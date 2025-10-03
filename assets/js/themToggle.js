@@ -1,3 +1,4 @@
+//Remove localStorage item later , i put it now for testing
 window.onload = () => {
     if(localStorage.getItem("theme")==="darkmode"){
         document.body.classList.add("darkmode");
