@@ -1,0 +1,85 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+  overflow: hidden;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px;
+}
+
+#changePage {
+  color: var(--text-muted);
+}
+
+.holder {
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: 1px solid black;
+  transition: all 0.3s ease;
+}
+.holder:focus {
+    outline: none;
+    border: 1px solid var(--primary-color);
+}
+
+.submit {
+  background-color: #000;
+  color: #fff;
+  border-radius: 20px;
+  border: none;
+  padding: 10px 85px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background 0.7s ease;
+}
+
+.submit:hover {
+    transform: translateY(-5px) scale(1.03);
+
+}
+.submit:active{
+  transform: translateY(0px) scale(1);
+  background-color: #fff;
+  color: black;
+}
+
+#email-div{
+  position: relative;
+}
+.email-icon{
+    position: absolute;
+  width: 24px;
+  right:10px;
+  top: 5px;
+}
+
+#pass-div {
+  position: relative;
+}
+.lock-icon {
+  position: absolute;
+  width: 24px;
+  right:10px;
+  top: 5px;
+}
+
+#changePage > a{
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+h1 {
+  font-size: 42px;
+  font-weight: bold;
+}

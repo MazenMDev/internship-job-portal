@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
+</head>
+<body>
+    <nav id="navbar">
+      <button onclick="themeToggle()" class="themeToggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      </button>
+    </nav>
+    
+    <div class="container">
+        <h1 id="title">Company Register</h1>
+        <form>
+            <div class="inp">
+                <label for ="CName">Company Name: </label>
+                <input type="text" name="CName" id="CName" placeholder="Add your organization's name" required>
+            </div>
+            <div class="inp">
+            <label for ="lname">Company Website: </label>
+            <input type="text" name="CWebsite" id="CWebsite" placeholder="Begin with http://, https:// or www." required>
+            </div>
+
+            <div class="inp">
+                <label for ="Industry">Industry: </label>
+                <input type="text" name="Industry" id="Industry" placeholder="ex: Information Services" required>
+            </div>
+
+            <div class="inp">
+                <label for ="Logo">Logo </label>
+            <p>Upload an image</p>
+            </div>
+            
+            <div class="inp">
+                <label for ="Industry">Tagline: </label>
+                <input type="description" name="description" id="description" placeholder="ex: An information services firm helping small businesses succeed.">
+            </div>
+            
+            <div class="inp">
+                
+            <input type="submit" value="Confirm">
+            </div>
+
+        </form>
+    </div>
+    
+</body>
+</html>
