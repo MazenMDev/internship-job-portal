@@ -1,48 +1,75 @@
 body {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 18px;
   height: 100vh;
-
-  font-size: 16px;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
-  text-align: center;
-  width: 100%;
-  max-width: 420px;
-  padding: 20px;
-}
-
-form {
-  background: var(--background-color);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  padding: 30px 25px;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.rightCont {
+  flex: 1;
+  background: url("../imgs/hero.jpg") no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.rightCont h1 {
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.rightCont p {
+  color:#fff;
+  text-shadow: 1px 1px 4px rgba(0,0,0,1);
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+
+form {
+  width: 100%;
+  max-width: 420px;
+  background: var(--background-color);
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  border-radius: 12px;
 }
 
 h1 {
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .holder {
-  width: 90%;
+  width: 100%;
+  box-sizing: border-box;
   border: 1px solid var(--border-color);
   border-radius: 10px;
-  padding: 12px 16px;
-  font-size: 0.95rem;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
   background: transparent;
   color: var(--text-color);
   transition: border-color 0.3s ease;
 }
+
 .holder:focus {
   outline: none;
   border-color: var(--primary-color);
@@ -52,8 +79,8 @@ h1 {
   background-color: var(--primary-color);
   color: #fff;
   border: none;
-  border-radius: 10px;
-  padding: 12px;
+  border-radius: 0.625rem;
+  padding: 0.9rem;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -74,22 +101,23 @@ h1 {
 .email-icon,
 .lock-icon {
   position: absolute;
-  right: 12px;
+  right: 1rem;
   top: 50%;
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   transform: translateY(-50%);
   pointer-events: none;
   color: var(--text-muted);
 }
 
 #changePage {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text-muted);
 }
 #changePage button {
   color: var(--primary-color);
   font-weight: 500;
+  font-size: 0.95rem;
   text-decoration: none;
   background: none;
   border: none;
@@ -98,17 +126,79 @@ h1 {
   text-decoration: underline;
 }
 
-.reg{
+.reg {
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
   text-align: left;
-
 }
-
-.reg label{
+.reg label {
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-muted);
+  margin-left: 0.3rem;
+}
+
+.gender-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.gender-options {
+  display: flex;
+  gap: 1rem;
   margin-left: 5px;
+}
+.gender-options label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (max-width: 992px) {
+  body {
+    font-size: 16px;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+  .holder,
+  .submit {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    font-size: 15px;
+    overflow-y: auto;
+  }
+  .rightCont {
+    height: 200px;
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+  form {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  h1 {
+    font-size: 1.4rem;
+  }
+  .holder,
+  .submit {
+    font-size: 0.85rem;
+    padding: 0.75rem;
+  }
+  #changePage {
+    font-size: 0.85rem;
+  }
 }
