@@ -20,7 +20,7 @@
 
     <div class="container">
       <h1 id="title">Welcome!</h1>
-      <form>
+      <form id="form">
         <div class="inp" id="email-div">
           <input
             class="holder"
@@ -65,12 +65,13 @@
           <input type="submit" value="Login" class="submit" />
         </div>
 
-        <h2 id="changePage">
-          Don't have an account? <a href="./register.html">Register</a>
-        </h2>
       </form>
+      <h2 id="changePage">
+        Don't have an account? <button onclick="changePage()">Register</button>
+      </h2>
     </div>
 
     <script src="../assets/js/themToggle.js"></script>
+    <script src="../assets/js/logReg.js"></script>
   </body>
 </html>

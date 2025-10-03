@@ -6,7 +6,7 @@
     --error: #dc2626;
     --success: #16a34a;
     --warning: #f59e0b;
-    --border-color: #e5e7eb;
+    --border-color: #d9daddff;
     
     --primary-color: #2563eb;
     --secondary-color: #d97706;
@@ -47,12 +47,14 @@ body{
     margin-right: 20px;
     background:none;
     border:none;
+    color:white;
     transition: color 0.2s ease-in-out , transform 0.4s ease;
 }
 
 .themeToggle:hover{
     transform: scale(1.1);
     color: var(--secondary-color);
+    cursor: pointer;
 }
 
 .themeToggle:active{
