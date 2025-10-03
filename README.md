@@ -1,1 +1,0 @@
-# internship-job-portal
