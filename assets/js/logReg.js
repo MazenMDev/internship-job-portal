@@ -5,6 +5,7 @@ const changePageH = document.getElementById("changePage");
 
 function changePage() {
     if (current === "login") {
+        document.title = "Register - JobConnect";
         title.innerText = "Join Us!";
         form.innerHTML = `
         <div class="inp reg">
@@ -42,6 +43,7 @@ function changePage() {
             'Already have an account? <button onclick="changePage()">Login</button>';
         current = "register";
     } else {
+        document.title = "Login - JobConnect";
         title.innerText = "Welcome!";
         form.innerHTML = `
         <div class="inp" id="email-div">
