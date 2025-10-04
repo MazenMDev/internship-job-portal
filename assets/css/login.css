@@ -16,7 +16,7 @@ body {
   display: flex;
   align-items: center;
   padding-left: 50px;
-  color: var(--primary-color);
+  color: var(--text-color);
   font-weight: 600;
 }
 
