@@ -145,3 +145,32 @@ button:hover {
   font-weight: 500;
   text-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
+
+
+.currentPage {
+  border-bottom: 3px solid var(--background-color);
+}
+
+.themeToggle{
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-right: 20px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  background: none !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  font-size: 20px;
+  transition: color 0.2s ease-in-out, transform 0.4s ease;
+}
+
+.themeToggle:hover {
+    transform: scale(1.1);
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.themeToggle:active {
+    transform: scale(0.9);
+}
