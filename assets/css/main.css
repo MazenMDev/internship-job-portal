@@ -104,7 +104,7 @@ body {
   font-size: 18px;
   gap: 5px;
   padding: 10px 20px;
-  border-radius: 20px;
+  border-radius: 10px;
   transition: all 0.2s ease-in-out;
   z-index: 100;
 }
@@ -138,7 +138,7 @@ body {
 
 .themeToggle:hover {
   transform: scale(1.1);
-  color: var(--secondary-color);
+  color: var(--primary-color);
   cursor: pointer;
 }
 
