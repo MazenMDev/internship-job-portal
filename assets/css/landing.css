@@ -78,7 +78,7 @@
 
 .sign:hover {
   background-color: var(--background-color);
-  color: var(--primary-color);
+  color: var(--primary-color) !important;
   transform: translateY(-3px);
 }
 
@@ -99,6 +99,13 @@ section {
   height: 100px;
   font-size: 64px;
   text-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.right p{
+  font-size: 24px;
+  width: 600px;
+  margin-top: -50px;
+  line-height: 1.4;
 }
 
 .main-img {
@@ -127,6 +134,7 @@ button:hover {
 .learners {
   display: flex;
   align-items: center;
+  margin-top: -40px;
 }
 
 .learners > img:first-child {
