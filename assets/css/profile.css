@@ -13,7 +13,7 @@
   width: 80%;
   max-width: 800px;
   margin: 150px auto;
-  background-color: white;
+  background-color: var(--background-color);
   border-radius: 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -85,7 +85,7 @@ li {
 }
 
 .edit-btn{
- background-color: #fff;
+ background-color:var(--background-color);
  width: 21px;
  height: 21px;
  align-items: center;
