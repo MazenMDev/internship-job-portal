@@ -18,7 +18,7 @@
 }
 
 .darkmode {
-    --background-color: #0c0d0fff;
+    --background-color: rgb(20, 27, 41);
     --text-color: #f3f4f6;
     --text-muted: #9ca3af;
     

@@ -1,0 +1,200 @@
+html {
+  font-family: "Rubik", sans-serif;
+}
+
+body {
+  background-color: aliceblue;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.logoContainer {
+  display: flex;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  margin-right: 5px;
+}
+
+.logo-text {
+  font-size: 30px;
+}
+
+.mid-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+
+  background-color: #31919a;
+  border-radius: 20px;
+  padding: 6px 20px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mid-nav a {
+  display: flex;
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  gap: 5px;
+
+  background-color: #31919a;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+.mid-nav a:hover {
+  background-color: #31919a;
+  color: black;
+  transform: translateY(-2px);
+}
+
+.nav-icon {
+}
+
+.nav-icon:hover {
+}
+
+.iconForNav {
+  width: 20px;
+  margin-bottom: 2px;
+}
+.account {
+  display: flex;
+  gap: 24px;
+}
+
+.account > a {
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.join {
+  color: black;
+  margin: auto 0;
+}
+
+.sign:link {
+  background-color: #2f9ea8;
+  color: #fff;
+  text-align: center;
+  border-radius: 20px;
+  transition: all 0.2s ease-in-out;
+  padding: 10px 20px;
+
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sign:hover {
+  background-color: #fff;
+  color: #2f9ea8;
+  transform: translateY(-3px);
+}
+.profile-container {
+  width: 80%;
+  max-width: 800px;
+  margin: 100px auto;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.cover-photo {
+  background-color: #31919a;
+  height: 120px;
+}
+
+.profile-section {
+  padding: 20px;
+  position: relative;
+}
+
+.profile-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid white;
+  position: absolute;
+  top: -60px;
+  left: 20px;
+  background-color: lightgray;
+  object-fit: cover;
+  
+}
+
+.name {
+  margin-top: 70px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.headline {
+  color: gray;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.about, .experience, .education, .skills {
+  margin-top: 25px;
+}
+
+h2 {
+  font-size: 20px;
+  color: #31919a;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.skills span {
+  display: inline-block;
+  background-color: #e8f0fe;
+  color: #31919a;
+  padding: 6px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.edit-btn{
+ background-color: #fff;
+ width: 21px;
+ height: 21px;
+ align-items: center;
+ border:none;
+ border-radius: 50%; 
+ color: #31919a;
+ scale: 1.5;
+ position: absolute;
+ top: 6%;
+ left: 15%;
+ cursor: pointer; 
+ transition: all 0.2s ease-in-out;
+}
+.edit-btn:hover{
+ background-color: #fff;
+ color: black;
+}
+
+
+
+
