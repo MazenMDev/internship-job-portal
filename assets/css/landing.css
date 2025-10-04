@@ -74,14 +74,14 @@ body {
   font-size: 18px;
   gap: 5px;
 
-  background-color: rgb(59, 59, 59);
+  background-color: #31919a;
   padding: 10px 20px;
   border-radius: 20px;
   transition: all 0.2s ease-in-out;
 }
 
 .mid-nav a:hover {
-  background-color: aliceblue;
+  background-color: #31919a;
   color: black;
   transform: translateY(-2px);
 }
