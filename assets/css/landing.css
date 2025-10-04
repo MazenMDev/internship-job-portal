@@ -1,7 +1,4 @@
-:root {
-  --main-color: #087f5b;
-  --grey-color: #343a40;
-}
+
 /*
       SPACING SYSTEM (px)
       2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
@@ -15,15 +12,6 @@
       GREY COLOR: #343a40
       */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-family: "Rubik", sans-serif;
-}
 
 body {
   background-color: aliceblue;
@@ -42,26 +30,11 @@ body {
   margin-top: 5px;
 }
 
-.logoContainer {
-  display: flex;
-}
-
-.logo {
-  width: 32px;
-  height: 32px;
-  margin-right: 5px;
-}
-
-.logo-text {
-  font-size: 30px;
-}
-
 .mid-nav {
   display: flex;
   align-items: center;
   gap: 32px;
-
-  background-color: #31919a;
+  background-color: var(--primary-color);
   border-radius: 20px;
   padding: 6px 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
@@ -69,20 +42,18 @@ body {
 
 .mid-nav a {
   display: flex;
-  color: #fff;
+  color: var(--background-color);
   text-decoration: none;
   font-size: 18px;
   gap: 5px;
-
-  background-color: #31919a;
   padding: 10px 20px;
   border-radius: 20px;
   transition: all 0.2s ease-in-out;
 }
 
 .mid-nav a:hover {
-  background-color: #31919a;
-  color: black;
+  background-color: var(--box-color);
+  color: var(--text-color);
   transform: translateY(-2px);
 }
 
@@ -109,13 +80,13 @@ body {
 }
 
 .join {
-  color: black;
+  color: var(--text-color);
   margin: auto 0;
 }
 
 .sign:link {
-  background-color: #2f9ea8;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--background-color);
   text-align: center;
   border-radius: 20px;
   transition: all 0.2s ease-in-out;
@@ -125,8 +96,8 @@ body {
 }
 
 .sign:hover {
-  background-color: #fff;
-  color: #2f9ea8;
+  background-color: var(--background-color);
+  color: var(--primary-color);
   transform: translateY(-3px);
 }
 
@@ -156,8 +127,8 @@ section {
 
 button {
   font-size: 24px;
-  background-color: #2f9ea8;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--background-color);
   border-radius: 25px;
   border: none;
   padding: 20px 40px;
@@ -167,8 +138,8 @@ button {
 }
 
 button:hover {
-  background-color: aliceblue;
-  color: #2f9ea8;
+  background-color: var(--box-color);
+  color: var(--primary-color);
   transform: translateY(-10px);
 }
 
