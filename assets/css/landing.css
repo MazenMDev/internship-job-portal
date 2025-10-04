@@ -1,49 +1,3 @@
-.container {
-  width: 1400px;
-  margin: 0 auto;
-}
-
-.nav-bar {
-  display: flex;
-  justify-content: space-between;
-  height: 50px;
-  align-items: center;
-  margin-top: 5px;
-}
-
-.mid-nav {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  background-color: var(--primary-color);
-  border-radius: 20px;
-  padding: 6px 20px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-}
-
-.mid-nav a {
-  display: flex;
-  color: var(--background-color);
-  text-decoration: none;
-  font-size: 18px;
-  gap: 5px;
-  padding: 10px 20px;
-  border-radius: 20px;
-  transition: all 0.2s ease-in-out;
-}
-
-.mid-nav a:hover {
-  background-color: var(--box-color);
-  color: var(--text-color);
-  transform: translateY(-2px);
-}
-
-.nav-icon {
-}
-
-.nav-icon:hover {
-}
-
 .iconForNav {
   width: 20px;
   margin-bottom: 2px;
@@ -65,15 +19,20 @@
   margin: auto 0;
 }
 
+.sign {
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  margin: auto 0;
+}
+
 .sign:link {
   background-color: var(--primary-color);
   color: var(--background-color) !important;
   text-align: center;
   border-radius: 20px;
   transition: all 0.2s ease-in-out;
-  padding: 10px 20px;
-
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  padding: 6px 20px;
 }
 
 .sign:hover {
@@ -157,28 +116,4 @@ button:hover {
 
 .currentPage {
   border-bottom: 3px solid var(--background-color);
-}
-
-.themeToggle{
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin-right: 20px;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  background: none !important;
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
-  font-size: 20px;
-  transition: color 0.2s ease-in-out, transform 0.4s ease;
-}
-
-.themeToggle:hover {
-    transform: scale(1.1);
-    color: var(--secondary-color);
-    cursor: pointer;
-}
-
-.themeToggle:active {
-    transform: scale(0.9);
 }
