@@ -88,6 +88,10 @@ form {
   border-radius: 12px;
 }
 
+.separator{
+  display:none;
+}
+
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -210,30 +214,88 @@ h1 {
   }
 }
 
+
 @media (max-width: 768px) {
   body {
     flex-direction: column;
     font-size: 15px;
     overflow-y: auto;
   }
+
+  .logoContainer {
+    position: relative;
+    top: 0;
+    left: 0;
+    padding-left: 0;
+    margin-bottom: 1rem;
+    justify-content: center;
+  }
+
+  .logoContainer h1 {
+    font-size: 18px;
+  }
+
   .rightCont {
-    height: 200px;
+    flex: unset;
+    width: 100%;
+    margin: 0;
+    height: auto;
+    padding: 1rem;
   }
-  h1 {
-    font-size: 1.6rem;
+
+  .innerCont {
+    align-items: flex-start;
+    text-align: left;
+    max-width: 100%;
   }
 
-  .logoContainer{
-  top: 10px;
-  left: 15px;
-  padding-left: 10px;
+  .innerCont h1,
+  .innerCont p {
+    text-align: left;
+  }
+
+  .svg-container {
+    margin-top: 1rem;
+  }
+
+  .separator {
+    display: block;
+    width: 90%;
+    border: 0;
+    height: 1px;
+    background: var(--text-muted);
+    margin: 1.5rem auto;
+  }
+
+  .container {
+    width: 100%;
+    padding: 1rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  form {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .holder,
+  .submit {
+    font-size: 1rem;
+    height: 3.2rem;
+  }
+
+  #changePage {
+    font-size: 0.95rem;
+    text-align: center;
+  }
 }
 
-.logoContainer h1{
-  font-size: 18px;
-}
 
-}
 
 @media (max-width: 480px) {
   body {
