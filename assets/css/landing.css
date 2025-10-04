@@ -1,3 +1,5 @@
+
+
 .iconForNav {
   width: 20px;
   margin-bottom: 2px;
@@ -36,7 +38,7 @@
 }
 
 .sign:hover {
-  background-color: var(--background-color);
+  background-color: var(--box-color);
   color: var(--primary-color) !important;
   transform: translateY(-3px);
 }

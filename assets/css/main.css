@@ -1,82 +1,86 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
 
 :root {
-    --background-color: #f5f5f5;
-    --text-color: #1f2937;
-    --text-muted: #6b7280;
+  --background-color: #f5f5f5;
+  --text-color: #1f2937;
+  --text-muted: #6b7280;
 
-    --error: #dc2626;
-    --success: #16a34a;
-    --warning: #f59e0b;
-    --border-color: #d9daddff;
-    
-    --box-color: #e7eff7;
-    --primary-color: #2F9EA8;
-    --secondary-color: #154060;
+  --error: #dc2626;
+  --success: #16a34a;
+  --warning: #f59e0b;
+  --border-color: #d9daddff;
 
-    --main-font-family: 'Rubik', sans-serif;
+  --box-color: #e7eff7;
+  --primary-color: #2f9ea8;
+  --secondary-color: #154060;
+
+  --main-font-family: "Rubik", sans-serif;
 }
 
 .darkmode {
-    --background-color: rgb(20, 27, 41);
-    --text-color: #f3f4f6;
-    --text-muted: #9ca3af;
-    
-    --error: #ef4444;
-    --success: #22c55e;
-    --warning: #facc15;
-    --border-color: #374151;
+  --background-color: rgb(20, 27, 41);
+  --text-color: #f3f4f6;
+  --text-muted: #9ca3af;
 
-    --box-color: #1f2937;
-    --primary-color: #2F9EA8;
-    --secondary-color: #154060;
-    --main-font-family: 'Rubik', sans-serif;
+  --error: #ef4444;
+  --success: #22c55e;
+  --warning: #facc15;
+  --border-color: #374151;
+
+  --box-color: #1f2937;
+  --primary-color: #2f9ea8;
+  --secondary-color: #154060;
+  --main-font-family: "Rubik", sans-serif;
 }
 
 body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    font-family: var(--main-font-family);
-    margin: 0;
-    padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--main-font-family);
+  margin: 0;
+  padding: 0;
 }
 
+.container {
+  width: 1400px;
+  margin: 0 auto;
+}
 
 .logoContainer {
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-    color: white;
-    font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  color: white;
+  font-weight: 600;
 }
 
 .logoContainer h1 {
-    font-size: 24px;
-    margin: 0;
-    color: var(--text-color);
-    padding: 0;
+  font-size: 24px;
+  margin: 0;
+  color: var(--text-color);
+  padding: 0;
 }
 
 .logoContainer img {
-    height: 30px;
-    margin-right: 15px;
-    width: auto;
+  height: 30px;
+  margin-right: 15px;
+  width: auto;
 }
 
-.logoContainer{
+.logoContainer {
   z-index: 100;
 }
 
-.nav-bar{
-    position: fixed;
-    display: flex;
-    justify-content: space-between;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    background: var(--background-color);
-    z-index: 100;
+.nav-bar {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  background: var(--background-color);
+  z-index: 100;
 }
 
 .mid-nav {
@@ -88,7 +92,6 @@ body {
   padding: 6px 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
-
 }
 
 .mid-nav a {
@@ -101,7 +104,6 @@ body {
   border-radius: 20px;
   transition: all 0.2s ease-in-out;
   z-index: 100;
-
 }
 
 .mid-nav a:hover {
@@ -121,8 +123,7 @@ body {
   margin-bottom: 2px;
 }
 
-
-.themeToggle{
+.themeToggle {
   background: none;
   border: none;
   color: var(--text-color);
@@ -133,117 +134,116 @@ body {
 }
 
 .themeToggle:hover {
-    transform: scale(1.1);
-    color: var(--secondary-color);
-    cursor: pointer;
+  transform: scale(1.1);
+  color: var(--secondary-color);
+  cursor: pointer;
 }
 
 .themeToggle:active {
-    transform: scale(0.9);
+  transform: scale(0.9);
 }
 
 .currentPage {
   border-bottom: 3px solid var(--background-color);
 }
 
-
 @media (min-width: 1024px) {
-    #navbar {
-        height: 70px;
-        padding: 0 50px;
-    }
+  #navbar {
+    height: 70px;
+    padding: 0 50px;
+  }
 
-    .logoContainer {
-        padding-left: 30px;
-    }
+  .logoContainer {
+    padding-left: 30px;
+  }
 
-    .logoContainer h1 {
-        font-size: 26px;
-    }
+  .logoContainer h1 {
+    font-size: 26px;
+  }
 
-    .logoContainer img {
-        height: 36px;
-        margin-right: 18px;
-    }
+  .logoContainer img {
+    height: 36px;
+    margin-right: 18px;
+  }
 
-    .themeToggle {
-        font-size: 22px;
-        margin-right: 30px;
-    }
+  .themeToggle {
+    font-size: 22px;
+    margin-right: 30px;
+  }
 }
 
 @media (min-width: 1440px) {
-    #navbar {
-        padding: 0 60px;
-    }
+  #navbar {
+    padding: 0 60px;
+  }
 
-    .logoContainer {
-        padding-left: 40px;
-    }
+  .logoContainer {
+    padding-left: 40px;
+  }
 
-    .logoContainer h1 {
-        font-size: 28px;
-    }
+  .logoContainer h1 {
+    font-size: 28px;
+  }
 
-    .logoContainer img {
-        height: 38px;
-        margin-right: 20px;
-    }
+  .logoContainer img {
+    height: 38px;
+    margin-right: 20px;
+  }
 
-    .themeToggle {
-        font-size: 24px;
-    }
+  .themeToggle {
+    font-size: 24px;
+  }
 }
 
 @media (max-width: 768px) {
-    #navbar {
-        height: 55px;
-        padding: 0 15px;
-    }
+  #navbar {
+    height: 55px;
+    padding: 0 15px;
+  }
 
-    .logoContainer {
-        padding-left: 10px;
-    }
+  .logoContainer {
+    padding-left: 10px;
+  }
 
-    .logoContainer h1 {
-        font-size: 20px;
-    }
+  .logoContainer h1 {
+    font-size: 20px;
+  }
 
-    .logoContainer img {
-        height: 24px;
-        margin-right: 10px;
-    }
+  .logoContainer img {
+    height: 24px;
+    margin-right: 10px;
+  }
 
-    .themeToggle {
-        margin-right: 10px;
-        font-size: 18px;
-    }
+  .themeToggle {
+    margin-right: 10px;
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 480px) {
-    #navbar {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        height: 50px;
-        padding: 0 12px;
-    }
+  #navbar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 12px;
+  }
 
-    .logoContainer {
-        padding-left: 0;
-    }
+  .logoContainer {
+    padding-left: 0;
+  }
 
-    .logoContainer h1 {
-        font-size: 18px;
-    }
+  .logoContainer h1 {
+    font-size: 18px;
+  }
 
-    .logoContainer img {
-        height: 22px;
-        margin-right: 8px;
-    }
+  .logoContainer img {
+    height: 22px;
+    margin-right: 8px;
+  }
 
-    .themeToggle {
-        font-size: 16px;
-        margin-right: 5px;
-    }
+  .themeToggle {
+    font-size: 16px;
+    margin-right: 5px;
+  }
 }
