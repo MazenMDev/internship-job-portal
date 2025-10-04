@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
 :root {
     --background-color: #f5f5f5;
     --text-color: #1f2937;
@@ -11,6 +12,8 @@
     --box-color: #e7eff7;
     --primary-color: #4560ef;
     --secondary-color: #d97706;
+
+    --main-font-family: 'Rubik', sans-serif;
 }
 
 .darkmode {

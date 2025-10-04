@@ -4,7 +4,7 @@ body {
   margin: 0;
   overflow: visible;
   display: flex;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family:  var(--main-font-family);
 }
 
 
@@ -173,14 +173,13 @@ h1 {
 .reg {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.5rem;
   text-align: left;
 }
 .reg label {
   font-size: 0.9rem;
   font-weight: 500;
-  color: white;
-  text-shadow: 1px 1px 4px rgba(0,0,0,1);
+  color: var(--text-muted);
   margin-left: 0.3rem;
 }
 
