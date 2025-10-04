@@ -8,11 +8,23 @@
     <link rel="stylesheet" href="../assets/css/login.css" />
   </head>
   <body>
-    <div class="bg"></div>
     <div class="logoContainer">
-            <img src="../assets//imgs/JobConnect.png" alt="Logo" />
-            <h1>JobConnect</h1>
+      <img src="../assets//imgs/JobConnect.png" alt="Logo" />
+      <h1>JobConnect</h1>
+    </div>
+
+    <div class="rightCont">
+      <div class="innerCont">
+        <h1>Find Your Dream Job</h1>
+        <p>
+          Join JobConnect to explore thousands of internships and job
+          opportunities tailored for you.
+        </p>
+        <div class="svg-container">
+          <img src="../assets/svg/Business.svg" alt="Business Illustration" />
         </div>
+      </div>
+    </div>
 
     <div class="container">
       <h1 id="title">Welcome!</h1>
@@ -26,10 +38,20 @@
             placeholder="example@email.com"
             required
           />
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="email-icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25" />
-</svg>
-
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="email-icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+            />
+          </svg>
         </div>
 
         <div class="inp" id="pass-div">
@@ -60,18 +82,12 @@
         <div class="inp">
           <input type="submit" value="Login" class="submit" />
         </div>
-
       </form>
       <h2 id="changePage">
         Don't have an account? <button onclick="changePage()">Register</button>
       </h2>
     </div>
 
-    <div class="seperator"></div>
-    <div class="rightCont">
-      <h1>Find Your Dream Job</h1>
-      <p>Join JobConnect to explore thousands of internships and job opportunities tailored for you.</p>
-    </div>
     <script src="../assets/js/themToggle.js"></script>
     <script src="../assets/js/logReg.js"></script>
   </body>

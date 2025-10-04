@@ -2,29 +2,11 @@ body {
   font-size: 18px;
   height: 100vh;
   margin: 0;
-  
+  overflow: visible;
   display: flex;
-  flex-direction: row;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-.bg{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url("../imgs/hero.jpg") no-repeat center center/cover;
-  filter: blur(8px);
-  z-index: -1;
-}
 
-.seperator{
-  height: 80vh;
-  width: 1px;
-  background: rgba(0, 0, 0, 0.9);
-  align-self: center;
-  margin: 0 20px;
-}
 
 .logoContainer{
   position: fixed;
@@ -57,10 +39,18 @@ body {
 .rightCont {
   flex: 1;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 1rem;
+}
+
+.innerCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  max-width: 600px;
+  width: 100%;
 }
 
 .rightCont h1 {
@@ -70,44 +60,56 @@ body {
   margin-bottom: 1rem;
 }
 .rightCont p {
-  color:#fff;
-  text-shadow: 1px 1px 4px rgba(0,0,0,1);
+  color: var(--text-muted);
   font-size: 1.2rem;
   text-align: center;
   margin-bottom: 1.5rem;
 }
 
+.svg-container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  width: 100%;
+}
+
+.svg-container img {
+  max-width: 100%;
+  height: auto;
+}
 
 form {
   width: 100%;
-  max-width: 420px;
-  padding: 1.5rem 1.25rem;
+  max-width: 620px;
+  padding: 2rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 2rem;
   border-radius: 12px;
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .holder {
   width: 100%;
+  border: none;
+  border-radius: 16px;
+  height: 4rem;
+  padding: 0 1rem;
+  font-size: 1.2rem;
   box-sizing: border-box;
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 0.9rem 1rem;
-  font-size: 1rem;
-  background: var(--background-color);
+  background: var(--box-color);
   color: var(--text-color);
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease , border 0.3s ease;
 }
 
 .holder:focus {
   outline: none;
+  border: 1px solid;
   border-color: var(--primary-color);
 }
 
@@ -115,12 +117,15 @@ h1 {
   background-color: var(--primary-color);
   color: #fff;
   border: none;
-  border-radius: 0.625rem;
-  padding: 0.9rem;
+  border-radius: 16px;
+  padding:  0.9rem 1rem;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
+  width: 100%;
+  height: 3.5rem;
+  box-sizing: border-box;
 }
 .submit:hover {
   background-color: var(--secondary-color);
@@ -137,7 +142,7 @@ h1 {
 .email-icon,
 .lock-icon {
   position: absolute;
-  right: 1rem;
+  right: 20px;
   top: 50%;
   width: 1.25rem;
   height: 1.25rem;
@@ -147,13 +152,13 @@ h1 {
 }
 
 #changePage {
-  font-size: 0.95rem;
-  color: white;
+  font-size: 1.2rem;
+  color: var(--text-muted);
 }
 #changePage button {
   color: var(--primary-color);
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   text-decoration: none;
   background: none;
   border: none;
@@ -217,9 +222,17 @@ h1 {
   h1 {
     font-size: 1.6rem;
   }
-  .seperator{
-    display: none;
-  }
+
+  .logoContainer{
+  top: 10px;
+  left: 15px;
+  padding-left: 10px;
+}
+
+.logoContainer h1{
+  font-size: 18px;
+}
+
 }
 
 @media (max-width: 480px) {

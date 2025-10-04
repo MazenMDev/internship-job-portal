@@ -1,5 +1,5 @@
 :root {
-    --background-color: #f9fafb;
+    --background-color: #f5f5f5;
     --text-color: #1f2937;
     --text-muted: #6b7280;
 
@@ -8,7 +8,8 @@
     --warning: #f59e0b;
     --border-color: #d9daddff;
     
-    --primary-color: #2563eb;
+    --box-color: #e7eff7;
+    --primary-color: #4560ef;
     --secondary-color: #d97706;
 }
 
@@ -22,7 +23,7 @@
     --warning: #facc15;
     --border-color: #374151;
 
-    --primary-color: #3b82f6;
+    --primary-color: #4560ef;
     --secondary-color: #f59e0b;
 }
 
