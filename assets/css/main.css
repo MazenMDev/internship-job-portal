@@ -42,7 +42,7 @@ body {
 }
 
 .container {
-  width: 1400px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -75,7 +75,7 @@ body {
   position: fixed;
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 70px;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
@@ -96,6 +96,8 @@ body {
 }
 
 .mid-nav a {
+  display: inline-block;
+  white-space: nowrap;
   display: flex;
   color: var(--background-color);
   text-decoration: none;
