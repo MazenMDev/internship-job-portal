@@ -74,7 +74,8 @@ body {
 .nav-bar {
   position: fixed;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 30px;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);

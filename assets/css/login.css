@@ -1,3 +1,9 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-size: 16px;
   height: 100vh;
@@ -325,8 +331,6 @@ h1 {
   .innerCont {
     width: 100%;
     max-width: 100%;
-    align-items: flex-start;
-    text-align: left;
   }
 
   .innerCont h1 {
@@ -335,7 +339,6 @@ h1 {
 
   .innerCont h1,
   .innerCont p {
-    text-align: left;
     word-wrap: break-word;
   }
 
@@ -409,7 +412,9 @@ h1 {
 
   h1 {
     font-size: 1.4rem;
+    margin: 0 auto;
   }
+  
 
   .holder,
   .submit {
