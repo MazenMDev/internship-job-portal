@@ -1,60 +1,42 @@
-html {
-  font-family: "Rubik", sans-serif;
-}
-
-body {
-  background-color: aliceblue;
-}
-
-.nav-bar {
-  display: flex;
-  justify-content: space-between;
-  height: 50px;
-  align-items: center;
-  margin-top: 5px;
-}
-
-.logoContainer {
-  display: flex;
-}
-
-.logo {
-  width: 32px;
-  height: 32px;
-  margin-right: 5px;
-}
-
-.logo-text {
-  font-size: 30px;
+.logoContainer{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
 }
 
 .mid-nav {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 32px;
-
-  background-color: #31919a;
+  background-color: var(--primary-color);
   border-radius: 20px;
   padding: 6px 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+
 }
 
 .mid-nav a {
   display: flex;
-  color: #fff;
+  color: var(--background-color);
   text-decoration: none;
   font-size: 18px;
   gap: 5px;
-
-  background-color: #31919a;
   padding: 10px 20px;
   border-radius: 20px;
   transition: all 0.2s ease-in-out;
+  z-index: 100;
+
 }
 
 .mid-nav a:hover {
-  background-color: #31919a;
-  color: black;
+  background-color: var(--box-color);
+  color: var(--text-color);
   transform: translateY(-2px);
 }
 
@@ -68,6 +50,7 @@ body {
   width: 20px;
   margin-bottom: 2px;
 }
+
 .account {
   display: flex;
   gap: 24px;
@@ -79,31 +62,10 @@ body {
   text-decoration: none;
 }
 
-.join {
-  color: black;
-  margin: auto 0;
-}
-
-.sign:link {
-  background-color: #2f9ea8;
-  color: #fff;
-  text-align: center;
-  border-radius: 20px;
-  transition: all 0.2s ease-in-out;
-  padding: 10px 20px;
-
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-}
-
-.sign:hover {
-  background-color: #fff;
-  color: #2f9ea8;
-  transform: translateY(-3px);
-}
 .profile-container {
   width: 80%;
   max-width: 800px;
-  margin: 100px auto;
+  margin: 150px auto;
   background-color: white;
   border-radius: 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
@@ -196,5 +158,32 @@ li {
 }
 
 
+.currentPage {
+  border-bottom: 3px solid var(--background-color);
+}
 
+.themeToggle{
+  position: fixed;
+  right: 20px;
+  top: 30px;
+  margin-right: 20px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  background: none !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  font-size: 20px;
+  transition: color 0.2s ease-in-out, transform 0.4s ease;
+  z-index: 100;
 
+}
+
+.themeToggle:hover {
+    transform: scale(1.1);
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.themeToggle:active {
+    transform: scale(0.9);
+}
