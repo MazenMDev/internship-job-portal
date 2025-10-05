@@ -42,7 +42,7 @@ body {
 }
 
 .container {
-  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -88,10 +88,8 @@ body {
   display: flex;
   align-items: center;
   gap: 32px;
-  background-color: var(--primary-color);
   border-radius: 20px;
   padding: 6px 20px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
 }
 
@@ -99,18 +97,18 @@ body {
   display: inline-block;
   white-space: nowrap;
   display: flex;
-  color: var(--background-color);
+  color: var(--text-color);
   text-decoration: none;
   font-size: 18px;
   gap: 5px;
   padding: 10px 20px;
-  border-radius: 10px;
+  border-radius: 20px;
   transition: all 0.2s ease-in-out;
   z-index: 100;
 }
 
 .mid-nav a:hover {
-  background-color: var(--box-color);
+  background-color: var(--border-color);
   color: var(--text-color);
   transform: translateY(-2px);
 }

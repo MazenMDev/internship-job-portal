@@ -81,7 +81,7 @@ section {
 
 .main-img {
   width: 600px;
-  margin-left: auto;
+  margin-left: 100px;
 }
 
 button {
@@ -126,5 +126,5 @@ button:hover {
 }
 
 .currentPage {
-  border-bottom: 3px solid var(--background-color);
+  border-bottom: 3px solid var(--text-color);
 }
