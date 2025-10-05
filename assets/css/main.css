@@ -42,7 +42,7 @@ body {
 }
 
 .container {
-  width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -74,7 +74,8 @@ body {
 .nav-bar {
   position: fixed;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 70px;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
@@ -87,16 +88,16 @@ body {
   display: flex;
   align-items: center;
   gap: 32px;
-  background-color: var(--primary-color);
   border-radius: 20px;
   padding: 6px 20px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
 }
 
 .mid-nav a {
+  display: inline-block;
+  white-space: nowrap;
   display: flex;
-  color: var(--background-color);
+  color: var(--text-color);
   text-decoration: none;
   font-size: 18px;
   gap: 5px;
@@ -107,7 +108,7 @@ body {
 }
 
 .mid-nav a:hover {
-  background-color: var(--box-color);
+  background-color: var(--border-color);
   color: var(--text-color);
   transform: translateY(-2px);
 }
@@ -135,7 +136,7 @@ body {
 
 .themeToggle:hover {
   transform: scale(1.1);
-  color: var(--secondary-color);
+  color: var(--primary-color);
   cursor: pointer;
 }
 
