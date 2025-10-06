@@ -7,6 +7,7 @@
 }
 .job-block {
   background: var(--background-color);
+  color:var(--text-color);
   width: 250px;
   text-align: center;
   padding: 20px;
@@ -16,6 +17,7 @@
 }
 .job-block:hover {
   transform: translateY(-5px);
+  color: var(--text-color);
   box-shadow: 0 4px 12px rgba(179, 71, 71, 0.15);
 }
 .job-block img {
@@ -30,13 +32,13 @@
 }
 
 .job-block p {
-  color: gray;
+  color: var(--text-muted);
   margin: 0 0 10px;
 }
 
 .job-block button {
   background: var(--primary-color);
-  color: var(--text-color);
+  color: var(--background-color);
   border: none;
   padding: 10px 100px;
   border-radius: 6px;
@@ -44,5 +46,7 @@
 }
 
 .job-block button:hover {
-  background: var(--secondary-color);
+  background-color: var(--box-color);
+  color: var(--primary-color) !important;
+  transform: translateY(-3px);
 }
