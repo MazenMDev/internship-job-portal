@@ -41,6 +41,60 @@ body {
   padding: 0;
 }
 
+.wrapper {
+  transform: scale(0.8);
+  transform-origin: top center;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* center horizontally */
+}
+
+
+
+.iconForNav {
+  width: 20px;
+  margin-bottom: 2px;
+}
+
+.account {
+  display: flex;
+  gap: 24px;
+}
+
+.account > a {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.join {
+  color: var(--text-color);
+  margin: auto 0;
+}
+
+.sign {
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  margin: auto 0;
+}
+
+.sign:link {
+  background-color: var(--primary-color);
+  color: var(--background-color) !important;
+  text-align: center;
+  border-radius: 20px;
+  transition: all 0.2s ease-in-out;
+  padding: 6px 20px;
+}
+
+.sign:hover {
+  background-color: var(--box-color);
+  color: var(--primary-color) !important;
+  transform: translateY(-3px);
+}
 .container {
   max-width: 1200px;
   margin: 0 auto;
