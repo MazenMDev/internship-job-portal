@@ -3,6 +3,17 @@ const title = document.getElementById("title");
 const form = document.getElementById("form");
 const changePageH = document.getElementById("changePage");
 
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("form");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault(); 
+
+    window.location.href = "landing.html"; 
+  });
+});
+
+
 function changePage() {
     if (current === "login") {
         document.title = "Register - JobConnect";
