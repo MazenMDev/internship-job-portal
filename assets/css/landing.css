@@ -125,6 +125,6 @@ button:hover {
   text-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
-.currentPage {
-  border-bottom: 3px solid var(--text-color);
+.mid-nav a.currentPage {
+  opacity: 1;
 }

@@ -72,15 +72,14 @@ body {
 }
 
 .nav-bar {
-  position: fixed;
+  position: absolute;
   display: flex;
   justify-content: center;
   gap: 70px;
-  top: 20px;
+  top: 0px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  background: var(--background-color);
   z-index: 100;
 }
 
@@ -94,6 +93,7 @@ body {
 }
 
 .mid-nav a {
+  opacity: 0.4;
   display: inline-block;
   white-space: nowrap;
   display: flex;
@@ -149,7 +149,7 @@ body {
 }
 
 @media (min-width: 1024px) {
-  #navbar {
+  .nav-bar {
     height: 70px;
     padding: 0 50px;
   }
@@ -174,7 +174,7 @@ body {
 }
 
 @media (min-width: 1440px) {
-  #navbar {
+  .nav-bar {
     padding: 0 60px;
   }
 
@@ -197,7 +197,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  #navbar {
+  .nav-bar {
     height: 55px;
     padding: 0 15px;
   }
@@ -222,20 +222,70 @@ body {
 }
 
 @media (max-width: 480px) {
-  #navbar {
-    flex-direction: row;
+ 
+ 
+.nav-bar {
+    position: fixed;
+    bottom: 0px;
+    top: auto;
+  
+    width: 100%;
+    background: var(--background-color);
     justify-content: space-between;
     align-items: center;
     height: 50px;
     padding: 0 12px;
   }
 
+.mid-nav {
+  gap: 5px;
+  padding: 6px 10px;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.mid-nav a {
+  opacity: 0.4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 12px;
+  padding: auto;
+  border-radius: 0;
+}
+
+.mid-nav a:hover {
+  background-color: var(--border-color);
+  color: var(--text-color);
+  transform: translateY(-2px);
+}
+
+.nav-icon {
+}
+
+.nav-icon:hover {
+}
+
+.iconForNav {
+  width: 20px;
+  margin-bottom: 2px;
+}
+
+
   .logoContainer {
-    padding-left: 0;
+    display: none;
+
   }
 
   .logoContainer h1 {
     font-size: 18px;
+    opacity: 0.9;
   }
 
   .logoContainer img {
