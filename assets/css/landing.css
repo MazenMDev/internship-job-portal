@@ -64,10 +64,10 @@ button {
 }
 
 .btn button:last-child {
-  background-color: transparent; 
+  background-color: transparent;
   color: var(--primary-color);
-  border: 1px solid var(--primary-color); 
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1); 
+  border: 1px solid var(--primary-color);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
@@ -104,7 +104,7 @@ button:hover {
   color: var(--text-color);
   text-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
-.learners-span{
+.learners-span {
   font-weight: 700;
   color: var(--primary-color);
 }
@@ -124,9 +124,10 @@ button:hover {
     margin-left: 30px;
   }
 
-  .learners{
+  .learners {
     display: flex;
-    flex-wrap: nowrap;}
+    flex-wrap: nowrap;
+  }
 
   .btn button {
     font-size: 19px;
@@ -157,6 +158,13 @@ button:hover {
     width: 90%;
     max-width: 600px;
     margin: 0 auto;
+  }
+
+  .btn button {
+    font-size: 14px;
+    padding: 14px 28px;
+    width: 100%;
+    max-width: 300px;
   }
 
   .main-img {
@@ -214,6 +222,5 @@ button:hover {
 
   .learners > div {
     font-size: 14px;
-    margin-top: 20px;
   }
 }
