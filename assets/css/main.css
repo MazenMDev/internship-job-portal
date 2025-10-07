@@ -61,8 +61,18 @@ body {
 }
 
 .join {
+  background-color: transparent;
   color: var(--text-color);
   margin: auto 0;
+  transition: all 0.2s ease-in-out;
+  padding: 6px 20px;
+  border-radius: 20px;
+  border: 1px solid var(--primary-color);
+  margin-left: -30px;
+}
+
+.join:hover {
+  transform: translateY(-3px);
 }
 
 .sign {
@@ -79,6 +89,7 @@ body {
   border-radius: 20px;
   transition: all 0.2s ease-in-out;
   padding: 6px 20px;
+  border: 1px solid var(--primary-color);
 }
 
 .sign:hover {
@@ -86,6 +97,7 @@ body {
   color: var(--primary-color) !important;
   transform: translateY(-3px);
 }
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -213,6 +225,18 @@ body {
   display: none;
 }
 
+@media (max-width: 1200px) {
+  .account{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .account a{
+    margin: 0;
+    font-size: 16px;
+  }
+}
+
 @media (min-width: 1025px) {
   .nav-bar {
     height: 70px;
@@ -262,6 +286,8 @@ body {
   .mobile-top-nav {
     display: none;
   }
+
+  
 }
 
 @media (min-width: 1440px) {
@@ -316,7 +342,7 @@ body {
   .account {
     display: none !important;
   }
-  
+
   .mid-nav {
     display: flex !important;
     justify-content: space-around;
@@ -407,7 +433,7 @@ body {
   .account {
     display: none !important;
   }
-  
+
   .mid-nav {
     display: flex !important;
     justify-content: space-around;
