@@ -1,13 +1,3 @@
-.account {
-  display: flex;
-  gap: 24px;
-}
-
-.account > a {
-  font-size: 18px;
-  font-weight: 500;
-  text-decoration: none;
-}
 
 .profile-container {
   width: 80%;
