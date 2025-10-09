@@ -413,6 +413,23 @@ body {
   }
 
 
+  .mobile-accounts {
+    display: flex;
+    gap: 12px;
+    
+  }
+  .mobile-accounts a {
+    padding: 4px 10px;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 16px;
+  }
+
+  .mobile-top-nav .themeToggle {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 5px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -504,5 +521,33 @@ body {
     display: block !important;
     font-size: 16px;
     margin-right: 0;
+  }
+
+    .mobile-accounts {
+    display: flex;
+    gap: 12px;
+    
+  }
+  .mobile-accounts a {
+    padding: 6px 10px;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 16px;
+  }
+
+  .mobile-accounts a.join {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .mobile-accounts a.sign {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .mobile-top-nav .themeToggle {
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 5px;
   }
 }
