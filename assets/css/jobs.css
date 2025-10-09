@@ -81,17 +81,16 @@
 
 
 .job-card {
-    background: var(--box-color);
+    background: var(--background);
     border-radius: 12px;
     padding: 0px 24px;
-    border: 2px solid var(--border-color);
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    transition: all 0.3s ease;
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 20px;
     min-height: 200px;
+    transition: all 0.3s ease;
 }
 .job-card:hover {
     transform: translateY(-2px);
@@ -222,6 +221,7 @@
     background: var(--secondary-color);
     transform: translateY(-1px);
 }
+
 
 @media (max-width: 760px) {
   .job-container {
