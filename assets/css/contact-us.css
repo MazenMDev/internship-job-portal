@@ -20,7 +20,11 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap : 60px;
-    background-color: #f9f9f9;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 60px;
     align-items: start;
 }
 .page-title{
@@ -46,13 +50,13 @@
     display : flex;
     flex-direction : column;
     gap : 30px;
+    height: 90%;
 }
 .info{
     background-color: var(--box-color);
     padding :30px;
     border-radius : 10px;
     border : var(--border-color) 1px solid;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     transition : all 0.3s ease-in-out;
 }
 .info:hover {
@@ -80,11 +84,15 @@
     border-radius: 14px;
     border: 1px solid var(--border-color);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    height: 90%;
 }
 #contact-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    position: relative;
+    align-items: center;
+    height: 90%;
 }
 .form-row {
     display: flex;
@@ -117,6 +125,8 @@ textarea:focus {
     box-shadow: 0 0 0 3px rgba(43, 158, 168, 0.1);
 }
 button[type="submit"] {
+    position: absolute;
+    bottom: 20px;
     background-color: var(--primary-color);
     color: #fff;
     border: none;
