@@ -337,7 +337,7 @@ renderPage(currentPage);
 //search
 function searchJobs(keyword) {
   const lowerKeyword = keyword.toLowerCase();
-  const filteredJobs = jobs.filter((job) => {
+  const filteredJobs = jobListings.filter((job) => {
     return (
       job.title.toLowerCase().includes(lowerKeyword) ||
       job.location.toLowerCase().includes(lowerKeyword) ||
@@ -350,3 +350,5 @@ function searchJobs(keyword) {
   });
   return filteredJobs;
 }
+
+export { jobListings };
