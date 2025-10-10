@@ -219,6 +219,11 @@
     transform: translateY(-1px);
 }
 
+@media (max-width: 1160px){
+  .job-container {
+    margin-bottom: 100px;
+  }
+}
 
 @media (max-width: 760px) {
   .job-container {
@@ -343,7 +348,6 @@
   .job-container {
     padding: 16px 12px;
     padding-top: 90px;
-    padding-bottom: 90px;
     gap: 16px;
   }
 
