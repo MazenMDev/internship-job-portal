@@ -31,7 +31,7 @@ const jobListings = [
     salary: "$24000-$32000",
     location: "Cairo, EG",
     experience: "2-4 years",
-    datePosted: "2025-10-09 10:32:00",
+    datePosted: "2025-10-10 20:00:00",
     logo: "../assets/imgs/dummyJobCompanyImages/google-company.jpg",
   },
 
@@ -144,7 +144,6 @@ function timeSince(date) {
   return "just now";
 }
 
-
 //get the parent category of any sub category and if it was parent then store it , and then use it to get the svg to use
 function getSVG(category) {
   for (const parent in jobCategories) {
@@ -171,14 +170,21 @@ const pagesContainer = document.querySelector(".pages");
 const prevButton = document.querySelector(".prevP");
 const nextButton = document.querySelector(".nextP");
 
-
 // show the ammount of job cards per page , and use javascript to dynammically show the jobs instead of the hardcoded html
 // REMINDER:: render the last "jobsPerPage" jobs from the backend when its done and when a page button  is clicked render the needed jobs for it
 function renderPage(page) {
   jobContainer.innerHTML = "";
+
+  //show the indexes of the jobs being displayed and the current page of total pages
+  const startJobNum = (page - 1) * jobsPerPage + 1;
+  const endJobNum = Math.min(page * jobsPerPage, jobListings.length);
+  const jobResult = document.createElement("h1");
+  jobResult.textContent = `Showing ${startJobNum}-${endJobNum} of ${jobListings.length} results (Page ${page} of ${totalPages})`;
+  jobResult.id = "job-results";
+  jobContainer.appendChild(jobResult);
+
   const start = (page - 1) * jobsPerPage;
   const end = start + jobsPerPage;
-
   //get and display only the jobs for the current page
   const jobsToDisplay = jobListings.slice(start, end);
   jobsToDisplay.forEach((job) => {
@@ -243,7 +249,6 @@ function renderPage(page) {
   updatePages();
 }
 
-
 //add a page button before the next button
 function createPageButton(num) {
   const btn = document.createElement("button");
@@ -267,7 +272,9 @@ function createDots() {
 
 function updatePages() {
   // remove all existing numbered buttons and dots except Prev and Next
-  document.querySelectorAll(".page-btn:not(.prevP):not(.nextP), .dots").forEach((el) => el.remove());
+  document
+    .querySelectorAll(".page-btn:not(.prevP):not(.nextP), .dots")
+    .forEach((el) => el.remove());
 
   // hide pages container if only 1 page
   if (totalPages <= 1) {
@@ -326,3 +333,20 @@ nextButton.addEventListener("click", () => {
 });
 
 renderPage(currentPage);
+
+//search
+function searchJobs(keyword) {
+  const lowerKeyword = keyword.toLowerCase();
+  const filteredJobs = jobs.filter((job) => {
+    return (
+      job.title.toLowerCase().includes(lowerKeyword) ||
+      job.location.toLowerCase().includes(lowerKeyword) ||
+      job.company.toLowerCase().includes(lowerKeyword) ||
+      job.category.toLowerCase().includes(lowerKeyword) ||
+      job.experience.toLowerCase().includes(lowerKeyword) ||
+      job.location.toLowerCase().includes(lowerKeyword) ||
+      job.salary.toLowerCase().includes(lowerKeyword)
+    );
+  });
+  return filteredJobs;
+}
