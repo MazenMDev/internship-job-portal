@@ -1,9 +1,17 @@
-<link rel="stylesheet" href="../assets/css/main.css" />
-
-<div class="mobile-top-nav">
-        <div class="logoContainer">
-          <img src="../assets//imgs/JobConnect.png" alt="logo" class="logo" />
-          <h1 class="logo-text">JobConnect</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About us</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/aboutus.css" />
+  </head>
+  <body>
+    <div class="mobile-top-nav">
+      <div class="logoContainer">
+        <img src="../assets//imgs/JobConnect.png" alt="logo" class="logo" />
+        <h1 class="logo-text">JobConnect</h1>
         <button onclick="themeToggle()" class="themeToggle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -28,129 +36,131 @@
             <path d="m19.07 4.93-1.41 1.41" />
           </svg>
         </button>
+      </div>
+
+      <div class="mobile-accounts">
+        <a href="./login.html" class="join">Join now</a>
+        <a href="./login.html" class="sign">Sign up</a>
+      </div>
+    </div>
+
+    <nav class="nav-bar">
+      <div class="logoContainer">
+        <img src="../assets//imgs/JobConnect.png" alt="logo" class="logo" />
+        <h1 class="logo-text">JobConnect</h1>
+      </div>
+
+      <div class="mid-nav">
+        <div class="nav-icon">
+          <a href="./landing.html">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="iconForNav"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Home</a
+          >
         </div>
 
-        <div class="mobile-accounts">
-          <a href="./login.html" class="join">Join now</a>
-          <a href="./login.html" class="sign">Sign up</a>
+        <div class="nav-icon">
+          <a href="./jobs.html" >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="iconForNav"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M6 3.75A2.75 2.75 0 0 1 8.75 1h2.5A2.75 2.75 0 0 1 14 3.75v.443c.572.055 1.14.122 1.706.2C17.053 4.582 18 5.75 18 7.07v3.469c0 1.126-.694 2.191-1.83 2.54-1.952.599-4.024.921-6.17.921s-4.219-.322-6.17-.921C2.694 12.73 2 11.665 2 10.539V7.07c0-1.321.947-2.489 2.294-2.676A41.047 41.047 0 0 1 6 4.193V3.75Zm6.5 0v.325a41.622 41.622 0 0 0-5 0V3.75c0-.69.56-1.25 1.25-1.25h2.5c.69 0 1.25.56 1.25 1.25ZM10 10a1 1 0 0 0-1 1v.01a1 1 0 0 0 1 1h.01a1 1 0 0 0 1-1V11a1 1 0 0 0-1-1H10Z"
+                clip-rule="evenodd"
+              />
+              <path
+                d="M3 15.055v-.684c.126.053.255.1.39.142 2.092.642 4.313.987 6.61.987 2.297 0 4.518-.345 6.61-.987.135-.041.264-.089.39-.142v.684c0 1.347-.985 2.53-2.363 2.686a41.454 41.454 0 0 1-9.274 0C3.985 17.585 3 16.402 3 15.055Z"
+              />
+            </svg>
+            Jobs</a
+          >
+        </div>
+
+        <div class="nav-icon">
+          <a href="#" class="currentPage">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="iconForNav"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            About us</a
+          >
+        </div>
+
+        <div class="nav-icon">
+          <a href="#">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="iconForNav"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 2c-2.236 0-4.43.18-6.57.524C1.993 2.755 1 4.014 1 5.426v5.148c0 1.413.993 2.67 2.43 2.902 1.168.188 2.352.327 3.55.414.28.02.521.18.642.413l1.713 3.293a.75.75 0 0 0 1.33 0l1.713-3.293a.783.783 0 0 1 .642-.413 41.102 41.102 0 0 0 3.55-.414c1.437-.231 2.43-1.49 2.43-2.902V5.426c0-1.413-.993-2.67-2.43-2.902A41.289 41.289 0 0 0 10 2ZM6.75 6a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Zm0 2.5a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5h-3.5Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Contact</a
+          >
         </div>
       </div>
 
-        <nav class="nav-bar">
-          <div class="logoContainer">
-            <img src="../assets//imgs/JobConnect.png" alt="logo" class="logo" />
-            <h1 class="logo-text">JobConnect</h1>
-          </div>
-          
-          <div class="mid-nav">
-            <div class="nav-icon">
-              <a href="./landing.html">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  class="iconForNav"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                Home</a
-              >
-            </div>
-
-            <div class="nav-icon">
-              <a href="#"  class="currentPage">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  class="iconForNav"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M6 3.75A2.75 2.75 0 0 1 8.75 1h2.5A2.75 2.75 0 0 1 14 3.75v.443c.572.055 1.14.122 1.706.2C17.053 4.582 18 5.75 18 7.07v3.469c0 1.126-.694 2.191-1.83 2.54-1.952.599-4.024.921-6.17.921s-4.219-.322-6.17-.921C2.694 12.73 2 11.665 2 10.539V7.07c0-1.321.947-2.489 2.294-2.676A41.047 41.047 0 0 1 6 4.193V3.75Zm6.5 0v.325a41.622 41.622 0 0 0-5 0V3.75c0-.69.56-1.25 1.25-1.25h2.5c.69 0 1.25.56 1.25 1.25ZM10 10a1 1 0 0 0-1 1v.01a1 1 0 0 0 1 1h.01a1 1 0 0 0 1-1V11a1 1 0 0 0-1-1H10Z"
-                    clip-rule="evenodd"
-                  />
-                  <path
-                    d="M3 15.055v-.684c.126.053.255.1.39.142 2.092.642 4.313.987 6.61.987 2.297 0 4.518-.345 6.61-.987.135-.041.264-.089.39-.142v.684c0 1.347-.985 2.53-2.363 2.686a41.454 41.454 0 0 1-9.274 0C3.985 17.585 3 16.402 3 15.055Z"
-                  />
-                </svg>
-                Jobs</a
-              >
-            </div>
-
-            <div class="nav-icon">
-              <a href="#">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  class="iconForNav"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                About us</a
-              >
-            </div>
-
-            <div class="nav-icon">
-              <a href="#">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  class="iconForNav"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 2c-2.236 0-4.43.18-6.57.524C1.993 2.755 1 4.014 1 5.426v5.148c0 1.413.993 2.67 2.43 2.902 1.168.188 2.352.327 3.55.414.28.02.521.18.642.413l1.713 3.293a.75.75 0 0 0 1.33 0l1.713-3.293a.783.783 0 0 1 .642-.413 41.102 41.102 0 0 0 3.55-.414c1.437-.231 2.43-1.49 2.43-2.902V5.426c0-1.413-.993-2.67-2.43-2.902A41.289 41.289 0 0 0 10 2ZM6.75 6a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Zm0 2.5a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5h-3.5Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                Contact</a
-              >
-            </div>
-          </div>
-          
-          <!-- Account Section -->
-          <div class="account">
-            <a href="./login.html" class="join">Join now</a>
-            <a
-              href="./login.html"
-              class="sign"
-              style="color: var(--background-color)"
-              >Sign up</a
-            >
-            <button onclick="themeToggle()" class="themeToggle">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-sun-icon lucide-sun"
-              >
-                <circle cx="12" cy="12" r="4" />
-                <path d="M12 2v2" />
-                <path d="M12 20v2" />
-                <path d="m4.93 4.93 1.41 1.41" />
-                <path d="m17.66 17.66 1.41 1.41" />
-                <path d="M2 12h2" />
-                <path d="M20 12h2" />
-                <path d="m6.34 17.66-1.41 1.41" />
-                <path d="m19.07 4.93-1.41 1.41" />
-              </svg>
-            </button>
-          </div>
-        </nav>
+      <!-- Account Section -->
+      <div class="account">
+        <a href="./login.html" class="join">Join now</a>
+        <a
+          href="./login.html"
+          class="sign"
+          style="color: var(--background-color)"
+          >Sign up</a
+        >
+        <button onclick="themeToggle()" class="themeToggle">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-sun-icon lucide-sun"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.34 17.66-1.41 1.41" />
+            <path d="m19.07 4.93-1.41 1.41" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </body>
+</html>
