@@ -8,6 +8,8 @@ window.onload = () => {
     }
 }
 
+
+//toggle darkmode
 const themeToggle = () =>{  
     document.body.classList.toggle("darkmode");
     

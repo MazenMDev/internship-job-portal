@@ -216,10 +216,6 @@ body {
   transform: scale(0.9);
 }
 
-.currentPage {
-  border-bottom: 3px solid var(--background-color);
-}
-
 .mobile-top-nav {
   display: none;
 }
@@ -430,6 +426,8 @@ body {
     margin-left: 10px;
     margin-top: 5px;
   }
+
+
 }
 
 @media (max-width: 480px) {
