@@ -24,6 +24,7 @@ const categoryIcons = {
 // dummy jobs until we make the backend
 const jobListings = [
   {
+    id: 1,
     title: "Software Engineer",
     company: "Google",
     category: "Software Development",
@@ -36,6 +37,7 @@ const jobListings = [
   },
 
   {
+    id: 2,
     title: "Marketing Specialist",
     company: "Coca-Cola",
     category: "Marketing & Sales",
@@ -47,6 +49,7 @@ const jobListings = [
     logo: "../assets/imgs/dummyJobCompanyImages/cocacola.jpg",
   },
   {
+    id: 3,
     title: "Cloud Engineer",
     company: "Amazon",
     category: "Cloud Computing",
@@ -58,6 +61,7 @@ const jobListings = [
     logo: "../assets/imgs/dummyJobCompanyImages/amazon.jpeg",
   },
   {
+    id: 4,
     title: "Registered Nurse",
     company: "Mayo Clinic",
     category: "Science & Healthcare",
@@ -69,6 +73,7 @@ const jobListings = [
     logo: "../assets/imgs/dummyJobCompanyImages/mayo-clinic.jpeg",
   },
   {
+    id: 5,
     title: "Accountant",
     company: "PwC",
     category: "Accounting",
@@ -80,6 +85,7 @@ const jobListings = [
     logo: "../assets/imgs/dummyJobCompanyImages/pwc.jpg",
   },
   {
+    id: 6,
     title: "Civil Engineer",
     company: "Bechtel",
     category: "Architecture",
@@ -91,6 +97,7 @@ const jobListings = [
     logo: "../assets/imgs/dummyJobCompanyImages/bechtel.png",
   },
   {
+    id: 7,
     title: "Biology Teacher",
     company: "Springfield High School",
     category: "Teaching & Tutoring",
@@ -102,6 +109,7 @@ const jobListings = [
     logo: "../assets/imgs/dummyJobCompanyImages/springfield.jpeg",
   },
   {
+    id: 8,
     title: "IOS Developer",
     company: "Apple",
     category: "Mobile App Development",
@@ -113,6 +121,11 @@ const jobListings = [
     logo: "../assets/imgs/dummyJobCompanyImages/apple.jpeg",
   },
 ];
+
+
+
+const userBookMarks = [];
+
 
 const jobContainer = document.querySelector(".job-container");
 
@@ -190,9 +203,10 @@ function renderPage(page) {
   jobsToDisplay.forEach((job) => {
     const jobCard = document.createElement("div");
     jobCard.classList.add("job-card");
+    jobCard.setAttribute("data-id", job.id);
     jobCard.innerHTML = `
         <div class="job-date">${timeSince(job.datePosted)}</div>
-        <svg class="job-bookmark" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="job-bookmark ${userBookMarks.includes(job.id) ? "bookmarked" : ""}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
         </svg>
         <div class="job-main-content">
@@ -243,6 +257,9 @@ function renderPage(page) {
                 </div>
         </div>
     `;
+    jobCard.querySelector(".job-bookmark").addEventListener("click", () => {
+        toggleBookmark(job.id);
+    });
     //put the job at the end of the job container
     jobContainer.appendChild(jobCard);
   });
@@ -349,6 +366,44 @@ function searchJobs(keyword) {
     );
   });
   return filteredJobs;
+}
+
+
+function toggleBookmark(jobId) {
+
+  const index = userBookMarks.indexOf(jobId);
+  //search the userBookMarks array for the job id 
+  //and if its found (means that its already bookmarked) we remove the class of bookmarked and remove it from the bookmarked class
+  // else if its not found we add the class of bookmarked and add it to the bookmarked array
+  if (index === -1) {
+    userBookMarks.push(jobId);
+  } else {
+    userBookMarks.splice(index, 1);
+  }
+  const bookmarkIcon = document.querySelector(`.job-card[data-id="${jobId}"] .job-bookmark`);
+  if (bookmarkIcon) {
+    bookmarkIcon.classList.toggle("bookmarked", index === -1);
+    
+  }
+  showBookmarkedFirst();
+}
+
+
+function showBookmarkedFirst() {
+  // Get bookmarked jobs in order where they were bookmarked (latest first)
+  const bookmarkedJobs = [];
+  //i loop through them in reverse to show the latest bookmarked first
+  for (let i = userBookMarks.length - 1; i >= 0; i--) {
+    const job = jobListings.find(j => j.id === userBookMarks[i]);
+    if (job) bookmarkedJobs.push(job);
+  }
+  // Get non bookmarked jobs
+  const nonBookmarkedJobs = jobListings.filter(job => !userBookMarks.includes(job.id));
+  // Combine both to the joblisting with latest bookmarked first
+  const sortedJobs = [...bookmarkedJobs, ...nonBookmarkedJobs];
+  jobListings.length = 0;
+  jobListings.push(...sortedJobs);
+  renderPage(1);
 }
 
 export { jobListings };

@@ -117,8 +117,14 @@
     transition: color 0.2s ease;
 }
 
+.bookmarked {
+  color: var(--primary-color);
+  fill: var(--primary-color);
+}
+
 .job-bookmark:hover {
     color: var(--primary-color);
+    fill: var(--primary-color);
 }
 
 .job-main-content {
