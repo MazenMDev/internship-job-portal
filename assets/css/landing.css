@@ -113,6 +113,80 @@ button:hover {
   opacity: 1;
 }
 
+/* Recent Jobs Section */
+.recent-jobs {
+  background-color: var(--box-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: auto;
+}
+
+.recent-jobs h2{
+  font-size: 2.8rem;
+  word-spacing: 3.5px;
+  text-align: center;
+  padding-top: 20px;
+  color: var(--text-color);
+}
+
+.job-list {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+
+.job-item {
+  background-color: var(--background-color);
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  border: 1px solid transparent;
+}
+.job-item:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--primary-color);
+}
+
+.job-item h3 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.job-detail-category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+}
+.job-location{
+  font-size: 1.1rem;
+}
+.job-salary{
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+
 @media (max-width: 1200px) {
   section {
     padding: 40px 30px;
