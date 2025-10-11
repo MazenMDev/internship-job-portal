@@ -125,7 +125,7 @@ button:hover {
   margin: 60px auto 100px;
 }
 
-.recent-jobs h2{
+.recent-jobs h2 {
   font-size: 2.8rem;
   word-spacing: 3.5px;
   text-align: center;
@@ -140,7 +140,6 @@ button:hover {
   gap: 50px;
   flex-wrap: wrap;
 }
-
 
 .job-item {
   background-color: var(--background-color);
@@ -168,6 +167,8 @@ button:hover {
 }
 
 .job-detail-category {
+  /* might add js to go the current category */
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -180,15 +181,40 @@ button:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 10px 0;
 }
-.job-location{
+.job-location {
   font-size: 1.1rem;
 }
-.job-salary{
+.job-salary {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--primary-color);
 }
+.job-view-details:link,
+.job-view-details:visited {
+  text-decoration: none;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+.job-view-details:hover,
+.job-view-details:active {
+  background-color: var(--box-color);
+  color: var(--primary-color);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--primary-color);
+}
 
+.blurred {
+  transition: filter 0.3s;
+  filter: opacity(0.5);
+}
 
 @media (max-width: 1200px) {
   .hero {

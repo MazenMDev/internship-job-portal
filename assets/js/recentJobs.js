@@ -1,4 +1,5 @@
 import { jobListings } from "./data/jobsData.js";
+import jobCategories from "./jobCategories.js";
 
 // put icons for each main category
 const categoryIcons = {
@@ -63,10 +64,33 @@ function renderRecentJobs() {
         ${job.category}
     </div>
     <p class="job-location">${job.location}</p>
-    <p class="job-salary">${job.salary}</P>
+    <p class="job-salary">${job.salary}</p>
+    <a href ="#" class="job-view-details">View Details</a>
     `;
     container.appendChild(item);
   });
 }
 
 renderRecentJobs();
+
+const jobList = document.querySelector(".recent-jobs .job-list");
+
+jobList.addEventListener("mouseover", (e) => {
+  const jobItem = e.target.closest(".job-item");
+  if (!jobItem) return;
+
+  document.querySelectorAll(".job-item").forEach((item) => {
+    if (item != jobItem) {
+      item.classList.add("blurred");
+    }
+  });
+});
+
+jobList.addEventListener("mouseout", (e) => {
+  const jobItem = e.target.closest(".job-item");
+  if (!jobItem) return;
+
+  document.querySelectorAll(".job-item").forEach((item) => {
+    item.classList.remove("blurred");
+  });
+});
