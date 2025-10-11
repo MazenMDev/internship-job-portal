@@ -1,4 +1,4 @@
-section {
+.hero {
   margin-top: 100px;
   display: flex;
   align-items: center;
@@ -113,7 +113,7 @@ button:hover {
   opacity: 1;
 }
 
-/* Recent Jobs Section */
+/* Recent Jobs ..hero */
 .recent-jobs {
   background-color: var(--box-color);
   border-radius: 12px;
@@ -121,6 +121,8 @@ button:hover {
   display: flex;
   flex-direction: column;
   min-height: auto;
+  padding: 30px 20px 40px;
+  margin: 60px auto 100px;
 }
 
 .recent-jobs h2{
@@ -128,7 +130,8 @@ button:hover {
   word-spacing: 3.5px;
   text-align: center;
   padding-top: 20px;
-  color: var(--text-color);
+  color: var(--primary-color);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .job-list {
@@ -188,7 +191,7 @@ button:hover {
 
 
 @media (max-width: 1200px) {
-  section {
+  .hero {
     padding: 40px 30px;
     gap: 30px;
   }
@@ -209,7 +212,7 @@ button:hover {
 }
 
 @media (max-width: 1025px) {
-  section {
+  .hero {
     flex-direction: column;
     margin-top: 50px;
     gap: 40px;
@@ -263,7 +266,7 @@ button:hover {
 }
 
 @media (max-width: 480px) {
-  section {
+  .hero {
     margin-top: 50px;
     padding: 20px 15px 100px;
     gap: 30px;
