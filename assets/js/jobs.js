@@ -176,7 +176,7 @@ function getSVG(category) {
 }
 
 // pages buttons
-const jobsPerPage = 5;
+const jobsPerPage = 10;
 let currentPage = 1;
 const totalPages = Math.ceil(jobListings.length / jobsPerPage);
 const pagesContainer = document.querySelector(".pages");

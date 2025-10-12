@@ -22,7 +22,12 @@
   align-items: center;
   gap: 6px;
   margin-bottom: 100px;
-  padding: 0 20px;
+  background: var(--background-color);
+  box-shadow: 2px 2px 6px var(--box-shadow);
+  padding: 10px 16px;
+  border-radius: 12px;
+  width: fit-content;
+  margin: 30px auto 0 auto;
 }
 .dots {
   padding: 0 5px;
@@ -30,14 +35,14 @@
 }
 
 .page-btn {
-  background: var(--box-color);
-  border: 1px solid var(--border-color);
   color: var(--text-color);
+  background: var(--background-color);
   padding: 10px 16px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.9em;
   font-weight: 500;
+  border: none;
   transition: all 0.3s ease;
   min-width: 44px;
   height: 44px;
@@ -49,9 +54,7 @@
 .page-btn.active {
   background: var(--primary-color);
   color: var(--background-color);
-  border: 1px solid var(--primary-color);
   transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
 }
 
 .prevP, .nextP {
@@ -63,16 +66,18 @@
 .page-btn:hover {
   background: var(--secondary-color);
   color: var(--background-color);
-  border-color: var(--secondary-color);
 }
 
 .page-btn:disabled {
-  background: var(--box-color);
   color: var(--text-muted);
-  border: 1px solid var(--border-color);
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
+}
+
+.page-btn:disabled:hover {
+  background: var(--background-color);
+  color: var(--text-muted);
 }
 
 
@@ -363,15 +368,14 @@
   }
 
   .pages {
-    gap: 4px;
+    gap: 10px;
     margin-top: 20px;
     padding: 0 12px;
-    justify-content: space-between;
   }
 
   .page-btn {
-    padding: 6px 8px;
-    font-size: 0.8em;
+    padding: 8px 10px;
+    font-size: 1em;
     min-width: 36px;
     height: 36px;
     border-radius: 6px;
