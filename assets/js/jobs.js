@@ -253,7 +253,7 @@ function renderPage(page) {
                         </div>
                 </div>
                 <div class="job-action-button">
-                        <button>Job Details</button>
+                        <button class="job-form-button">Job Details</button>
                 </div>
         </div>
     `;

@@ -230,6 +230,37 @@
     transform: translateY(-1px);
 }
 
+.formDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 95%;
+    background: var(--border-color);
+    border-radius: 12px;
+    border: 1px solid var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.FormCloseBtn{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--error);
+    color: var(--background-color);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+}
+
 @media (max-width: 1160px){
   .job-container {
     margin-bottom: 100px;
