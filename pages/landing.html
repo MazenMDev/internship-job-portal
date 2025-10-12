@@ -14,30 +14,30 @@
         <div class="logoContainer">
           <img src="../assets//imgs/JobConnect.png" alt="logo" class="logo" />
           <h1 class="logo-text">JobConnect</h1>
-        <button onclick="themeToggle()" class="themeToggle">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-sun-icon lucide-sun"
-          >
-            <circle cx="12" cy="12" r="4" />
-            <path d="M12 2v2" />
-            <path d="M12 20v2" />
-            <path d="m4.93 4.93 1.41 1.41" />
-            <path d="m17.66 17.66 1.41 1.41" />
-            <path d="M2 12h2" />
-            <path d="M20 12h2" />
-            <path d="m6.34 17.66-1.41 1.41" />
-            <path d="m19.07 4.93-1.41 1.41" />
-          </svg>
-        </button>
+          <button onclick="themeToggle()" class="themeToggle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-sun-icon lucide-sun"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="m17.66 17.66 1.41 1.41" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="m6.34 17.66-1.41 1.41" />
+              <path d="m19.07 4.93-1.41 1.41" />
+            </svg>
+          </button>
         </div>
 
         <div class="mobile-accounts">
@@ -160,7 +160,7 @@
         </div>
       </nav>
 
-      <section>
+      <section class="hero">
         <div class="right">
           <h1>
             Work Smarter,<br />
@@ -193,7 +193,36 @@
           class="main-img"
         />
       </section>
+
+      <section class="recent-jobs">
+        <h2>Recent Job Openings</h2>
+        <div class="job-list">
+          <div class="job-item">
+            <h3>Job Title 1</h3>
+            <div class="job-detail-category">Category 1</div>
+            <p>Company Name 1</p>
+            <p>Location 1</p>
+            <p>Salary 1</p>
+          </div>
+          <div class="job-item">
+            <h3>Job Title 2</h3>
+            <div class="job-detail-category">Category 2</div>
+            <p>Company Name 2</p>
+            <p>Location 2</p>
+            <p>Salary 2</p>
+          </div>
+          <div class="job-item">
+            <h3>Job Title 3</h3>
+            <div class="job-detail-category">Category 3</div>
+            <p>Company Name 3</p>
+            <p>Location 3</p>
+            <p>Salary 3</p>
+            <a href="#" class="job-view-details">view details</a>
+          </div>
+        </div>
+      </section>
     </div>
     <script src="../assets/js/themeToggle.js"></script>
+    <script type="module" src="../assets/js/recentJobs.js"></script>
   </body>
 </html>
