@@ -1,4 +1,3 @@
-
 .profile-container {
   width: 80%;
   max-width: 800px;
@@ -10,7 +9,7 @@
 }
 
 .cover-photo {
-  background-color: #31919a;
+  background-color: var(--primary-color);
   height: 120px;
 }
 
@@ -29,7 +28,6 @@
   left: 20px;
   background-color: lightgray;
   object-fit: cover;
-  
 }
 
 .name {
@@ -44,13 +42,16 @@
   margin-top: 5px;
 }
 
-.about, .experience, .education, .skills {
+.about,
+.experience,
+.education,
+.skills {
   margin-top: 25px;
 }
 
 h2 {
   font-size: 20px;
-  color: #31919a;
+  color: var(--primary-color);
   border-bottom: 1px solid #ddd;
   padding-bottom: 5px;
 }
@@ -67,29 +68,47 @@ li {
 .skills span {
   display: inline-block;
   background-color: #e8f0fe;
-  color: #31919a;
+  color: var(--primary-color);
   padding: 6px 12px;
   margin: 5px;
   border-radius: 20px;
   font-size: 14px;
 }
 
-.edit-btn{
- background-color:var(--background-color);
- width: 21px;
- height: 21px;
- align-items: center;
- border:none;
- border-radius: 50%; 
- color: #31919a;
- scale: 1.5;
- position: absolute;
- top: 6%;
- left: 15%;
- cursor: pointer; 
- transition: all 0.2s ease-in-out;
+.edit-photo {
+  background-color: var(--background-color);
+  width: 21px;
+  height: 21px;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  color: var(--primary-color);
+  scale: 1.5;
+  position: absolute;
+  top: 6%;
+  left: 15%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
-.edit-btn:hover{
- background-color: #fff;
- color: black;
+.edit-photo:hover {
+  background-color: #fff;
+  color: black;
+}
+
+.edit-btn a {
+  width: 21px;
+  height: 21px;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  color: var(--primary-color);
+  scale: 1.5;
+  position: absolute;
+  top: 4%;
+  right: 5%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.edit-btn:hover a {
+  color: var(--text-color);
 }
