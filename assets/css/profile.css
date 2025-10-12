@@ -86,7 +86,7 @@ li {
   scale: 1.5;
   position: absolute;
   top: 6%;
-  left: 15%;
+  left: 120px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
@@ -111,4 +111,21 @@ li {
 }
 .edit-btn:hover a {
   color: var(--text-color);
+}
+
+@media (max-width: 1200px) {
+.profile-container 
+{
+  width: 100%;
+  max-width: 800px;
+  margin-top: 35px ;
+}
+.edit-photo 
+{
+  margin-top: 0px ;
+  position: absolute;
+}
+
+
+
 }
