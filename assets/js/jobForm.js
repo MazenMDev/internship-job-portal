@@ -4,15 +4,25 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener("click", () => {
             const formDiv = document.createElement("div");
             formDiv.classList.add("formDiv");
-            document.body.appendChild(formDiv);
-
+            
+            const formLeftDiv = document.createElement("div");
+            formLeftDiv.classList.add("formLeftDiv");
+            
             const closeBtn = document.createElement("button");
             closeBtn.classList.add("FormCloseBtn");
             closeBtn.textContent = "X";
             closeBtn.addEventListener("click", () => {
                 formDiv.remove();
             });
-            formDiv.appendChild(closeBtn);
+            formLeftDiv.appendChild(closeBtn);
+
+            const formRightDiv = document.createElement("div");
+            formRightDiv.classList.add("formRightDiv");
+            
+            formDiv.appendChild(formLeftDiv);
+            formDiv.appendChild(formRightDiv);
+            
+            document.body.appendChild(formDiv);
         });
     });
 });
