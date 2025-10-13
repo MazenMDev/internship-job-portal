@@ -166,38 +166,41 @@
             </button>
           </div>
         </nav>
-        <aside class="job-filter-sidebar">
-    <h2 class="sidebar-heading">Filter Jobs</h2>
+        <div class="main-container">
+          <aside class="job-filter-sidebar">
+            <h2 class="sidebar-heading">Filter Jobs</h2>
+            <fieldset class="filter-group-box category-filter-group">
+              <legend class="filter-group-legend">Category</legend>
+              <label class="filter-option-label"><input type="checkbox" value="development" class="filter-checkbox" /> Development</label><br />
+              <label class="filter-option-label"><input type="checkbox" value="design" class="filter-checkbox" /> Design</label><br />
+              <label class="filter-option-label"><input type="checkbox" value="marketing" class="filter-checkbox" /> Marketing</label><br />
+              <label class="filter-option-label"><input type="checkbox" value="sales" class="filter-checkbox" /> Sales</label>
+            </fieldset>
 
-    <fieldset class="filter-group-box category-filter-group">
-        <legend class="filter-group-legend">Category</legend>
-        <label class="filter-option-label"><input type="checkbox" value="development" class="filter-checkbox" /> Development</label><br />
-        <label class="filter-option-label"><input type="checkbox" value="design" class="filter-checkbox" /> Design</label><br />
-        <label class="filter-option-label"><input type="checkbox" value="marketing" class="filter-checkbox" /> Marketing</label><br />
-        <label class="filter-option-label"><input type="checkbox" value="sales" class="filter-checkbox" /> Sales</label>
-    </fieldset>
+            <fieldset class="filter-group-box type-filter-group">
+              <legend class="filter-group-legend">Job Type</legend>
+              <label class="filter-option-label"><input type="checkbox" value="full-time" class="filter-checkbox" /> Full-Time</label><br />
+              <label class="filter-option-label"><input type="checkbox" value="part-time" class="filter-checkbox" checked /> Part-Time</label><br />
+              <label class="filter-option-label"><input type="checkbox" value="contract" class="filter-checkbox" /> Contract</label>
+            </fieldset>
 
-    <fieldset class="filter-group-box type-filter-group">
-        <legend class="filter-group-legend">Job Type</legend>
-        <label class="filter-option-label"><input type="checkbox" value="full-time" class="filter-checkbox" /> Full-Time</label><br />
-        <label class="filter-option-label"><input type="checkbox" value="part-time" class="filter-checkbox" checked /> Part-Time</label><br />
-        <label class="filter-option-label"><input type="checkbox" value="contract" class="filter-checkbox" /> Contract</label>
-    </fieldset>
+            <fieldset class="filter-group-box date-filter-group">
+              <legend class="filter-group-legend">Date Posted</legend>
+              <label class="filter-option-label"><input type="checkbox" value="all" class="filter-checkbox" /> All</label><br />
+              <label class="filter-option-label"><input type="checkbox" value="last-hour" class="filter-checkbox" /> Last Hour</label><br />
+              <label class="filter-option-label"><input type="checkbox" value="last-24-hours" class="filter-checkbox" /> Last 24 Hours</label><br />
+              <label class="filter-option-label"><input type="checkbox" value="last-7-days" class="filter-checkbox" /> Last 7 Days</label><br />
+              <label class="filter-option-label"><input type="checkbox" value="last-30-days" class="filter-checkbox" checked /> Last 30 Days</label>
+            </fieldset>
 
-    <fieldset class="filter-group-box date-filter-group">
-        <legend class="filter-group-legend">Date Posted</legend>
-        <label class="filter-option-label"><input type="checkbox" value="all" class="filter-checkbox" /> All</label><br />
-        <label class="filter-option-label"><input type="checkbox" value="last-hour" class="filter-checkbox" /> Last Hour</label><br />
-        <label class="filter-option-label"><input type="checkbox" value="last-24-hours" class="filter-checkbox" /> Last 24 Hours</label><br />
-        <label class="filter-option-label"><input type="checkbox" value="last-7-days" class="filter-checkbox" /> Last 7 Days</label><br />
-        <label class="filter-option-label"><input type="checkbox" value="last-30-days" class="filter-checkbox" checked /> Last 30 Days</label>
-    </fieldset>
+            <button id="reset-filters" class="reset-button">Reset Filters</button>
+          </aside>
+           <section class="job-container">
+          </section>
+        </div>
+        
 
-    <button id="reset-filters" class="reset-button">Reset Filters</button>
-</aside>
-
-    <section class="job-container">
-    </section>
+   
 
    <div class="pages">
     <button class="page-btn prevP">&lt; Previous</button>

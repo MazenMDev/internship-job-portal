@@ -455,13 +455,14 @@
     padding:10px;
     margin-bottom: 20px;
     background-color: var(--secondary-background);
+    border: none;
 }
 
 .filter-group-legend {
     text-align: left;
     font-weight: 700;
     font-size: 1.1rem;
-    color: var(--accent-color);
+    color: var(--text-color);
     margin-left: -5px;
 }
 
@@ -518,4 +519,7 @@
 
 .reset-button:hover {
     background: var(--secondary-color);
+}
+.main-container{
+  display: flex;
 }
