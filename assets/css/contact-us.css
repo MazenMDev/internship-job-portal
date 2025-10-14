@@ -11,7 +11,7 @@
     var(--secondary-color)
   );
   color: white;
-  padding: 80px 20px 60px;
+  padding: 40px 20px 60px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -102,7 +102,7 @@
   border-radius: 14px;
   background-color: var(--background-color);
 
-  box-shadow: 0 2px 8px var(--box-shadow-small);
+ 
 }
 
 .contact-form h1 {
@@ -164,7 +164,7 @@ input[type="email"]:focus,
 textarea:focus {
   outline: none;
   border-bottom: 2px solid var(--primary-color);
-  box-shadow: 0 0 8px var(--box-shadow-small);
+
 }
 
 button[type="submit"] {
