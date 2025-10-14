@@ -12,6 +12,7 @@
 
   --box-color: #e7eff7;
   --box-shadow: rgba(0, 0, 0, 0.5);
+  --box-shadow-small: rgba(0, 0, 0, 0.1);
   --primary-color: #2f9ea8;
   --secondary-color: #154060;
 
@@ -29,6 +30,7 @@
   --border-color: #374151;
 
   --box-shadow: rgba(150, 139, 139, 0.5);
+  --box-shadow-small: rgba(0, 0, 0, 0.3);
   --box-color: #1f2937;
   --primary-color: #2f9ea8;
   --secondary-color: #154060;

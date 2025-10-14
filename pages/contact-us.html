@@ -52,7 +52,7 @@
 
       <div class="mid-nav">
         <div class="nav-icon">
-          <a href="#" class="currentPage">
+          <a href="#">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -109,7 +109,7 @@
         </div>
 
         <div class="nav-icon">
-          <a href="./contact-us.html">
+          <a href="./contact-us.html" class="currentPage">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -165,7 +165,7 @@
           concerns.
         </p>
       </div>
-      <div class="container">
+      <div class="contact-container">
         <div class="info-section">
           <div class="info">
             <h3>
@@ -264,17 +264,17 @@
           <form id="contact-form">
             <div class="form-row">
               <label for="firstname">First Name:</label>
-              <input type="text" id="firstname" name="firstname" required />
+              <input placeholder="Enter First Name" type="text" id="firstname" name="firstname" required />
             </div>
 
             <div class="form-row">
               <label for="lastname">Last Name:</label>
-              <input type="text" id="lastname" name="lastname" required />
+              <input placeholder="Enter Last Name" type="text" id="lastname" name="lastname" required />
             </div>
 
             <div class="form-row">
               <label for="email">Email:</label>
-              <input type="email" id="email" name="email" required />
+              <input placeholder="example@gmail.com" type="email" id="email" name="email" required />
             </div>
 
             <div class="form-row">
@@ -283,6 +283,7 @@
                 id="message"
                 name="message"
                 rows="4"
+                placeholder="Type your message here..."
                 required
               ></textarea>
             </div>
