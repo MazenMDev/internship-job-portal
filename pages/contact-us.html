@@ -6,6 +6,7 @@
     <title>Contact us</title>
     <link rel="stylesheet" href="../assets/css/main.css" />
     <link rel="stylesheet" href="../assets/css/contact-us.css" />
+    <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png" />
   </head>
   <body>
     <div class="mobile-top-nav">
@@ -262,23 +263,43 @@
         <div class="contact-form">
           <h1>Send us a Message</h1>
           <form id="contact-form">
-            <div class="form-row">
-              <label for="firstname">First Name:</label>
-              <input placeholder="Enter First Name" type="text" id="firstname" name="firstname" required />
+            <div class="form-grid">
+              <div class="form-row">
+                <label for="firstname"></label>
+                <input
+                  placeholder="First Name"
+                  type="text"
+                  id="firstname"
+                  name="firstname"
+                  required
+                />
+              </div>
+
+              <div class="form-row">
+                <label for="lastname"></label>
+                <input
+                  placeholder="Last Name"
+                  type="text"
+                  id="lastname"
+                  name="lastname"
+                  required
+                />
+              </div>
             </div>
 
             <div class="form-row">
-              <label for="lastname">Last Name:</label>
-              <input placeholder="Enter Last Name" type="text" id="lastname" name="lastname" required />
+              <label for="email"></label>
+              <input
+                placeholder="username@example.com"
+                type="email"
+                id="email"
+                name="email"
+                required
+              />
             </div>
 
             <div class="form-row">
-              <label for="email">Email:</label>
-              <input placeholder="example@gmail.com" type="email" id="email" name="email" required />
-            </div>
-
-            <div class="form-row">
-              <label for="message">Message:</label>
+              <label for="message"></label>
               <textarea
                 id="message"
                 name="message"
