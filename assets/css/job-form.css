@@ -26,8 +26,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(var(--formJobColor));
-  border: 2px solid var(--box-color);
+  background: var(--box-color);
+  box-shadow: 0 4px 6px var(--box-shadow);
   border-radius: 12px;
   width: 100%;
 }
@@ -47,8 +47,8 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  background: rgb(var(--formJobColor));
-  border: 2px solid var(--box-color);
+  background: var(--box-color);
+  box-shadow: 0 4px 6px var(--box-shadow);
   border-radius: 12px;
   width: 100%;
   height: 100%;
@@ -59,8 +59,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(var(--formJobColor));
-  border: 2px solid var(--box-color);
+  background: var(--box-color);
+  box-shadow: 0 4px 6px var(--box-shadow);
   border-radius: 12px;
 }
 
@@ -79,8 +79,8 @@
   transition: all 0.2s ease;
 }
 .FormCloseBtn:hover {
-  background:  #afa9a7ff;
-  color: var(--background-color);
+  background: var(--border-color);
+  color: var(--text-muted);
   transform: translateY(-2px);
 }
 
@@ -88,30 +88,25 @@
   .formDiv {
     height: 100%;
     width: 100%;
-    background: rgba(var(--formJobColor), 0.9);
-    border: 2px solid var(--box-color);
-    backdrop-filter: blur(4px);
+    background: var(--box-color);
     border-radius: 12px;
   }
   .upperDiv {
     background: none;
-    border: none;
-    backdrop-filter: none;
+    box-shadow: none;
   }
   .lowerDiv {
     flex-direction: column;
     width: 100%;
     height: 100%;
     background: none;
-    border: none;
-    backdrop-filter: none;
+    box-shadow: none;
   }
   .formLeftDiv,
   .formRightDiv {
     width: 100%;
-    height: 50%;
+    height: 50%%;
     background: none;
-    border: none;
-    backdrop-filter: none;
+    box-shadow: none;
   }
 }
