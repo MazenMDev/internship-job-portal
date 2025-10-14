@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener("click", () => {
             const formDiv = document.createElement("div");
             formDiv.classList.add("formDiv");
+
+            const upperDiv = document.createElement("div");
+            upperDiv.classList.add("upperDiv");
+            formDiv.appendChild(upperDiv);
+
+            const lowerDiv = document.createElement("div");
+            lowerDiv.classList.add("lowerDiv");
+            formDiv.appendChild(lowerDiv);
             
             const formLeftDiv = document.createElement("div");
             formLeftDiv.classList.add("formLeftDiv");
@@ -14,14 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
             closeBtn.addEventListener("click", () => {
                 formDiv.remove();
             });
-            formLeftDiv.appendChild(closeBtn);
+            upperDiv.appendChild(closeBtn);
 
             const formRightDiv = document.createElement("div");
             formRightDiv.classList.add("formRightDiv");
             
-            formDiv.appendChild(formLeftDiv);
-            formDiv.appendChild(formRightDiv);
-            
+            lowerDiv.appendChild(formLeftDiv);
+            lowerDiv.appendChild(formRightDiv);
+
             document.body.appendChild(formDiv);
         });
     });

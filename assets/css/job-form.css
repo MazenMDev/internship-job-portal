@@ -4,33 +4,57 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 95%;
-    height: 95%;
+    width: clamp(300px, 80%, 1800px);
+    height: clamp(300px, 90%, 1200px);
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 5px;
     z-index: 1000;
     
-    
 }
+.upperDiv {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(var(--formJobColor), 0.9);
+    border: 1px solid var(--text-muted);
+    backdrop-filter: blur(4px);
+    border-radius: 12px;
+    width: 100%;
+}
+
+.lowerDiv{
+    flex: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+
+}
+
 .formLeftDiv {
     flex: 3;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    background: rgba(var(--formJobColor), 0.95);
-    border: 3px solid var(--border-color);
+    background: rgba(var(--formJobColor), 0.9);
+    border: 1px solid var(--text-muted);
     backdrop-filter: blur(4px);
     border-radius: 12px;
-    width: 90%;
+    width: 100%;
+    height: 100%;
 }
 .formRightDiv {
     flex: 1;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(var(--formJobColor), 0.95);
-    border: 3px solid var(--border-color);
+    background: rgba(var(--formJobColor), 0.9);
+    border: 1px solid var(--text-muted);
     backdrop-filter: blur(4px);
     border-radius: 12px;
 }
@@ -39,8 +63,8 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    background: var(--error);
-    color: var(--background-color);
+    background: #ff4d4f;
+    color: #fff;
     border: none;
     padding: 6px 12px;
     border-radius: 8px;
@@ -49,12 +73,21 @@
     font-size: 0.9em;
     transition: all 0.2s ease;
 }
+.FormCloseBtn:hover{
+    background: #ff7875;
+    transform: translateY(-2px);
+}
 
 @media (max-width: 768px) {
     .formDiv {
+        height: 95%;
+        width: 95%;
+    }
+
+    .lowerDiv {
         flex-direction: column;
-        width: 90%;
-        height: 90%;
+        width: 100%;
+        height: 100%;
     }
     .formLeftDiv, .formRightDiv {
         width: 100%;
