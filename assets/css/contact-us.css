@@ -11,7 +11,7 @@
     var(--secondary-color)
   );
   color: white;
-  padding: 80px 20px 60px;
+  padding: 40px 20px 60px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -61,7 +61,7 @@
   padding: 24px;
   border-radius: 10px;
   background-color: var(--background-color);
-  border: 1px solid var(--border-color);
+
   transition: all 0.3s ease-in-out;
 }
 
@@ -101,8 +101,8 @@
   padding: 30px;
   border-radius: 14px;
   background-color: var(--background-color);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 2px 8px var(--box-shadow-small);
+
+ 
 }
 
 .contact-form h1 {
@@ -130,16 +130,23 @@
   font-size: 14px;
   color: var(--text-color);
 }
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
 
 input[type="text"],
 input[type="email"],
 textarea {
-  border: 1px solid var(--border-color);
+  border: none;
+  border-bottom: 1px solid;
   font-size: 15px;
-  border-radius: 8px;
+
   font-family: var(--main-font-family);
   color: var(--text-color);
-  background-color: var(--box-color);
+  background-color: var(--background-color);
   transition: all 0.2s ease;
   resize: vertical;
   padding: 12px 16px;
@@ -156,8 +163,8 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus {
   outline: none;
-  border: 1px solid var(--primary-color);
-  box-shadow: 0 0 8px var(--box-shadow-small);
+  border-bottom: 2px solid var(--primary-color);
+
 }
 
 button[type="submit"] {
