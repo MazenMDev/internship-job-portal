@@ -4,7 +4,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: clamp(200px, 95%, 1200px);
+    width: 95%;
     height: 95%;
     display: flex;
     gap: 20px;
@@ -18,7 +18,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    background: var(--box-shadow);
+    background: rgba(var(--formJobColor), 0.95);
     border: 3px solid var(--border-color);
     backdrop-filter: blur(4px);
     border-radius: 12px;
@@ -29,7 +29,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--box-shadow);
+    background: rgba(var(--formJobColor), 0.95);
     border: 3px solid var(--border-color);
     backdrop-filter: blur(4px);
     border-radius: 12px;

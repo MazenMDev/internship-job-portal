@@ -1,41 +1,46 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
 
 :root {
-  --background-color: #f5f5f5;
-  --text-color: #1f2937;
+  --background-color: #f8fafc;
+  --text-color: #222730ff;
   --text-muted: #6b7280;
 
   --error: #dc2626;
   --success: #16a34a;
   --warning: #f59e0b;
-  --border-color: #d9daddff;
+  --border-color: #e2e8f0;
 
-  --box-color: #e7eff7;
-  --box-shadow: rgba(0, 0, 0, 0.5);
-  --box-shadow-small: rgba(0, 0, 0, 0.1);
+  --box-color: #ffffff;
+  --formJobColor: 131, 135, 142;
+  --box-shadow: rgba(0, 0, 0, 0.08);
+  --box-shadow-small: rgba(0, 0, 0, 0.04);
+
   --primary-color: #2f9ea8;
   --primary-color-rgb: 47, 158, 168;
-  --secondary-color: #154060;
-
+  --secondary-color: #2563eb;
+  
   --main-font-family: "Rubik", sans-serif;
 }
 
 .darkmode {
-  --background-color: #07080bff;
-  --text-color: #f3f4f6;
+  --background-color: #0d1117;
+  --text-color: #e5e7eb;
   --text-muted: #9ca3af;
 
   --error: #ef4444;
   --success: #22c55e;
   --warning: #facc15;
-  --border-color: #374151;
+  --border-color: #1f2937;
 
-  --box-shadow: rgba(150, 139, 139, 0.5);
-  --box-shadow-small: rgba(0, 0, 0, 0.3);
-  --box-color: #1f2937;
+  --box-color: #161b22;
+  --formJobColor: 22, 27, 34;
+  --box-shadow: rgba(0, 0, 0, 0.4);
+  --box-shadow-small: rgba(0, 0, 0, 0.25);
+
   --primary-color: #2f9ea8;
   --primary-color-rgb: 47, 158, 168;
-  --secondary-color: #154060;
+  --secondary-color: #2563eb;
+
   --main-font-family: "Rubik", sans-serif;
 }
 
