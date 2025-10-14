@@ -2,8 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const jobFormButtons = document.querySelectorAll(".job-form-button");
     jobFormButtons.forEach(button => {
         button.addEventListener("click", () => {
+            const blurDiv = document.createElement("div");
+            blurDiv.classList.add("ParentBlurDiv");
+
             const formDiv = document.createElement("div");
             formDiv.classList.add("formDiv");
+            
+            blurDiv.appendChild(formDiv);
+
+            blurDiv.addEventListener("click", (e) => {
+                if (e.target === blurDiv) {
+                    blurDiv.remove();
+                }
+            });
 
             const upperDiv = document.createElement("div");
             upperDiv.classList.add("upperDiv");
@@ -20,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
             closeBtn.classList.add("FormCloseBtn");
             closeBtn.textContent = "X";
             closeBtn.addEventListener("click", () => {
-                formDiv.remove();
+                blurDiv.remove();
             });
             upperDiv.appendChild(closeBtn);
 
@@ -30,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
             lowerDiv.appendChild(formLeftDiv);
             lowerDiv.appendChild(formRightDiv);
 
-            document.body.appendChild(formDiv);
+            document.body.appendChild(blurDiv);
         });
     });
 });
