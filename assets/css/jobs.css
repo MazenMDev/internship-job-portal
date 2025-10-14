@@ -57,7 +57,8 @@
   transform: translateY(-1px);
 }
 
-.prevP, .nextP {
+.prevP,
+.nextP {
   font-weight: 600;
   padding: 10px 20px;
   min-width: auto;
@@ -80,46 +81,45 @@
   color: var(--text-muted);
 }
 
-
 .job-card {
-    background: var(--background);
-    border-radius: 12px;
-    padding: 0px 24px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    min-height: 200px;
-    transition: all 0.3s ease;
+  background: var(--background);
+  border-radius: 12px;
+  padding: 0px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 200px;
+  transition: all 0.3s ease;
 }
 .job-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .job-date {
-    font-size: 0.85em;
-    opacity: 0.75;
-    color: var(--background-color);
-    background: var(--primary-color);
-    padding: 6px 12px;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    margin-bottom: 12px;
-    margin-top: 12px;
-    width: fit-content;
+  font-size: 0.85em;
+  opacity: 0.75;
+  color: var(--background-color);
+  background: var(--primary-color);
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 12px;
+  margin-top: 12px;
+  width: fit-content;
 }
 
 .job-bookmark {
-    position: absolute;
-    top: 20px;
-    right: 24px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    color: var(--secondary-text-color);
-    transition: color 0.2s ease;
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  color: var(--secondary-text-color);
+  transition: color 0.2s ease;
 }
 
 .bookmarked {
@@ -128,123 +128,243 @@
 }
 
 .job-bookmark:hover {
-    color: var(--primary-color);
-    fill: var(--primary-color);
+  color: var(--primary-color);
+  fill: var(--primary-color);
 }
 
 .job-main-content {
-    display: flex;
-    align-items: flex-start;
-    gap: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
 }
 
 .company-logo {
-    width: 70px;
-    height: 70px;
-    flex-shrink: 0;
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
 }
 
 .company-logo img {
-    width: 70px;
-    height: 70px;
-    border-radius: 8px;
-    object-fit: cover;
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 .job-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .job-header-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .job-title {
-    font-size: 1.15em;
-    font-weight: 600;
-    color: var(--text-color);
-    margin: 0;
-    line-height: 1.3;
+  font-size: 1.15em;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.3;
 }
 
 .company-name {
-    font-size: 0.95em;
-    color: var(--secondary-text-color);
-    font-weight: 400;
-    margin: 0;
+  font-size: 0.95em;
+  color: var(--secondary-text-color);
+  font-weight: 400;
+  margin: 0;
 }
 
 .job-details-row {
-    display: flex;
-    flex-wrap: wrap; 
-    align-items: center;
-    gap: 10px;
-    margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
 }
 
 .job-detail-item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.75em;
-    color: var(--secondary-text-color);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75em;
+  color: var(--secondary-text-color);
 }
 
 .job-detail-item svg {
-    width: 14px;
-    height: 14px;
-    color: var(--primary-color);
-    flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  color: var(--primary-color);
+  flex-shrink: 0;
 }
 
 .job-type-badge {
-    padding: 4px 6px;
-    border-radius: 8px;
-    font-size: 1em;
+  padding: 4px 6px;
+  border-radius: 8px;
+  font-size: 1em;
 }
 
 .job-action-button {
-    align-self: flex-end;
-    margin-top: -8px;
+  align-self: flex-end;
+  margin-top: -8px;
 }
 
 .job-action-button button {
-    background: var(--primary-color);
-    color: var(--background-color);
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 0.9em;
-    transition: all 0.2s ease;
+  background: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9em;
+  transition: all 0.2s ease;
 }
 
 .job-action-button button:hover {
-    background: var(--secondary-color);
-    transform: translateY(-1px);
+  background: var(--secondary-color);
+  transform: translateY(-1px);
 }
 
+.job-filter-sidebar {
+  width: 280px;
+  margin-top: 120px;
+  padding: 20px;
+  background-color: rgba(var(--primary-color-rgb), 0.05);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  align-self: flex-start;
+  height: fit-content;
+}
 
-@media (max-width: 1160px){
+.sidebar-heading {
+  font-size: 1.4rem;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 0;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.filter-group-box {
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+}
+
+.filter-group-legend {
+  text-align: left;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.filter-option-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 5px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.filter-option-label:hover {
+  color: var(--primary-color);
+  background-color: var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.filter-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--primary-color);
+  border-radius: 4px;
+  margin-right: 10px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.filter-checkbox:checked {
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+}
+
+.reset-button {
+  width: 100%;
+  height: 44px;
+  margin-top: 10px;
+  margin-bottom: 0;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.reset-button:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.reset-button:active {
+  transform: translateY(0);
+}
+
+.main-container {
+  display: flex;
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (max-width: 1160px) {
   .job-container {
     margin-bottom: 100px;
   }
-  .pages{
+  .pages {
     margin-bottom: 100px;
+  }
+  .main-container {
+    flex-direction: column;
+    padding: 0 16px;
+  }
+  .job-filter-sidebar {
+    display: none;
   }
 }
 
 @media (max-width: 760px) {
+  .main-container {
+    flex-direction: column;
+    padding: 0 16px;
+  }
+
   .job-container {
-    padding: 20px 16px;
+    padding: 20px 0;
     padding-top: 100px;
     gap: 20px;
+    max-width: 100%;
+    width: 100%;
   }
 
   #job-results {
@@ -255,7 +375,7 @@
   .pages {
     gap: 6px;
     margin-top: 25px;
-    padding: 0 16px;
+    padding: 10px 16px;
     margin-bottom: 120px;
     flex-wrap: wrap;
   }
@@ -267,91 +387,92 @@
     height: 40px;
   }
 
-  .prevP, .nextP {
+  .prevP,
+  .nextP {
     padding: 8px 16px;
     font-size: 0.85em;
   }
-  
+
   .job-card {
     padding: 20px;
     min-height: auto;
     gap: 16px;
     text-align: left;
   }
-  
+
   .job-date {
     font-size: 0.8em;
     padding: 4px 8px;
     margin-bottom: 12px;
     margin-top: 0;
   }
-  
+
   .job-bookmark {
     top: 16px;
     right: 20px;
     width: 18px;
     height: 18px;
   }
-  
+
   .job-main-content {
     flex-direction: column;
     gap: 16px;
     align-items: stretch;
   }
-  
+
   .company-logo {
     width: 75px;
     height: 75px;
     align-self: flex-start;
   }
-  
+
   .company-logo img {
     width: 75px;
     height: 75px;
   }
-  
+
   .job-info {
     gap: 12px;
   }
-  
+
   .job-title {
     font-size: 1.2em;
     line-height: 1.3;
     margin-bottom: 4px;
   }
-  
+
   .company-name {
     font-size: 0.95em;
     margin-bottom: 12px;
   }
-  
+
   .job-details-row {
     flex-direction: column;
     align-items: stretch;
     gap: 12px;
     margin-top: 0;
   }
-  
+
   .job-detail-item {
     font-size: 0.85em;
     gap: 8px;
     justify-content: flex-start;
   }
-  
+
   .job-detail-item svg {
     width: 16px;
     height: 16px;
   }
-  
+
   .job-type-badge {
     padding: 3px 6px;
   }
-  
+
   .job-action-button {
     align-self: stretch;
     margin-top: 16px;
   }
-  
+
   .job-action-button button {
     width: 100%;
     padding: 12px 16px;
@@ -359,13 +480,22 @@
     font-weight: 600;
   }
 
+  .job-filter-sidebar {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
+  .main-container {
+    padding: 0 12px;
+  }
+
   .job-container {
-    padding: 16px 12px;
+    padding: 16px 0;
     padding-top: 90px;
     gap: 16px;
+    max-width: 100%;
+    width: 100%;
   }
 
   #job-results {
@@ -376,8 +506,8 @@
   .pages {
     gap: 10px;
     margin-top: 20px;
-    padding: 0 12px;
-    
+    padding: 10px 12px;
+
     margin-bottom: 120px;
   }
 
@@ -389,137 +519,48 @@
     border-radius: 6px;
   }
 
-  .prevP, .nextP {
+  .prevP,
+  .nextP {
     padding: 6px 12px;
     font-size: 0.8em;
     flex-shrink: 0;
   }
-  
-  
+
   .job-card {
     padding: 16px;
     gap: 14px;
   }
-  
+
   .company-logo {
     width: 70px;
     height: 70px;
   }
-  
+
   .company-logo img {
     width: 70px;
     height: 70px;
   }
-  
+
   .job-title {
     font-size: 1.1em;
   }
-  
+
   .company-name {
     font-size: 0.9em;
   }
-  
+
   .job-detail-item {
     font-size: 0.8em;
     gap: 6px;
   }
-  
+
   .job-detail-item svg {
     width: 14px;
     height: 14px;
   }
-  
+
   .job-action-button button {
     padding: 10px 14px;
     font-size: 0.85em;
   }
-  
-}
-  
-.job-filter-sidebar {
-    width: 200px;
-    margin-top: 65px;
-    background-color: var(--card-background);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-}
-
-.sidebar-heading {
-    font-size: 1.5rem;
-    color: var(--text-color);
-    text-align: center;
-}
-
-.filter-group-box {
-    border-radius: 6px;
-    padding:10px;
-    margin-bottom: 20px;
-    background-color: var(--secondary-background);
-    border: none;
-}
-
-.filter-group-legend {
-    text-align: left;
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--text-color);
-    margin-left: -5px;
-}
-
-.filter-option-label {
-    display: block;
-    cursor: pointer;
-    padding: 5px ;
-    font-size: 0.95rem;
-    color: var(--text-color);
-    
-}
-
-.filter-option-label:hover {
-    color: var(--primary-color);
-    transition: color 0.2s ease;
-}
-
-.filter-checkbox {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 16px;
-    height: 16px;
-    border: 2px solid var(--primary-color);
-    border-radius: 4px;
-    margin-right: 8px;
-    vertical-align: middle;
-    cursor: pointer;
-    outline: none;
-    position: relative;
-    top: -1px;
-    transition: all 0.2s ease;
-}
-
-.filter-checkbox:checked {
-    border-color: var(--primary-color);
-    background-color: var(--primary-color);
-}
-
-.reset-button {
-    width: 70%;
-    height: 40px;
-    margin-bottom: 20px;
-    margin-left: 30px;
-    background-color: var(--primary-color) ;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: background-color 0.2s, transform 0.1s;
-}
-
-.reset-button:hover {
-    background: var(--secondary-color);
-}
-.main-container{
-  display: flex;
 }
