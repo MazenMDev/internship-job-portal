@@ -426,7 +426,10 @@ document.addEventListener("DOMContentLoaded" , () =>{
 
 const displayCategories = () =>{
   const categoryDropDown = document.querySelector(".category-filter-group");
-  categoryDropDown.innerHTML="";
+  categoryDropDown.innerHTML=`
+              <summary class="filter-group-legend filter-group-summary">Category</summary>
+              `;
+              
   let i =0;
   for (const parent in jobCategories){
   
