@@ -1,0 +1,112 @@
+.ParentBlurDiv {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(var(--formJobColor), 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+}
+
+.formDiv {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(300px, 80%, 1800px);
+  height: clamp(300px, 90%, 1200px);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  z-index: 1000;
+}
+.upperDiv {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--box-color);
+  box-shadow: 0 4px 6px var(--box-shadow);
+  border-radius: 12px;
+  width: 100%;
+}
+
+.lowerDiv {
+  flex: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+
+.formLeftDiv {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: var(--box-color);
+  box-shadow: 0 4px 6px var(--box-shadow);
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+}
+.formRightDiv {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--box-color);
+  box-shadow: 0 4px 6px var(--box-shadow);
+  border-radius: 12px;
+}
+
+.FormCloseBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: var(--text-color);
+  background: none;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9em;
+  transition: all 0.2s ease;
+}
+.FormCloseBtn:hover {
+  background: var(--border-color);
+  color: var(--text-muted);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .formDiv {
+    height: 100%;
+    width: 100%;
+    background: var(--box-color);
+    border-radius: 12px;
+  }
+  .upperDiv {
+    background: none;
+    box-shadow: none;
+  }
+  .lowerDiv {
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: none;
+    box-shadow: none;
+  }
+  .formLeftDiv,
+  .formRightDiv {
+    width: 100%;
+    height: 50%%;
+    background: none;
+    box-shadow: none;
+  }
+}

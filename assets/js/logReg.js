@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
+//function to change between login and register containers
 function changePage() {
     if (current === "login") {
         document.title = "Register - JobConnect";
