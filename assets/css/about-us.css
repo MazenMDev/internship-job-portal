@@ -1,15 +1,136 @@
-.aboutus-container {
-    margin-top: 100px;
-    width: 50%;
-    padding: 20px;
-    border-radius: 8px;
-    
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-.aboutus-section h1 {
-    text-align: center;
-    margin-bottom: 20px;
+
+body {
+  font-family: "Inter", Arial, sans-serif;
+  line-height: 1.5;
+  color: #111;
+  background-color: #fff;
+  padding: 2rem;
 }
-.aboutus-section h2 {
-    margin-top: 25px;
-    margin-bottom: 10px;
+
+.content-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.text-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.title {
+  flex: 1;
+}
+
+.title h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.description {
+  flex: 1;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.image-container {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 1rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--main-font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.how-it-works-section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.section-header h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--text-color);
+}
+
+.section-header p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 60px auto;
+}
+
+.steps-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.step-card {
+  background-color: var(--box-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 40px 30px;
+  flex-basis: 260px;
+  flex-grow: 1;
+  max-width: 280px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px var(--box-shadow);
+}
+
+.step-icon {
+  margin-bottom: 25px;
+  color: var(--primary-color);
+}
+
+.step-icon svg {
+  width: 50px;
+  height: 50px;
+}
+
+.step-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.step-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
 }
