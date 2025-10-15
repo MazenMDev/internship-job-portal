@@ -8,7 +8,6 @@
   gap: 16px;
 }
 
-
 .jobResultDiv {
   display: flex;
   font-weight: 500;
@@ -355,6 +354,15 @@
 .reset-button:active {
   transform: translateY(0);
 }
+
+
+.category-filter-group{
+  position: relative;
+  height: auto;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
 
 .main-container {
   display: flex;

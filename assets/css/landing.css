@@ -76,6 +76,11 @@ button:hover {
   transform: translateY(-6px);
 }
 
+.btn button:last-child:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
 .learners {
   display: flex;
   align-items: center;
