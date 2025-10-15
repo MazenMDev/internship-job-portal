@@ -330,6 +330,7 @@
   background-color: var(--primary-color);
 }
 
+
 .reset-button {
   width: 100%;
   height: 44px;
@@ -371,6 +372,23 @@
   margin: 0 auto;
   padding: 0 20px;
 }
+
+.category-filter-group::-webkit-scrollbar {
+  background-color: var(--border-color);
+  width: 10px;
+}
+
+.category-filter-group::-webkit-scrollbar-thumb {
+  background-color: var(--scrollBar);
+  border-radius: 10px;
+  transition: background 0.4s ease;
+}
+
+.category-filter-group::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+  cursor: pointer;
+}
+
 
 
 @media (max-width: 1160px) {
