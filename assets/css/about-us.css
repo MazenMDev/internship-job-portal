@@ -1,18 +1,9 @@
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: "Inter", Arial, sans-serif;
-  line-height: 1.5;
-  color: #111;
-  background-color: #fff;
-  padding: 2rem;
 }
 
 .content-section {
+  margin-top: 120px;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -36,7 +27,7 @@ body {
 
 .description {
   flex: 1;
-  color: #333;
+  color: var(--text-muted);
   font-size: 0.95rem;
 }
 
@@ -53,18 +44,6 @@ body {
   border-radius: 1rem;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: var(--main-font-family);
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: 1.6;
-}
 
 .how-it-works-section {
   padding: 80px 20px;
