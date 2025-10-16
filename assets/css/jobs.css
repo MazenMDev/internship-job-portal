@@ -429,23 +429,34 @@
   left: 18px;
   top: 16px;
 }
+
+.jobRange{
+  position: relative;
+  height: 50px;
+  background: var(--background-color);
+  margin-top: 20px;
+  display: flex;
+}
 .salary-filter input{
-  background-color: var(--background-color);
-  color: var(--primary-color);
-  width: 100%;
+  background: var(--primary-color);
+  position: absolute;
+  color: var(--secondary-color);
+  width: 50%;
   transform: translateY(-50%);
   appearance: none;
+  border-radius: 8px 0px 0px 8px;
 
+}
+
+.salary-filter input:last-child{
+  left: 50%;
+  border-radius: 0px 8px 8px 0px;
 }
 .salary-range{
   background-color: var(--background-color);
   color: var(--primary-color);
   width: 100%;
 }
-
-
-
-
 
 @media (max-width: 1160px) {
   .job-container {
