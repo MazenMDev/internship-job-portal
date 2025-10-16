@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../assets/css/jobs.css" />
     <link rel="stylesheet" href="../assets/css/job-form.css" />
     <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
 </head>
 <body>
       <div class="container">
@@ -169,24 +170,35 @@
         <div class="main-container">
           <aside class="job-filter-sidebar">
             <h2 class="sidebar-heading">Filter Jobs</h2>
+            <fieldset class="filter-group-box search-filter">
+              <legend class="search-legend">Search By Job Title</legend>
+              <span class="material-symbols-outlined">search</span>
+              <input  class="search-bar" type="search" placeholder="Job Title or Company">
+            </fieldset>
             <details open class="filter-group-box category-filter-group">
               <summary class="filter-group-legend filter-group-summary">Category</summary>
              </details>
 
             <fieldset class="filter-group-box type-filter-group">
               <legend class="filter-group-legend">Job Type</legend>
-              <label class="filter-option-label"><input type="checkbox" value="full-time" class="filter-checkbox" /> Full-Time</label><br />
-              <label class="filter-option-label"><input type="checkbox" value="part-time" class="filter-checkbox" checked /> Part-Time</label><br />
+              <label class="filter-option-label"><input type="checkbox" value="full-time" class="filter-checkbox" /> Full-Time</label>
+              <label class="filter-option-label"><input type="checkbox" value="part-time" class="filter-checkbox" checked /> Part-Time</label>
               <label class="filter-option-label"><input type="checkbox" value="contract" class="filter-checkbox" /> Contract</label>
             </fieldset>
 
             <fieldset class="filter-group-box date-filter-group">
               <legend class="filter-group-legend">Date Posted</legend>
-              <label class="filter-option-label"><input type="checkbox" value="all" class="filter-checkbox" /> All</label><br />
-              <label class="filter-option-label"><input type="checkbox" value="last-hour" class="filter-checkbox" /> Last Hour</label><br />
-              <label class="filter-option-label"><input type="checkbox" value="last-24-hours" class="filter-checkbox" /> Last 24 Hours</label><br />
-              <label class="filter-option-label"><input type="checkbox" value="last-7-days" class="filter-checkbox" /> Last 7 Days</label><br />
+              <label class="filter-option-label"><input type="checkbox" value="all" class="filter-checkbox" /> All</label>
+              <label class="filter-option-label"><input type="checkbox" value="last-hour" class="filter-checkbox" /> Last Hour</label>
+              <label class="filter-option-label"><input type="checkbox" value="last-24-hours" class="filter-checkbox" /> Last 24 Hours</label>
+              <label class="filter-option-label"><input type="checkbox" value="last-7-days" class="filter-checkbox" /> Last 7 Days</label>
               <label class="filter-option-label"><input type="checkbox" value="last-30-days" class="filter-checkbox" checked /> Last 30 Days</label>
+            </fieldset>
+            <fieldset class="filter-group-box salary-filter">
+              <legend class="filter-group-legend">Salary</legend>
+              <input class="min-val" type="range">
+              <input class="max-val" type="range">
+
             </fieldset>
 
             <button id="reset-filters" class="reset-button">Reset Filters</button>
