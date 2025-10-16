@@ -429,28 +429,66 @@
   left: 18px;
   top: 16px;
 }
+.salary-filter{
+  position: relative;
+  height: auto;
+  padding: 10px 0;
+}
 
 .jobRange{
   position: relative;
-  height: 50px;
+  height: 6px;
+  width: 100%;
   background: var(--background-color);
   margin-top: 20px;
   display: flex;
+  border-radius: 3px;
 }
-.salary-filter input{
-  background: var(--primary-color);
+
+.slider-track {
   position: absolute;
-  color: var(--secondary-color);
-  width: 50%;
-  transform: translateY(-50%);
-  appearance: none;
-  border-radius: 8px 0px 0px 8px;
+  height: 6px;
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+.salary-filter input{
+  position: absolute;
+  width: 100%;
+  top: -3px;
+  height: 6px;
+  -webkit-appearance: none; /*the default slidr */
+  background: none;
+  pointer-events: none; /* to not make the rest of the range input clickable */
 
 }
 
-.salary-filter input:last-child{
-  left: 50%;
-  border-radius: 0px 8px 8px 0px;
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: var(--background-color);
+  border: 6px solid var(--primary-color);
+  box-shadow: 0 0 6px var(--box-shadow);
+  pointer-events: auto; /* to make the thumb the only clickable part */
+  cursor: pointer; 
+  transition: all 0.3s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: var(--primary-color);
+}
+
+.salary-values{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 0.9em;
+  padding: 0 5px;
 }
 .salary-range{
   background-color: var(--background-color);

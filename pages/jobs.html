@@ -197,8 +197,14 @@
             <fieldset class="filter-group-box salary-filter">
               <legend class="filter-group-legend">Salary</legend>
               <div class="jobRange">
-                <input class="min-val" type="range">
-                <input class="max-val" type="range">
+                <div class="slider-track"></div>
+                <input class="min-val" type="range" id="min-slider">
+                <input class="max-val" type="range" id="max-slider">
+                <div class="salary-values">
+                  <span class="salary-range" id="min-salary">$0</span>
+                  <span class="salary-range" id="max-salary">$200,000+</span>
+              
+                </div>
               </div>
             </fieldset>
 
