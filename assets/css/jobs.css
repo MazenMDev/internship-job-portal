@@ -437,9 +437,8 @@
 
 .jobRange{
   position: relative;
-  height: 6px;
+  height: auto;
   width: 100%;
-  background: var(--background-color);
   margin-top: 20px;
   display: flex;
   border-radius: 3px;
@@ -464,6 +463,7 @@
 }
 
 
+
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 20px;
@@ -477,10 +477,6 @@ input[type="range"]::-webkit-slider-thumb {
   transition: all 0.3s ease;
 }
 
-input[type="range"]::-webkit-slider-thumb:hover {
-  background: var(--primary-color);
-}
-
 .salary-values{
   display: flex;
   width: 100%;
@@ -491,9 +487,14 @@ input[type="range"]::-webkit-slider-thumb:hover {
   padding: 0 5px;
 }
 .salary-range{
-  background-color: var(--background-color);
   color: var(--primary-color);
   width: 100%;
+  align-items: left;
+  text-align: left;
+}
+.salary-range:last-child{
+  text-align: right;
+  align-items: right;
 }
 
 @media (max-width: 1160px) {
