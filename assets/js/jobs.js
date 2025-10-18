@@ -207,6 +207,7 @@ function renderPage(page) {
   const end = start + jobsPerPage;
   //get and display only the jobs for the current page
   const jobsToDisplay = jobListings.slice(start, end);
+
   jobsToDisplay.forEach((job) => {
     const jobCard = document.createElement("div");
     jobCard.classList.add("job-card");
@@ -415,4 +416,110 @@ function showBookmarkedFirst() {
   renderPage(1);
 }
 
-export { jobListings };
+let numCategories = 7;
+document.addEventListener("DOMContentLoaded", () => {
+  displayCategories();
+});
+
+const displayCategories = () => {
+  const categoryDropDown = document.querySelector(".category-filter-group");
+  categoryDropDown.innerHTML = `
+              <summary class="filter-group-legend filter-group-summary">Category</summary>
+              `;
+
+  let i = 0;
+  for (const parent in jobCategories) {
+    jobCategories[parent].forEach((cat) => {
+      if (i >= numCategories) {
+        return;
+      }
+      const label = document.createElement("label");
+      label.classList.add("filter-option-label");
+      label.innerHTML = `
+      <input type="checkbox" value="${cat}" class="filter-checkbox" /> ${cat}
+      `;
+      categoryDropDown.appendChild(label);
+      i++;
+    });
+  }
+
+  const addMore = document.createElement("button");
+  addMore.textContent = "View More";
+  addMore.classList.add("viewMore-category");
+  addMore.addEventListener("click", () => {
+    numCategories += 5;
+    console.log(numCategories);
+    displayCategories();
+  });
+  categoryDropDown.appendChild(addMore);
+};
+
+//Logic for double range salary
+const sliderTrack = document.querySelector(".slider-track");
+const minSlider = document.getElementById("min-slider");
+const maxSlider = document.getElementById("max-slider");
+
+const minSalarySpan = document.getElementById("min-salary");
+const maxSalarySpan = document.getElementById("max-salary");
+
+const manageSlider = () => {
+  let left , width;
+  let minDifference = (minSlider.value - minSlider.min); // see how much the min slider moved
+  let maxDifference = (minSlider.max - minSlider.min); // find the total range of the slider
+  left = (minDifference / maxDifference) * 100; //get the percentage of the movement
+
+  let sliderDiff = (maxSlider.value - minSlider.value); // see how much the difference between the two sliders
+  width = (sliderDiff / maxDifference) * 100; // get the percentage of the difference between them
+
+  sliderTrack.style.left = `${left+2}%`;
+  sliderTrack.style.width = `${width-2}%`;
+
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  let max = -1;
+  let min = 999999999999;
+  jobListings.forEach((job) => {
+    // Extract numbers from salary string without using regex
+    // Example: "$24000-$32000"
+    const parts = job.salary.split("-");
+    // parts = ["$24000" , "$32000"] now
+    //remove the dollar sign and parse the string to int
+    const low = parseInt(parts[0].replace("$", ""));
+    const high = parseInt(parts[1].replace("$", ""));
+    if (!isNaN(low) && low < min) min = low;
+    if (!isNaN(high) && high > max) max = high;
+  });
+
+  minSalarySpan.textContent = `$ ${min}`;
+  maxSalarySpan.textContent = `$ ${max}`;
+
+  minSlider.min = min;
+  minSlider.max = max;
+  minSlider.value = min;
+
+  maxSlider.min = min;
+  maxSlider.max = max;
+  maxSlider.value = max;
+  manageSlider();
+  //calculate the differnce to not let the sliders overlap and set it to 10% of the range between them
+  let diff = Math.floor((max - min) * 0.1);
+
+  minSlider.addEventListener("input", () => {
+    // prevent the min from going after the max by 10% of the distance
+    if (parseInt(minSlider.value) >= parseInt(maxSlider.value)) {
+      minSlider.value = parseInt(maxSlider.value) - diff;
+    }
+    minSalarySpan.textContent = `$ ${minSlider.value}`;
+    manageSlider();
+  });
+
+  maxSlider.addEventListener("input", () => {
+    // prevent the max from going before the min by 10% of the distance
+    if (parseInt(maxSlider.value) <= parseInt(minSlider.value)) {
+      maxSlider.value = parseInt(minSlider.value) + diff;
+    }
+    maxSalarySpan.textContent = `$ ${maxSlider.value}`;
+    manageSlider();
+  });
+});

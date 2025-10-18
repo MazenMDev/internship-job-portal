@@ -13,6 +13,7 @@
   --box-color: #FFFFFF; /* White - Card/Surface background */
   --formJobColor: 220, 220, 220;
   --box-shadow: rgba(0, 0, 0, 0.08);
+  --scrollBar: rgba(0 , 0 , 0 , 0.1);
   --box-shadow-small: rgba(0, 0, 0, 0.04);
 
   --primary-color: #0d00ff; /* Indigo 600 - Primary accent, buttons */

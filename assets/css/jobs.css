@@ -8,7 +8,6 @@
   gap: 16px;
 }
 
-
 .jobResultDiv {
   display: flex;
   font-weight: 500;
@@ -291,8 +290,7 @@
   font-weight: 600;
   font-size: 1rem;
   color: var(--text-color);
-  margin-bottom: 10px;
-  padding: 0;
+  padding: 0px;
 }
 
 .filter-option-label {
@@ -331,6 +329,7 @@
   background-color: var(--primary-color);
 }
 
+
 .reset-button {
   width: 100%;
   height: 44px;
@@ -356,6 +355,15 @@
   transform: translateY(0);
 }
 
+
+.category-filter-group{
+  position: relative;
+  height: auto;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+
 .main-container {
   display: flex;
   gap: 30px;
@@ -364,6 +372,130 @@
   padding: 0 20px;
 }
 
+.category-filter-group::-webkit-scrollbar {
+  background-color: var(--border-color);
+  width: 10px;
+}
+
+.category-filter-group::-webkit-scrollbar-thumb {
+  background-color: var(--scrollBar);
+  border-radius: 10px;
+  transition: background 0.4s ease;
+}
+
+.category-filter-group::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+  cursor: pointer;
+}
+.viewMore-category{
+  background-color: var(--primary-color);
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  margin-top: 10px;
+  border: none;
+}
+.viewMore-category:hover{
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.search-filter{
+  position: relative;
+  height: 50px;
+  padding: 10px;
+}
+.search-legend{
+  text-align: left;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+.search-bar{
+  background-color: var(--background-color);
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  color: var(--text-color);
+  padding: 10px 10px 10px 40px;
+  border: none;
+  outline: none;
+}
+.material-symbols-outlined{
+  height: 35px;
+  border-radius: 10px;
+  color: var(--text-color);
+  position: absolute;
+  left: 18px;
+  top: 16px;
+}
+.salary-filter{
+  position: relative;
+  height: auto;
+  padding: 10px 0;
+}
+
+.jobRange{
+  position: relative;
+  height: auto;
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  border-radius: 3px;
+}
+
+.slider-track {
+  position: absolute;
+  height: 6px;
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+.salary-filter input{
+  position: absolute;
+  width: 100%;
+  top: -3px;
+  height: 6px;
+  -webkit-appearance: none; /*the default slidr */
+  background: none;
+  pointer-events: none; /* to not make the rest of the range input clickable */
+
+}
+
+
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: var(--background-color);
+  border: 6px solid var(--primary-color);
+  box-shadow: 0 0 6px var(--box-shadow);
+  pointer-events: auto; /* to make the thumb the only clickable part */
+  cursor: pointer; 
+  transition: all 0.3s ease;
+}
+
+.salary-values{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 0.9em;
+  padding: 0 5px;
+}
+.salary-range{
+  color: var(--primary-color);
+  width: 100%;
+  align-items: left;
+  text-align: left;
+}
+.salary-range:last-child{
+  text-align: right;
+  align-items: right;
+}
 
 @media (max-width: 1160px) {
   .job-container {
