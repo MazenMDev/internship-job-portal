@@ -1,47 +1,46 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
 
 :root {
-  --background-color: #f8fafc;
-  --text-color: #222730ff;
-  --text-muted: #6b7280;
+  --background-color: #F9FAFB; /* Gray 50 - Soft light background */
+  --text-color: #1F2937; /* Gray 800 - Primary text */
+  --text-muted: #4B5563; /* Gray 600 - Secondary text */
 
-  --error: #dc2626;
-  --success: #16a34a;
+  --error: #DC2626;
+  --success: #10B981; /* Updated green for better visibility */
   --warning: #f59e0b;
-  --border-color: #e2e8f0;
+  --border-color: #E5E7EB; /* Gray 200 - Subtle borders */
 
-  --box-color: #ffffff;
+  --box-color: #FFFFFF; /* White - Card/Surface background */
   --formJobColor: 220, 220, 220;
   --box-shadow: rgba(0, 0, 0, 0.08);
   --box-shadow-small: rgba(0, 0, 0, 0.04);
 
-  --primary-color: #2fa8a0ff;
-  --primary-color-rgb: 47, 158, 168;
-  --secondary-color: #2563eb;
+  --primary-color: #0d00ff; /* Indigo 600 - Primary accent, buttons */
+  --primary-color-rgb: 79, 70, 229; /* RGB value for Indigo 600 */
+  --secondary-color: #3730A3; /* Indigo 800 - Darker accent for hover/gradients */
   
   --main-font-family: "Rubik", sans-serif;
 }
 
+
 .darkmode {
-  --background-color: #0d1117;
-  --text-color: #e5e7eb;
-  --text-muted: #9ca3af;
+ --background-color: #121c34; 
+  --text-color: #F3F4F6;
+  --text-muted: #9CA3AF;
 
-  --error: #ef4444;
-  --success: #22c55e;
-  --warning: #facc15;
-  --border-color: #1f2937;
+  --error: #EF4444;
+  --success: #34D399;
+  --warning: #FCD34D;
+  --border-color: #334155; 
 
-  --box-color: #161b22;
-  --formJobColor: 22, 27, 34;
-  --box-shadow: rgba(0, 0, 0, 0.4);
-  --box-shadow-small: rgba(0, 0, 0, 0.25);
+  --box-color: #1E293B; 
+  --formJobColor: 30, 41, 59; 
+  --box-shadow: none; 
+  --box-shadow-small: none;
 
-  --primary-color: #2f9ea8;
-  --primary-color-rgb: 47, 158, 168;
-  --secondary-color: #2563eb;
-
-  --main-font-family: "Rubik", sans-serif;
+  --primary-color: #0004da; 
+  --primary-color-rgb: 99, 102, 241; 
+  --secondary-color: #4F46E5; 
 }
 
 body {
