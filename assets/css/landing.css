@@ -63,7 +63,22 @@ button {
   white-space: nowrap;
 }
 
-.btn button:last-child {
+.btn a {
+  font-size: 22px;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border-radius: 25px;
+  border: 2px solid var(--primary-color);
+  padding: 18px 36px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.13);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  width: fit-content;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn a:last-child {
   background-color: transparent;
   color: var(--primary-color);
   border: 1px solid var(--primary-color);
@@ -75,8 +90,13 @@ button:hover {
   color: var(--primary-color);
   transform: translateY(-6px);
 }
+.btn a:hover {
+  background-color: var(--box-color);
+  color: var(--primary-color);
+  transform: translateY(-6px);
+}
 
-.btn button:last-child:hover {
+.btn a:last-child:hover {
   background-color: var(--primary-color);
   color: var(--background-color);
 }

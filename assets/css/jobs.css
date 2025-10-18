@@ -108,10 +108,10 @@
 }
 
 .job-card {
-  background: var(--background);
+  background: var(--box-color);
   border-radius: 12px;
   padding: 0px 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px var(--box-shadow);
   position: relative;
   display: flex;
   flex-direction: column;

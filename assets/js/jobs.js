@@ -416,23 +416,24 @@ function showBookmarkedFirst() {
   renderPage(1);
 }
 
-let numCategories = 7;
 document.addEventListener("DOMContentLoaded", () => {
   displayCategories();
 });
 
+let viewMore = false;
 const displayCategories = () => {
   const categoryDropDown = document.querySelector(".category-filter-group");
   categoryDropDown.innerHTML = `
               <summary class="filter-group-legend filter-group-summary">Category</summary>
               `;
-
   let i = 0;
   for (const parent in jobCategories) {
-    jobCategories[parent].forEach((cat) => {
-      if (i >= numCategories) {
+    if (i >= 7) {
+      if (viewMore === false) {
         return;
       }
+    }
+    jobCategories[parent].forEach((cat) => {
       const label = document.createElement("label");
       label.classList.add("filter-option-label");
       label.innerHTML = `
@@ -441,14 +442,25 @@ const displayCategories = () => {
       categoryDropDown.appendChild(label);
       i++;
     });
+    if (viewMore) {
+      const seperator = document.createElement("hr");
+      seperator.classList.add("filter-seperator");
+      categoryDropDown.appendChild(seperator);
+    }
+    if (i >= 7) {
+      if (viewMore === false) {
+        break;
+      }
+    }
   }
 
+  if (viewMore === true) return;
   const addMore = document.createElement("button");
   addMore.textContent = "View More";
   addMore.classList.add("viewMore-category");
   addMore.addEventListener("click", () => {
-    numCategories += 5;
-    console.log(numCategories);
+    viewMore = !viewMore;
+    addMore.remove();
     displayCategories();
   });
   categoryDropDown.appendChild(addMore);
@@ -463,17 +475,16 @@ const minSalarySpan = document.getElementById("min-salary");
 const maxSalarySpan = document.getElementById("max-salary");
 
 const manageSlider = () => {
-  let left , width;
-  let minDifference = (minSlider.value - minSlider.min); // see how much the min slider moved
-  let maxDifference = (minSlider.max - minSlider.min); // find the total range of the slider
+  let left, width;
+  let minDifference = minSlider.value - minSlider.min; // see how much the min slider moved
+  let maxDifference = minSlider.max - minSlider.min; // find the total range of the slider
   left = (minDifference / maxDifference) * 100; //get the percentage of the movement
 
-  let sliderDiff = (maxSlider.value - minSlider.value); // see how much the difference between the two sliders
+  let sliderDiff = maxSlider.value - minSlider.value; // see how much the difference between the two sliders
   width = (sliderDiff / maxDifference) * 100; // get the percentage of the difference between them
 
-  sliderTrack.style.left = `${left+2}%`;
-  sliderTrack.style.width = `${width-2}%`;
-
+  sliderTrack.style.left = `${left + 2}%`;
+  sliderTrack.style.width = `${width - 2}%`;
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -507,7 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   minSlider.addEventListener("input", () => {
     // prevent the min from going after the max by 10% of the distance
-    if (parseInt(minSlider.value) >= parseInt(maxSlider.value)) {
+    if (parseInt(minSlider.value) >= parseInt(maxSlider.value) - diff) {
       minSlider.value = parseInt(maxSlider.value) - diff;
     }
     minSalarySpan.textContent = `$ ${minSlider.value}`;
@@ -516,7 +527,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   maxSlider.addEventListener("input", () => {
     // prevent the max from going before the min by 10% of the distance
-    if (parseInt(maxSlider.value) <= parseInt(minSlider.value)) {
+    if (parseInt(maxSlider.value) <= parseInt(minSlider.value) + diff) {
       maxSlider.value = parseInt(minSlider.value) + diff;
     }
     maxSalarySpan.textContent = `$ ${maxSlider.value}`;

@@ -1,31 +1,31 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
 
 :root {
-  --background-color: #F9FAFB; /* Gray 50 - Soft light background */
-  --text-color: #1F2937; /* Gray 800 - Primary text */
-  --text-muted: #4B5563; /* Gray 600 - Secondary text */
+  --background-color: #F9FAFB;
+  --text-color: #1F2937;
+  --text-muted: #4B5563;
 
   --error: #DC2626;
-  --success: #10B981; /* Updated green for better visibility */
+  --success: #10B981;
   --warning: #f59e0b;
-  --border-color: #E5E7EB; /* Gray 200 - Subtle borders */
+  --border-color: #E5E7EB;
 
-  --box-color: #FFFFFF; /* White - Card/Surface background */
+  --box-color: #FFFFFF;
   --formJobColor: 220, 220, 220;
   --box-shadow: rgba(0, 0, 0, 0.08);
   --scrollBar: rgba(0 , 0 , 0 , 0.1);
   --box-shadow-small: rgba(0, 0, 0, 0.04);
 
-  --primary-color: #0d00ff; /* Indigo 600 - Primary accent, buttons */
-  --primary-color-rgb: 79, 70, 229; /* RGB value for Indigo 600 */
-  --secondary-color: #3730A3; /* Indigo 800 - Darker accent for hover/gradients */
+  --primary-color: #009aabff;
+  --primary-color-rgb: 79, 70, 229;
+  --secondary-color: #005070ff;
   
   --main-font-family: "Rubik", sans-serif;
 }
 
 
 .darkmode {
- --background-color: #121c34; 
+  --background-color: #050d11ff; 
   --text-color: #F3F4F6;
   --text-muted: #9CA3AF;
 
@@ -34,14 +34,14 @@
   --warning: #FCD34D;
   --border-color: #334155; 
 
-  --box-color: #1E293B; 
+  --box-color: #091721ff; 
   --formJobColor: 30, 41, 59; 
   --box-shadow: none; 
   --box-shadow-small: none;
 
-  --primary-color: #0004da; 
+  --primary-color: #3282B8; 
   --primary-color-rgb: 99, 102, 241; 
-  --secondary-color: #4F46E5; 
+  --secondary-color: #0F4C75; 
 }
 
 body {
