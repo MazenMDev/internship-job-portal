@@ -11,6 +11,7 @@
 .cover-photo {
   background-color: var(--primary-color);
   height: 120px;
+   position: relative;
 }
 
 .profile-section {
@@ -109,8 +110,31 @@ li {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.edit-btn:hover a {
+.edit-btn a:hover  {
   color: var(--text-color);
+}
+.edit
+{
+  display: none;
+}
+.cover-btn 
+{
+  width: 21px;
+  height: 21px;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  color:var(--background-color);
+  scale: 1.5;
+  position: absolute;
+  top: 70%;
+  right: 3%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.cover-btn:hover
+{
+  color:var(--text-color);
 }
 
 @media (max-width: 1200px) {
