@@ -180,9 +180,20 @@ const pagesContainer = document.querySelector(".pages");
 const prevButton = document.querySelector(".prevP");
 const nextButton = document.querySelector(".nextP");
 
+document
+  .getElementById("close-filter-button")
+  .addEventListener("click", closeFilterBar);
+function closeFilterBar() {
+  const filterbar = document.querySelector(".job-filter-sidebar");
+  filterbar.style.display = "none";
+  const parentBlurDiv = document.querySelector(".ParentBlurDiv");
+  document.body.removeChild(parentBlurDiv);
+}
+
 // show the ammount of job cards per page , and use javascript to dynammically show the jobs instead of the hardcoded html
 // REMINDER:: render the last "jobsPerPage" jobs from the backend when its done and when a page button  is clicked render the needed jobs for it
 function renderPage(page) {
+  window.scrollTo(0, 0);
   jobContainer.innerHTML = "";
 
   //show the indexes of the jobs being displayed and the current page of total pages
@@ -198,6 +209,15 @@ function renderPage(page) {
   filterButton.innerHTML = `
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal-icon lucide-sliders-horizontal"><path d="M10 5H3"/><path d="M12 19H3"/><path d="M14 3v4"/><path d="M16 17v4"/><path d="M21 12h-9"/><path d="M21 19h-5"/><path d="M21 5h-7"/><path d="M8 10v4"/><path d="M8 12H3"/></svg>
   `;
+  filterButton.addEventListener("click", function () {
+    const filterbar = document.querySelector(".job-filter-sidebar");
+    filterbar.style.display = "block";
+    const parentBlurDiv = document.createElement("div");
+    parentBlurDiv.classList.add("ParentBlurDiv");
+    document.body.appendChild(parentBlurDiv);
+    parentBlurDiv.addEventListener("click", closeFilterBar);
+  });
+
   filterButton.id = "filter-button-mobile";
   jobResultDiv.appendChild(filterButton);
   jobResultDiv.appendChild(jobResult);
@@ -361,7 +381,6 @@ nextButton.addEventListener("click", () => {
 
 renderPage(currentPage);
 
-//search
 function searchJobs(keyword) {
   const lowerKeyword = keyword.toLowerCase();
   const filteredJobs = jobListings.filter((job) => {
@@ -420,50 +439,62 @@ document.addEventListener("DOMContentLoaded", () => {
   displayCategories();
 });
 
-let viewMore = false;
+function resetCategoryFilters() {
+  const categoryDropDown = document.querySelector(".category-filter-group");
+  categoryDropDown.innerHTML = `
+              <summary class="filter-group-legend filter-group-summary">Category</summary>
+              `;
+  for (const parent in jobCategories) {
+    const parentInp = document.createElement("button");
+    parentInp.classList.add("parent-category-button");
+    parentInp.textContent = parent;
+
+    parentInp.addEventListener("click", () => showSubcategories(parent));
+    categoryDropDown.appendChild(parentInp);
+  }
+}
+
+function showSubcategories(parent) {
+  const categoryDropDown = document.querySelector(".category-filter-group");
+  categoryDropDown.innerHTML = `
+    <summary class="filter-group-legend filter-group-summary">Category - ${parent}</summary>
+  `;
+
+  for (const cat of jobCategories[parent]) {
+    const label = document.createElement("label");
+    label.classList.add("filter-option-label");
+    label.innerHTML = `
+        <input type="checkbox" value="${cat}" class="filter-checkbox" /> ${cat}
+      `;
+    categoryDropDown.appendChild(label);
+  }
+
+  const goBackCatBtn = document.createElement("button");
+  goBackCatBtn.classList.add("parent-category-button");
+  goBackCatBtn.textContent = "← Back to Categories";
+
+  categoryDropDown.appendChild(goBackCatBtn);
+
+  goBackCatBtn.addEventListener("click", () => {
+    resetCategoryFilters();
+  });
+}
+
 const displayCategories = () => {
   const categoryDropDown = document.querySelector(".category-filter-group");
   categoryDropDown.innerHTML = `
               <summary class="filter-group-legend filter-group-summary">Category</summary>
               `;
-  let i = 0;
-  for (const parent in jobCategories) {
-    if (i >= 7) {
-      if (viewMore === false) {
-        return;
-      }
-    }
-    jobCategories[parent].forEach((cat) => {
-      const label = document.createElement("label");
-      label.classList.add("filter-option-label");
-      label.innerHTML = `
-      <input type="checkbox" value="${cat}" class="filter-checkbox" /> ${cat}
-      `;
-      categoryDropDown.appendChild(label);
-      i++;
-    });
-    if (viewMore) {
-      const seperator = document.createElement("hr");
-      seperator.classList.add("filter-seperator");
-      categoryDropDown.appendChild(seperator);
-    }
-    if (i >= 7) {
-      if (viewMore === false) {
-        break;
-      }
-    }
-  }
 
-  if (viewMore === true) return;
-  const addMore = document.createElement("button");
-  addMore.textContent = "View More";
-  addMore.classList.add("viewMore-category");
-  addMore.addEventListener("click", () => {
-    viewMore = !viewMore;
-    addMore.remove();
-    displayCategories();
-  });
-  categoryDropDown.appendChild(addMore);
+  for (const parent in jobCategories) {
+    const parentInp = document.createElement("button");
+    parentInp.classList.add("parent-category-button");
+    parentInp.textContent = parent;
+
+    categoryDropDown.appendChild(parentInp);
+
+    parentInp.addEventListener("click", () => showSubcategories(parent));
+  }
 };
 
 //Logic for double range salary

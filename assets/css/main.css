@@ -44,6 +44,10 @@
   --secondary-color: #0F4C75; 
 }
 
+*{
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--background-color);
   color: var(--text-color);
