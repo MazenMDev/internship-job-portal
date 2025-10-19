@@ -8,10 +8,12 @@
   overflow: hidden;
 }
 
+
+
 .cover-photo {
   background-color: var(--primary-color);
   height: 120px;
-   position: relative;
+  position: relative;
 }
 
 .profile-section {
@@ -110,21 +112,19 @@ li {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.edit-btn a:hover  {
+.edit-btn a:hover {
   color: var(--text-color);
 }
-.edit
-{
+.edit {
   display: none;
 }
-.cover-btn 
-{
+.cover-btn {
   width: 21px;
   height: 21px;
   align-items: center;
   border: none;
   border-radius: 50%;
-  color:var(--background-color);
+  color: var(--background-color);
   scale: 1.5;
   position: absolute;
   top: 70%;
@@ -132,24 +132,18 @@ li {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.cover-btn:hover
-{
-  color:var(--text-color);
+.cover-btn:hover {
+  color: var(--text-color);
 }
 
 @media (max-width: 1200px) {
-.profile-container 
-{
-  width: 100%;
-  max-width: 800px;
-  margin-top: 35px ;
-}
-.edit-photo 
-{
-  margin-top: 0px ;
-  position: absolute;
-}
-
-
-
+  .profile-container {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 35px;
+  }
+  .edit-photo {
+    margin-top: 0px;
+    position: absolute;
+  }
 }

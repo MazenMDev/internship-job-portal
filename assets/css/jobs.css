@@ -445,7 +445,7 @@
   border: none;
   outline: none;
 }
-.material-symbols-outlined{
+#search{
   height: 35px;
   border-radius: 10px;
   color: var(--text-color);

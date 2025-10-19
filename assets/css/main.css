@@ -111,6 +111,23 @@ body {
   color: var(--primary-color) !important;
   transform: translateY(-3px);
 }
+.material-symbols-outlined {
+  opacity: 0.4;
+  color: var(--text-color);
+  text-decoration: none;
+  display: flex;
+  scale: 1.5;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  padding: 10px 14px;
+  transition: all 0.2s ease;
+
+}
+.material-symbols-outlined:hover {
+  transform: translateY(-2px);
+  opacity: 1; 
+}
 
 .container {
   max-width: 1200px;
@@ -190,6 +207,11 @@ body {
 }
 
 .mid-nav a.currentPage {
+  opacity: 1;
+}
+
+ a.currentPage span.material-symbols-outlined {
+
   opacity: 1;
 }
 
