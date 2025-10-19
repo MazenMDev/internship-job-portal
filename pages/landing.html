@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile</title>
+    <title>Home</title>
     <link rel="stylesheet" href="../assets/css/main.css" />
     <link rel="stylesheet" href="../assets/css/landing.css" />
     <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png" />
@@ -56,30 +56,6 @@
 
       <nav class="nav-bar">
         <div class="logoContainer">
-          <button onclick="themeToggle()" class="themeToggle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-sun-icon lucide-sun"
-            >
-              <circle cx="12" cy="12" r="4" />
-              <path d="M12 2v2" />
-              <path d="M12 20v2" />
-              <path d="m4.93 4.93 1.41 1.41" />
-              <path d="m17.66 17.66 1.41 1.41" />
-              <path d="M2 12h2" />
-              <path d="M20 12h2" />
-              <path d="m6.34 17.66-1.41 1.41" />
-              <path d="m19.07 4.93-1.41 1.41" />
-            </svg>
-          </button>
           <img src="../assets//imgs/JobConnect.png" alt="logo" class="logo" />
           <h1 class="logo-text">JobConnect</h1>
         </div>
@@ -143,20 +119,26 @@
           </div>
 
           <div class="nav-icon">
-            <a href="./contact-us.html">
+            <a href="./profile.html">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
+                width="16"
+                height="16"
                 fill="currentColor"
-                class="iconForNav"
+                class="bi bi-person-fill"
+                viewBox="0 0 16 16"
               >
                 <path
-                  fill-rule="evenodd"
-                  d="M10 2c-2.236 0-4.43.18-6.57.524C1.993 2.755 1 4.014 1 5.426v5.148c0 1.413.993 2.67 2.43 2.902 1.168.188 2.352.327 3.55.414.28.02.521.18.642.413l1.713 3.293a.75.75 0 0 0 1.33 0l1.713-3.293a.783.783 0 0 1 .642-.413 41.102 41.102 0 0 0 3.55-.414c1.437-.231 2.43-1.49 2.43-2.902V5.426c0-1.413-.993-2.67-2.43-2.902A41.289 41.289 0 0 0 10 2ZM6.75 6a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Zm0 2.5a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5h-3.5Z"
-                  clip-rule="evenodd"
+                  d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"
                 />
               </svg>
-              Contact</a
+              <label id="profile"
+                >Profile<select>
+                  <optgroup>
+                    <option value="view">View</option>
+                  </optgroup>
+                </select></label
+              ></a
             >
           </div>
         </div>
@@ -170,9 +152,30 @@
             style="color: var(--background-color)"
             >Sign up</a
           >
-          <a href="./profile.html">
-            <span class="material-symbols-outlined"> account_circle </span>
-          </a>
+          <button onclick="themeToggle()" class="themeToggle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-sun-icon lucide-sun"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="m17.66 17.66 1.41 1.41" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="m6.34 17.66-1.41 1.41" />
+              <path d="m19.07 4.93-1.41 1.41" />
+            </svg>
+          </button>
         </div>
       </nav>
 
