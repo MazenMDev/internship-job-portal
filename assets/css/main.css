@@ -1,50 +1,49 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
 
 :root {
-  --background-color: #F9FAFB;
-  --text-color: #1F2937;
-  --text-muted: #4B5563;
+  --background-color: #f9fafb;
+  --text-color: #1f2937;
+  --text-muted: #4b5563;
 
-  --error: #DC2626;
-  --success: #10B981;
+  --error: #dc2626;
+  --success: #10b981;
   --warning: #f59e0b;
-  --border-color: #E5E7EB;
+  --border-color: #e5e7eb;
 
-  --box-color: #FFFFFF;
+  --box-color: #ffffff;
   --formJobColor: 220, 220, 220;
   --box-shadow: rgba(0, 0, 0, 0.08);
-  --scrollBar: rgba(0 , 0 , 0 , 0.1);
+  --scrollBar: rgba(0, 0, 0, 0.1);
   --box-shadow-small: rgba(0, 0, 0, 0.04);
 
   --primary-color: #009aabff;
   --primary-color-rgb: 79, 70, 229;
   --secondary-color: #005070ff;
-  
+
   --main-font-family: "Rubik", sans-serif;
 }
 
-
 .darkmode {
-  --background-color: #050d11ff; 
-  --text-color: #F3F4F6;
-  --text-muted: #9CA3AF;
+  --background-color: #050d11ff;
+  --text-color: #f3f4f6;
+  --text-muted: #9ca3af;
 
-  --error: #EF4444;
-  --success: #34D399;
-  --warning: #FCD34D;
-  --border-color: #334155; 
+  --error: #ef4444;
+  --success: #34d399;
+  --warning: #fcd34d;
+  --border-color: #334155;
 
-  --box-color: #091721ff; 
-  --formJobColor: 30, 41, 59; 
-  --box-shadow: none; 
+  --box-color: #091721ff;
+  --formJobColor: 30, 41, 59;
+  --box-shadow: none;
   --box-shadow-small: none;
 
-  --primary-color: #3282B8; 
-  --primary-color-rgb: 99, 102, 241; 
-  --secondary-color: #0F4C75; 
+  --primary-color: #3282b8;
+  --primary-color-rgb: 99, 102, 241;
+  --secondary-color: #0f4c75;
 }
 
-*{
+* {
   scroll-behavior: smooth;
 }
 
@@ -68,7 +67,7 @@ body {
 }
 
 .account > a {
-  font-size: 18px;  
+  font-size: 18px;
   font-weight: 500;
   text-decoration: none;
 }
@@ -112,7 +111,6 @@ body {
   transform: translateY(-3px);
 }
 .bi-person-fill {
-
   color: var(--text-color);
   text-decoration: none;
   display: flex;
@@ -120,20 +118,20 @@ body {
   border-radius: 8px;
   transition: all 0.2s ease;
 }
-.profileIcon{
+.profileIcon {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px !important;
 }
 
-.profileDivC{
+.profileDivC {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.profileDivC svg{
+.profileDivC svg {
   width: 15px;
   height: 15px;
 }
@@ -143,13 +141,13 @@ body {
   transform: translateY(-2px);
 }
 
-#profile{
+#profile {
   margin-top: 5px;
   flex-direction: column;
   align-items: center;
   border-radius: 8px;
 }
-a select{
+a select {
   border: none;
   color: var(--text-color);
   background-color: var(--background-color);
@@ -157,15 +155,14 @@ a select{
 }
 .material-symbols-outlined:hover {
   transform: translateY(-2px);
-  opacity: 1; 
+  opacity: 1;
 }
 
 .mid-nav a.currentPage {
   opacity: 1;
 }
 
- a.currentPage span.material-symbols-outlined {
-
+a.currentPage span.material-symbols-outlined {
   opacity: 1;
 }
 
@@ -246,8 +243,6 @@ a select{
   opacity: 1;
 }
 
-
-
 .nav-icon {
 }
 
@@ -289,7 +284,6 @@ a select{
 .mobile-top-nav {
   display: none;
 }
-
 
 @media (max-width: 1200px) {
   .account {
@@ -441,7 +435,6 @@ a select{
     height: 24px;
   }
 
-
   .mobile-top-nav {
     display: flex !important;
     position: fixed;
@@ -478,11 +471,9 @@ a select{
     margin-right: 0;
   }
 
-
   .mobile-accounts {
     display: flex;
     gap: 12px;
-    
   }
   .mobile-accounts a {
     padding: 4px 10px;
@@ -496,8 +487,6 @@ a select{
     margin-left: 10px;
     margin-top: 5px;
   }
-
-
 }
 
 @media (max-width: 480px) {
@@ -549,7 +538,6 @@ a select{
     opacity: 1;
   }
 
-
   .iconForNav {
     width: 22px;
     height: 22px;
@@ -591,10 +579,9 @@ a select{
     margin-right: 0;
   }
 
-    .mobile-accounts {
+  .mobile-accounts {
     display: flex;
     gap: 12px;
-    
   }
   .mobile-accounts a {
     padding: 6px 10px;
