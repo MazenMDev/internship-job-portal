@@ -22,7 +22,7 @@ const categoryIcons = {
 };
 
 // dummy jobs until we make the backend
-const jobListings = [
+let jobListings = [
   {
     id: 1,
     title: "Software Engineer",
@@ -122,8 +122,19 @@ const jobListings = [
   },
 ];
 
-const userBookMarks = [];
+const noFilterArr = jobListings;
 
+const userBookMarks = [];
+const selectedCategories = [];
+
+function toggleCategory(cat) {
+  const index = selectedCategories.indexOf(cat);
+  if (index === -1) {
+    selectedCategories.push(cat);
+  } else {
+    selectedCategories.splice(index, 1);
+  }
+}
 const jobContainer = document.querySelector(".job-container");
 
 //Calculate time since posted
@@ -381,22 +392,6 @@ nextButton.addEventListener("click", () => {
 
 renderPage(currentPage);
 
-function searchJobs(keyword) {
-  const lowerKeyword = keyword.toLowerCase();
-  const filteredJobs = jobListings.filter((job) => {
-    return (
-      job.title.toLowerCase().includes(lowerKeyword) ||
-      job.location.toLowerCase().includes(lowerKeyword) ||
-      job.company.toLowerCase().includes(lowerKeyword) ||
-      job.category.toLowerCase().includes(lowerKeyword) ||
-      job.experience.toLowerCase().includes(lowerKeyword) ||
-      job.location.toLowerCase().includes(lowerKeyword) ||
-      job.salary.toLowerCase().includes(lowerKeyword)
-    );
-  });
-  return filteredJobs;
-}
-
 function toggleBookmark(jobId) {
   const index = userBookMarks.indexOf(jobId);
   //search the userBookMarks array for the job id
@@ -444,6 +439,7 @@ function resetCategoryFilters() {
   categoryDropDown.innerHTML = `
               <summary class="filter-group-legend filter-group-summary">Category</summary>
               `;
+
   for (const parent in jobCategories) {
     const parentInp = document.createElement("button");
     parentInp.classList.add("parent-category-button");
@@ -455,6 +451,8 @@ function resetCategoryFilters() {
 }
 
 function showSubcategories(parent) {
+  let parentClass = parent.split(" ").join("");
+  parentClass = parentClass.split("&").join("-");
   const categoryDropDown = document.querySelector(".category-filter-group");
   categoryDropDown.innerHTML = `
     <summary class="filter-group-legend filter-group-summary">Category - ${parent}</summary>
@@ -463,11 +461,33 @@ function showSubcategories(parent) {
   for (const cat of jobCategories[parent]) {
     const label = document.createElement("label");
     label.classList.add("filter-option-label");
+    label.classList.add(`category-filter-${parentClass}`);
+
     label.innerHTML = `
         <input type="checkbox" value="${cat}" class="filter-checkbox" /> ${cat}
       `;
+    label
+      .querySelector(".filter-checkbox")
+      .addEventListener("change", function () {
+        toggleCategory(cat);
+      });
     categoryDropDown.appendChild(label);
   }
+
+  const selectAll = document.createElement("button");
+  selectAll.classList.add("selectAllSubLists-button");
+  selectAll.textContent = "Select all categories";
+  let allSelected = false;
+  categoryDropDown.appendChild(selectAll);
+  selectAll.addEventListener("click", () => {
+    allSelected = !allSelected;
+    const labels = document.querySelectorAll(`.category-filter-${parentClass}`);
+    labels.forEach(function (label) {
+      const inp = label.querySelector(".filter-checkbox");
+      inp.checked = allSelected;
+      toggleCategory(label.textContent);
+    });
+  });
 
   const goBackCatBtn = document.createElement("button");
   goBackCatBtn.classList.add("parent-category-button");
@@ -565,3 +585,71 @@ document.addEventListener("DOMContentLoaded", () => {
     manageSlider();
   });
 });
+
+// FILTERING FUNCTION
+function searchJobs(keyword) {
+  const lowerKeyword = keyword.toLowerCase();
+  const filteredJobs = jobListings.filter((job) => {
+    return (
+      job.title.toLowerCase().includes(lowerKeyword) ||
+      job.location.toLowerCase().includes(lowerKeyword) ||
+      job.company.toLowerCase().includes(lowerKeyword) ||
+      job.category.toLowerCase().includes(lowerKeyword) ||
+      job.experience.toLowerCase().includes(lowerKeyword) ||
+      job.location.toLowerCase().includes(lowerKeyword)
+    );
+  });
+  return filteredJobs;
+}
+
+// class="search-bar"
+
+document.querySelector(".apply-button").addEventListener("click", function () {
+  inputSearch();
+});
+
+document.addEventListener("keydown", function (e) {
+  if (e.key == "Enter") {
+    e.preventDefault();
+    inputSearch();
+  }
+});
+
+document.querySelector(".reset-button").addEventListener("click", function () {
+  resetButton();
+});
+
+document.addEventListener("keydown", function (e) {
+  if (e.key == "Escape") {
+    e.preventDefault();
+    resetButton();
+  }
+});
+
+const inputSearch = () => {
+  let searchInput = document.querySelector(".search-bar").value;
+  searchInput = searchInput.trim();
+
+  let filterJobs;
+  if (searchInput !== "") {
+    filterJobs = searchJobs(searchInput);
+    console.log(filterJobs);
+  }
+
+  jobListings = filterJobs;
+  console.log(jobListings);
+  currentPage = 1;
+  renderPage(currentPage);
+};
+
+function removeCatSelections() {
+  const categoryFilters = document.querySelectorAll(".filter-checkbox");
+  categoryFilters.forEach((catInp) => {
+    catInp.checked = false;
+  });
+}
+function resetButton() {
+  jobListings = noFilterArr;
+  document.querySelector(".search-bar").value = "";
+  removeCatSelections();
+}

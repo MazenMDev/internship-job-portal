@@ -532,7 +532,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 
-.parent-category-button{
+.parent-category-button , .selectAllSubLists-button{
   width: 100%;
   height: 30px;
   margin-top: 8px;
@@ -546,7 +546,7 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.parent-category-button:hover{
+.parent-category-button:hover , .selectAllSubLists-button:hover{
   background: var(--secondary-color);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
