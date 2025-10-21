@@ -28,7 +28,7 @@ let jobListings = [
     title: "Software Engineer",
     company: "Google",
     category: "Software Development",
-    type: "Full time",
+    type: "Part time",
     salary: "$24000-$32000",
     location: "Cairo, EG",
     experience: "2-4 years",
@@ -40,7 +40,7 @@ let jobListings = [
     id: 2,
     title: "Marketing Specialist",
     company: "Coca-Cola",
-    category: "Marketing & Sales",
+    category: "Digital Marketing",
     type: "Full time",
     salary: "$28000-$35000",
     experience: "3-5 years",
@@ -53,7 +53,7 @@ let jobListings = [
     title: "Cloud Engineer",
     company: "Amazon",
     category: "Cloud Computing",
-    type: "Full time",
+    type: "Part Time",
     salary: "$130000-$190000",
     experience: "6+ years",
     location: "Smart Village, Giza",
@@ -64,8 +64,8 @@ let jobListings = [
     id: 4,
     title: "Registered Nurse",
     company: "Mayo Clinic",
-    category: "Science & Healthcare",
-    type: "Full time",
+    category: "Medical & Nursing",
+    type: "Part Time",
     salary: "$55000-$75000",
     experience: "2+ years",
     location: "Rochester, MN",
@@ -89,9 +89,9 @@ let jobListings = [
     title: "Civil Engineer",
     company: "Bechtel",
     category: "Architecture",
-    type: "Full time",
-    salary: "$70000-$90000",
-    experience: "5+ years",
+    type: "InternShip",
+    salary: "$1000-$1200",
+    experience: "student",
     location: "Houston, TX",
     datePosted: "2025-10-03 09:30:00",
     logo: "../assets/imgs/dummyJobCompanyImages/bechtel.png",
@@ -113,7 +113,7 @@ let jobListings = [
     title: "IOS Developer",
     company: "Apple",
     category: "Mobile App Development",
-    type: "Full time",
+    type: "Remote",
     salary: "$34000-$45000",
     experience: "4-6 years",
     location: "Cupertino, CA",
@@ -466,11 +466,9 @@ function showSubcategories(parent) {
     label.innerHTML = `
         <input type="checkbox" value="${cat}" class="filter-checkbox" /> ${cat}
       `;
-    label
-      .querySelector(".filter-checkbox")
-      .addEventListener("change", function () {
-        toggleCategory(cat);
-      });
+    label.addEventListener("change", function () {
+      toggleCategory(cat);
+    });
     categoryDropDown.appendChild(label);
   }
 
@@ -589,13 +587,14 @@ document.addEventListener("DOMContentLoaded", () => {
 // FILTERING FUNCTION
 function searchJobs(keyword) {
   const lowerKeyword = keyword.toLowerCase();
-  const filteredJobs = jobListings.filter((job) => {
+  const filteredJobs = noFilterArr.filter((job) => {
     return (
       job.title.toLowerCase().includes(lowerKeyword) ||
       job.location.toLowerCase().includes(lowerKeyword) ||
       job.company.toLowerCase().includes(lowerKeyword) ||
       job.category.toLowerCase().includes(lowerKeyword) ||
       job.experience.toLowerCase().includes(lowerKeyword) ||
+      job.type.toLowerCase().includes(lowerKeyword)||
       job.location.toLowerCase().includes(lowerKeyword)
     );
   });
@@ -604,9 +603,13 @@ function searchJobs(keyword) {
 
 // class="search-bar"
 
-document.querySelector(".apply-button").addEventListener("click", function () {
-  inputSearch();
-});
+const applyButton = document.querySelector(".apply-button");
+console.log(selectedCategories);
+if (applyButton) {
+  applyButton.addEventListener("click", function () {
+    inputSearch();
+  });
+}
 
 document.addEventListener("keydown", function (e) {
   if (e.key == "Enter") {
@@ -615,9 +618,12 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-document.querySelector(".reset-button").addEventListener("click", function () {
-  resetButton();
-});
+const resetButtonElement = document.querySelector(".reset-button");
+if (resetButtonElement) {
+  resetButtonElement.addEventListener("click", function () {
+    resetButton();
+  });
+}
 
 document.addEventListener("keydown", function (e) {
   if (e.key == "Escape") {
@@ -626,6 +632,19 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
+function FilterCategories() {
+  const filteredCategories = [];
+
+  noFilterArr.forEach((job) => {
+    for (let cat of selectedCategories) {
+      if (cat === job.category) {
+        filteredCategories.push(job);
+      }
+    }
+  });
+  return filteredCategories;
+}
+
 const inputSearch = () => {
   let searchInput = document.querySelector(".search-bar").value;
   searchInput = searchInput.trim();
@@ -633,11 +652,26 @@ const inputSearch = () => {
   let filterJobs;
   if (searchInput !== "") {
     filterJobs = searchJobs(searchInput);
-    console.log(filterJobs);
+    const filteredCat = FilterCategories();
+    if (filteredCat.length > 0) {
+      jobListings = filterJobs.filter((job) => {
+        filteredCat.some((categ) => {
+          if (categ.id === job.id) return true;
+          else return false;
+        });
+      });
+    }
+    else{
+      jobListings= filterJobs;
+    }
+  } else {
+    if (FilterCategories().length == 0) {
+      jobListings = noFilterArr;
+    } else {
+      jobListings = FilterCategories();
+    }
   }
 
-  jobListings = filterJobs;
-  console.log(jobListings);
   currentPage = 1;
   renderPage(currentPage);
 };
@@ -652,4 +686,6 @@ function resetButton() {
   jobListings = noFilterArr;
   document.querySelector(".search-bar").value = "";
   removeCatSelections();
+  currentPage = 1;
+  renderPage(currentPage);
 }
