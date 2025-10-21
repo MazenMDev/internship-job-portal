@@ -121,7 +121,7 @@
 
           <div class="nav-icon">
             <a href="./profile.html" class="profileIcon">
-             <svg
+              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
@@ -151,8 +151,7 @@
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </div>
-              </a
-            >
+            </a>
           </div>
         </div>
 
@@ -212,6 +211,29 @@
 
           <fieldset class="filter-group-box type-filter-group">
             <legend class="filter-group-legend">Job Type</legend>
+
+            <label class="filter-option-label"
+              ><input
+                type="checkbox"
+                value="all"
+                checked
+                class="filter-checkbox"
+              />
+              All</label
+            >
+
+            <label class="filter-option-label"
+              ><input type="checkbox" value="remote" class="filter-checkbox" />
+              Remote</label
+            >
+            <label class="filter-option-label"
+              ><input
+                type="checkbox"
+                value="internship"
+                class="filter-checkbox"
+              />
+              Internship</label
+            >
             <label class="filter-option-label"
               ><input
                 type="checkbox"
@@ -225,7 +247,6 @@
                 type="checkbox"
                 value="part-time"
                 class="filter-checkbox"
-                checked
               />
               Part-Time</label
             >
@@ -242,7 +263,12 @@
           <fieldset class="filter-group-box date-filter-group">
             <legend class="filter-group-legend">Date Posted</legend>
             <label class="filter-option-label"
-              ><input type="checkbox" value="all" class="filter-checkbox" />
+              ><input
+                type="checkbox"
+                value="all"
+                checked
+                class="filter-checkbox"
+              />
               All</label
             >
             <label class="filter-option-label"
@@ -274,7 +300,6 @@
                 type="checkbox"
                 value="last-30-days"
                 class="filter-checkbox"
-                checked
               />
               Last 30 Days</label
             >
@@ -292,8 +317,17 @@
             </div>
           </fieldset>
 
-          <button id="reset-filters" class="reset-button">Reset Filters</button>
+            <button id="reset-filters" class="reset-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw-icon lucide-rotate-ccw"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              Reset Filters
+            </button>
+
+            <button id="apply-filters" class="apply-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-funnel-plus-icon lucide-funnel-plus"><path d="M13.354 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14v6a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341l1.218-1.348"/><path d="M16 6h6"/><path d="M19 3v6"/></svg>
+              Apply Filters
+            </button>
         </aside>
+
         <section class="job-container"></section>
       </div>
     </div>
