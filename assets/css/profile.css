@@ -8,8 +8,6 @@
   overflow: hidden;
 }
 
-
-
 .cover-photo {
   background-color: var(--primary-color);
   height: 120px;
@@ -135,6 +133,158 @@ li {
 .cover-btn:hover {
   color: var(--text-color);
 }
+.inp {
+  margin: 5px;
+  background-color: var(--box-color);
+  border-radius: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.address {
+  /*background-color: blanchedalmond;*/
+  border-radius: 10px;
+}
+
+.submit {
+  background-color: var(--primary-color);
+}
+
+form {
+  width: 100%;
+  max-width: 400px;
+  padding: 0;
+  display: flex;
+  position: relative;
+  align-content: center;
+  flex-direction: column;
+  gap: 1.2rem;
+  border-radius: 12px;
+}
+
+.holder {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  height: 3rem;
+  padding: 0 1rem;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  background: var(--background-color);
+  color: var(--text-color);
+  transition: border-color 0.3s ease, border 0.3s ease;
+}
+
+.holder:focus {
+  outline: none;
+  border: 1px solid;
+  border-color: var(--primary-color);
+}
+
+.submit {
+  background-color: var(--primary-color) !important;
+  color: var(--background-color);
+  border: none;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  width: 100%;
+  height: 3rem;
+  box-sizing: border-box;
+}
+.submit:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+.submit:active {
+  transform: translateY(0);
+}
+
+#email-div {
+  position: relative;
+}
+
+.email-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  width: 1.1rem;
+  height: 1.1rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-muted);
+}
+#blurred-background {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 100; /* Behind the modal but on top of content */
+}
+#popup {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* This centers the modal */
+  transform: translate(-50%, -50%);
+  padding: 24px;
+  z-index: 101; /* On top of the backdrop */
+  margin-top: 50px;
+  align-items: center;
+  max-width: 600px !important;
+  min-height: max-content !important;
+  background-color: var(--box-color);
+  border-radius: 20px;
+  box-shadow: 0px 30px 50px var(--box-shadow);
+}
+/* 1. Blur and disable the main content */
+body.modal-open #container {
+  filter: blur(100px);
+  /* Prevents clicking on the blurred content */
+  pointer-events: none;
+}
+
+/* 2. Show the backdrop and modal */
+body.modal-open #blurred-background,
+body.modal-open #popup {
+  display: block;
+}
+#open-btn {
+  color: var(--background-color);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 20px;
+  position: relative;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 20px;
+  margin-left: 500px;
+  transition: all 0.2s ease-in-out;
+}
+#open-btn:hover {
+  background-color: var(--box-color);
+  color: var(--primary-color) !important;
+  transform: translateY(-3px);
+}
+#close-btn {
+  border: none;
+  font-size: 20px;
+  margin-left: 380px;
+  background-color: var(--box-color);
+  color: var(--text-color);
+}
 
 @media (max-width: 1200px) {
   .profile-container {
@@ -145,5 +295,80 @@ li {
   .edit-photo {
     margin-top: 0px;
     position: absolute;
+  }
+  #popup {
+    margin-top: 0px;
+  }
+}
+
+@media (min-width: 1024px) {
+  form {
+    max-width: 420px;
+    gap: 1.3rem;
+  }
+
+  .holder {
+    height: 3.2rem;
+    font-size: 1rem;
+  }
+
+  .submit {
+    height: 3.2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  form {
+    max-width: 400px;
+  }
+
+  form .holder,
+  form .submit {
+    font-size: 1rem;
+    height: 2.8rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .separator {
+    display: block;
+    width: 90%;
+    border: 0;
+    height: 1px;
+    background: var(--text-muted);
+    margin: 1.5rem auto;
+  }
+
+  form {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    gap: 1rem;
+    box-sizing: border-box;
+  }
+
+  .holder,
+  .submit {
+    font-size: 1rem;
+    height: 3.2rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  form {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .holder,
+  .submit {
+    font-size: 0.85rem;
+    padding: 0.75rem;
   }
 }
