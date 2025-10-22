@@ -205,6 +205,7 @@ function closeFilterBar() {
 function renderPage(page) {
   window.scrollTo(0, 0);
   jobContainer.innerHTML = "";
+  
 
   //show the indexes of the jobs being displayed and the current page of total pages
   const totalPages = Math.ceil(jobListings.length / jobsPerPage);
@@ -233,6 +234,12 @@ function renderPage(page) {
   jobResultDiv.appendChild(filterButton);
   jobResultDiv.appendChild(jobResult);
   jobContainer.appendChild(jobResultDiv);
+
+
+  const errorMessage = document.createElement("h2");
+  errorMessage.id = "no-jobs-message";
+  errorMessage.textContent = "No job listings found.";
+  jobContainer.appendChild(errorMessage);
 
   const start = (page - 1) * jobsPerPage;
   const end = start + jobsPerPage;
@@ -305,6 +312,13 @@ function renderPage(page) {
     jobContainer.appendChild(jobCard);
   });
   updatePages();
+}
+
+function showError (message) {
+  const errorMessage = document.getElementById("no-jobs-message");
+  errorMessage.textContent = message;
+  errorMessage.style.display = "block";
+  document.querySelector(".jobResultDiv").style.display = "none";
 }
 
 //add a page button before the next button
@@ -685,11 +699,21 @@ const inputSearch = () => {
       });
     }
     else{
-      jobListings= filterJobs;
+      if(filterJobs.length === 0){
+        jobListings = [];
+        renderPage(currentPage);
+        showError("No jobs found.");
+        return;
+      }
+
+      jobListings = filterJobs;
     }
   } else {
     if (FilterCategories().length === 0) {
-      jobListings = noFilterArr;
+      jobListings = [];
+      renderPage(currentPage);
+      showError("No jobs found.");
+      return;
     } else {
       jobListings = FilterCategories();
     }
@@ -704,6 +728,7 @@ function removeCatSelections() {
   categoryFilters.forEach((catInp) => {
     catInp.checked = false;
   });
+  selectedCategories.length = 0;
 }
 function resetButton() {
   jobListings = noFilterArr;

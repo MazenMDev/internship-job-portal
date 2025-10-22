@@ -565,6 +565,13 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+#no-jobs-message {
+  text-align: center;
+  color: var(--text-muted);
+  display: none;
+  opacity: 0.9;
+  font-size: 1.2em;
+}
 
 
 
