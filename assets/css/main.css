@@ -255,12 +255,6 @@ a.currentPage span.material-symbols-outlined {
   opacity: 1;
 }
 
-.nav-icon {
-}
-
-.nav-icon:hover {
-}
-
 .iconForNav {
   width: 20px;
   margin-bottom: 2px;
@@ -397,9 +391,165 @@ a.currentPage span.material-symbols-outlined {
   font-weight: 500;
 }
 
+#blurred-background {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(var(--formJobColor), 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+}
+#popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 24px;
+  z-index: 2001;
+  margin-top: 10px;
+  align-items: center;
+  max-width: 600px !important;
+  min-height: max-content !important;
+  background-color: var(--box-color);
+  border-radius: 20px;
+  box-shadow: 0px 30px 50px var(--box-shadow);
+  transition: all 0.2s ease-in-out;
+}
+body.modal-open #container {
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+body.modal-open #blurred-background,
+body.modal-open #popup {
+  display: block;
+}
+#open-btn {
+  display: block;
+  opacity: 1 !important;
+  background-color: transparent;
+  color: var(--text-color);
+  font-size: 14px;
+  width: 300px;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+#open-btn:hover {
+  background-color: var(--border-color);
+  color: var(--text-color);
+}
+#close-btn {
+  border: none;
+  font-size: 20px;
+  margin-left: 380px;
+  background-color: var(--box-color);
+  color: var(--text-color);
+  transition: all 0.2s ease-in-out;
+}
+#close-btn:hover {
+  background-color: var(--box-color);
+  color: var(--primary-color) !important;
+  transform: translateY(-3px);
+}
+.inp {
+  margin: 5px;
+  background-color: var(--box-color);
+  border-radius: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.address {
+  /*background-color: blanchedalmond;*/
+  border-radius: 10px;
+}
+
+.submit {
+  background-color: var(--primary-color);
+}
+
+form {
+  width: 100%;
+  max-width: 400px;
+  padding: 0;
+  display: flex;
+  position: relative;
+  align-content: center;
+  flex-direction: column;
+  gap: 1.2rem;
+  border-radius: 12px;
+}
+
+.holder {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  height: 3rem;
+  padding: 0 1rem;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  background: var(--background-color);
+  color: var(--text-color);
+  transition: border-color 0.3s ease, border 0.3s ease;
+}
+
+.holder:focus {
+  outline: none;
+  border: 1px solid;
+  border-color: var(--primary-color);
+}
+
+.submit {
+  background-color: var(--primary-color) !important;
+  color: var(--background-color);
+  border: none;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  width: 100%;
+  height: 3rem;
+  box-sizing: border-box;
+}
+.submit:hover {
+  background-color: var(--background-color)!important;
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+.submit:active {
+  transform: translateY(0);
+}
+
+#email-div {
+  position: relative;
+}
+
+.email-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  width: 1.1rem;
+  height: 1.1rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-muted);
+}
+
+
 .signout-btn {
   display: block;
-  padding: 12px 16px;
   color: var(--text-muted);
   font-size: 14px;
   text-decoration: none;
@@ -465,6 +615,9 @@ a.currentPage span.material-symbols-outlined {
     margin: 0;
     font-size: 16px;
   }
+    #popup {
+    margin-top: 0px;
+  }
 }
 
 @media (min-width: 1025px) {
@@ -516,6 +669,15 @@ a.currentPage span.material-symbols-outlined {
   .mobile-top-nav {
     display: none;
   }
+    .holder {
+    height: 3.2rem;
+    font-size: 1rem;
+  }
+
+  .submit {
+    height: 3.2rem;
+    font-size: 1rem;
+  }
 }
 
 @media (min-width: 1440px) {
@@ -548,6 +710,18 @@ a.currentPage span.material-symbols-outlined {
 
   .themeToggle {
     font-size: 20px;
+  }
+    form {
+    max-width: 400px;
+  }
+
+  form .holder,
+  form .submit {
+    font-size: 1rem;
+    height: 2.8rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem;
   }
 }
 
