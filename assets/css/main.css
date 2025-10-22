@@ -9,6 +9,7 @@
   --success: #10b981;
   --warning: #f59e0b;
   --border-color: #e5e7eb;
+  --sign-out: rgba(255, 0, 0, 0.726); 
 
   --box-color: #ffffff;
   --formJobColor: 220, 220, 220;
@@ -34,7 +35,8 @@
   --success: #34d399;
   --warning: #fcd34d;
   --border-color: #334155;
-
+  --sign-out: rgba(255, 0, 0, 0.63); 
+  
   --box-color: #091721ff;
   --formJobColor: 30, 41, 59;
   --box-shadow: none;
@@ -558,7 +560,7 @@ form {
 }
 
 .signout-btn:hover {
-  background-color: var(--border-color);
+  background-color: var(--sign-out)!important;
   color: var(--text-color);
 }
 
