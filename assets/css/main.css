@@ -138,7 +138,6 @@ body {
 .bi-person-fill:hover {
   opacity: 1;
   background-color: var(--border-color) !important;
-  transform: translateY(-2px);
 }
 
 #profile {

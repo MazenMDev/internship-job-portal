@@ -260,6 +260,12 @@ button:hover {
   .btn button {
     font-size: 19px;
   }
+  .btn a {
+    font-size: 14px;
+    padding: 14px 28px;
+    width: 100%;
+    max-width: 300px;
+  }
 }
 
 @media (max-width: 1025px) {
@@ -289,6 +295,12 @@ button:hover {
   }
 
   .btn button {
+    font-size: 14px;
+    padding: 14px 28px;
+    width: 100%;
+    max-width: 300px;
+  }
+  .btn a {
     font-size: 14px;
     padding: 14px 28px;
     width: 100%;
@@ -334,6 +346,12 @@ button:hover {
   button {
     font-size: 16px;
     padding: 12px 24px;
+    width: 100%;
+    max-width: 300px;
+  }
+  .btn a {
+    font-size: 14px;
+    padding: 14px 28px;
     width: 100%;
     max-width: 300px;
   }
