@@ -345,6 +345,7 @@ a.currentPage span.material-symbols-outlined {
 .dropdown-content .view-profile-btn {
   display: block;
   box-sizing: border-box;
+  opacity: 1 !important;
   width: calc(100% - 24px);
   margin: 12px 12px;
   padding: 8px 16px;
