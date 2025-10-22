@@ -111,9 +111,12 @@
           </div>
 
           <div class="profile-dropdown-container">
-
-            <a href="#" class="profile-link currentPage"> 
-              <img src="../assets/imgs/DefaultProfile/profile.jpeg" alt="Profile" class="profile-nav-img">
+            <a href="#" class="profile-link currentPage">
+              <img
+                src="../assets/imgs/DefaultProfile/profile.jpeg"
+                alt="Profile"
+                class="profile-nav-img"
+              />
               <div class="profileDivC">
                 <span>Me</span>
                 <svg
@@ -134,24 +137,32 @@
               </div>
             </a>
 
-              <div class="dropdown-content">
-                <div class="profileDataDiv">
-                  <img src="../assets/imgs/DefaultProfile/profile.jpeg" alt="Profile Picture" class="profile-dropdown-img">
-                  <div class="profileInfo">
-                    <span class="profileName">Mostafa Mohammed</span>
-                    <span class="profileEducation">Student at MSA University</span>
-                  </div>
+            <div class="dropdown-content">
+              <div class="profileDataDiv">
+                <img
+                  src="../assets/imgs/DefaultProfile/profile.jpeg"
+                  alt="Profile Picture"
+                  class="profile-dropdown-img"
+                />
+                <div class="profileInfo">
+                  <span class="profileName">Mostafa Mohammed</span>
+                  <span class="profileEducation"
+                    >Student at MSA University</span
+                  >
                 </div>
-                <a href="./profile.html" class="view-profile-btn">View profile</a>
-
-                <div class="dropdown-section">
-                  <h3 class="dropdown-section-title">Register your company</h3>
-                  <a href="#" class="dropdown-link company-reg-link">Company Registration</a>
-                </div>
-
-                <a href="./login.html" class="signout-btn">Sign Out</a>
               </div>
+              <a href="./profile.html" class="view-profile-btn">View profile</a>
+
+              <div class="dropdown-section">
+                <h3 class="dropdown-section-title">Register your company</h3>
+                <a href="#" class="dropdown-link company-reg-link"
+                  >Company Registration</a
+                >
+              </div>
+
+              <a href="./login.html" class="signout-btn">Sign Out</a>
             </div>
+          </div>
         </div>
 
         <!-- Account Section -->
@@ -252,6 +263,22 @@
         </div>
       </section>
     </div>
+    <script>
+      const navbar = document.querySelector(".nav-bar");
+      const SCROLL_THRESHOLD = 50;
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (window.scrollY > SCROLL_THRESHOLD) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        },
+        { passive: true }
+      );
+    </script>
     <script src="../assets/js/themeToggle.js"></script>
     <script type="module" src="../assets/js/recentJobs.js"></script>
   </body>
