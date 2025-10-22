@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../assets/css/main.css" />
     <link rel="stylesheet" href="../assets/css/landing.css" />
     <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png" />
-    
   </head>
   <body>
     <div class="container">
@@ -113,7 +112,7 @@
 
           <div class="nav-icon">
             <a href="./profile.html" class="profileIcon">
-             <svg
+              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
@@ -245,6 +244,22 @@
         </div>
       </section>
     </div>
+    <script>
+      const navbar = document.querySelector(".nav-bar");
+      const SCROLL_THRESHOLD = 50;
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (window.scrollY > SCROLL_THRESHOLD) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        },
+        { passive: true }
+      );
+    </script>
     <script src="../assets/js/themeToggle.js"></script>
     <script type="module" src="../assets/js/recentJobs.js"></script>
   </body>

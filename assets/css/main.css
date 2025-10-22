@@ -198,9 +198,12 @@ a.currentPage span.material-symbols-outlined {
 }
 
 .nav-bar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  transition: all 0.3s ease;
+  background: transparent;
   width: 100%;
   background: var(--background-color);
   display: flex;
@@ -213,6 +216,11 @@ a.currentPage span.material-symbols-outlined {
   max-width: 100vw;
   overflow: hidden;
   min-height: 64px;
+}
+
+.nav-bar.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .mid-nav {
