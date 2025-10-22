@@ -216,7 +216,7 @@ a.currentPage span.material-symbols-outlined {
   border-bottom: 1px solid var(--border-color);
   box-sizing: border-box;
   max-width: 100vw;
-  overflow: hidden;
+  overflow: visible;
   min-height: 64px;
 }
 
@@ -253,6 +253,7 @@ a.currentPage span.material-symbols-outlined {
 }
 
 .nav-icon {
+
 }
 
 .nav-icon:hover {
@@ -292,6 +293,53 @@ a.currentPage span.material-symbols-outlined {
 
 .mobile-top-nav {
   display: none;
+}
+
+.profile-dropdown-container {
+    position: relative; 
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+    color: white; 
+    padding: 14px 16px; 
+    text-decoration: none;
+    display: block; 
+}
+
+.dropdown-content {
+    display: none; 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    right: 0;   
+    min-width: 160px;
+    background-color: var(--nav-bar-bg-color, #242424); 
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5); 
+    z-index: 1000;
+    border-radius: 4px;
+    padding: 4px 0;
+}
+
+.dropdown-content a {
+    color: var(--text-color, white);
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block; 
+    white-space: nowrap; 
+}
+
+.dropdown-content a:hover {
+    background-color: var(--primary-color, #007bff);
+    color: white; 
+}
+
+.profile-dropdown-container:hover .dropdown-content {
+    display: block;
 }
 
 @media (max-width: 1200px) {
