@@ -21,6 +21,7 @@
   --primary-color-rgb: 0, 154, 171;
   --secondary-color: #005070ff;
 
+  --brightness: 1;
   --main-font-family: "Rubik", sans-serif;
 }
 
@@ -42,6 +43,8 @@
 
   --primary-color: #3282b8;
   --primary-color-rgb: 50, 130, 184;
+
+  --brightness: 0.5;
   --secondary-color: #0f4c75;
 }
 
@@ -332,6 +335,11 @@ a.currentPage span.material-symbols-outlined {
   height: 24px;
   border-radius: 50%;
   object-fit: cover;
+  filter: brightness(var(--brightness));
+}
+
+.profileCurrentPage {
+  filter: brightness(1);
 }
 
 .dropdown-content .view-profile-btn {
