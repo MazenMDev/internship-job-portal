@@ -186,7 +186,6 @@ function getSVG(category) {
 // pages buttons
 const jobsPerPage = 6;
 let currentPage = 1;
-const totalPages = Math.ceil(jobListings.length / jobsPerPage);
 const pagesContainer = document.querySelector(".pages");
 const prevButton = document.querySelector(".prevP");
 const nextButton = document.querySelector(".nextP");
@@ -208,6 +207,7 @@ function renderPage(page) {
   jobContainer.innerHTML = "";
 
   //show the indexes of the jobs being displayed and the current page of total pages
+  const totalPages = Math.ceil(jobListings.length / jobsPerPage);
   const startJobNum = (page - 1) * jobsPerPage + 1;
   const endJobNum = Math.min(page * jobsPerPage, jobListings.length);
   const jobResult = document.createElement("h1");
@@ -334,6 +334,9 @@ function updatePages() {
     .querySelectorAll(".page-btn:not(.prevP):not(.nextP), .dots")
     .forEach((el) => el.remove());
 
+  // Calculate the number of pages 
+  const totalPages = Math.ceil(jobListings.length / jobsPerPage);
+
   // hide pages container if only 1 page
   if (totalPages <= 1) {
     pagesContainer.style.display = "none";
@@ -434,6 +437,8 @@ document.addEventListener("DOMContentLoaded", () => {
   displayCategories();
 });
 
+
+//Change the content of the category fitler back to show the parent categories
 function resetCategoryFilters() {
   const categoryDropDown = document.querySelector(".category-filter-group");
   categoryDropDown.innerHTML = `
@@ -450,22 +455,36 @@ function resetCategoryFilters() {
   }
 }
 
+//when a parent category is clicked , we show all its sub categories
 function showSubcategories(parent) {
+
+  //clean the parent string to use as a class
   let parentClass = parent.split(" ").join("");
   parentClass = parentClass.split("&").join("-");
+  
   const categoryDropDown = document.querySelector(".category-filter-group");
   categoryDropDown.innerHTML = `
     <summary class="filter-group-legend filter-group-summary">Category - ${parent}</summary>
   `;
 
+  //loop through the sub categories of the parent and create a checkbox for each one
   for (const cat of jobCategories[parent]) {
     const label = document.createElement("label");
     label.classList.add("filter-option-label");
     label.classList.add(`category-filter-${parentClass}`);
 
     label.innerHTML = `
-        <input type="checkbox" value="${cat}" class="filter-checkbox" /> ${cat}
-      `;
+    <input type="checkbox" value="${cat}" class="filter-checkbox" /> ${cat}
+    `;
+    //see if it was checked before to recheck it
+    for(const selectedCat of selectedCategories){
+      if(selectedCat === cat){
+        label.querySelector(".filter-checkbox").checked = true;
+      }
+    }
+    
+
+    //if its checked or un checked we toggle it from the selected categories array
     label.addEventListener("change", function () {
       toggleCategory(cat);
     });
@@ -483,8 +502,9 @@ function showSubcategories(parent) {
     labels.forEach(function (label) {
       const inp = label.querySelector(".filter-checkbox");
       inp.checked = allSelected;
-      toggleCategory(label.textContent);
+      toggleCategory(inp.value);
     });
+    console.log(selectedCategories);
   });
 
   const goBackCatBtn = document.createElement("button");
@@ -650,14 +670,17 @@ const inputSearch = () => {
   searchInput = searchInput.trim();
 
   let filterJobs;
-  if (searchInput !== "") {
+  if (searchInput != "") {
     filterJobs = searchJobs(searchInput);
     const filteredCat = FilterCategories();
     if (filteredCat.length > 0) {
+      //Removes duplicate jobs from the filtered categories to not add a job twice if its returned from both filters
       jobListings = filterJobs.filter((job) => {
-        filteredCat.some((categ) => {
-          if (categ.id === job.id) return true;
-          else return false;
+        return filteredCat.some((categ) => {
+          if (categ.id == job.id) {
+            return true;
+          }
+          return false;
         });
       });
     }
@@ -665,7 +688,7 @@ const inputSearch = () => {
       jobListings= filterJobs;
     }
   } else {
-    if (FilterCategories().length == 0) {
+    if (FilterCategories().length === 0) {
       jobListings = noFilterArr;
     } else {
       jobListings = FilterCategories();
