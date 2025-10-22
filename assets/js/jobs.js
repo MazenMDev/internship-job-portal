@@ -318,7 +318,6 @@ function showError (message) {
   const errorMessage = document.getElementById("no-jobs-message");
   errorMessage.textContent = message;
   errorMessage.style.display = "block";
-  document.querySelector(".jobResultDiv").style.display = "none";
 }
 
 //add a page button before the next button
@@ -710,6 +709,11 @@ const inputSearch = () => {
     }
   } else {
     if (FilterCategories().length === 0) {
+      if(selectedCategories.length === 0){
+        jobListings = noFilterArr;
+        renderPage(currentPage);
+        return;
+      }
       jobListings = [];
       renderPage(currentPage);
       showError("No jobs found.");
