@@ -15,6 +15,7 @@
   --box-shadow: rgba(0, 0, 0, 0.08);
   --scrollBar: rgba(0, 0, 0, 0.1);
   --box-shadow-small: rgba(0, 0, 0, 0.04);
+  --nav-bar-scroll: rgba(255, 255, 255, 0.95);
 
   --primary-color: #009aabff;
   --primary-color-rgb: 79, 70, 229;
@@ -37,6 +38,7 @@
   --formJobColor: 30, 41, 59;
   --box-shadow: none;
   --box-shadow-small: none;
+  --nav-bar-scroll: rgba(5, 13, 17, 0.95);
 
   --primary-color: #3282b8;
   --primary-color-rgb: 99, 102, 241;
@@ -219,7 +221,7 @@ a.currentPage span.material-symbols-outlined {
 }
 
 .nav-bar.scrolled {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--nav-bar-scroll);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
