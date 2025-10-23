@@ -443,6 +443,7 @@ body.modal-open #popup {
   transition: all 0.2s ease;
 }
 #open-btn:hover {
+  border-radius: 10px;
   background-color: var(--border-color);
   color: var(--text-color);
 }
