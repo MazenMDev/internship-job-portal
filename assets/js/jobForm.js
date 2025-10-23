@@ -73,10 +73,16 @@ function upperDivContent(job, upperDiv) {
       </svg>
     <div class="job-info-form">
         <p class="job-posted-time-form">${timeSince(job.datePosted)}</p>
-        <h2 class="job-title-form">${job.title}</h2>
-        <p class="job-company-form">${job.company}</p>
+        
+        <div class="job-header-form">
+          <img src="${job.logo}" alt="${job.company} Logo" class="job-logo-form" />
+          <div class="job-header-info">
+            <h2 class="job-title-form">${job.title}</h2>
+            <p class="job-company-form">${job.company}</p>
+          </div>
+        </div>
 
-        <div class="job-details-form">
+        <div class="job-details-row">
 
             <div class="job-detail-item">
                 ${getSVG(job.category)}
