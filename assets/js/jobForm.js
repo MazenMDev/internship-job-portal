@@ -1,3 +1,5 @@
+import { jobListings, getSVG , timeSince } from './jobs.js';
+
 document.addEventListener("DOMContentLoaded", () => {
     const jobFormButtons = document.querySelectorAll(".job-form-button");
     jobFormButtons.forEach(button => {
@@ -45,3 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+
+function upperDivContent() {
+    const upperDiv = document.querySelector(".upperDiv");
+    const time = document.createElement("p");
+    time.textContent = `Posted ${timeSince(job.createdAt)} ago`;
+}

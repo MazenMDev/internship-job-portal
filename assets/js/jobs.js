@@ -34,8 +34,12 @@ let jobListings = [
     experience: "2-4 years",
     datePosted: "2025-10-10 20:00:00",
     logo: "../assets/imgs/dummyJobCompanyImages/google-company.jpg",
+    description:
+      "As a Software Engineer at Google, you will be part of a dynamic and innovative environment that values creativity, problem-solving, and technical excellence. You will collaborate with cross-functional teams to design, build, and optimize scalable web and cloud-based applications. The ideal candidate should have a strong grasp of modern JavaScript frameworks, experience in developing RESTful APIs, and the ability to translate product requirements into clean and efficient code. This position offers opportunities for mentorship, career growth, and exposure to global-scale projects.",
+    skills: ["JavaScript", "React", "Node.js", "API Design"],
+    tags: ["Frontend", "Backend", "Web Development"],
+    website: "https://careers.google.com",
   },
-
   {
     id: 2,
     title: "Marketing Specialist",
@@ -47,6 +51,11 @@ let jobListings = [
     location: "Atlanta, GA",
     datePosted: "2025-10-08 09:20:00",
     logo: "../assets/imgs/dummyJobCompanyImages/cocacola.jpg",
+    description:
+      "Join Coca-Cola’s digital marketing team and play a key role in shaping online campaigns that reach millions of customers worldwide. As a Marketing Specialist, you will develop creative strategies for social media engagement, manage advertising budgets, analyze performance data, and coordinate with design and product teams to ensure brand consistency. Candidates should possess strong analytical skills, an understanding of digital trends, and experience using tools such as Google Analytics and Meta Ads Manager. This role encourages innovative thinking and offers the opportunity to work on global brand campaigns.",
+    skills: ["SEO", "Google Ads", "Social Media Management", "Analytics"],
+    tags: ["Marketing", "Advertising", "Branding"],
+    website: "https://www.coca-colacompany.com/careers",
   },
   {
     id: 3,
@@ -59,6 +68,11 @@ let jobListings = [
     location: "Smart Village, Giza",
     datePosted: "2025-10-06 11:55:00",
     logo: "../assets/imgs/dummyJobCompanyImages/amazon.jpeg",
+    description:
+      "As a Cloud Engineer at Amazon, you will architect, deploy, and maintain secure and scalable infrastructure across AWS services. You’ll collaborate closely with DevOps teams to implement CI/CD pipelines, monitor cloud performance, and automate processes using Terraform and AWS CloudFormation. The ideal candidate should have experience with container technologies like Docker and Kubernetes, strong networking knowledge, and a passion for improving system reliability and scalability. This is an excellent opportunity to work within a fast-paced environment where innovation drives every decision.",
+    skills: ["AWS", "Docker", "Kubernetes", "CI/CD"],
+    tags: ["Cloud", "DevOps", "Infrastructure"],
+    website: "https://aws.amazon.com/careers/",
   },
   {
     id: 4,
@@ -71,6 +85,11 @@ let jobListings = [
     location: "Rochester, MN",
     datePosted: "2025-10-07 08:45:00",
     logo: "../assets/imgs/dummyJobCompanyImages/mayo-clinic.jpeg",
+    description:
+      "The Registered Nurse at Mayo Clinic will provide patient-centered care in one of the most respected healthcare institutions in the world. You will be responsible for assessing patient health, administering medications, assisting with procedures, and collaborating with physicians to develop effective treatment plans. Candidates should have strong communication skills, the ability to remain calm under pressure, and a compassionate approach to patient care. Working at Mayo Clinic offers continuous learning opportunities and access to cutting-edge medical research and technologies.",
+    skills: ["Patient Care", "CPR", "EMR Systems", "Teamwork"],
+    tags: ["Healthcare", "Nursing"],
+    website: "https://jobs.mayoclinic.org",
   },
   {
     id: 5,
@@ -83,6 +102,11 @@ let jobListings = [
     location: "London, UK",
     datePosted: "2025-10-04 12:00:00",
     logo: "../assets/imgs/dummyJobCompanyImages/pwc.jpg",
+    description:
+      "As an Accountant at PwC, you’ll be responsible for managing client accounts, preparing financial reports, analyzing budgets, and ensuring regulatory compliance. You will work with a diverse set of clients and collaborate with audit and consulting teams to provide strategic financial insights. The position requires a strong understanding of accounting principles, attention to detail, and proficiency in financial software tools. This role offers a collaborative environment where you’ll have opportunities to grow within one of the world’s leading professional services firms.",
+    skills: ["Excel", "Financial Analysis", "QuickBooks", "Tax Preparation"],
+    tags: ["Finance", "Auditing", "Tax"],
+    website: "https://www.pwc.com/careers",
   },
   {
     id: 6,
@@ -91,10 +115,15 @@ let jobListings = [
     category: "Architecture",
     type: "InternShip",
     salary: "$1000-$1200",
-    experience: "student",
+    experience: "Student",
     location: "Houston, TX",
     datePosted: "2025-10-03 09:30:00",
     logo: "../assets/imgs/dummyJobCompanyImages/bechtel.png",
+    description:
+      "Bechtel is offering an internship opportunity for aspiring Civil Engineers looking to gain real-world experience in infrastructure development. As an intern, you will assist project managers and senior engineers in drafting designs, inspecting construction sites, and preparing reports. You will learn how to use tools like AutoCAD, perform basic structural analysis, and understand project documentation processes. This internship provides an excellent foundation for students passionate about construction, design, and sustainable engineering practices.",
+    skills: ["AutoCAD", "Project Management", "Structural Design"],
+    tags: ["Engineering", "Construction", "Internship"],
+    website: "https://jobs.bechtel.com",
   },
   {
     id: 7,
@@ -107,10 +136,15 @@ let jobListings = [
     location: "Springfield, IL",
     datePosted: "2025-10-02 08:15:00",
     logo: "../assets/imgs/dummyJobCompanyImages/springfield.jpeg",
+    description:
+      "We are seeking a dedicated Biology Teacher to join Springfield High School’s science department. The candidate will be responsible for preparing lesson plans, conducting laboratory experiments, and fostering a love for science among students. You will also evaluate student performance, maintain a safe classroom environment, and collaborate with other teachers to develop interdisciplinary projects. A strong passion for education and the ability to engage students through interactive teaching methods are essential for success in this role.",
+    skills: ["Teaching", "Biology", "Classroom Management", "Lesson Planning"],
+    tags: ["Education", "Science"],
+    website: "https://springfieldhigh.edu/careers",
   },
   {
     id: 8,
-    title: "IOS Developer",
+    title: "iOS Developer",
     company: "Apple",
     category: "Mobile App Development",
     type: "Remote",
@@ -119,6 +153,11 @@ let jobListings = [
     location: "Cupertino, CA",
     datePosted: "2025-10-05 14:18:00",
     logo: "../assets/imgs/dummyJobCompanyImages/apple.jpeg",
+    description:
+      "As an iOS Developer at Apple, you will design, develop, and maintain mobile applications that deliver exceptional user experiences. You’ll collaborate with designers, backend developers, and product managers to bring creative ideas to life. The ideal candidate should have strong experience with Swift and Xcode, a deep understanding of Apple’s Human Interface Guidelines, and a commitment to writing clean and maintainable code. This role provides the opportunity to work on apps that reach millions of users while staying at the forefront of mobile innovation.",
+    skills: ["Swift", "Xcode", "UI/UX Design", "REST APIs"],
+    tags: ["Mobile", "iOS", "App Development"],
+    website: "https://jobs.apple.com",
   },
 ];
 
@@ -205,7 +244,6 @@ function closeFilterBar() {
 function renderPage(page) {
   window.scrollTo(0, 0);
   jobContainer.innerHTML = "";
-  
 
   //show the indexes of the jobs being displayed and the current page of total pages
   const totalPages = Math.ceil(jobListings.length / jobsPerPage);
@@ -234,7 +272,6 @@ function renderPage(page) {
   jobResultDiv.appendChild(filterButton);
   jobResultDiv.appendChild(jobResult);
   jobContainer.appendChild(jobResultDiv);
-
 
   const errorMessage = document.createElement("h2");
   errorMessage.id = "no-jobs-message";
@@ -314,7 +351,7 @@ function renderPage(page) {
   updatePages();
 }
 
-function showError (message) {
+function showError(message) {
   const errorMessage = document.getElementById("no-jobs-message");
   errorMessage.textContent = message;
   errorMessage.style.display = "block";
@@ -347,7 +384,7 @@ function updatePages() {
     .querySelectorAll(".page-btn:not(.prevP):not(.nextP), .dots")
     .forEach((el) => el.remove());
 
-  // Calculate the number of pages 
+  // Calculate the number of pages
   const totalPages = Math.ceil(jobListings.length / jobsPerPage);
 
   // hide pages container if only 1 page
@@ -450,7 +487,6 @@ document.addEventListener("DOMContentLoaded", () => {
   displayCategories();
 });
 
-
 //Change the content of the category fitler back to show the parent categories
 function resetCategoryFilters() {
   const categoryDropDown = document.querySelector(".category-filter-group");
@@ -470,11 +506,10 @@ function resetCategoryFilters() {
 
 //when a parent category is clicked , we show all its sub categories
 function showSubcategories(parent) {
-
   //clean the parent string to use as a class
   let parentClass = parent.split(" ").join("");
   parentClass = parentClass.split("&").join("-");
-  
+
   const categoryDropDown = document.querySelector(".category-filter-group");
   categoryDropDown.innerHTML = `
     <summary class="filter-group-legend filter-group-summary">Category - ${parent}</summary>
@@ -490,12 +525,11 @@ function showSubcategories(parent) {
     <input type="checkbox" value="${cat}" class="filter-checkbox" /> ${cat}
     `;
     //see if it was checked before to recheck it
-    for(const selectedCat of selectedCategories){
-      if(selectedCat === cat){
+    for (const selectedCat of selectedCategories) {
+      if (selectedCat === cat) {
         label.querySelector(".filter-checkbox").checked = true;
       }
     }
-    
 
     //if its checked or un checked we toggle it from the selected categories array
     label.addEventListener("change", function () {
@@ -627,8 +661,10 @@ function searchJobs(keyword) {
       job.company.toLowerCase().includes(lowerKeyword) ||
       job.category.toLowerCase().includes(lowerKeyword) ||
       job.experience.toLowerCase().includes(lowerKeyword) ||
-      job.type.toLowerCase().includes(lowerKeyword)||
-      job.location.toLowerCase().includes(lowerKeyword)
+      job.type.toLowerCase().includes(lowerKeyword) ||
+      job.location.toLowerCase().includes(lowerKeyword) ||
+      job.tags.some((tag) => tag.toLowerCase().includes(lowerKeyword))||
+      job.skills.some((skill) => skill.toLowerCase().includes(lowerKeyword))
     );
   });
   return filteredJobs;
@@ -696,9 +732,8 @@ const inputSearch = () => {
           return false;
         });
       });
-    }
-    else{
-      if(filterJobs.length === 0){
+    } else {
+      if (filterJobs.length === 0) {
         jobListings = [];
         renderPage(currentPage);
         showError("No jobs found.");
@@ -709,7 +744,7 @@ const inputSearch = () => {
     }
   } else {
     if (FilterCategories().length === 0) {
-      if(selectedCategories.length === 0){
+      if (selectedCategories.length === 0) {
         jobListings = noFilterArr;
         renderPage(currentPage);
         return;
@@ -741,3 +776,5 @@ function resetButton() {
   currentPage = 1;
   renderPage(currentPage);
 }
+
+export { jobListings, getSVG , timeSince };
