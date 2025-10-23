@@ -455,12 +455,13 @@ function toggleBookmark(jobId) {
   } else {
     userBookMarks.splice(index, 1);
   }
-  const bookmarkIcon = document.querySelector(
+  const bookmarkIcons = document.querySelectorAll(
     `.job-card[data-id="${jobId}"] .job-bookmark`
   );
-  if (bookmarkIcon) {
+  bookmarkIcons.forEach((bookmarkIcon) => {
+    
     bookmarkIcon.classList.toggle("bookmarked", index === -1);
-  }
+  });
   showBookmarkedFirst();
 }
 
@@ -777,4 +778,4 @@ function resetButton() {
   renderPage(currentPage);
 }
 
-export { jobListings, getSVG , timeSince };
+export { jobListings, getSVG , timeSince , toggleBookmark , userBookMarks};

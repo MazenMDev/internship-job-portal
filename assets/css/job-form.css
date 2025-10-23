@@ -64,24 +64,37 @@
   border-radius: 12px;
 }
 
-.FormCloseBtn {
+.close-btn {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  color: var(--text-color);
-  background: none;
+  top: -10px;
+  right: -10px;
+  color: white;
+  background: var(--error);
+  border-radius: 16px;
   border: none;
   padding: 6px 12px;
-  border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
   font-size: 0.9em;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease-in-out;
 }
-.FormCloseBtn:hover {
-  background: var(--border-color);
-  color: var(--text-muted);
-  transform: translateY(-2px);
+
+.close-btn:hover {
+  background: var(--sign-out);
+  transform: scale(1.1);
+}
+
+.form-bookmark {
+  top: 20px;
+  right: 60px;
+}
+
+.job-posted-time-form {
+  background-color: rgba(var(--primary-color-rgb), 0.2);
+  color : var(--primary-color);
+  padding: 2px 6px;
+  font-size: 0.8em;
+  border-radius: 12px;
 }
 
 @media (max-width: 768px) {
