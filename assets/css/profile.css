@@ -70,6 +70,7 @@ li {
   display: inline-block;
   background-color: var(--box-color);
   color: var(--primary-color);
+  box-shadow: 2px 2px 3px var(--box-shadow);
   padding: 6px 12px;
   margin: 5px;
   border-radius: 20px;
@@ -133,7 +134,6 @@ li {
 .cover-btn:hover {
   color: var(--text-color);
 }
-
 
 @media (max-width: 1200px) {
   .profile-container {

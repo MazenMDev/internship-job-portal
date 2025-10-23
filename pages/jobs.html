@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle,search"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=close,search"
     />
     <link
       rel="stylesheet"
@@ -120,7 +120,7 @@
           </div>
 
           <div class="profile-dropdown-container">
-            <a href="./profile.html">
+            <a>
               <img
                 src="../assets/imgs/DefaultProfile/profile.jpeg"
                 alt="Profile"
@@ -373,7 +373,9 @@
     <div id="blurred-background"></div>
 
     <div id="popup">
-      <button id="close-btn">X</button>
+      <button id="close-btn">
+        <span class="material-symbols-outlined" id="close"> close </span>
+      </button>
       <h1 id="title">Register Your Company</h1>
       <form id="form">
         <div class="inp" id="name">
