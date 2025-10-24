@@ -140,6 +140,9 @@ li {
     width: 100%;
     max-width: 800px;
     margin-top: 35px;
+    margin-bottom: 60px;
+    border-radius: 0px;
+    box-shadow: none;
   }
   .edit-photo {
     margin-top: 0px;
