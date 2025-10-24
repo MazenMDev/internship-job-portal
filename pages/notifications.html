@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notifications</title>
+    <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/notifications.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&text=close"
+    />
+  </head>
+  <body>
+    <div class="mobile-top-nav">
+      <div class="logoContainer">
+        <img src="../assets//imgs/JobConnect.png" alt="logo" class="logo" />
+        <h1 class="logo-text">JobConnect</h1>
+        <button onclick="themeToggle()" class="themeToggle">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-sun-icon lucide-sun"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.34 17.66-1.41 1.41" />
+            <path d="m19.07 4.93-1.41 1.41" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="mobile-accounts">
+        <a href="./login.html" class="join">Join now</a>
+        <a href="./register.html" class="sign">Sign up</a>
+      </div>
+    </div>
+
+    <nav class="nav-bar">
+      <div class="logoContainer">
+        <img src="../assets//imgs/JobConnect.png" alt="logo" class="logo" />
+        <h1 class="logo-text">JobConnect</h1>
+      </div>
+
+      <div class="mid-nav">
+        <div class="nav-icon">
+          <a href="./landing.html">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="iconForNav"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Home</a
+          >
+        </div>
+
+        <div class="nav-icon">
+          <a href="./notifications.html" class="currentPage">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="iconForNav"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-bell-icon lucide-bell"
+            >
+              <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+              <path
+                d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
+              />
+            </svg>
+            Notifications</a
+          >
+        </div>
+        <div class="nav-icon">
+          <a href="./jobs.html">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="iconForNav"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M6 3.75A2.75 2.75 0 0 1 8.75 1h2.5A2.75 2.75 0 0 1 14 3.75v.443c.572.055 1.14.122 1.706.2C17.053 4.582 18 5.75 18 7.07v3.469c0 1.126-.694 2.191-1.83 2.54-1.952.599-4.024.921-6.17.921s-4.219-.322-6.17-.921C2.694 12.73 2 11.665 2 10.539V7.07c0-1.321.947-2.489 2.294-2.676A41.047 41.047 0 0 1 6 4.193V3.75Zm6.5 0v.325a41.622 41.622 0 0 0-5 0V3.75c0-.69.56-1.25 1.25-1.25h2.5c.69 0 1.25.56 1.25 1.25ZM10 10a1 1 0 0 0-1 1v.01a1 1 0 0 0 1 1h.01a1 1 0 0 0 1-1V11a1 1 0 0 0-1-1H10Z"
+                clip-rule="evenodd"
+              />
+              <path
+                d="M3 15.055v-.684c.126.053.255.1.39.142 2.092.642 4.313.987 6.61.987 2.297 0 4.518-.345 6.61-.987.135-.041.264-.089.39-.142v.684c0 1.347-.985 2.53-2.363 2.686a41.454 41.454 0 0 1-9.274 0C3.985 17.585 3 16.402 3 15.055Z"
+              />
+            </svg>
+            Jobs</a
+          >
+        </div>
+
+        <div class="nav-icon">
+          <a href="./about-us.html">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="iconForNav"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            About us</a
+          >
+        </div>
+
+        <div class="profile-dropdown-container">
+          <a>
+            <img
+              src="../assets/imgs/DefaultProfile/profile.jpeg"
+              alt="Profile"
+              class="profile-nav-img"
+            />
+            <div class="profileDivC">
+              <span>Me</span>
+              <svg
+                class="arrowDown"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-chevron-down-icon lucide-chevron-down"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+          </a>
+
+          <div class="dropdown-content">
+            <div class="profileDataDiv">
+              <img
+                src="../assets/imgs/DefaultProfile/profile.jpeg"
+                alt="Profile Picture"
+                class="profile-dropdown-img"
+              />
+              <div class="profileInfo">
+                <span class="profileName">Mostafa Mohammed</span>
+                <span class="profileEducation">Student at MSA University</span>
+              </div>
+            </div>
+            <a href="./profile.html" class="view-profile-btn">View profile</a>
+
+            <div class="dropdown-section">
+              <h3 class="dropdown-section-title">Register your company</h3>
+              <button id="open-btn">
+                <a href="#" class="dropdown-link company-reg-link"
+                  >Company Register</a
+                >
+              </button>
+            </div>
+
+            <a href="./login.html" class="signout-btn">Sign Out</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account Section -->
+      <div class="account">
+        <a href="./login.html" class="join">Join now</a>
+        <a
+          href="./register.html"
+          class="sign"
+          style="color: var(--background-color)"
+          >Sign up</a
+        >
+        <button onclick="themeToggle()" class="themeToggle">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-sun-icon lucide-sun"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.34 17.66-1.41 1.41" />
+            <path d="m19.07 4.93-1.41 1.41" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <main>
+      <section class="notifications-section">
+        <h1>Notifications</h1>
+        <div class="notification-card">
+          <p>
+            Your application for the Software Engineer position has been
+            received.
+          </p>
+          <span class="notification-time">2 hours ago</span>
+        </div>
+        <div class="notification-card">
+          <p>New job posting: Frontend Developer at TechCorp.</p>
+          <span class="notification-time">1 day ago</span>
+        </div>
+        <div class="notification-card">
+          <p>Your profile has been viewed by HR at Innovatech.</p>
+          <span class="notification-time">3 days ago</span>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 JobConnect. All rights reserved.</p>
+    </footer>
+    <script src="../assets/js/themeToggle.js"></script>
+  </body>
+</html>
