@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notification Test</title>
+</head>
+<body>
+  <button id="notifyBtn">Send Notifications</button>
+
+<script>
+const notifications = [
+  { title: "New Job Posted", body: "Check out the new Frontend Developer position!" },
+  { title: "Profile Update", body: "Your profile was viewed 3 times today!" }
+];
+
+document.querySelector("#notifyBtn").addEventListener("click", async () => {
+  const permission = await Notification.requestPermission();
+
+  console.log("Notification permission:", permission); 
+
+  if (permission === "granted") {
+    notifications.forEach((n, index) => {
+      setTimeout(() => {
+        new Notification(n.title, {
+          body: n.body,
+          icon: "../assets/imgs/JobConnect.png"
+        });
+      }, index * 2000);
+    });
+  } else {
+    alert("Please allow notifications in your browser settings.");
+  }
+});
+</script>
+
+</body>
+</html>
