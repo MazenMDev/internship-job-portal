@@ -152,6 +152,18 @@ h1 {
 #pass-div {
   position: relative;
 }
+.container #email-div label,
+.container #pass-div label {
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-muted);
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  background: transparent;
+  padding: 0 2px;
+}
 .email-icon,
 .lock-icon {
   position: absolute;
@@ -183,6 +195,16 @@ h1 {
 
 #changePage a:hover {
   text-decoration: underline;
+}
+
+/* Generic labels for inputs on login/register pages */
+.container .inp label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 0.3rem;
+  display: inline-block;
+  margin-bottom: 0.25rem;
 }
 
 .reg {
@@ -238,6 +260,12 @@ h1 {
   background: var(--primary-color);
   color: var(--background-color);
   border-color: var(--primary-color);
+}
+
+label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-bottom: 0.3rem;
 }
 
 @media (min-width: 1024px) {
