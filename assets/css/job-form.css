@@ -24,8 +24,7 @@
 .upperDiv {
   flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
   background: var(--box-color);
   box-shadow: 0 4px 6px var(--box-shadow);
   border-radius: 12px;
@@ -69,7 +68,7 @@
   top: -10px;
   right: -10px;
   color: white;
-  background: var(--error);
+  background: var(--text-muted);
   border-radius: 16px;
   border: none;
   padding: 6px 12px;
@@ -85,9 +84,18 @@
 }
 
 .form-bookmark {
+  position: absolute;
   top: 20px;
   right: 60px;
+  cursor: pointer;
+  color: var(--secondary-text-color);
+  transition: color 0.2s ease;
 }
+
+.form-bookmark:not(.bookmarked) {
+  fill: none;
+}
+
 .job-posted-time-form {
   background-color: rgba(var(--primary-color-rgb), 0.12);
   color: var(--primary-color);
@@ -159,6 +167,38 @@
   flex-shrink: 0;
 }
 
+.job-details-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.job-detail-item-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--secondary-text-color);
+  padding: 6px 10px;
+  background: rgba(var(--primary-color-rgb), 0.06);
+  border-radius: 8px;
+}
+
+.job-detail-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.job-type-badge {
+  font-weight: 500;
+}
+
+
+
 
 @media (max-width: 768px) {
   .formDiv {
@@ -186,29 +226,53 @@
     box-shadow: none;
   }
 
+  .form-bookmark{
+    top: 60px;
+    right: 20px;
+    width: 25px;
+    height: 25px;
+  }
+  .close-btn {
+    top: 10px;
+    right: 10px;
+  }
   .job-info-form {
     padding: 12px;
-    gap: 6px;
+    gap: 16px;
+    border-bottom: 3px solid var(--border-color);
   }
   .job-header-form {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     gap: 10px;
   }
   .job-header-left {
     width: 100%;
   }
+  .job-header-info {
+    margin-top: 10px;
+    gap: 6px;
+  }
   .job-logo-form {
-    width: 56px;
-    height: 56px;
+    width: 75px;
+    height: 75px;
     min-width: 56px;
     min-height: 56px;
   }
   .job-title-form {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
   }
-  .job-company-form,
-  .job-meta-row {
-    font-size: 0.9rem;
+  .job-company-form {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+  }
+  .job-detail-item-form {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+  .job-details-row{
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
   }
 }
