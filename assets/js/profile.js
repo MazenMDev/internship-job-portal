@@ -1,5 +1,6 @@
 const toggleLink = document.querySelector(".edit-btn");
 const allHiddenDivs = document.querySelectorAll(".edit");
+const openBtnSkill = document.getElementById("open-btn-skill");
 
 // 1. Use querySelectorAll to get a LIST of all editable texts
 const textsToEdit = document.querySelectorAll(".editedtext");
@@ -20,7 +21,6 @@ toggleLink.addEventListener("click", (event) => {
     div.classList.toggle("edit");
   });
 });
-
 document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("open-btn");
   const closeBtn = document.getElementById("close-btn");
