@@ -403,6 +403,15 @@ a.currentPage span.material-symbols-outlined {
   backdrop-filter: blur(4px);
   z-index: 2000;
 }
+body.modal-open #container {
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+body.modal-open #blurred-background,
+body.modal-open #popup {
+  display: block;
+}
 #popup {
   display: none;
   position: fixed;
@@ -413,25 +422,17 @@ a.currentPage span.material-symbols-outlined {
   z-index: 2001;
   margin-top: 10px;
   align-items: center;
-  max-width: 600px !important;
-  min-height: max-content !important;
+  max-width: 600px;
+  min-height: max-content;
   background-color: var(--box-color);
   border-radius: 20px;
   box-shadow: 0px 30px 50px var(--box-shadow);
   transition: all 0.2s ease-in-out;
-}
-body.modal-open #container {
-  filter: blur(100px);
-  pointer-events: none;
-}
 
-body.modal-open #blurred-background,
-body.modal-open #popup {
-  display: block;
 }
 #open-btn {
   display: block;
-  opacity: 1 !important;
+  opacity: 1;
   background-color: transparent;
   color: var(--text-color);
   font-size: 14px;
@@ -447,53 +448,54 @@ body.modal-open #popup {
   color: var(--text-color);
 }
 #close-btn {
-  position: relative;
+  position: absolute;
+  top: 15px;
+  right: 20px;
   border: none;
   font-size: 20px;
-  margin-left: 400px !important;
   background-color: var(--box-color);
   color: var(--text-color);
   transition: all 0.2s ease-in-out;
 }
 #close-btn:hover {
   background-color: var(--box-color);
-  color: var(--primary-color) !important;
-  transform: none !important;
+  color: var(--primary-color);
+  transform: none;
 }
-.inp {
-  margin: 5px;
-  background-color: var(--box-color);
-  border-radius: 10px;
-}
+form {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  border-radius: 12px;
+  width: 100%;
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 20px;
 }
 
 .address {
   border-radius: 10px;
 }
-
-.submit {
-  background-color: var(--primary-color);
-}
-
-form {
-  width: 100%;
-  max-width: 400px;
-  padding: 0;
-  display: flex;
+.grid {
   position: relative;
-  align-content: center;
-  flex-direction: column;
-  gap: 1.2rem;
-  border-radius: 12px;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 5px;
+  gap: 5px;
+}
+.inp {
+  position: relative;
+  align-items: center;
+  width: 100%;
+  margin: 0px;
+  background-color: var(--box-color);
+  border-radius: 5px;
 }
 
 .holder {
+  position: relative;
   width: 100%;
+  box-sizing: border-box;
   border: none !important;
   border-radius: 12px;
   height: 3rem;
@@ -502,12 +504,18 @@ form {
   background: var(--background-color);
   color: var(--text-color);
   transition: border-color 0.3s ease, border 0.3s ease;
+  border: 1px solid !important;
+  border-color: var(--box-color) !important;
 }
 
 .holder:focus {
   outline: none;
   border: 1px solid !important;
   border-color: var(--primary-color) !important;
+}
+
+.submit {
+  background-color: var(--primary-color);
 }
 
 .submit {
@@ -614,25 +622,10 @@ form {
     margin: 0;
     font-size: 16px;
   }
-  #popup {
-    margin-top: 0px;
 
-  }
   h1 {
     position: relative;
     text-align: center;
-  }
-  .holder {
-    padding-right: 5px;
-    
-  }
-  .grid {
-    gap: 15px;
-  }
-  .submit {
-    position: relative;
-    text-align: center;
-    margin-left: 10px;
   }
 }
 
@@ -685,30 +678,9 @@ form {
   .mobile-top-nav {
     display: none;
   }
-
-  form {
-        min-width: max-content;
-    max-width: 420px;
-    gap: 1.3rem;
-    padding-right: 25px;
-    padding: 0px 25px 25px 0px;
-  }
-
   h1 {
     position: relative;
     text-align: center;
-  }
-  .holder {
-    padding-right: 5px;
-
-  }
-  .grid {
-    gap: 15px;
-  }
-  .submit {
-    position: relative;
-    text-align: center;
-    margin-left: 10px;
   }
 }
 
@@ -742,18 +714,6 @@ form {
 
   .themeToggle {
     font-size: 20px;
-  }
-  form {
-    max-width: 400px;
-  }
-
-  form .holder,
-  form .submit {
-    font-size: 1rem;
-    height: 2.8rem;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.75rem;
   }
 }
 
@@ -897,6 +857,12 @@ form {
   .profile-nav-img {
     width: 22px;
     height: 22px;
+  }
+
+  #popup {
+    width: 100%;
+    max-width: 450px;
+    margin-top: 35px;
   }
 }
 
@@ -1043,5 +1009,11 @@ form {
   .profile-nav-img {
     width: 22px;
     height: 22px;
+  }
+  #popup {
+    top: 10%;
+    left: 0;
+    transform: none;
+    box-sizing: border-box;
   }
 }
