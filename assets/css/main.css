@@ -160,7 +160,6 @@ a select {
   max-width: 20px;
 }
 .material-symbols-outlined:hover {
-  transform: translateY(-2px);
   opacity: 1;
 }
 
@@ -443,20 +442,23 @@ body.modal-open #popup {
   transition: all 0.2s ease;
 }
 #open-btn:hover {
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: var(--border-color);
   color: var(--text-color);
 }
 #close-btn {
+  position: relative;
   border: none;
   font-size: 20px;
-  margin-left: 380px;
+  margin-left: 400px !important;
   background-color: var(--box-color);
   color: var(--text-color);
+  transition: all 0.2s ease-in-out;
 }
 #close-btn:hover {
   background-color: var(--box-color);
   color: var(--primary-color) !important;
+  transform: none !important;
 }
 .inp {
   margin: 5px;
@@ -614,6 +616,23 @@ form {
   }
   #popup {
     margin-top: 0px;
+
+  }
+  h1 {
+    position: relative;
+    text-align: center;
+  }
+  .holder {
+    padding-right: 5px;
+    
+  }
+  .grid {
+    gap: 15px;
+  }
+  .submit {
+    position: relative;
+    text-align: center;
+    margin-left: 10px;
   }
 }
 
@@ -666,14 +685,30 @@ form {
   .mobile-top-nav {
     display: none;
   }
-  .holder {
-    height: 3.2rem;
-    font-size: 1rem;
+
+  form {
+        min-width: max-content;
+    max-width: 420px;
+    gap: 1.3rem;
+    padding-right: 25px;
+    padding: 0px 25px 25px 0px;
   }
 
+  h1 {
+    position: relative;
+    text-align: center;
+  }
+  .holder {
+    padding-right: 5px;
+
+  }
+  .grid {
+    gap: 15px;
+  }
   .submit {
-    height: 3.2rem;
-    font-size: 1rem;
+    position: relative;
+    text-align: center;
+    margin-left: 10px;
   }
 }
 
@@ -981,7 +1016,7 @@ form {
     margin-left: 5px;
     margin-top: 5px;
   }
-   .dropdown-content {
+  .dropdown-content {
     position: fixed;
     bottom: 70px;
     right: 10px;
