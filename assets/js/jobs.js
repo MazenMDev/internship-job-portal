@@ -427,24 +427,23 @@ function updatePages() {
   } else {
     nextButton.classList.remove("disabled");
   }
+
+  prevButton.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderPage(currentPage);
+    }
+  });
+
+  nextButton.addEventListener("click", () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderPage(currentPage);
+    }
+  });
+
 }
-
-prevButton.addEventListener("click", () => {
-  if (currentPage > 1) {
-    currentPage--;
-    renderPage(currentPage);
-  }
-});
-
-nextButton.addEventListener("click", () => {
-  if (currentPage < totalPages) {
-    currentPage++;
-    renderPage(currentPage);
-  }
-});
-
 renderPage(currentPage);
-
 function toggleBookmark(jobId) {
   const index = userBookMarks.indexOf(jobId);
   //search the userBookMarks array for the job id
@@ -459,7 +458,6 @@ function toggleBookmark(jobId) {
     `.job-card[data-id="${jobId}"] .job-bookmark`
   );
   bookmarkIcons.forEach((bookmarkIcon) => {
-    
     bookmarkIcon.classList.toggle("bookmarked", index === -1);
   });
   showBookmarkedFirst();
@@ -664,7 +662,7 @@ function searchJobs(keyword) {
       job.experience.toLowerCase().includes(lowerKeyword) ||
       job.type.toLowerCase().includes(lowerKeyword) ||
       job.location.toLowerCase().includes(lowerKeyword) ||
-      job.tags.some((tag) => tag.toLowerCase().includes(lowerKeyword))||
+      job.tags.some((tag) => tag.toLowerCase().includes(lowerKeyword)) ||
       job.skills.some((skill) => skill.toLowerCase().includes(lowerKeyword))
     );
   });
@@ -778,4 +776,4 @@ function resetButton() {
   renderPage(currentPage);
 }
 
-export { jobListings, getSVG , timeSince , toggleBookmark , userBookMarks};
+export { jobListings, getSVG, timeSince, toggleBookmark, userBookMarks };
