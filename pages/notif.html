@@ -15,22 +15,80 @@ const notifications = [
 ];
 
 document.querySelector("#notifyBtn").addEventListener("click", async () => {
-  const permission = await Notification.requestPermission();
 
-  console.log("Notification permission:", permission); 
-
-  if (permission === "granted") {
-    notifications.forEach((n, index) => {
-      setTimeout(() => {
-        new Notification(n.title, {
-          body: n.body,
-          icon: "../assets/imgs/JobConnect.png"
-        });
-      }, index * 2000);
-    });
-  } else {
-    alert("Please allow notifications in your browser settings.");
+  if (!("Notification" in window)) {
+    alert("Notifications are not supported by this browser.");
+    return;
   }
+
+  if (Notification.permission === "default") {
+    try {
+      await Notification.requestPermission();
+    } catch (e) {
+      console.warn("Notification permission request failed:", e);
+    }
+  }
+
+  console.log("Notification permission:", Notification.permission);
+
+  if (Notification.permission !== "granted") {
+    alert("Please allow notifications in your browser settings.");
+    return;
+  }
+
+   const canUseServiceWorker = "serviceWorker" in navigator && "showNotification" in ServiceWorkerRegistration.prototype;
+  let registration = null;
+
+  if (canUseServiceWorker) {
+    try {
+     const swCode = `
+        self.addEventListener('notificationclick', function(event) {
+          event.notification.close();
+          event.waitUntil(clients.matchAll().then(function(clientList) {
+            if (clients.openWindow) {
+              return clients.openWindow('/');
+            }
+          }));
+        });
+      `;
+      const blob = new Blob([swCode], { type: "text/javascript" });
+      const swUrl = URL.createObjectURL(blob);
+      registration = await navigator.serviceWorker.register(swUrl);
+    } catch (e) {
+      console.warn("Service worker registration failed, will fallback to in-page notifications:", e);
+      try {
+        registration = await navigator.serviceWorker.getRegistration();
+      } catch (err) {
+        registration = null;
+      }
+    }
+  }
+
+  notifications.forEach((n, index) => {
+    setTimeout(() => {
+      const options = {
+        body: n.body,
+        icon: "../assets/imgs/JobConnect.png"
+      };
+
+      if (registration && typeof registration.showNotification === "function") {
+        registration.showNotification(n.title, options).catch(err => {
+          console.warn("showNotification failed, falling back:", err);
+          try {
+            new Notification(n.title, options);
+          } catch (e) {
+            console.error("Notification error:", e);
+          }
+        });
+      } else {
+        try {
+          new Notification(n.title, options);
+        } catch (e) {
+          console.error("Notification error:", e);
+        }
+      }
+    }, index * 2000);
+  });
 });
 </script>
 
