@@ -170,17 +170,18 @@ h1 {
   margin-top: 0.3rem;
 }
 
-#changePage button {
+#changePage a {
   color: var(--primary-color);
-  font-weight: 500;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 0.95rem;
   text-decoration: none;
-  background: none;
-  border: none;
   cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
-#changePage button:hover {
+#changePage a:hover {
   text-decoration: underline;
 }
 
