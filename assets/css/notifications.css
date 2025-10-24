@@ -6,7 +6,6 @@ body {
   padding: 0;
 }
 
-
 header {
   background-color: var(--box-color);
   box-shadow: 0 2px 8px var(--box-shadow-small);
@@ -15,39 +14,35 @@ header {
   z-index: 100;
 }
 
-
-
 main {
   display: flex;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: 20px 10px;
 }
 
 .notifications-section {
-  max-width: 800px;
+  max-width: 600px;
+  min-height: max-content;
   width: 100%;
   background: var(--box-color);
-  padding: 2rem;
-  border-radius: 8px;
+  padding-top: 20px;
+  margin-top: 50px;
+  border-radius: 10px;
   box-shadow: 0 2px 10px var(--box-shadow);
 }
 
 .notifications-section h1 {
-  margin-bottom: 1.5rem;
-  color: var(--secondary-color);
-  font-size: 1.75rem;
+  color: var(--primary-color);
+  font-size: 30px;
   border-bottom: 2px solid var(--border-color);
-  padding-bottom: 0.5rem;
+  padding-bottom: 5px;
 }
 
 .notification-card {
-  background: var(--background-color);
-  border: 1px solid var(--border-color);
-  border-left: 4px solid var(--primary-color);
+ 
+  padding: 15px 20px;
   border-radius: 6px;
-  padding: 1rem 1.25rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 4px var(--box-shadow-small);
+  box-shadow: 1px 0px 0px 1px var(--box-shadow-small);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -69,14 +64,14 @@ main {
   color: var(--text-muted);
 }
 
-
 footer {
   text-align: center;
-  padding: 1.5rem;
-  background-color: var(--box-color);
-  border-top: 1px solid var(--border-color);
+position:absolute;
+bottom: -2%;
+left:50%;
+left: 50%;
+  transform: translate(-50%, -50%);
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 15px;
+
 }
-
-
