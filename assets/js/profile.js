@@ -1,40 +1,50 @@
-const toggleLink = document.querySelector(".edit-btn");
-const allHiddenDivs = document.querySelectorAll(".edit");
-const openBtnSkill = document.getElementById("open-btn-skill");
+document.addEventListener("DOMContentLoaded", function () {
+  const openEditProfileBtn = document.getElementById("open-edit-profile-btn");
+  const closeEditProfileBtn = document.getElementById("close-btn-edit-profile");
+  const editProfileModal = document.getElementById("popup-edit-profile");
+  const blurredBackground = document.getElementById("blurred-background");
 
-// 1. Use querySelectorAll to get a LIST of all editable texts
-const textsToEdit = document.querySelectorAll(".editedtext");
+  const editProfileForm = document.querySelector("#popup-edit-profile #form");
 
-toggleLink.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  // 2. Loop through every element in the list
-  textsToEdit.forEach((textElement) => {
-    // Get the current state (true or false)
-    const isEditable = textElement.getAttribute("contenteditable") === "true";
-
-    // Set the attribute to the opposite of its current state
-    textElement.setAttribute("contenteditable", !isEditable);
-  });
-
-  allHiddenDivs.forEach((div) => {
-    div.classList.toggle("edit");
-  });
-});
-document.addEventListener("DOMContentLoaded", () => {
-  const openBtn = document.getElementById("open-btn");
-  const closeBtn = document.getElementById("close-btn");
-  const backdrop = document.getElementById("blurred-background");
-
-  function openModal() {
-    document.body.classList.add("modal-open");
+  function openPopupEditProfile() {
+    if (editProfileModal) {
+      editProfileModal.classList.add("open");
+    }
+    if (blurredBackground) {
+      blurredBackground.classList.add("visible");
+    }
   }
 
-  function closeModal() {
-    document.body.classList.remove("modal-open");
+  function closePopupEditProfile() {
+    if (editProfileModal) {
+      editProfileModal.classList.remove("open");
+    }
+    if (blurredBackground) {
+      blurredBackground.classList.remove("visible");
+    }
   }
 
-  openBtn.addEventListener("click", openModal);
-  closeBtn.addEventListener("click", closeModal);
-  backdrop.addEventListener("click", closeModal);
+  if (openEditProfileBtn) {
+    openEditProfileBtn.addEventListener("click", openPopupEditProfile);
+  }
+
+  if (closeEditProfileBtn) {
+    closeEditProfileBtn.addEventListener("click", closePopupEditProfile);
+  }
+
+  if (blurredBackground) {
+    blurredBackground.addEventListener("click", closePopupEditProfile);
+  }
+
+  if (editProfileForm) {
+    editProfileForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(editProfileForm);
+      const data = Object.fromEntries(formData.entries());
+      console.log("Profile data saved:", data);
+
+      closePopupEditProfile();
+    });
+  }
 });
