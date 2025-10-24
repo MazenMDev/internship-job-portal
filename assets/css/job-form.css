@@ -14,59 +14,65 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(300px, 80%, 1800px);
-  height: clamp(300px, 90%, 1200px);
+  width: clamp(300px, 90%, 1200px);
+  max-width: 1200px;
+  height: clamp(400px, 85vh, 900px);
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  z-index: 1000;
+  gap: 10px;
+  z-index: 2001;
 }
 .upperDiv {
-  flex: 1;
   display: flex;
   position: relative;
   background: var(--box-color);
   box-shadow: 0 4px 6px var(--box-shadow);
   border-radius: 12px;
   width: 100%;
+  min-height: 0;
 }
 
 .lowerDiv {
-  flex: 5;
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 5px;
+  align-items: stretch;
+  gap: 10px;
   width: 100%;
+  flex: 1;
+  min-height: 0;
 }
 
 .formLeftDiv {
-  flex: 3;
+  flex: 2;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   position: relative;
   background: var(--box-color);
   box-shadow: 0 4px 6px var(--box-shadow);
   border-radius: 12px;
-  width: 100%;
-  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
 }
 .formRightDiv {
   flex: 1;
-  height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding: 20px;
   background: var(--box-color);
   box-shadow: 0 4px 6px var(--box-shadow);
   border-radius: 12px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
 }
 
 .close-btn {
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: -20px;
+  right: -20px;
   color: white;
   background: var(--text-muted);
   border-radius: 16px;
@@ -75,12 +81,17 @@
   cursor: pointer;
   font-weight: 500;
   font-size: 0.9em;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease;
+}
+
+.close-btn-inner{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .close-btn:hover {
-  background: var(--sign-out);
-  transform: scale(1.1);
+  background: var(--primary-color);
 }
 
 .form-bookmark {
@@ -197,82 +208,338 @@
   font-weight: 500;
 }
 
+.details-container {
+  padding: 20px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  width: 100%;
+}
 
+.job-description-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
 
+.job-description-content {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.job-skills-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.job-skills-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+
+.job-skill {
+  background: rgba(var(--primary-color-rgb), 0.06);
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin-right: 8px;
+  font-size: 0.85rem;
+  color: var(--primary-color);
+}
+
+.job-tags-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.job-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.job-tag {
+  background: rgba(var(--primary-color-rgb), 0.06);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  color: var(--primary-color);
+}
+
+.companyWebsite {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-size: 0.95rem;
+  color: var(--secondary-color);
+
+  text-decoration: none;
+}
+
+.application-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  gap: 12px;
+  box-sizing: border-box;
+}
+.application-form-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-color);
+}
+.application-form label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+.application-form input,
+.application-form textarea,
+.application-form select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  background: var(--box-color);
+  box-sizing: border-box;
+}
+.application-form input:focus,
+.application-form textarea:focus,
+.application-form select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+}
+
+#resume{
+  padding: 4px;
+  border: none;
+  color: var(--text-color);
+  background: var(--box-color);
+  box-sizing: border-box;
+}
+#resume::file-selector-button {
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px 12px;
+  background: var(--box-color);
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+#experience-level{
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-color);
+  background: var(--box-color);
+  box-sizing: border-box;
+  width: 100%;
+}
+#experience-level-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+}
+.application-form button {
+  margin-top: 12px;
+  padding: 10px;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.application-form button:hover {
+  background: var(--secondary-color);
+}
 
 @media (max-width: 768px) {
-  .formDiv {
-    height: 100%;
-    width: 100%;
+  .ParentBlurDiv {
+    backdrop-filter: none;
     background: var(--box-color);
-    border-radius: 12px;
   }
+  
+  .formDiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: none;
+    height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    background: var(--box-color);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 0;
+    gap: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
   .upperDiv {
-    background: none;
-    box-shadow: none;
+    display: block;
+    position: relative;
+    background: var(--box-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    border-radius: 0;
+    border-bottom: 2px solid var(--border-color);
+    width: 100%;
+    min-height: fit-content;
+    flex-shrink: 0;
+    z-index: 100;
   }
+
   .lowerDiv {
     flex-direction: column;
     width: 100%;
-    height: 100%;
-    background: none;
-    box-shadow: none;
+    height: auto;
+    min-height: 0;
+    gap: 0;
+    flex: none;
+    display: flex;
+    align-items: stretch;
   }
-  .formLeftDiv,
+  
+  .formLeftDiv {
+    width: 100%;
+    height: auto;
+    min-height: fit-content;
+    flex: none;
+    background: var(--box-color);
+    box-shadow: none;
+    border-radius: 0;
+    overflow-y: visible;
+    overflow-x: hidden;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 20px;
+  }
+  
   .formRightDiv {
     width: 100%;
-    height: 50%%;
-    background: none;
+    height: auto;
+    min-height: fit-content;
+    flex: none;
+    background: var(--box-color);
     box-shadow: none;
+    border-radius: 0;
+    overflow-y: visible;
+    overflow-x: hidden;
+    padding: 16px;
+    padding-bottom: 60px;
+    box-sizing: border-box;
   }
 
-  .form-bookmark{
-    top: 60px;
+  .form-bookmark {
+    top: 80px;
     right: 20px;
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
+    z-index: 10;
   }
+  
   .close-btn {
+    position: fixed;
     top: 10px;
     right: 10px;
+    background: var(--primary-color);
+    z-index: 10;
   }
+  
   .job-info-form {
-    padding: 12px;
-    gap: 16px;
-    border-bottom: 3px solid var(--border-color);
+    padding: 16px;
+    gap: 12px;
   }
+  
   .job-header-form {
     flex-direction: row;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
   }
+  
   .job-header-left {
     width: 100%;
   }
+  
   .job-header-info {
-    margin-top: 10px;
-    gap: 6px;
+    gap: 4px;
   }
+  
   .job-logo-form {
-    width: 75px;
-    height: 75px;
-    min-width: 56px;
-    min-height: 56px;
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    min-height: 64px;
   }
+  
   .job-title-form {
-    font-size: 1.25rem;
-  }
-  .job-company-form {
     font-size: 1.1rem;
-    color: var(--text-muted);
   }
+  
+  .job-company-form {
+    font-size: 0.9rem;
+  }
+  
   .job-detail-item-form {
     font-size: 0.8rem;
-    padding: 4px 8px;
+    padding: 5px 8px;
   }
-  .job-details-row{
-    align-items: flex-start;
-    flex-wrap: wrap;
+  
+  .job-details-row {
     flex-direction: row;
+    margin-top: 12px;
+    gap: 8px;
   }
+  
+  .details-container {
+    padding: 16px;
+  }
+  
+  .job-description-title,
+  .job-skills-title,
+  .job-tags-title {
+    font-size: 1rem;
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+  
+  .job-description-content {
+    font-size: 0.9rem;
+  }
+  
+  .application-form {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .application-form input,
+  .application-form textarea,
+  .application-form select {
+    box-sizing: border-box;
+  }
+  
+  .application-form-title {
+    font-size: 1.1rem;
+  }
+  
 }

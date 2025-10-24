@@ -40,11 +40,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const formLeftDiv = document.createElement("div");
     formLeftDiv.classList.add("formLeftDiv");
+    leftDivContent(job, formLeftDiv);
 
     const closeBtn = document.createElement("button");
     const spanInner = document.createElement("span");
-    spanInner.classList.add("material-symbols-outlined");
-    spanInner.textContent = "close";
+    spanInner.classList.add("close-btn-inner");
+    spanInner.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+    Back
+    `;
 
     closeBtn.classList.add("close-btn");
     closeBtn.appendChild(spanInner);
@@ -56,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const formRightDiv = document.createElement("div");
     formRightDiv.classList.add("formRightDiv");
+    rightDivContent(job, formRightDiv);
 
     lowerDiv.appendChild(formLeftDiv);
     lowerDiv.appendChild(formRightDiv);
@@ -63,6 +68,57 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(blurDiv);
   });
 });
+
+function rightDivContent(job, formRightDiv) {
+  formRightDiv.innerHTML = `
+    <form class="application-form">
+      <h2 class="application-form-title">Apply for ${job.title}</h2>
+      <label for="full-name">Full Name <span class="required">*</span></label>
+      <input type="text" id="full-name" name="full-name" required />
+      <label for="email">Email Address <span class="required">*</span></label>
+      <input type="email" id="email" name="email" required />
+      <label for="resume">Resume <span class="required">*</span></label>
+      <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required />
+      <label for="cover-letter">Cover Letter <span class="required">*</span></label>
+      <textarea id="cover-letter" name="cover-letter" rows="4" required></textarea>
+      <label for="note">Additional Note</label>
+      <textarea id="note" name="note" rows="3"></textarea>
+      <label for="experience-level">Experience Level <span class="required">*</span></label>
+      <select id="experience-level" name="experience-level" required>
+        <option value="" disabled selected>Select your experience level</option>
+        <option value="entry-level">Entry Level</option>
+        <option value="mid-level">Mid Level</option>
+        <option value="senior-level">Senior Level</option>
+      </select>
+      <button type="submit">Submit Application</button>
+    </form>
+  `;
+}
+
+function leftDivContent(job, formLeftDiv) {
+  formLeftDiv.innerHTML = `
+  <div class="details-container">
+    <h2 class="job-description-title">Job Description</h2>
+    <p class="job-description-content">${job.description}</p>
+    <h2 class="job-skills-title">Required Skills</h2>
+    <ul class="job-skills-list">
+      ${job.skills.map(skill => `<li class="job-skill">${skill}</li>`).join("")}
+    </ul>
+
+    <h2 class="job-tags-title">Tags:</h2>
+    <div class="job-tags-container">
+      ${job.tags.map(tag => `<span class="job-tag">${tag}</span>`).join("")}
+    </div> 
+
+    <a href="${job.website}" target="_blank" class="companyWebsite">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-icon lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+      Visit Company Website
+    </a>
+  </div>
+  `
+}
+
+
 
 function upperDivContent(job, upperDiv) {
   upperDiv.innerHTML = `
