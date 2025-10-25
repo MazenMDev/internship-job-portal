@@ -141,8 +141,10 @@ h1 {
   box-sizing: border-box;
 }
 .submit:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--secondary-color) !important;
   transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  color: #fff;
 }
 .submit:active {
   transform: translateY(0);
@@ -232,6 +234,7 @@ h1 {
 .container .gender-box {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.4rem;
 }
 .gender-label {
