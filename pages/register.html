@@ -56,30 +56,48 @@
       <h1 id="title">Join Us!</h1>
       <form id="form">
         <div class="inp reg">
-          <label for="fname">First Name</label>
-          <input type="text" name="fname" id="fname" placeholder="First Name" required class="holder" />
+          <input type="text" name="fname" id="fname" required class="holder" />
+          <label for="fname" class="reg-label">First Name</label>
         </div>
         <div class="inp reg">
-          <label for="lname">Last Name</label>
-          <input type="text" name="lname" id="lname" placeholder="Last Name" required class="holder" />
+          <input type="text" name="lname" id="lname" required class="holder" />
+          <label for="lname" class="reg-label">Last Name</label>
         </div>
         <div class="inp reg">
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email" placeholder="example@email.com" required class="holder" />
+          <input type="email" name="email" id="email" required class="holder" />
+          <label for="email" class="reg-label">Email</label>
         </div>
         <div class="inp reg">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" required class="holder" placeholder="At least 8 characters" />
+          <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          class="holder"
+          />
+          <label for="password" class="reg-label">Password</label>
         </div>
         <div class="inp reg">
-          <label for="confirm">Confirm Password</label>
-          <input type="password" id="confirm" name="confirm" required class="holder" placeholder="Repeat your password" />
+          <input
+          type="password"
+          id="confirm"
+          name="confirm"
+          required
+          class="holder"
+          />
+          <label for="confirm" class="reg-label">Confirm Password</label>
         </div>
         <div class="inp reg gender-box">
-          <label>Gender:</label>
+          <label class="gender-label">Gender:</label>
           <div class="gender-options">
-            <label><input type="radio" name="gender" value="male" required /> Male</label>
-            <label><input type="radio" name="gender" value="female" required /> Female</label>
+            <label
+              ><input type="radio" name="gender" value="male" required />
+              Male</label
+            >
+            <label
+              ><input type="radio" name="gender" value="female" required />
+              Female</label
+            >
           </div>
         </div>
         <div class="inp">
@@ -96,4 +114,4 @@
     <script src="../assets/js/themeToggle.js"></script>
     <script src="../assets/js/logReg.js"></script>
   </body>
-  </html>
+</html>

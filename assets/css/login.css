@@ -198,38 +198,55 @@ h1 {
 }
 
 /* Generic labels for inputs on login/register pages */
-.container .inp label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  margin-left: 0.3rem;
-  display: inline-block;
-  margin-bottom: 0.25rem;
-}
-
 .reg {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  text-align: left;
+  position: relative;
+  margin-top: 20px;
 }
 
-.reg label {
+.inp{
+  margin-top: 20px;
+}
+
+.inp .reg-label {
+  z-index: 1;
+  position: absolute;
+  left: 0px;
+  top: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin: 0 0 0.35rem 0.3rem;
+}
+
+.reg .reg-label {
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-muted);
   margin-left: 0.3rem;
 }
 
-.gender-box {
+.container .gender-box {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 }
+.gender-label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-bottom: 0.3rem;
+}
+
+.gender-box label {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-bottom: 0.3rem;
+}
 
 .gender-options {
+  margin-top: 30;
   display: flex;
-  gap: 1rem;
+  gap: 5rem !important;
   margin-left: 5px;
 }
 
