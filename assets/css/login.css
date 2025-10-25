@@ -95,6 +95,8 @@ form {
   flex-direction: column;
   gap: 1.2rem;
   border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
 }
 
 .separator {
@@ -118,6 +120,7 @@ h1 {
   background: var(--box-color);
   color: var(--text-color);
   transition: border-color 0.3s ease, border 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .holder:focus {
@@ -139,6 +142,7 @@ h1 {
   width: 100%;
   height: 3rem;
   box-sizing: border-box;
+  margin-bottom: -3rem;
 }
 .submit:hover {
   background-color: var(--secondary-color) !important;
@@ -202,14 +206,14 @@ h1 {
 /* Generic labels for inputs on login/register pages */
 .reg {
   position: relative;
-  margin-top: 10px;
+  scale: calc(0.85);
 }
 
 .inp {
   margin-top: 20px;
 }
 
-.inp .reg-label {
+.inp label {
   z-index: 1;
   position: absolute;
   left: 0px;
@@ -217,7 +221,7 @@ h1 {
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-muted);
-  margin: 0 0 0.35rem 0.3rem;
+  margin: 0 0.35rem 0.3rem;
 }
 
 .reg .reg-label {
@@ -228,7 +232,7 @@ h1 {
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-muted);
-  margin: 0 0 0.35rem 0.3rem;
+  margin: 0 0.35rem 0.3rem;
 }
 
 .container .gender-box {
@@ -498,6 +502,7 @@ label {
   }
 
   form {
+    margin-top: 1rem;
     padding: 1rem;
     gap: 1rem;
   }
