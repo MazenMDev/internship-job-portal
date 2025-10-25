@@ -69,6 +69,26 @@
   min-height: 0;
 }
 
+.formLeftDiv::-webkit-scrollbar,
+.formRightDiv::-webkit-scrollbar,
+.details-container::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--border-color);
+}
+.formLeftDiv::-webkit-scrollbar-thumb,
+.formRightDiv::-webkit-scrollbar-thumb,
+.details-container::-webkit-scrollbar-thumb {
+  background-color: var(--scrollBar);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.formLeftDiv::-webkit-scrollbar-thumb:hover,
+.formRightDiv::-webkit-scrollbar-thumb:hover,
+.details-container::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text-muted);
+}
+
 .close-btn {
   position: absolute;
   top: -20px;
