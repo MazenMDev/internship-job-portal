@@ -1,9 +1,11 @@
 .profile-container {
   width: 80%;
+  position: relative;
   max-width: 800px;
   margin: 150px auto;
   background-color: var(--background-color);
   border-radius: 20px;
+  padding: 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
@@ -12,9 +14,16 @@
   background-color: var(--primary-color);
   height: 120px;
   position: relative;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  padding: 20px;
 }
 
 .profile-section {
+  margin-top: 120px;
   padding: 20px;
   position: relative;
 }
