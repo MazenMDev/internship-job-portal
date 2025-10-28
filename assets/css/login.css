@@ -224,11 +224,11 @@ h1 {
   margin: 0 0.35rem 0.3rem;
 }
 
-.reg .reg-label {
+.reg-label {
   z-index: 1;
   position: absolute;
   left: 0px;
-  top: 20px;
+  top: 15px;
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-muted);
@@ -520,5 +520,22 @@ label {
 
   #changePage {
     font-size: 0.85rem;
+  }
+
+  .rightCont {
+    margin: 0;
+  }
+  .container {
+    scale: calc(1.05);
+  }
+
+  #form {
+    padding: 30px 0;
+  }
+  .reg {
+    margin-bottom: 5px;
+  }
+  .reg label {
+    font-size: 0.9rem !important;
   }
 }
