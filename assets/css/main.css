@@ -742,8 +742,9 @@ form {
     border-top: 1px solid var(--border-color);
     border-bottom: none;
     justify-content: center;
-    padding: 8px 0;
+    padding: 8px 0 !important;
     height: auto;
+    transform: translateY(1px);
   }
 
   .logoContainer,
@@ -891,8 +892,9 @@ form {
     border-top: 1px solid var(--border-color);
     border-bottom: none;
     justify-content: center;
-    padding: 6px 0;
+    padding: 6px 0 !important;
     height: auto;
+    transform: translateY(-5px);
   }
 
   .logoContainer,
