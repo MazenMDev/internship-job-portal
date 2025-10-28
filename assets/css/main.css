@@ -239,6 +239,9 @@ a.currentPage span.material-symbols-outlined {
 .nav-bar.scrolled {
   background: var(--nav-bar-scroll);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 8px 16px;
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
 }
 
 .mid-nav {
