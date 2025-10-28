@@ -20,7 +20,7 @@
   min-width: 0;
 }
 
-.right > h1 {
+.right h1 {
   margin: 0;
   font-size: clamp(36px, 6vw, 64px);
   line-height: 1.02;
@@ -34,6 +34,7 @@
   line-height: 1.5;
   margin-top: -20px;
   color: var(--text-muted);
+  text-align: left;
 }
 
 .main-img {
@@ -328,8 +329,8 @@
     gap: 30px;
   }
 
-  .right > h1 {
-    font-size: 32px;
+  .right h1 {
+    font-size: 40px;
   }
 
   .right p {

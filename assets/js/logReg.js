@@ -8,7 +8,7 @@ function updateLabels(input, label, isActive) {
 
   if (active) {
     spans.forEach((span) => {
-      span.style.transform = "translateY(-45px)";
+      span.style.transform = "translateY(-35px)";
       span.style.color = "var(--primary-color)";
     });
     if (restSpan) {
