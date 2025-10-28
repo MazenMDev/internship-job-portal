@@ -54,6 +54,10 @@
   scroll-behavior: smooth;
 }
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   background-color: var(--background-color);
   color: var(--text-color);
@@ -428,7 +432,6 @@ body.modal-open #popup {
   border-radius: 20px;
   box-shadow: 0px 30px 50px var(--box-shadow);
   transition: all 0.2s ease-in-out;
-
 }
 #open-btn {
   display: block;
@@ -878,6 +881,7 @@ form {
     border-bottom: none;
     justify-content: center;
     padding: 6px 0;
+    height: auto;
   }
 
   .logoContainer,
