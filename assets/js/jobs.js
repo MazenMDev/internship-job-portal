@@ -9,7 +9,7 @@ const categoryIcons = {
   "Marketing & Sales": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-dollar-sign-icon lucide-badge-dollar-sign"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>`,
   "Finance & Accounting": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-landmark-icon lucide-landmark"><path d="M10 18v-7"/><path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M3 22h18"/><path d="M6 18v-7"/></svg>`,
   "Human Resources": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>`,
-  Engineering: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-ruler-icon lucide-pencil-ruler"><path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"/><path d="m8 6 2-2"/><path d="m18 16 2-2"/><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>`,
+  "Engineering": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-ruler-icon lucide-pencil-ruler"><path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"/><path d="m8 6 2-2"/><path d="m18 16 2-2"/><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>`,
   "Science & Healthcare": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain-icon lucide-brain"><path d="M12 18V5"/><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/><path d="M18 18a4 4 0 0 0 2-7.464"/><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/><path d="M6 18a4 4 0 0 1-2-7.464"/><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/></svg>`,
   "Architecture & Construction": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hard-hat-icon lucide-hard-hat"><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M14 6a6 6 0 0 1 6 6v3"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><rect x="2" y="15" width="20" height="4" rx="1"/></svg>`,
   "Education & Training": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap-icon lucide-graduation-cap"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>`,
@@ -18,7 +18,7 @@ const categoryIcons = {
   "Hospitality & Tourism": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tram-front-icon lucide-tram-front"><rect width="16" height="16" x="4" y="3" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="m8 19-2 3"/><path d="m18 22-2-3"/><path d="M8 15h.01"/><path d="M16 15h.01"/></svg>`,
   "Agriculture & Environment": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sprout-icon lucide-sprout"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"/><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"/><path d="M5 21h14"/></svg>`,
   "Manufacturing & Logistics": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-factory-icon lucide-factory"><path d="M12 16h.01"/><path d="M16 16h.01"/><path d="M3 19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5a.5.5 0 0 0-.769-.422l-4.462 2.844A.5.5 0 0 1 15 10.5v-2a.5.5 0 0 0-.769-.422L9.77 10.922A.5.5 0 0 1 9 10.5V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/><path d="M8 16h.01"/></svg>`,
-  Other: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-panel-left-icon lucide-layout-panel-left"><rect width="7" height="18" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/></svg>`,
+  "Other": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-panel-left-icon lucide-layout-panel-left"><rect width="7" height="18" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/></svg>`,
 };
 
 // dummy jobs until we make the backend
@@ -117,7 +117,7 @@ let jobListings = [
     salary: "$1000-$1200",
     experience: "Student",
     location: "Houston, TX",
-    datePosted: "2025-10-03 09:30:00",
+    datePosted: "2025-10-29 17:32:00",
     logo: "../assets/imgs/dummyJobCompanyImages/bechtel.png",
     description:
       "Bechtel is offering an internship opportunity for aspiring Civil Engineers looking to gain real-world experience in infrastructure development. As an intern, you will assist project managers and senior engineers in drafting designs, inspecting construction sites, and preparing reports. You will learn how to use tools like AutoCAD, perform basic structural analysis, and understand project documentation processes. This internship provides an excellent foundation for students passionate about construction, design, and sustainable engineering practices.",
@@ -183,6 +183,7 @@ function timeSince(date) {
   // then calculate the time since posted
   const postedDate = new Date(date.replace(" ", "T"));
   const currentTime = new Date();
+  //subtracting the two dates gives milliseconds time and so we divide it by 1000 to get seconds
   const seconds = Math.floor((currentTime - postedDate) / 1000);
 
   //put number of seconds of each label to use for the for loop after it
@@ -196,6 +197,10 @@ function timeSince(date) {
   ];
 
   for (const interval of intervals) {
+    if (interval.label === "second") {
+      return "just now";
+    }
+    
     let count = Math.floor(seconds / interval.seconds);
     if (count >= 1) {
       return `${count} ${interval.label}${count > 1 ? "s" : ""} ago`;
@@ -211,10 +216,7 @@ function getSVG(category) {
       return categoryIcons[parent] || categoryIcons["Other"];
     }
 
-    if (
-      Array.isArray(jobCategories[parent]) &&
-      jobCategories[parent].includes(category)
-    ) {
+    if (jobCategories[parent].includes(category)) {
       return categoryIcons[parent] || categoryIcons["Other"];
     }
   }
@@ -248,7 +250,13 @@ function renderPage(page) {
   //show the indexes of the jobs being displayed and the current page of total pages
   const totalPages = Math.ceil(jobListings.length / jobsPerPage);
   const startJobNum = (page - 1) * jobsPerPage + 1;
-  const endJobNum = Math.min(page * jobsPerPage, jobListings.length);
+  let endJobNum;
+  if (page === totalPages) {
+    endJobNum = jobListings.length;
+  } else {
+    endJobNum = startJobNum + jobsPerPage - 1;
+  }
+
   const jobResult = document.createElement("h1");
   jobResult.textContent = `Showing ${startJobNum}-${endJobNum} of ${jobListings.length} results (Page ${page} of ${totalPages})`;
   jobResult.id = "job-results";
@@ -259,6 +267,7 @@ function renderPage(page) {
   filterButton.innerHTML = `
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal-icon lucide-sliders-horizontal"><path d="M10 5H3"/><path d="M12 19H3"/><path d="M14 3v4"/><path d="M16 17v4"/><path d="M21 12h-9"/><path d="M21 19h-5"/><path d="M21 5h-7"/><path d="M8 10v4"/><path d="M8 12H3"/></svg>
   `;
+
   filterButton.addEventListener("click", function () {
     const filterbar = document.querySelector(".job-filter-sidebar");
     filterbar.style.display = "block";
@@ -361,6 +370,7 @@ function showError(message) {
 function createPageButton(num) {
   const btn = document.createElement("button");
   btn.classList.add("page-btn");
+  btn.classList.add("page-btn-num");
   btn.textContent = num;
   if (num === currentPage) btn.classList.add("active");
   btn.addEventListener("click", () => {
@@ -380,9 +390,8 @@ function createDots() {
 
 function updatePages() {
   // remove all existing numbered buttons and dots except Prev and Next
-  document
-    .querySelectorAll(".page-btn:not(.prevP):not(.nextP), .dots")
-    .forEach((el) => el.remove());
+  document.querySelectorAll(".dots").forEach((el) => el.remove());
+  document.querySelectorAll(".page-btn-num").forEach((el) => el.remove());
 
   // Calculate the number of pages
   const totalPages = Math.ceil(jobListings.length / jobsPerPage);
@@ -649,6 +658,11 @@ document.addEventListener("DOMContentLoaded", () => {
     manageSlider();
   });
 });
+
+
+
+
+// THESE FUNCTIONS WILL BE REPLACED LATER WITH SQL QUERIES
 
 // FILTERING FUNCTION
 function searchJobs(keyword) {
