@@ -23,23 +23,40 @@
             
         </div>
         <div class="container-bottom">
-            <div class="container-bottom-left">
-                <label for="descreption">descreption</label>
-                <input type="text" class="descrep">
-                <label for="location">location</label>
-                <input type="text" class="loc">
-                <label for="job">job</label>
+            <div class="container-bottom-left">  
+                <div class="left">
+                    <label for="descrip" class="des">description</label> <br>
+                    <input type="text" class="descrip"> <br>
+                    <label for="loc" class="location">location</label><br>
+                    <input type="text" class="loc"><br>
+                    <label for="link">Website Link</label><br>
+                    <input type="text" class="link">
+                </div>
+                <div class="right">
+                    <label for="job" class="des">Job</label> <br>
+                    <input type="text" class="job"> <br>
+                    <label for="salary" class="location">salary</label><br>
+                    <input type="text" class="salary"><br>
+                </div>
             </div>
             <div class="container-bottom-right">
                 <aside>
                     <fieldset class="jop-type">
                     <legend class="job-type-name"></legend>
-                        <label for="job-type">part-time</label>
-                        <input type="checkbox" class="job-type-input">
+                        <details open class="filter-group-box category-filter-group">
+                            <summary class="filter-group-legend filter-group-summary">job-type</summary>
+                                 <label for="job-type">full-time</label>
+                                <input type="checkbox" class="job-type-input">
+                                 <label for="job-type">part-time</label>
+                                <input type="checkbox" class="job-type-input">
+                        </details>
                     </fieldset>
-                    <details open class="filter-group-box category-filter-group">
-                        <summary class="filter-group-legend filter-group-summary">Category</summary>
-                    </details>
+                    <fieldset>
+                        <details open class="filter-group-box category-filter-group">
+                                <summary class="filter-group-legend filter-group-summary">Category</summary>
+                        </details>
+                    </fieldset>
+                    <button class="add-button">Add</button>
                 </aside>
                 
             </div>

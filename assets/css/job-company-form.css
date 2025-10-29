@@ -26,10 +26,12 @@ body{
     border-radius: 6px;
 }
 .container-bottom-left{
+    display: flex;
     width: 73%;
     height: 100%;
      background: var(--box-color);
     border-radius: 6px;
+    padding: 10px;
 }
 .container-bottom-right{
     width: 25%;
@@ -37,4 +39,25 @@ body{
     background: var(--box-color);
     border-radius: 6px;
     margin-left: 2%;
+    padding: 10px;
+}
+.des{
+    margin-left: 5px;
+}
+.descrip{
+    width: 250px;
+    height: 100px;
+}
+.location{
+    margin-left: 5px;
+}
+.loc{
+    width: 250px;
+}
+.link{
+    width: 250px;
+}
+.salary{
+    width: 200px;
+    margin-right: 0px;
 }
