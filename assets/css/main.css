@@ -239,6 +239,9 @@ a.currentPage span.material-symbols-outlined {
 .nav-bar.scrolled {
   background: var(--nav-bar-scroll);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 8px 20px;
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
 }
 
 .mid-nav {
@@ -739,8 +742,9 @@ form {
     border-top: 1px solid var(--border-color);
     border-bottom: none;
     justify-content: center;
-    padding: 8px 0;
+    padding: 8px 0 !important;
     height: auto;
+    transform: translateY(1px) !important;
   }
 
   .logoContainer,
@@ -888,8 +892,9 @@ form {
     border-top: 1px solid var(--border-color);
     border-bottom: none;
     justify-content: center;
-    padding: 6px 0;
+    padding: 6px 0 !important;
     height: auto;
+    transform: translateY(1px) !important;
   }
 
   .logoContainer,

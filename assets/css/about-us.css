@@ -258,14 +258,19 @@
   padding: 24px;
   border-radius: 10px;
   background-color: var(--background-color);
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .info:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px var(--box-shadow-small);
+  border: 1px solid var(--primary-color);
+  transform: scale(1.015);
+  box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.2);
+
   border-color: var(--primary-color);
+  transition: all 0.13s ease;
 }
 
 .info h3 {
