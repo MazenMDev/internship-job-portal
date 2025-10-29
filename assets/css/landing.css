@@ -134,7 +134,55 @@
   opacity: 1;
 }
 
-/* Recent Jobs ..hero */
+/* Featured in logos */
+.featured-logos {
+  margin: 80px auto 60px;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.featured-logos h2 {
+  font-size: 2rem;
+  color: var(--text-muted);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.logo-list img {
+  width: 120px;
+  height: auto;
+  filter: brightness(0);
+  opacity: 0.5;
+  transition: all 0.4s ease;
+}
+
+.logo-list img:hover {
+  filter: brightness(1);
+  opacity: 1;
+  transition: all 0.4s ease;
+}
+
+body.darkmode .logo-list img {
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+body.darkmode .logo-list img:hover {
+  opacity: 1;
+}
+
+/* Recent Jobs  */
 .recent-jobs {
   background-color: var(--box-color);
   border-radius: 12px;
@@ -371,5 +419,9 @@
 
   .learners > div {
     font-size: 14px;
+  }
+
+  .featured-logos {
+    margin: 0;
   }
 }
