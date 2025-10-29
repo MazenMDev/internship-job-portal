@@ -147,9 +147,8 @@
   gap: 50px;
   flex-wrap: wrap;
 }
-
 .job-item {
-  background-color: var(--background-color);
+  background-color: var(--box-color);
   border-radius: 12px;
   padding: 20px;
   min-width: 300px;
@@ -157,13 +156,15 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease, border 0.3s ease;
   border: 1px solid transparent;
 }
+
 .job-item:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.3);
   border: 1px solid var(--primary-color);
 }
 
@@ -227,7 +228,7 @@
   .right h1 {
     font-size: 56px;
   }
-  .right p{
+  .right p {
     font-size: 20px;
   }
   .hero {
@@ -244,7 +245,7 @@
     display: flex;
     flex-wrap: nowrap;
   }
-  .learners img{
+  .learners img {
     width: 50px;
     height: 50px;
     margin-left: -20px;

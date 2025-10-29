@@ -27,7 +27,7 @@
 }
 
 .darkmode {
-  --background-color: #050d11ff;
+  --background-color: #121212;
   --text-color: #f3f4f6;
   --text-muted: #9ca3af;
 
@@ -37,17 +37,17 @@
   --border-color: #334155;
   --sign-out: rgba(255, 0, 0, 0.63);
 
-  --box-color: #091721ff;
+  --box-color: #1e1e1e;
   --formJobColor: 30, 41, 59;
   --box-shadow: none;
   --box-shadow-small: none;
   --nav-bar-scroll: rgba(5, 13, 17, 0.95);
 
-  --primary-color: #3282b8;
+  --primary-color: #028a96;
   --primary-color-rgb: 50, 130, 184;
 
   --brightness: 1;
-  --secondary-color: #0f4c75;
+  --secondary-color: #0c7484;
 }
 
 * {

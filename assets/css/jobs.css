@@ -140,11 +140,14 @@
   flex-direction: column;
   gap: 20px;
   min-height: 200px;
+  border: 1px solid transparent;
   transition: all 0.3s ease;
 }
 .job-card:hover {
+  border: 1px solid var(--primary-color);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: all 0.1s ease-in-out;
 }
 
 .job-date {
