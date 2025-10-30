@@ -219,9 +219,15 @@ body.darkmode .logo-list img:hover {
   align-items: center;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.3s ease, border 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
   border: 1px solid transparent;
+  transition: all 0.5s;
+}
+
+.job-item.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .job-item:hover {
