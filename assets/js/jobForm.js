@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const upperDiv = document.createElement("div");
     upperDiv.classList.add("upperDiv");
-    formDiv.appendChild(upperDiv);
+    formDiv.ndChild(upperDiv);
 
     const lowerDiv = document.createElement("div");
     lowerDiv.classList.add("lowerDiv");
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const formLeftDiv = document.createElement("div");
     formLeftDiv.classList.add("formLeftDiv");
-    leftDivContent(job, formLeftDiv);
+    leftDivContentappe(job, formLeftDiv);
 
     const closeBtn = document.createElement("button");
     const spanInner = document.createElement("span");
