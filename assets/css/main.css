@@ -67,6 +67,10 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 .iconForNav {
   width: 20px;
   margin-bottom: 2px;
@@ -1115,9 +1119,9 @@ footer {
     box-sizing: border-box;
   }
 
-
-  footer{
+  footer {
     grid-template-columns: 1fr 1fr;
     padding: 20px;
+    padding-bottom: 80px;
   }
 }

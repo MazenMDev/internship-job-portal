@@ -594,8 +594,15 @@ button[type="submit"]:active {
 }
 
 @media (max-width: 550px) {
+  .faq-card {
+    padding: 15px 20px;
+  }
+  .faq-decorative-btn {
+    right: 15px;
+  }
   .card-question {
     gap: 10px;
+    padding-right: 50px;
   }
   .card-question span {
     font-size: 1rem;
@@ -603,7 +610,7 @@ button[type="submit"]:active {
   .card-question p {
     font-size: 0.875rem;
   }
-  .card-answer{
+  .card-answer {
     font-size: 0.875rem;
   }
 }

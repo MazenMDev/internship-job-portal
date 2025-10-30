@@ -367,6 +367,7 @@ body.darkmode .logo-list img:hover {
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow: hidden;
 }
 .step-img::after {
   content: "";
@@ -548,12 +549,12 @@ body.darkmode .logo-list img:hover {
     width: 75%;
   }
   .step-img::after {
-    width: 500px;
-    height: 500px;
+    width: min(90vw, 420px);
+    height: min(90vw, 420px);
   }
   .step-img::before {
-    width: 400px;
-    height: 400px;
+    width: min(75vw, 360px);
+    height: min(75vw, 360px);
   }
 }
 
