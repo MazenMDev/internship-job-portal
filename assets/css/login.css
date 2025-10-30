@@ -6,9 +6,10 @@
 
 body {
   font-size: 16px;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   font-family: var(--main-font-family);
 }
@@ -29,6 +30,12 @@ body {
   font-size: 20px;
   margin: 0;
   padding: 0;
+  color: var(--background-color);
+  opacity: 0.94;
+}
+.logoContainer button {
+  color: var(--background-color);
+  opacity: 0.94;
 }
 
 .container {
@@ -39,7 +46,7 @@ body {
   align-items: center;
   padding: 1rem;
   min-width: 0;
-  overflow-y: auto;
+  overflow-y: visible;
 }
 
 .rightCont {
@@ -49,7 +56,22 @@ body {
   align-items: center;
   padding: 1rem;
   min-width: 0;
-  overflow-y: auto;
+  overflow-y: visible;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+.rightCont::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to left,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  z-index: 0;
+  pointer-events: none;
 }
 
 .innerCont {
@@ -59,17 +81,20 @@ body {
   text-align: left;
   max-width: 420px;
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .rightCont h1 {
-  color: var(--primary-color);
+  color: #fff;
   font-size: 1.8rem;
   text-align: center;
   margin-bottom: 0.8rem;
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .rightCont p {
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.95rem;
   text-align: center;
   margin-bottom: 1rem;
@@ -142,7 +167,8 @@ h1 {
   width: 100%;
   height: 3rem;
   box-sizing: border-box;
-  margin-bottom: -3rem;
+  /* avoid negative margins that cause overlap/clipping on larger screens */
+  margin-bottom: 0;
 }
 .submit:hover {
   background-color: var(--secondary-color) !important;
@@ -255,7 +281,7 @@ h1 {
 }
 
 .gender-options {
-  margin-top: 30;
+  margin-top: 30px;
   display: flex;
   gap: 5rem !important;
   margin-left: 5px;
@@ -306,8 +332,9 @@ label {
   display: none;
   animation: moveUp 0.2s ease-in-out;
 }
-#eyeIcon1 , #eyeIcon2 {
-  top:12px;
+#eyeIcon1,
+#eyeIcon2 {
+  top: 12px;
   right: 20px;
 }
 .eyeIcon:hover {
@@ -315,7 +342,7 @@ label {
   color: var(--primary-color);
 }
 
-.eyeIcon svg{
+.eyeIcon svg {
   width: 100%;
   height: 100%;
 }
@@ -349,10 +376,11 @@ label {
   }
 }
 
-
 @media (min-width: 1024px) {
   body {
     font-size: 16px;
+    overflow: hidden;
+    height: 100vh;
   }
 
   .container {
@@ -462,6 +490,7 @@ label {
   }
 
   .rightCont {
+    margin: 0 !important;
     flex: unset;
     width: 100%;
     margin-top: 70px;
@@ -471,9 +500,23 @@ label {
     overflow-y: visible;
   }
 
+  .rightCont::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to left,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+    z-index: 0;
+  }
+
   .innerCont {
     width: 100%;
     max-width: 100%;
+    position: relative;
+    z-index: 1;
   }
 
   .innerCont h1 {
