@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../assets/css/main.css" />
     <link rel="stylesheet" href="../assets/css/landing.css" />
     <link rel="stylesheet" href="../assets/css/profile.css" />
+    <link rel="stylesheet" href="../assets/css/footer.css" />
     <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png" />
     <link
       rel="stylesheet"
@@ -335,7 +336,7 @@
             <div class="step-img">
               <!-- temporary image until we find a suitable one -->
               <img
-                src="../assets/imgs/How it works/best_iphone_image-removebg-preview.png"
+                src="../assets/imgs/How it works (dummy)/best_iphone_image-removebg-preview.png"
                 alt="iPhone app representation of Create Account"
               />
             </div>
@@ -346,7 +347,7 @@
             <div class="step-img">
               <!-- temporary image until we find a suitable one -->
               <img
-                src="../assets/imgs/How it works/best_iphone_image-removebg-preview.png"
+                src="../assets/imgs/How it works (dummy)/best_iphone_image-removebg-preview.png"
                 alt="iPhone app representation of Create Account"
               />
             </div>
@@ -377,7 +378,7 @@
             <div class="step-img">
               <!-- temporary image until we find a suitable one -->
               <img
-                src="../assets/imgs/How it works/best_iphone_image-removebg-preview.png"
+                src="../assets/imgs/How it works (dummy)/best_iphone_image-removebg-preview.png"
                 alt="iPhone app representation of Create Account"
               />
             </div>
@@ -519,6 +520,15 @@
         </div>
       </form>
     </div>
+    <!-- temporary way to link footer -->
+    <div id="footer"></div>
+    <script>
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
     <script>
       const steps = document.querySelectorAll(".step");
       window.addEventListener("scroll", checkSteps);
