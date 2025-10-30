@@ -592,3 +592,18 @@ button[type="submit"]:active {
     font-size: 24px;
   }
 }
+
+@media (max-width: 550px) {
+  .card-question {
+    gap: 10px;
+  }
+  .card-question span {
+    font-size: 1rem;
+  }
+  .card-question p {
+    font-size: 0.875rem;
+  }
+  .card-answer{
+    font-size: 0.875rem;
+  }
+}

@@ -1114,4 +1114,10 @@ footer {
     transform: none;
     box-sizing: border-box;
   }
+
+
+  footer{
+    grid-template-columns: 1fr 1fr;
+    padding: 20px;
+  }
 }
