@@ -128,5 +128,5 @@ form.addEventListener("submit", (e) => {
   }
 
   errorMsg.textContent = "";
-
+  form.submit();
 });

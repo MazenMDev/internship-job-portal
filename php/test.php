@@ -1,35 +1,45 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $fname = test_input($_POST['fname']);
-    $lname = test_input($_POST['lname']);
-    $email = test_input($_POST["email"]);
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $emailErr = "Invalid email format";
-    }
-    $password = test_input($_POST['password']);
-    $confirm = test_input($_POST['confirm']);
-    $gender = test_input($_POST['gender']);
+// Database connection
+$conn = new mysqli("localhost", "root", "", "jobconnect-cs283project");
 
-    echo "First Name: " . $fname . "<br>";
-    echo "Last Name: " . $lname . "<br>";
-    if (isset($emailErr)) {
-        echo $emailErr . "<br>";
-    } else {
-        echo "Email: " . $email . "<br>";
-    }
-    echo "Password: " . $password . "<br>";
-    echo "Confirm Password: " . $confirm . "<br>";
-    echo "Gender: " . $gender . "<br>";
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
+$fname = $_POST['fname'];
+$lname = $_POST['lname'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+$confirm = $_POST['confirm'];
+$gender = $_POST['gender'];
+$isCompany = 0; // Default 0 for regular users
+
+if ($password !== $confirm) {
+  die("Passwords do not match!");
+}
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  die("Invalid email format!");
+}
+
+$emailExistsQuery = "SELECT * FROM users WHERE Email='$email'";
+$result = $conn->query($emailExistsQuery);
+if ($result->num_rows > 0) {
+  die("Email already registered!");
+}
+
+// Hash the password
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+// Insert into database
+$sql = "INSERT INTO users (First_Name, Last_Name, Email, Password, Gender , is_Company) 
+        VALUES ('$fname', '$lname', '$email', '$hashedPassword', '$gender', '$isCompany')";
+
+if ($conn->query($sql) === TRUE) {
+  echo "Registration successful!";
+  
 } else {
-    echo "No form data received.";
+  echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-
+$conn->close();
 ?>
