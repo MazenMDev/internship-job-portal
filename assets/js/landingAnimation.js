@@ -1,8 +1,10 @@
 const steps = document.querySelectorAll(".step");
 window.addEventListener("scroll", check);
+window.addEventListener("load", check); // ensure initial state on page load
 function check() {
   checkJobs();
   checkSteps();
+  checkBenefits();
 }
 function checkJobs() {
   const triggerBottom = (window.innerHeight / 5) * 4;
@@ -24,6 +26,19 @@ function checkSteps() {
       step.classList.add("show");
     } else {
       step.classList.remove("show");
+    }
+  });
+}
+
+function checkBenefits() {
+  const triggerBottom = (window.innerHeight / 5) * 4;
+  const benefits = document.querySelectorAll(".benefit-item");
+  benefits.forEach((card) => {
+    const top = card.getBoundingClientRect().top;
+    if (top < triggerBottom) {
+      card.classList.add("show");
+    } else {
+      card.classList.remove("show");
     }
   });
 }
