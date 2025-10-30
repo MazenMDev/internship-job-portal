@@ -519,6 +519,22 @@
         </div>
       </form>
     </div>
+    <script>
+      const steps = document.querySelectorAll(".step");
+      window.addEventListener("scroll", checkSteps);
+      checkSteps();
+      function checkSteps() {
+        const triggerBottom = (window.innerHeight / 5) * 4;
+        steps.forEach((step) => {
+          const stepTop = step.getBoundingClientRect().top;
+          if (stepTop < triggerBottom) {
+            step.classList.add("show");
+          } else {
+            step.classList.remove("show");
+          }
+        });
+      }
+    </script>
     <script src="../assets/js/navBar.js"></script>
     <script src="../assets/js/themeToggle.js"></script>
     <script src="../assets/js/popup.js"></script>

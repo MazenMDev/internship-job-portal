@@ -321,9 +321,20 @@ body.darkmode .logo-list img:hover {
   grid-template-columns: repeat(2, 1fr);
   column-gap: 60px;
   align-items: center;
+
+  opacity: 0;
+  transform: translateY(-60px) translateX(30px);
+  transition: all 1s ease;
 }
+
+/* Even items slide from the opposite side */
 .step:nth-child(even) {
-  column-gap: 100px;
+  transform: translateY(60px) translateX(-30px);
+}
+
+.step.show {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
 }
 
 .step-text {
@@ -430,7 +441,7 @@ body.darkmode .logo-list img:hover {
     column-gap: 40px;
   }
   .step:nth-child(even) {
-    column-gap: 40px; 
+    column-gap: 40px;
   }
 }
 
@@ -500,7 +511,7 @@ body.darkmode .logo-list img:hover {
     column-gap: 30px;
   }
   .step:nth-child(even) {
-    column-gap: 30px; 
+    column-gap: 30px;
   }
   .step-img::after {
     width: 300px;
@@ -516,7 +527,7 @@ body.darkmode .logo-list img:hover {
   .step {
     grid-template-columns: 1fr;
     column-gap: 20px;
-    row-gap: 16px; 
+    row-gap: 16px;
   }
   .step-img {
     grid-row: 1;
@@ -585,7 +596,7 @@ body.darkmode .logo-list img:hover {
   }
   .step {
     column-gap: 16px;
-    row-gap: 16px; 
+    row-gap: 16px;
   }
   .step-img {
     grid-row: 1;
