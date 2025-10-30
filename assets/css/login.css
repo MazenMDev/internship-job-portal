@@ -6,9 +6,10 @@
 
 body {
   font-size: 16px;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible; /* avoid body as a second scroll container */
   display: flex;
   font-family: var(--main-font-family);
 }
@@ -29,6 +30,12 @@ body {
   font-size: 20px;
   margin: 0;
   padding: 0;
+  color: var(--background-color);
+  opacity: 0.94;
+}
+.logoContainer button {
+  color: var(--background-color);
+  opacity: 0.94;
 }
 
 .container {
@@ -39,7 +46,13 @@ body {
   align-items: center;
   padding: 1rem;
   min-width: 0;
-  overflow-y: auto;
+  overflow-y: visible;
+  margin-top: -20px;
+}
+
+#form {
+  scale: calc(1.04);
+  margin: 20px;
 }
 
 .rightCont {
@@ -49,7 +62,23 @@ body {
   align-items: center;
   padding: 1rem;
   min-width: 0;
-  overflow-y: auto;
+  overflow-y: visible;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  scale: calc(1.15);
+}
+.rightCont::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to left,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  z-index: 0;
+  pointer-events: none;
 }
 
 .innerCont {
@@ -59,17 +88,20 @@ body {
   text-align: left;
   max-width: 420px;
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .rightCont h1 {
-  color: var(--primary-color);
+  color: #fff;
   font-size: 1.8rem;
   text-align: center;
   margin-bottom: 0.8rem;
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .rightCont p {
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.95rem;
   text-align: center;
   margin-bottom: 1rem;
@@ -142,7 +174,8 @@ h1 {
   width: 100%;
   height: 3rem;
   box-sizing: border-box;
-  margin-bottom: -3rem;
+  /* avoid negative margins that cause overlap/clipping on larger screens */
+  margin-bottom: 0;
 }
 .submit:hover {
   background-color: var(--secondary-color) !important;
@@ -255,7 +288,7 @@ h1 {
 }
 
 .gender-options {
-  margin-top: 30;
+  margin-top: 30px;
   display: flex;
   gap: 5rem !important;
   margin-left: 5px;
@@ -306,8 +339,9 @@ label {
   display: none;
   animation: moveUp 0.2s ease-in-out;
 }
-#eyeIcon1 , #eyeIcon2 {
-  top:12px;
+#eyeIcon1,
+#eyeIcon2 {
+  top: 12px;
   right: 20px;
 }
 .eyeIcon:hover {
@@ -315,7 +349,7 @@ label {
   color: var(--primary-color);
 }
 
-.eyeIcon svg{
+.eyeIcon svg {
   width: 100%;
   height: 100%;
 }
@@ -349,8 +383,12 @@ label {
   }
 }
 
-
 @media (min-width: 1024px) {
+  html,
+  body {
+    overflow: hidden; /* no page scrollbars on desktop */
+  }
+
   body {
     font-size: 16px;
   }
@@ -381,7 +419,7 @@ label {
 
   form {
     max-width: 420px;
-    gap: 1.3rem;
+    gap: 1.1rem; /* slightly tighter to help avoid overflow */
   }
 
   h1 {
@@ -389,12 +427,12 @@ label {
   }
 
   .holder {
-    height: 3.2rem;
+    height: 3rem;
     font-size: 1rem;
   }
 
   .submit {
-    height: 3.2rem;
+    height: 3rem;
     font-size: 1rem;
   }
 }
@@ -442,8 +480,8 @@ label {
   body {
     flex-direction: column;
     font-size: 15px;
-    overflow-x: hidden;
-    overflow-y: auto;
+    /* scrolling is handled by html; keep body visible to avoid double bars */
+    overflow: visible;
   }
 
   .logoContainer {
@@ -462,18 +500,33 @@ label {
   }
 
   .rightCont {
+    margin: 0 !important;
     flex: unset;
     width: 100%;
-    margin-top: 70px;
+    margin-top: 0;
+    padding: 120px 1rem 1rem;
     height: auto;
-    padding: 1rem;
     box-sizing: border-box;
     overflow-y: visible;
+  }
+
+  .rightCont::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to left,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+    z-index: 0;
   }
 
   .innerCont {
     width: 100%;
     max-width: 100%;
+    position: relative;
+    z-index: 1;
   }
 
   .innerCont h1 {
@@ -483,6 +536,7 @@ label {
   .innerCont h1,
   .innerCont p {
     word-wrap: break-word;
+    padding: 0 30px;
   }
 
   .svg-container {
@@ -579,8 +633,9 @@ label {
   .rightCont {
     margin: 0;
   }
+  /* remove scaling to avoid content being pushed under the viewport top */
   .container {
-    scale: calc(1.05);
+    transform: none;
   }
 
   #form {

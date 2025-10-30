@@ -380,6 +380,69 @@
       </div>
     </section>
 
+    <section class="faq-section">
+      <div class="faq-heading">
+        <h2>Frequently Asked Questions</h2>
+        <h3>Common Queries</h3>
+      </div>
+      <div class="faq-cards">
+        <div class="faq-card">
+          <div class="card-question">
+            <span>01</span>
+            <p>What is JobConnect?</p>
+            <h4 class="faq-decorative-btn">+</h4>
+          </div>
+          <div class="card-answer">
+            JobConnect is a platform that connects job seekers with potential
+            employers.
+          </div>
+        </div>
+        <div class="faq-card">
+          <div class="card-question">
+            <span>02</span>
+            <p>How does JobConnect work?</p>
+            <h4 class="faq-decorative-btn">+</h4>
+          </div>
+          <div class="card-answer">
+            JobConnect uses advanced algorithms to match job seekers with
+            relevant job listings based on their skills and preferences.
+          </div>
+        </div>
+        <div class="faq-card">
+          <div class="card-question">
+            <span>03</span>
+            <p>Is JobConnect free to use?</p>
+            <h4 class="faq-decorative-btn">+</h4>
+          </div>
+          <div class="card-answer">
+            Yes, JobConnect is completely free for job seekers. Employers may be
+            charged a fee for posting job listings.
+          </div>
+        </div>
+        <div class="faq-card">
+          <div class="card-question">
+            <span>04</span>
+            <p>How can I create an account?</p>
+            <h4 class="faq-decorative-btn">+</h4>
+          </div>
+          <div class="card-answer">
+            You can create an account by clicking on the "Sign Up" button on our
+            homepage and filling out the registration form.
+          </div>
+        </div>
+        <div class="faq-card">
+          <div class="card-question">
+            <span>05</span>
+            <p>What should I include in my resume?</p>
+            <h4 class="faq-decorative-btn">+</h4>
+          </div>
+          <div class="card-answer">
+            Your resume should include your contact information, work
+            experience, education, and any relevant skills or certifications.
+          </div>
+        </div>
+      </div>
+    </section>
     <div class="contact-page">
       <div class="contact-header">
         <h1 class="page-title">Contact Us</h1>
@@ -670,6 +733,18 @@
         </div>
       </form>
     </div>
+    <script>
+      // Toggle FAQ card open/close; rotation handled via CSS
+      const faqCards = document.querySelectorAll(".faq-card");
+
+      faqCards.forEach((card) => {
+        card.onclick = () => {
+          const isActive = card.classList.contains("active");
+          faqCards.forEach((c) => c.classList.remove("active"));
+          if (!isActive) card.classList.add("active");
+        };
+      });
+    </script>
     <script src="../assets/js/navBar.js"></script>
     <script src="../assets/js/themeToggle.js"></script>
     <script src="../assets/js/popup.js"></script>
