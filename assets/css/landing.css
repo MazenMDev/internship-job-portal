@@ -246,7 +246,6 @@ body.darkmode .logo-list img:hover {
   transition-delay: 300ms;
 }
 
-
 .benefit-item:hover {
   box-shadow: 0 0 14px rgba(var(--primary-color-rgb), 0.35);
 }
@@ -628,6 +627,12 @@ body.darkmode .logo-list img:hover {
 }
 
 @media (max-width: 800px) {
+  .benefits h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
   .step {
     grid-template-columns: 1fr;
     column-gap: 20px;
