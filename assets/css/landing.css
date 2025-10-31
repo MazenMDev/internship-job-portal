@@ -700,6 +700,10 @@ body.darkmode .logo-list img:hover {
     margin: 0;
   }
 
+  .benefits h3 {
+    font-size: 1.5rem;
+  }
+
   .steps {
     gap: 30px;
   }
