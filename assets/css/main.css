@@ -428,10 +428,10 @@ body.modal-open #container {
 }
 
 body.modal-open #blurred-background,
-body.modal-open #popup {
+body.modal-open #companyreg {
   display: block;
 }
-#popup {
+#companyreg {
   display: none;
   position: fixed;
   top: 50%;
