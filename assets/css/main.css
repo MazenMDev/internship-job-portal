@@ -4,13 +4,13 @@
   --background-color: #f9fafb;
   --text-color: #1f2937;
   --text-muted: #4b5563;
-
+  
   --error: #dc2626;
   --success: #10b981;
   --warning: #f59e0b;
   --border-color: #e5e7eb;
   --sign-out: rgba(255, 0, 0, 0.726);
-
+  
   --box-color: #ffffff;
   --formJobColor: 220, 220, 220;
   --box-shadow: rgba(0, 0, 0, 0.08);
@@ -21,8 +21,10 @@
   --primary-color: #009aabff;
   --primary-color-rgb: 0, 154, 171;
   --secondary-color: #005070ff;
-
+  
   --brightness: 1;
+  --table-even-row: #e6e6e6ff;
+  --table-hover-row: #c8d5d9ff;
   --main-font-family: "Rubik", sans-serif;
 }
 
@@ -47,6 +49,8 @@
   --primary-color-rgb: 50, 130, 184;
 
   --brightness: 1;
+  --table-even-row: #1a1a1aff;
+  --table-hover-row: #233b45ff;
   --secondary-color: #0f4c75;
 }
 
@@ -707,6 +711,34 @@ footer {
   border-bottom: 1px solid #cbc6c6;
 }
 
+
+.admin-panel-link{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius: 50%;
+  background-color: var(--box-color);
+  padding:10px;
+  border: 5px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.admin-panel-link:hover{
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+.admin-panel-link svg{
+  width:24px;
+  height:24px;
+  stroke: var(--text-color);
+}
+
 @media (max-width: 1200px) {
   .account {
     display: flex;
@@ -964,6 +996,11 @@ footer {
     max-width: 450px;
     margin-top: 35px;
   }
+  .admin-panel-link{
+    bottom:100px;
+    width:20px;
+    height:20px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1123,5 +1160,10 @@ footer {
     grid-template-columns: 1fr 1fr;
     padding: 20px;
     padding-bottom: 80px;
+  }
+    .admin-panel-link{
+    bottom:100px;
+    width:20px;
+    height:20px;
   }
 }
