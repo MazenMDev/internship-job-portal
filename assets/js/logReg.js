@@ -33,12 +33,12 @@ function updateLabels(input, label, isActive) {
   }
 }
 
-// Find the associated label robustly regardless of label position
+// get the next sibling label for an input
 function getLabelForInput(input) {
-  // Simple: in this markup, each input is immediately followed by its label
   return input.nextElementSibling;
 }
 
+// Update login form labels
 function updateLoginLabels() {
   // Only target login text inputs; avoid submit buttons
   const inputs = document.querySelectorAll("#email, #password");
@@ -56,12 +56,16 @@ function updateLoginLabels() {
       )
       .join("");
 
+    if (String(input.value || "").trim() !== "") {
+      updateLabels(input, label, true);
+    }
     input.addEventListener("focus", () => updateLabels(input, label, true));
     input.addEventListener("blur", () => updateLabels(input, label, false));
     input.addEventListener("input", () => updateLabels(input, label, true));
   });
 }
 
+// Update register form labels
 function updateRegLabels() {
   // Only target register text/password/email fields; skip radios/submit
   const inputs = document.querySelectorAll(
@@ -92,6 +96,9 @@ function updateRegLabels() {
 
     label.innerHTML = `${firstHTML}${restHTML}`;
 
+    if (String(input.value || "").trim() !== "") {
+      updateLabels(input, label, true);
+    }
     input.addEventListener("focus", () => updateLabels(input, label, true));
     input.addEventListener("blur", () => updateLabels(input, label, false));
     input.addEventListener("input", () => updateLabels(input, label, true));
@@ -100,3 +107,14 @@ function updateRegLabels() {
 
 updateLoginLabels();
 updateRegLabels();
+
+// update on load in case of autofill in load
+window.addEventListener("load", () => {
+  document.querySelectorAll("input").forEach((input) => {
+    const label = getLabelForInput(input);
+    if (!label) return;
+    if (String(input.value || "").trim() !== "") {
+      updateLabels(input, label, true);
+    }
+  });
+});
