@@ -25,7 +25,7 @@
         <div class="container-bottom">
             <div class="container-bottom-left">  
                 <div class="left">
-                    <label for="descrip" class="des">description</label> <br>
+                    <label for="descrip" class="des">Description</label> <br>
                     <input type="text" class="descrip"> <br>
                     <label for="loc" class="location">location</label><br>
                     <input type="text" class="loc"><br>
@@ -40,22 +40,24 @@
                 </div>
             </div>
             <div class="container-bottom-right">
-                <aside>
+                <aside class="job-time-cat-container">
+
                     <fieldset class="jop-type">
-                    <legend class="job-type-name"></legend>
-                        <details open class="filter-group-box category-filter-group">
-                            <summary class="filter-group-legend filter-group-summary">job-type</summary>
-                                 <label for="job-type">full-time</label>
-                                <input type="checkbox" class="job-type-input">
-                                 <label for="job-type">part-time</label>
-                                <input type="checkbox" class="job-type-input">
-                        </details>
+                    <h2 class="Options-title">Job-type</h2>
+                        <select open class="option-group">
+                                <option value="part-time">Part-Time</option>
+                                <option value="full-time">Full-Time</option>
+                                <option value="internship">InternShip</option>
+                                <option value="remote">Remote</option>
+                        </select>
                     </fieldset>
-                    <fieldset>
-                        <details open class="filter-group-box category-filter-group">
-                                <summary class="filter-group-legend filter-group-summary">Category</summary>
-                        </details>
+
+                    <fieldset class="job-categories">
+                        <select class="option-group" id="categoryDropdown">
+                        
+                        </select>
                     </fieldset>
+                    
                     <button class="add-button">Add</button>
                 </aside>
                 
@@ -65,5 +67,6 @@
         </div>
 
     </div>
+    <script src="../assets/js/job-company-form.js" type="module"></script>
 </body>
 </html>

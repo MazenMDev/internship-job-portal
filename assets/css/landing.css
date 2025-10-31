@@ -218,13 +218,38 @@ body.darkmode .logo-list img:hover {
   padding: 30px;
   flex: 1;
   min-width: 320px;
-  transition: all 0.3s ease;
+
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  filter: blur(2px);
+
+  transition: opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease,
+    box-shadow 0.3s ease;
 }
+
+.benefit-item.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.benefits-cards .benefit-item.show:nth-child(1) {
+  transition-delay: 60ms;
+}
+.benefits-cards .benefit-item.show:nth-child(2) {
+  transition-delay: 140ms;
+}
+.benefits-cards .benefit-item.show:nth-child(3) {
+  transition-delay: 220ms;
+}
+.benefits-cards .benefit-item.show:nth-child(4) {
+  transition-delay: 300ms;
+}
+
 .benefit-item:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.3);
-  transition: all 0.3s ease;
+  box-shadow: 0 0 14px rgba(var(--primary-color-rgb), 0.35);
 }
+
 .benefit-item svg {
   margin-bottom: 20px;
   /* ensure both strokes and fills of internal shapes are colored (works for inline SVG) */
@@ -245,7 +270,7 @@ body.darkmode .logo-list img:hover {
 
 .benefit-item h3 {
   font-size: 1.5rem;
-  color: var(--primary  -color);
+  color: var(--primary -color);
   margin-bottom: 10px;
 }
 .benefit-item p {
@@ -602,6 +627,12 @@ body.darkmode .logo-list img:hover {
 }
 
 @media (max-width: 800px) {
+  .benefits h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
   .step {
     grid-template-columns: 1fr;
     column-gap: 20px;
@@ -667,6 +698,10 @@ body.darkmode .logo-list img:hover {
 
   .featured-logos {
     margin: 0;
+  }
+
+  .benefits h3 {
+    font-size: 1.5rem;
   }
 
   .steps {

@@ -277,6 +277,7 @@
   padding-top: 0;
   overflow: hidden;
   opacity: 0;
+  line-height: 1.7;
   transition: all 0.3s ease;
 }
 
@@ -290,7 +291,7 @@
   color: var(--primary-color);
 }
 .faq-card.active .card-answer {
-  max-height: 50px;
+  max-height: 80px;
   padding-top: 12px;
   opacity: 1;
 }
