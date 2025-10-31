@@ -4,13 +4,13 @@
   --background-color: #f9fafb;
   --text-color: #1f2937;
   --text-muted: #4b5563;
-
+  
   --error: #dc2626;
   --success: #10b981;
   --warning: #f59e0b;
   --border-color: #e5e7eb;
   --sign-out: rgba(255, 0, 0, 0.726);
-
+  
   --box-color: #ffffff;
   --formJobColor: 220, 220, 220;
   --box-shadow: rgba(0, 0, 0, 0.08);
@@ -21,8 +21,10 @@
   --primary-color: #009aabff;
   --primary-color-rgb: 0, 154, 171;
   --secondary-color: #005070ff;
-
+  
   --brightness: 1;
+  --table-even-row: #e6e6e6ff;
+  --table-hover-row: #c8d5d9ff;
   --main-font-family: "Rubik", sans-serif;
 }
 
@@ -47,6 +49,8 @@
   --primary-color-rgb: 50, 130, 184;
 
   --brightness: 1;
+  --table-even-row: #1a1a1aff;
+  --table-hover-row: #233b45ff;
   --secondary-color: #0f4c75;
 }
 
