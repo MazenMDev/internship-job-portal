@@ -2,60 +2,58 @@ body{
     --background-color: #f9fafb;
 }
 .container{
-    max-width: 800px;
+    max-width: 900px;
     height: 500px;
-    margin-top: 30px;
+    margin: 40px auto;
     background-color: rgb(92, 92, 92);
-    padding-top: 30px;
+    padding: 20px;
     border-radius: 6px;
 }
 .container-top{
-    width: 700px;
-    height: 20%;
+    width: 90%;
+    height: 100px;
     background: var(--box-color);
-    margin-top: 30px;
-    margin-left: 50px;
+    margin: 20px   auto;
     border-radius: 6px;
 }
 .container-bottom{
     display: flex;
-    width: 700px;
+    width: 90%px;
     height: 60%;
-    margin-top: 2%;
-    margin-left: 50px;
+    margin: 20px auto;
     border-radius: 6px;
 }
+.container-bottom-right,
 .container-bottom-left{
     display: flex;
-    width: 73%;
-    height: 100%;
-     background: var(--box-color);
-    border-radius: 6px;
-    padding: 10px;
-}
-.container-bottom-right{
-    width: 25%;
-    height: 100%;
     background: var(--box-color);
     border-radius: 6px;
-    margin-left: 2%;
-    padding: 10px;
+    padding: 20px;
 }
-.des{
-    margin-left: 5px;
+.section-title{
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--primary-color);   
 }
-.descrip{
-    width: 250px;
-    height: 100px;
+label {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
-.location{
-    margin-left: 5px;
+.input-box {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  margin-top: 5px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.loc{
-    width: 250px;
-}
-.link{
-    width: 250px;
+textarea.large {
+  min-height: 100px;
+  resize: none;
 }
 .salary{
     width: 200px;
