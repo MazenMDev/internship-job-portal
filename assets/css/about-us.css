@@ -254,12 +254,12 @@
   color: var(--text-muted);
 }
 
-.faq-decorative-btn {
+.faq-btn {
   position: absolute;
   right: 20px;
   background-color: var(--primary-color);
-  color: white;
-  border: none;
+  color: #fff;
+  border: 1px solid transparent;
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -267,9 +267,28 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-  transform: rotate(0deg);
+  transition: all 0.2s ease-in-out;
   transform-origin: center;
+}
+
+.faq-btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 2px;
+  background: red;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.faq-decorative-btn {
+  transform: rotate(0deg);
+  color: #fff;
+  border: none;
+  user-select: none;
+  transition: transform 0.2s ease-in-out;
 }
 
 .card-answer {
@@ -295,11 +314,16 @@
   padding-top: 12px;
   opacity: 1;
 }
-.faq-card.active .faq-decorative-btn {
-  transform: rotate(-45deg);
+
+.faq-card.active .faq-btn {
   background-color: transparent;
-  border: 1.5px solid var(--primary-color);
   color: var(--primary-color);
+  border: 1.5px solid var(--primary-color);
+}
+.faq-card.active .faq-decorative-btn {
+  color: var(--primary-color);
+  transform: rotate(-45deg);
+  transition: transform 0.2s ease-in-out;
 }
 
 /*contact us*/
