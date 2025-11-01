@@ -24,7 +24,7 @@ if (empty($email) || empty($password)) {
 }
 
 // Check if user exists
-$stmt = $conn->prepare("SELECT Id, Password, First_Name, Is_Company FROM users WHERE Email = ?");
+$stmt = $conn->prepare("SELECT Id, Password, First_Name, Last_Name, Is_Company , Title , Image ,theme FROM users WHERE Email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -46,7 +46,11 @@ if (!password_verify($password, $user['Password'])) {
 $_SESSION['user_id'] = $user['Id'];
 $_SESSION['email'] = $email;
 $_SESSION['first_name'] = $user['First_Name'];
+$_SESSION['last_name'] = $user['Last_Name'];
 $_SESSION['is_company'] = $user['Is_Company'];
+$_SESSION['title'] = $user['Title'];
+$_SESSION['theme'] = $user['theme'];
+$_SESSION['image'] = $user['Image'];
 
 echo json_encode([
     "status" => "success",

@@ -8,7 +8,11 @@ if (isset($_SESSION['user_id'])) {
         "user_id" => $_SESSION['user_id'],
         "email" => $_SESSION['email'],
         "first_name" => $_SESSION['first_name'],
-        "is_company" => $_SESSION['is_company']
+        "last_name" => $_SESSION['last_name'],
+        "is_company" => $_SESSION['is_company'],
+        "title" => $_SESSION['title'],
+        "theme" => $_SESSION['theme'],
+        "image" => $_SESSION['image']
     ]);
 } else {
     echo json_encode(["logged_in" => false]);
