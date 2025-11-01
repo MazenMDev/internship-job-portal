@@ -66,7 +66,7 @@ confirmPassword.addEventListener("input", () => {
 
 const form = document.getElementById("form");
 const errorMsg = document.getElementById("errorMsg");
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   let passwordVal = (password.value = password.value.trim());
   let confirmPasswordVal = (confirmPassword.value =
@@ -97,9 +97,7 @@ form.addEventListener("submit", (e) => {
   if (!passwordVal.match(numbers)) {
     errorMsg.textContent = "Password must contain at least one number.";
     return;
-  
   }
-
 
   let specialCharacters = /[!@#$%^&*()_\-+=.?:{}|~]/g;
 
@@ -128,5 +126,25 @@ form.addEventListener("submit", (e) => {
   }
 
   errorMsg.textContent = "";
-  form.submit();
+
+  const formData = new FormData(form);
+
+  fetch("../php/register.php", {
+    method: "POST",
+    body: formData,
+  }).then((res) => res.json()).then((data) => {
+      if (data.status === "error") {
+        errorMsg.style.color = "var(--error)";
+        errorMsg.textContent = data.message;
+      } else {
+        errorMsg.style.color = "var(--success)";
+        errorMsg.textContent = data.message;
+        setTimeout(() => {
+          window.location.href = "./login.html";
+        }, 1000);
+      }
+    })
+    .catch(() => {
+      errorMsg.textContent = "Something went wrong. Please try again.";
+    });
 });

@@ -239,16 +239,6 @@ h1 {
 }
 
 
-.particle {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: var(--primary-color);
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: floatUp 5s linear infinite;
-}
-
 /* Generic labels for inputs on login/register pages */
 .reg {
   position: relative;
