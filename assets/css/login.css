@@ -9,10 +9,11 @@ body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  overflow-y: visible; /* avoid body as a second scroll container */
+  overflow-y: visible;
   display: flex;
   font-family: var(--main-font-family);
 }
+
 
 .logoContainer {
   position: fixed;
@@ -22,7 +23,6 @@ body {
   display: flex;
   align-items: center;
   padding-left: 20px;
-  color: var(--text-color);
   font-weight: 600;
 }
 
@@ -30,11 +30,9 @@ body {
   font-size: 20px;
   margin: 0;
   padding: 0;
-  color: var(--background-color);
   opacity: 0.94;
 }
 .logoContainer button {
-  color: var(--background-color);
   opacity: 0.94;
 }
 
@@ -68,19 +66,6 @@ body {
   overflow: hidden;
   scale: calc(1.15);
 }
-.rightCont::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to left,
-    var(--primary-color),
-    var(--secondary-color)
-  );
-  z-index: 0;
-  pointer-events: none;
-}
-
 .innerCont {
   display: flex;
   flex-direction: column;
@@ -93,7 +78,7 @@ body {
 }
 
 .rightCont h1 {
-  color: #fff;
+  color: var(--text-color);
   font-size: 1.8rem;
   text-align: center;
   margin-bottom: 0.8rem;
@@ -101,7 +86,7 @@ body {
 }
 
 .rightCont p {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-muted);
   font-size: 0.95rem;
   text-align: center;
   margin-bottom: 1rem;
@@ -117,6 +102,7 @@ body {
 .svg-container img {
   max-width: 85%;
   height: auto;
+  
 }
 
 form {
@@ -235,6 +221,23 @@ h1 {
 #changePage a:hover {
   text-decoration: underline;
 }
+
+
+.innerCont, .container {
+  animation: fadeUp 0.8s ease both;
+}
+
+@keyframes fadeUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
 
 /* Generic labels for inputs on login/register pages */
 .reg {
