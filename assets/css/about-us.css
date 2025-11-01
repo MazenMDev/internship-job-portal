@@ -271,17 +271,6 @@
   transform-origin: center;
 }
 
-.faq-btn::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 2px;
-  height: 2px;
-  background: red;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-}
 
 .faq-decorative-btn {
   transform: rotate(0deg);
