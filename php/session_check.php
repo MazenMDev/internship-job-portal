@@ -12,7 +12,8 @@ if (isset($_SESSION['user_id'])) {
         "is_company" => $_SESSION['is_company'],
         "title" => $_SESSION['title'],
         "theme" => $_SESSION['theme'],
-        "image" => $_SESSION['image']
+        "image" => $_SESSION['image'],
+        "is_admin" => $_SESSION['is_admin']
     ]);
 } else {
     echo json_encode(["logged_in" => false]);

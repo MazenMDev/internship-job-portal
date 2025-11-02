@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (profileEl) {
         profileEl.textContent = name;
       }
+      document.querySelector(".admin-panel-link").style.display = data.is_admin ? "block" : "none";
 
       document.querySelector(".profileEducation").textContent = data.title
       document.querySelector(".profile-dropdown-img").src = data.image
