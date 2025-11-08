@@ -109,12 +109,14 @@ updateLoginLabels();
 updateRegLabels();
 
 // update on load in case of autofill in load
-window.addEventListener("load", () => {
-  document.querySelectorAll("input").forEach((input) => {
-    const label = getLabelForInput(input);
-    if (!label) return;
-    if (String(input.value || "").trim() !== "") {
-      updateLabels(input, label, true);
-    }
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    document.querySelectorAll("input").forEach((input) => {
+      const label = getLabelForInput(input);
+      if (!label) return;
+      if (String(input.value || "").trim() !== "") {
+        updateLabels(input, label, true);
+      }
+    });
+  }, 100);
 });

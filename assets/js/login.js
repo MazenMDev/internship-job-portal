@@ -35,7 +35,7 @@ password.addEventListener("input", () => {
 
 
 const errorMsg = document.getElementById("errorMsg");
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   let emailVal = email.value = email.value.trim();
@@ -45,4 +45,28 @@ form.addEventListener("submit", (e) => {
     errorMsg.textContent = "Please fill in all fields.";
     return;
   }
+  const formData = new FormData(form);
+
+  fetch("../php/login.php", {
+    method: "POST",
+    body: formData,
+  }).then(async (res) => {
+      if (!res.ok) throw new Error(`HTTP error! ${res.status}`);
+      return await res.json();
+    }).then((data) => {
+      if (data.status === "error") {
+        errorMsg.style.color = "var(--error)";
+        errorMsg.textContent = data.message;
+      } else {
+        errorMsg.style.color = "var(--success)";
+        errorMsg.textContent = data.message;
+        setTimeout(() => {
+          window.location.href = data.redirect;
+        }, 1000);
+      }
+    })
+    .catch((err) => {
+      console.error("Login error:", err);
+      errorMsg.textContent = "Something went wrong. Please try again.";
+    });
 });
