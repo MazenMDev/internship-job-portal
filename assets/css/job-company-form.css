@@ -9,17 +9,9 @@ body{
     padding: 20px;
     border-radius: 6px;
 }
-.container-top{
-    width: 90%;
-    height: 100px;
-    background: var(--box-color);
-    margin: 20px   auto;
-    border-radius: 6px;
-}
 .container-bottom{
     display: flex;
-    width: 90%px;
-    height: 60%;
+    height: 90%;
     margin: 20px auto;
     border-radius: 6px;
 }
@@ -29,6 +21,15 @@ body{
     background: var(--box-color);
     border-radius: 6px;
     padding: 20px;
+}
+.container-bottom-left{
+    flex: 2;
+    display: flex;
+    justify-content: space-between;
+    gap: 2PX;
+}
+.container-bottom-right{
+    flex: 1;
 }
 .section-title{
   font-size: 1.1rem;
