@@ -224,33 +224,58 @@ div<!DOCTYPE html>
       </div>
     </nav>
 
-    <main id="adminPanel">
+    <button id="closeSideBar">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-x-icon lucide-x"
+      >
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </svg>
+    </button>
+    <aside id="adminAside">
       <h1>Admin Panel</h1>
       <p>Welcome <span id="adminName">Kareem</span></p>
+      <ul>
+        <li><a href="#Statistics">Statistics Overview</a></li>
+        <li><a href="#usersPanel">Manage Users</a></li>
+        <li><a href="#companyPanel">Manage Companies</a></li>
+        <li><a href="#jobsPanel">Manage Job Postings</a></li>
+        <li><a href="#jobApplication">Manage Job Applications</a></li>
+      </ul>
+    </aside>
 
-
+    <main id="adminPanel">
       <div id="Statistics" class="panel">
         <h2>Statistics Overview</h2>
         <div class="stats-grid">
-            <div class="stat-card">
-                <h3>Total Users</h3>
-                <p id="totalUsers">1,234</p>
-            </div>
-            <div class="stat-card">
-                <h3>Total Companies</h3>
-                <p id="totalCompanies">56</p>
-            </div>
-            <div class="stat-card">
-                <h3>Total Job Postings</h3>
-                <p id="totalJobs">789</p>
-            </div>
-            <div class="stat-card">
-                <h3>Total Applications</h3>
-                <p id="totalApplications">4,567</p>
-            </div>
+          <div class="stat-card">
+            <h3>Total Users</h3>
+            <p id="totalUsers">1,234</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Companies</h3>
+            <p id="totalCompanies">56</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Job Postings</h3>
+            <p id="totalJobs">789</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Applications</h3>
+            <p id="totalApplications">4,567</p>
+          </div>
         </div>
       </div>
-      
+
       <div id="usersPanel" class="panel">
         <h2>Manage Users</h2>
         <div class="tableContainer">
@@ -441,9 +466,10 @@ div<!DOCTYPE html>
             </tbody>
           </table>
         </div>
-    </div>
+      </div>
     </main>
     <script src="../assets/js/themeToggle.js"></script>
     <script src="../assets/js/Sessions/loggedSession.js"></script>
+    <script src="../assets/js/adminPanel.js"></script>
   </body>
 </html>

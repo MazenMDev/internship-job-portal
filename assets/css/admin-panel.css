@@ -1,15 +1,21 @@
-#adminPanel {
-    margin-top: 50px;
-    padding: 25px;
-    font-size: 1.2rem;
+#adminAside {
+    width: 220px;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    height: calc(100vh - 80px);
+    background-color: var(--box-color);
+    border-right: 2px solid var(--border-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
-
-#adminPanel h1 {
-    font-size: 3.5rem;
-    margin-bottom: 0px;
+#adminAside h1 {
+    margin-top: 40px;
+    font-size: 2rem;
 }
-#adminPanel p {
-    font-size: 1.5rem;
+#adminAside p {
+    font-size: 1rem;
     text-align: center;
 }
 
@@ -17,6 +23,66 @@
     font-weight: bold;
     color: var(--primary-color);
 }
+
+#adminAside ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 2px solid var(--border-color);
+    margin-top: 15px;
+    padding-top: 15px;
+}
+#adminAside li {
+    margin-bottom: 15px;
+}
+#adminAside a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+#adminAside a:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+#closeSideBar {
+    position: fixed;
+    top: 90px;
+    left: 15px;
+    background-color: var(--box-color);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1000;
+}
+#closeSideBar:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+#closeSideBar svg{
+    width: 20px;
+    height: 20px;
+}
+
+#adminPanel {
+    margin-left: 240px;
+    margin-top: 50px;
+    padding: 25px;
+    font-size: 1.2rem;
+}
+
 
 .panel{
     display: flex;
