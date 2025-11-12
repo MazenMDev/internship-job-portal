@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'db_connection.php';
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -8,12 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Database connection
-$conn = new mysqli("localhost", "root", "", "jobconnect-cs283project");
 
-if ($conn->connect_error) {
-    echo json_encode(["status" => "error", "message" => "Database connection failed."]);
-    exit;
-}
 
 $email = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';

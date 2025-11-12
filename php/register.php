@@ -1,12 +1,8 @@
 <?php
 // Database connection
-$conn = new mysqli("localhost", "root", "", "jobconnect-cs283project");
 
+include 'db_connection.php';
 header('Content-Type: application/json');
-if ($conn->connect_error) {
-    echo json_encode(["status" => "error", "message" => "Error connecting to the database"]);
-    exit;
-}
 
 $fname = trim($_POST['fname']);
 $lname = trim($_POST['lname']);
