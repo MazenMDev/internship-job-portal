@@ -24,18 +24,20 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (profileEl) {
         profileEl.textContent = name;
       }
-      document.querySelector(".admin-panel-link").style.display = data.is_admin ? "block" : "none";
-
-      document.querySelector(".profileEducation").textContent = data.title
+      if (document.querySelector(".admin-panel-link")) {
+        document.querySelector(".admin-panel-link").style.display =
+          data.is_admin ? "block" : "none";
+      }
+      document.querySelector(".profileEducation").textContent = data.title;
       document.querySelector(".profile-dropdown-img").src = data.image
-          ? "/internship-job-portal/ImageStorage/" + data.image
-          : "/internship-job-portal/ImageStorage/profile.jpeg";
-      }
+        ? "/internship-job-portal/ImageStorage/" + data.image
+        : "/internship-job-portal/ImageStorage/profile.jpeg";
+    }
 
-      if(data.is_company){
-        document.querySelector(".dropdown-section").style.display = "none";
-      }
-      if (data.theme === "dark") {
+    if (data.is_company) {
+      document.querySelector(".dropdown-section").style.display = "none";
+    }
+    if (data.theme === "dark") {
       document.body.classList.add("darkmode");
     }
     if (document.body.classList.contains("darkmode")) {
@@ -50,9 +52,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
       });
     }
-    }
-    catch (error) {
-      console.error("Error checking session:", error);
-    }
-    document.getElementById("loadingScreen").style.display = "none";
+  } catch (error) {
+    console.error("Error checking session:", error);
+  }
+  document.getElementById("loadingScreen").style.display = "none";
 });
