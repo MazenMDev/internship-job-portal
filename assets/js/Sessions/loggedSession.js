@@ -7,8 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       window.location.href = "./login.html";
     } else {
       document.querySelectorAll(".sign").forEach((el) => {
-        el.textContent = "Logout";
-        el.href = "../php/logout.php";
+        el.style.display = "none";
       });
 
       document.querySelectorAll(".join").forEach((el) => {
@@ -37,7 +36,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.querySelector(".dropdown-section").style.display = "none";
       }
     }
-   catch (error) {
-    console.error("Error checking session:", error);
-  }
+    catch (error) {
+      console.error("Error checking session:", error);
+    }
+    document.getElementById("loadingScreen").style.display = "none";
 });

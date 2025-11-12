@@ -10,8 +10,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.querySelector(".admin-panel-link").style.display = "none";
     } else {
       document.querySelectorAll(".sign").forEach((el) => {
-        el.textContent = "Logout";
-        el.href = "../php/logout.php";
+        el.style.display = "none";
+      });
+
+      document.querySelector(".signout-btn").addEventListener("click", async () => {
+        try {
+          const res = await fetch("../php/logout.php", {
+            method: "POST",
+          });
+          const data = await res.json();
+          if (data.success) {
+            window.location.href = "./login.html";
+          }
+        } catch (error) {
+          console.error("Error during logout:", error);
+        }
       });
 
       document.querySelectorAll(".join").forEach((el) => {
@@ -45,4 +58,6 @@ document.addEventListener("DOMContentLoaded", async () => {
    catch (error) {
     console.error("Error checking session:", error);
   }
+  
+    document.getElementById("loadingScreen").style.display = "none";
 });

@@ -4,7 +4,7 @@ CREATE TABLE users (
     Last_Name VARCHAR(100) NOT NULL,
     Email VARCHAR(150) NOT NULL UNIQUE,
     Password VARCHAR(255) NOT NULL,
-    Gender ENUM('Male', 'Female') NOT NULL,
+    Gender VARCHAR(6) NOT NULL,
     Image VARCHAR(255) DEFAULT 'profile.jpeg',
     Title VARCHAR(150) DEFAULT NULL,
     Bio TEXT DEFAULT NULL,
