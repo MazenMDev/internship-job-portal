@@ -118,10 +118,45 @@ if (userId) {
     .then((data) => {
       if (data.error) {
         document.body.innerHTML = `<h2>${data.error}</h2>`;
+      } else {
+        if (data.Image == "profile.jpeg") {
+          document.querySelector(
+            ".profile-photo"
+          ).src = `../ImageStorage/profile.jpeg`;
+        } else {
+          document.querySelector(".profile-photo").src =
+            `../ImageStorage/${userId}/${data.Image}`
+        }
+
+        document.querySelector(".profile-section .name").textContent =
+          `${data.First_Name} ${data.Last_Name}`;
+        
+          if(data.Title){
+            document.querySelector(".profile-section .headline").textContent =
+            data.Title;
+          }
+          else{
+            document.querySelector(".profile-section .headline").textContent = '';
+          }
+        if(data.Bio){
+          document.querySelector(".profile-section .about p").textContent =
+          data.Bio;
+        }
+        else{
+          document.querySelector(".profile-section .about p").textContent = '';
+        }
+
+        if(data.is_owner === true){
+          document.getElementById("profile-edit").style.display = "block";
+        } else {
+          document.getElementById("profile-edit").style.display = "none";
+        }
       }
     })
     .catch((err) => {
       document.body.innerHTML = `<h2>Error loading profile</h2>`;
       console.error(err);
     });
+} else {
+  document.body.innerHTML = "<h2>Invalid profile URL</h2>";
 }
