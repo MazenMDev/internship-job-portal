@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.getElementById("close-btn");
   const backdrop = document.getElementById("blurred-background");
 
-      document.getElementById("view-photo").addEventListener("click", openModal) 
+  document.getElementById("view-photo").addEventListener("click", openModal);
   function openModal() {
     document.body.classList.add("view-open");
   }
