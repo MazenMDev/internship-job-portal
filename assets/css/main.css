@@ -521,7 +521,7 @@ form {
   border: none !important;
   border-radius: 12px;
   height: 3rem;
-  padding: 0 1rem;
+  padding:10px 16px;
   font-size: 0.95rem;
   background: var(--background-color);
   color: var(--text-color);

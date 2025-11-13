@@ -1,14 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const openBtn = document.getElementById("open-btn");
+  const openBtn = document.getElementById("photo");
   const closeBtn = document.getElementById("close-btn");
   const backdrop = document.getElementById("blurred-background");
 
+      document.getElementById("profile-edit").addEventListener("click", openModal()) 
   function openModal() {
-    document.body.classList.add("modal-open");
+    document.body.classList.add("view-open");
   }
 
   function closeModal() {
-    document.body.classList.remove("modal-open");
+    document.body.classList.remove("view-open");
   }
 
   openBtn.addEventListener("click", openModal);

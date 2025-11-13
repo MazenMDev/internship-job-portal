@@ -323,24 +323,9 @@
   background-color: var(--background-color);
 }
 
-.contact-header {
-  background: linear-gradient(
-    135deg,
-    var(--primary-color),
-    var(--secondary-color)
-  );
-  color: white;
-  padding: 40px 20px 40px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 40px;
-}
-
 .contact-container {
   max-width: 1200px;
   margin: 0 auto;
-  margin-bottom: 50px;
   padding: 40px 30px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -354,26 +339,23 @@
 }
 
 .page-title {
-  font-size: 50px;
-  margin-bottom: 50px;
-  font-weight: 700;
+  font-size: 45px;
   position: relative;
-  color: var(--background-color);
+  color: var(--text-color);
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .page-subtitle {
   font-size: 24px;
   font-weight: 400;
-  color: var(--background-color);
+  color: var(--text-color);
   margin: 0 auto;
   opacity: 0.95;
   line-height: 1.6;
   max-width: 700px;
-  padding: 0 20px;
+
 }
 .info-section {
   display: flex;
@@ -392,11 +374,11 @@
 }
 
 .info:hover {
-  border: 1px solid var(--primary-color);
-  transform: scale(1.015);
-  box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.2);
 
-  border-color: var(--primary-color);
+  transform: scale(1.015);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+
+
   transition: all 0.13s ease;
 }
 

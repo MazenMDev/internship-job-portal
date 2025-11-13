@@ -6,6 +6,7 @@
   border-radius: 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  position: relative;
 }
 
 .cover-photo {
@@ -18,7 +19,61 @@
   padding: 0px 20px 20px 20px;
   position: relative;
 }
+#photo{
+  
+}
+#photo:hover{
+background-color: black;
+color:black;
+}
+#view-photo h3{
+    top: 40%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  opacity: 0;
+  z-index: 10; 
+  pointer-events: none; 
+  font-size: 50px;
+  color:var(--background-color);
+  width:auto;
+}
+#view-photo{
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
+  z-index: 2001;
+  margin-top: 10px;
+  align-items: center;
+  max-width: 600px;
+  min-height: max-content;
+  background-color: none;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.profile-photo2 {
+
+  min-width: 400px;
+  border-radius: 50%;
+}
+.profile-photo2:hover {
+  transition: all 0.2s ease-in-out;
+filter: brightness(0.6) contrast(0.95) blur(3px);
+
+
+}
+ #view-photo:hover h3 {
+  opacity: 1;
+}
+
+body.view-open #blurred-background,
+body.view-open #view-photo {
+  display: block;
+}
 .profile-photo {
   width: 120px;
   height: 120px;
@@ -29,12 +84,18 @@
   left: 20px;
   background-color: lightgray;
   object-fit: cover;
+  transition: all 0.2s ease-in-out;
+}
+.profile-photo:hover {
+  transition: all 0.2s ease-in-out;
+filter: brightness(0.6) contrast(0.95);
 }
 
 .name {
   margin-top: 70px;
   font-size: 24px;
   font-weight: bold;
+  max-width: max-content ;
 }
 
 .headline {
@@ -97,13 +158,8 @@ li {
   color: black;
 }
 
-#profile-edit {
-  background-color: var(--background-color);
-  border: none;
-}
-#profile-edit:hover {
-  color: var(--text-color);
-}
+
+
 
 body.edit-open #container {
   filter: blur(100px);
@@ -154,7 +210,7 @@ textarea {
 #bio {
   min-height: 70px;
 }
-.edit-btn a {
+.edit-btn  {
   width: 21px;
   height: 21px;
   align-items: center;
@@ -163,12 +219,12 @@ textarea {
   color: var(--primary-color);
   scale: 1.5;
   position: absolute;
-  top: 4%;
+  top:150px;
   right: 5%;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.edit-btn a:hover {
+.edit-btn :hover {
   color: var(--text-color);
 }
 .edit {
@@ -210,6 +266,9 @@ label {
   }
   #popup {
     margin-top: 0px;
+  }
+  #edit-form{
+    
   }
 }
 
