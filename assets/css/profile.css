@@ -19,8 +19,6 @@
   padding: 0px 20px 20px 20px;
   position: relative;
 }
-#photo {
-}
 #photo:hover {
   background-color: black;
   color: black;
@@ -55,7 +53,9 @@
 }
 
 .profile-photo2 {
-  min-width: 400px;
+  object-fit: cover;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
 }
 .profile-photo2:hover {
@@ -134,6 +134,33 @@ li {
   margin: 5px;
   border-radius: 20px;
   font-size: 14px;
+}
+.skills-div{
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 6px;
+}
+
+.skills-div .skill{
+    width: auto;
+    height: 30px;
+    padding: 0 15px;
+    margin: 10px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
+    transition: all 0.2s ease;
+}
+.skills-div .skill:hover{
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .edit-photo {
@@ -261,8 +288,6 @@ label {
   }
   #popup {
     margin-top: 0px;
-  }
-  #edit-form {
   }
 }
 
