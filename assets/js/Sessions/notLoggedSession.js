@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       document.querySelector(".view-profile-btn").href =
-        "/internship-job-portal/pages/profile.html?id=" + data.user_id;
+        "../../../pages/profile.html?id=" + data.user_id;
     }
   } catch (error) {
     console.error("Error checking session:", error);
