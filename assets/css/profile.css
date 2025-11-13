@@ -19,26 +19,25 @@
   padding: 0px 20px 20px 20px;
   position: relative;
 }
-#photo{
-  
+#photo {
 }
-#photo:hover{
-background-color: black;
-color:black;
+#photo:hover {
+  background-color: black;
+  color: black;
 }
-#view-photo h3{
-    top: 40%;
+#view-photo h3 {
+  top: 40%;
   left: 55%;
   transform: translate(-50%, -50%);
   position: fixed;
   opacity: 0;
-  z-index: 10; 
-  pointer-events: none; 
+  z-index: 10;
+  pointer-events: none;
   font-size: 50px;
-  color:var(--background-color);
-  width:auto;
+  color: var(--background-color);
+  width: auto;
 }
-#view-photo{
+#view-photo {
   display: none;
   position: fixed;
   top: 50%;
@@ -56,17 +55,15 @@ color:black;
 }
 
 .profile-photo2 {
-
   min-width: 400px;
   border-radius: 50%;
 }
 .profile-photo2:hover {
   transition: all 0.2s ease-in-out;
-filter: brightness(0.6) contrast(0.95) blur(3px);
-
-
+  filter: brightness(0.6) contrast(0.95) blur(3px);
+  cursor: pointer;
 }
- #view-photo:hover h3 {
+#view-photo:hover h3 {
   opacity: 1;
 }
 
@@ -88,14 +85,15 @@ body.view-open #view-photo {
 }
 .profile-photo:hover {
   transition: all 0.2s ease-in-out;
-filter: brightness(0.6) contrast(0.95);
+  filter: brightness(0.6) contrast(0.95);
+  cursor: pointer;
 }
 
 .name {
   margin-top: 70px;
   font-size: 24px;
   font-weight: bold;
-  max-width: max-content ;
+  max-width: max-content;
 }
 
 .headline {
@@ -158,9 +156,6 @@ li {
   color: black;
 }
 
-
-
-
 body.edit-open #container {
   filter: blur(100px);
   pointer-events: none;
@@ -210,7 +205,7 @@ textarea {
 #bio {
   min-height: 70px;
 }
-.edit-btn  {
+.edit-btn {
   width: 21px;
   height: 21px;
   align-items: center;
@@ -219,7 +214,7 @@ textarea {
   color: var(--primary-color);
   scale: 1.5;
   position: absolute;
-  top:150px;
+  top: 150px;
   right: 5%;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -267,8 +262,7 @@ label {
   #popup {
     margin-top: 0px;
   }
-  #edit-form{
-    
+  #edit-form {
   }
 }
 
