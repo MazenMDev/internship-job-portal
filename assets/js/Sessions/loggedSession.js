@@ -29,10 +29,20 @@ document.addEventListener("DOMContentLoaded", async () => {
           data.is_admin ? "block" : "none";
       }
       document.querySelector(".profileEducation").textContent = data.title;
-      document.querySelector(".profile-dropdown-img").src = data.image
-        ? "/internship-job-portal/ImageStorage/" + data.image
-        : "/internship-job-portal/ImageStorage/profile.jpeg";
-    }
+      
+      if(data.image == "profile.jpeg"){
+        document.querySelector(".profile-dropdown-img").src =
+        `../ImageStorage/profile.jpeg`;
+        document.querySelector(".profile-nav-img").src =
+        `../ImageStorage/profile.jpeg`;
+      }
+      else{
+        document.querySelector(".profile-dropdown-img").src =
+        `../ImageStorage/${data.user_id}/${data.image}`;
+        document.querySelector(".profile-nav-img").src =
+        `../ImageStorage/${data.user_id}/${data.image}`;
+      }
+     
 
     if (data.is_company) {
       document.querySelector(".dropdown-section").style.display = "none";
@@ -55,6 +65,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.querySelector(".view-profile-btn").href ="/internship-job-portal/pages/profile.html?id=" + data.user_id;
 
+    }
   } catch (error) {
     console.error("Error checking session:", error);
   }
