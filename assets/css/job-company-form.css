@@ -1,41 +1,41 @@
-body{
-    --background-color: #f9fafb;
+body {
+  --background-color: #f9fafb;
 }
-.container{
-    max-width: 900px;
-    height: 500px;
-    margin: 40px auto;
-    background-color: rgb(92, 92, 92);
-    padding: 20px;
-    border-radius: 6px;
+.container {
+  max-width: 900px;
+  height: 500px;
+  margin: 40px auto;
+  background-color: rgb(92, 92, 92);
+  padding: 20px;
+  border-radius: 6px;
 }
-.container-bottom{
-    display: flex;
-    height: 90%;
-    margin: 20px auto;
-    border-radius: 6px;
+.container-bottom {
+  display: flex;
+  height: 90%;
+  margin: 20px auto;
+  border-radius: 6px;
 }
 .container-bottom-right,
-.container-bottom-left{
-    display: flex;
-    background: var(--box-color);
-    border-radius: 6px;
-    padding: 20px;
+.container-bottom-left {
+  display: flex;
+  background: var(--box-color);
+  border-radius: 6px;
+  padding: 20px;
 }
-.container-bottom-left{
-    flex: 2;
-    display: flex;
-    justify-content: space-between;
-    gap: 2PX;
+.container-bottom-left {
+  flex: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 2px;
 }
-.container-bottom-right{
-    flex: 1;
+.container-bottom-right {
+  flex: 1;
 }
-.section-title{
+.section-title {
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 10px;
-  color: var(--primary-color);   
+  color: var(--primary-color);
 }
 label {
   display: block;
@@ -56,71 +56,67 @@ textarea.large {
   min-height: 100px;
   resize: none;
 }
-.salary{
-    width: 200px;
-    margin-right: 0px;
+.salary {
+  width: 200px;
+  margin-right: 0px;
 }
-.job-time-cat-container{
-    border: solid gray;
-    padding-top: 5px;
-    height: 300px;
+.job-time-cat-container {
+  border: solid gray;
+  padding-top: 5px;
+  height: 300px;
 }
-.add-button{
-    width: 100%;
-    height: 44px;
-    margin-top: 100px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: all 0.2s ease;
+.add-button {
+  width: 100%;
+  height: 44px;
+  margin-top: 100px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s ease;
 }
-.add-button:hover{
-    background: var(--secondary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.add-button:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-.optgroup-category{
-    
+.skillsLabel {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
-
-.skillsLabel{
-    margin-top: 20px;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-.requiredSkills{
-    display: flex;
-    flex-wrap: wrap;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
+.requiredSkills {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
 }
 
-.requiredSkills .skill{
-    width: auto;
-    height: 30px;
-    padding: 0 15px;
-    margin: 10px;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    background-color: var(--primary-color);
-    color: white;
-    transition: all 0.2s ease;
+.requiredSkills .skill {
+  width: auto;
+  height: 30px;
+  padding: 0 15px;
+  margin: 10px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+  transition: all 0.2s ease;
 }
-.requiredSkills .skill:hover{
-    background: var(--secondary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.requiredSkills .skill:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }

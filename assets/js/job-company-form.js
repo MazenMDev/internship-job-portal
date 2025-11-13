@@ -1,21 +1,19 @@
 import jobCategories from "./jobCategories.js";
 const jobcat = document.getElementById("categoryDropdown");
 
-
-for(let parent in jobCategories){
-    const parentOptgroup = document.createElement("optgroup");
-    parentOptgroup.label = parent;
-    parentOptgroup.classList.add("optgroup-category")
-    for(let jobCategory of jobCategories[parent]){
-          const childoption = document.createElement("option");
-          childoption.value = jobCategory;
-          childoption.textContent = jobCategory;
-          childoption.classList.add("option-category")
-          parentOptgroup.appendChild(childoption);
-    }
-    jobcat.appendChild(parentOptgroup);
+for (let parent in jobCategories) {
+  const parentOptgroup = document.createElement("optgroup");
+  parentOptgroup.label = parent;
+  parentOptgroup.classList.add("optgroup-category");
+  for (let jobCategory of jobCategories[parent]) {
+    const childoption = document.createElement("option");
+    childoption.value = jobCategory;
+    childoption.textContent = jobCategory;
+    childoption.classList.add("option-category");
+    parentOptgroup.appendChild(childoption);
+  }
+  jobcat.appendChild(parentOptgroup);
 }
-
 
 /*
 <select> 
@@ -25,7 +23,7 @@ for(let parent in jobCategories){
 </select>
 */
 
-document.getElementById("addSkill").addEventListener("click", function(e){
+document.getElementById("addSkill").addEventListener("click", function (e) {
   e.preventDefault();
 
   const addBtn = document.getElementById("addSkill");
@@ -43,7 +41,7 @@ document.getElementById("addSkill").addEventListener("click", function(e){
   function finishEditing() {
     skillDiv.removeAttribute("data-editing");
     skillDiv.contentEditable = "false";
-    
+
     //  remove it if user left it empty
     if (!skillDiv.textContent.trim()) {
       skillDiv.remove();
@@ -51,7 +49,7 @@ document.getElementById("addSkill").addEventListener("click", function(e){
     skillDiv.textContent = skillDiv.textContent.trim();
   }
 
-  skillDiv.addEventListener("keydown", function(ev){
+  skillDiv.addEventListener("keydown", function (ev) {
     if (ev.key === "Enter") {
       ev.preventDefault();
       finishEditing();
@@ -62,14 +60,14 @@ document.getElementById("addSkill").addEventListener("click", function(e){
   });
 
   // If the user leaves the div then keep it in the form
-  skillDiv.addEventListener("blur", function(){
+  skillDiv.addEventListener("blur", function () {
     if (skillDiv.getAttribute("data-editing")) {
       finishEditing();
     }
   });
 
   // remove a skill when clcicked
-  skillDiv.addEventListener("click", function(){
+  skillDiv.addEventListener("click", function () {
     if (skillDiv.contentEditable === "false") {
       skillDiv.remove();
     }

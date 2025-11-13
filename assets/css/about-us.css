@@ -271,7 +271,6 @@
   transform-origin: center;
 }
 
-
 .faq-decorative-btn {
   transform: rotate(0deg);
   color: #fff;
@@ -355,7 +354,6 @@
   opacity: 0.95;
   line-height: 1.6;
   max-width: 700px;
-
 }
 .info-section {
   display: flex;
@@ -374,10 +372,8 @@
 }
 
 .info:hover {
-
   transform: scale(1.015);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-
 
   transition: all 0.13s ease;
 }
