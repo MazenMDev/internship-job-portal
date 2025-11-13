@@ -28,19 +28,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const STORAGE_KEY = "userProfile";
 
-  // --- Modal Functions ---
-  document.getElementById("profile-edit").addEventListener("click", openModal()) 
-  
-  function openModal() {
+document.getElementById("profile-edit").addEventListener("click", openModal);
+
+function openModal() {
   loadProfileDataIntoForm();
   document.body.classList.add("edit-open");
 }
 function closeModal() {
   document.body.classList.remove("edit-open");
 }
-  // --- Data Functions ---
 
-  // This function loads data from storage and puts it into the FORM INPUTS
   function loadProfileDataIntoForm() {
     const savedData = localStorage.getItem(STORAGE_KEY);
     if (savedData) {
@@ -158,5 +155,5 @@ if (userId) {
       console.error(err);
     });
 } else {
-  document.body.innerHTML = "<h2>Invalid profile URL</h2>";
+  //document.body.innerHTML = "<h2>Invalid profile URL</h2>";
 }
