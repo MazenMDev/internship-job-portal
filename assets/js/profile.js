@@ -28,15 +28,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const STORAGE_KEY = "userProfile";
 
-document.getElementById("profile-edit").addEventListener("click", openModal);
+  document.getElementById("profile-edit").addEventListener("click", openModal);
 
-function openModal() {
-  loadProfileDataIntoForm();
-  document.body.classList.add("edit-open");
-}
-function closeModal() {
-  document.body.classList.remove("edit-open");
-}
+  let selectedImageFile = null;
+  function uploadImageToServer(file) {
+    const formData = new FormData();
+    formData.append("profile_image", file);
+
+    fetch("../../php/upload-profile-image.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          document.querySelector(".profile-photo").src = data.image_url;
+        } else {
+          alert(data.message || "Error uploading image");
+        }
+      })
+      .catch((err) => console.error(err));
+  }
+
+  function openModal() {
+    loadProfileDataIntoForm();
+    document.body.classList.add("edit-open");
+  }
+  function closeModal() {
+    document.body.classList.remove("edit-open");
+    if (selectedImageFile) {
+      document.querySelector(".profile-photo2").src = "";
+      uploadImageToServer(selectedImageFile);
+      fetchProfileData();
+      selectedImageFile = null;
+    }
+  }
 
   function loadProfileDataIntoForm() {
     const savedData = localStorage.getItem(STORAGE_KEY);
@@ -103,57 +129,91 @@ function closeModal() {
   // --- Initial Page Load ---
   // 7. Load data onto the page when you first visit
   loadProfileDataOntoPage();
+
+  document.getElementById("view-photo").addEventListener("click", uploadPhoto);
+  function uploadPhoto() {
+    // create a hidden file input to choose an image
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+    fileInput.click();
+
+    fileInput.onchange = () => {
+      const file = fileInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.querySelector(".profile-photo2").src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+        selectedImageFile = file;
+      }
+    };
+  }
 });
 
 // Get the current URL path
 const params = new URLSearchParams(window.location.search);
 const userId = params.get("id");
+fetchProfileData();
+function fetchProfileData() {
+  if (userId) {
+    fetch(`../php/profile.php?id=${userId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          document.body.innerHTML = `<h2>${data.error}</h2>`;
+        } else {
+          if (data.Image == "profile.jpeg") {
+            document.querySelector(
+              ".profile-photo"
+            ).src = `../ImageStorage/profile.jpeg`;
+          } else {
+            document.querySelector(
+              ".profile-photo"
+            ).src = `../ImageStorage/${userId}/${data.Image}`;
+            document.querySelector(
+              ".profile-photo2"
+            ).src = `../ImageStorage/${userId}/${data.Image}`;
+            document.querySelector(
+              ".profile-nav-img"
+            ).src = `../ImageStorage/${userId}/${data.Image}`;
+            document.querySelector(
+              ".profile-dropdown-img"
+            ).src = `../ImageStorage/${userId}/${data.Image}`;
+          }
 
-if (userId) {
-  fetch(`../php/profile.php?id=${userId}`)
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.error) {
-        document.body.innerHTML = `<h2>${data.error}</h2>`;
-      } else {
-        if (data.Image == "profile.jpeg") {
           document.querySelector(
-            ".profile-photo"
-          ).src = `../ImageStorage/profile.jpeg`;
-        } else {
-          document.querySelector(".profile-photo").src =
-            `../ImageStorage/${userId}/${data.Image}`
-        }
+            ".profile-section .name"
+          ).textContent = `${data.First_Name} ${data.Last_Name}`;
 
-        document.querySelector(".profile-section .name").textContent =
-          `${data.First_Name} ${data.Last_Name}`;
-        
-          if(data.Title){
+          if (data.Title) {
             document.querySelector(".profile-section .headline").textContent =
-            data.Title;
+              data.Title;
+          } else {
+            document.querySelector(".profile-section .headline").textContent =
+              "";
           }
-          else{
-            document.querySelector(".profile-section .headline").textContent = '';
+          if (data.Bio) {
+            document.querySelector(".profile-section .about p").textContent =
+              data.Bio;
+          } else {
+            document.querySelector(".profile-section .about p").textContent =
+              "";
           }
-        if(data.Bio){
-          document.querySelector(".profile-section .about p").textContent =
-          data.Bio;
-        }
-        else{
-          document.querySelector(".profile-section .about p").textContent = '';
-        }
 
-        if(data.is_owner === true){
-          document.getElementById("profile-edit").style.display = "block";
-        } else {
-          document.getElementById("profile-edit").style.display = "none";
+          if (data.is_owner === true) {
+            document.getElementById("profile-edit").style.display = "block";
+          } else {
+            document.getElementById("profile-edit").style.display = "none";
+          }
         }
-      }
-    })
-    .catch((err) => {
-      document.body.innerHTML = `<h2>Error loading profile</h2>`;
-      console.error(err);
-    });
-} else {
-  //document.body.innerHTML = "<h2>Invalid profile URL</h2>";
+      })
+      .catch((err) => {
+        document.body.innerHTML = `<h2>Error loading profile</h2>`;
+        console.error(err);
+      });
+  } else {
+    //document.body.innerHTML = "<h2>Invalid profile URL</h2>";
+  }
 }

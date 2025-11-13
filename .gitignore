@@ -1,0 +1,3 @@
+# Ignore all files inside the ImageStorage directory
+ImageStorage/*
+!ImageStorage/.gitkeep

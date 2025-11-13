@@ -81,10 +81,8 @@ body.view-open #view-photo {
   left: 20px;
   background-color: lightgray;
   object-fit: cover;
-  transition: all 0.2s ease-in-out;
 }
 .profile-photo:hover {
-  transition: all 0.2s ease-in-out;
   filter: brightness(0.6) contrast(0.95);
   cursor: pointer;
 }
