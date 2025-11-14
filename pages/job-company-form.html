@@ -18,53 +18,41 @@
 </head>
 <body>
     <div class="container">
-        <div class="container-bottom">
-            <div class="container-bottom-left">  
-                <div class="left">
-                    <h3 class="section-title">Company Information</h3>
-                    <label for="description">Description</label> <br>
-                    <textarea id="description" class="input-box large" placeholder="Write a description about the company"></textarea>
-                    <label for="location">location</label><br>
-                    <input type="text" id="location" class="input-box" placeholder="enter company location"><br>
-                    <label for="link">Website Link</label><br>
-                    <input type="text" id="link" class="input-box" placeholder="enter company website link">
-                </div>
-                <div class="right">
-                    <label for="job">Job title</label> <br>
-                    <input type="text" id="job" class="input-box"> <br>
-                    <label for="salary">salary</label><br>
-                    <input type="text" id="salary" class="input-box"><br>
-                    <label for="skills">required skills</label>
-                    <input type="text" id="experience" class="input-box">
-                </div>
-            </div>
-            <div class="container-bottom-right">
-                <aside class="job-time-cat-container">
-
-                    <fieldset class="jop-type">
-                    <h2 class="Options-title">Job-type</h2>
-                        <select open class="option-group">
-                                <option value="part-time">Part-Time</option>
-                                <option value="full-time">Full-Time</option>
-                                <option value="internship">InternShip</option>
-                                <option value="remote">Remote</option>
-                        </select>
-                    </fieldset>
-
-                    <fieldset class="job-categories">
-                        <select class="option-group" id="categoryDropdown">
-                        
-                        </select>
-                    </fieldset>
-                    
-                    <button class="add-button">Add</button>
-                </aside>
-                
-            </div>
-           
-            
+        <div class="left-container">
+            <h3 class="section-title">Company Information</h3>
+            <label for="job">Job Title</label>
+            <input type="text" id="job" class="input-box">
+         <label for="salary">Salary</label>
+            <input type="text" id="salary" class="input-box">
+            <label for="skills">Required Skills</label>
+            <input type="text" id="experience" class="input-box">
         </div>
-
+        <div class="mid-container">
+            <label for="description">Description</label>
+            <textarea id="description" class="input-box large" placeholder="Write a description about the company"></textarea>
+            <label for="location">Location</label>
+            <input type="text" id="location" class="input-box" placeholder="Enter company location">
+            <label for="link">Website Link</label>
+            <input type="text" id="link" class="input-box" placeholder="Enter company website link">
+        </div>
+        
+        <div class="right-container">
+            <aside class="job-time-cat-container">
+            <fieldset class="job-type">
+                <h2 class="Options-title">Job-type</h2>
+                <select class="option-group">
+                    <option value="part-time">Part-Time</option>
+                    <option value="full-time">Full-Time</option>
+                    <option value="internship">Internship</option>
+                    <option value="remote">Remote</option>
+                </select>
+            </fieldset>
+            <fieldset class="job-categories">
+                <select class="option-group" id="categoryDropdown"></select>
+            </fieldset>
+            <button class="add-button">Add</button>
+        </aside>
+        </div>
     </div>
     <script src="../assets/js/job-company-form.js" type="module"></script>
 </body>
