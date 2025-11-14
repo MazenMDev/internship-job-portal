@@ -8,30 +8,47 @@ body{
     margin: 40px auto;
     background-color: rgb(255, 255, 255);
     padding: 20px;
-    border-radius: 6px;
+    border-radius: 20px;
     display: flex;
     gap: 10px;
 }
 .mid-container {
-    flex: 2;
+    flex: 1.6;
     background: var(--box-color);
     padding: 20px;
     border-radius: 6px;
     padding: 20px;
+    padding-top: 92px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 .left-container {
-    flex: 1.5;
+    flex:1.5;
     background: var(--box-color);
     padding: 20px;
+    padding-top: 0px;
     border-radius: 6px;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 .right-container {
-    flex: 1;
+    flex: 1.6;
     background: var(--box-color);
     padding: 20px;
     border-radius: 6px;
     padding: 20px;
+    padding-top: 120px;display: flex;
+    flex-direction: column;
+    gap: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.left-container h3 {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
 }
 .section-title {
   font-size: 1.1rem;
@@ -49,13 +66,20 @@ label {
   width: 90%;
   padding: 10px;
   border: 1px solid var(--border-color);
+  outline: var(--primary-color);
   border-radius: 6px;
   margin-top: 5px;
   font-size: 0.9rem;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
+.input-box:focus{
+  border-color: var(--primary-color);
+  outline: none;
+  transition: all 0.2s ease;
+}
 textarea.large {
   min-height: 100px;
+  outline: var(--primary-color);
   resize: none;
 }
 .salary {
@@ -113,4 +137,54 @@ fieldset {
   background: var(--secondary-color);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+select.option-group {
+    width: 100%;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: var(--box-color);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+.optgroup-category {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.option-category {
+    font-size: 0.9rem;
+    padding-left: 10px;
+    color: #333;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.option-category:hover {
+    background: var(--primary-color);
+    color: white;
+}
+select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+.add-button {
+    width: 100%;
+    height: 44px;
+    margin-top: 130px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+.add-button:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
