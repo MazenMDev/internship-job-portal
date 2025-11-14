@@ -6,6 +6,7 @@
   border-radius: 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  position: relative;
 }
 
 .cover-photo {
@@ -18,23 +19,81 @@
   padding: 0px 20px 20px 20px;
   position: relative;
 }
+#photo:hover {
+  background-color: black;
+  color: black;
+}
+#view-photo h3 {
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  font-size: 30px;
+  color: var(--background-color);
+  width: auto;
+}
+#view-photo {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
+  z-index: 2001;
+  margin-top: 10px;
+  align-items: center;
+  max-width: 600px;
+  min-height: max-content;
+  background-color: none;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.profile-photo2 {
+  object-fit: cover;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+}
+.profile-photo2:hover {
+  transition: all 0.2s ease-in-out;
+  filter: brightness(0.6) contrast(0.95) blur(3px);
+  cursor: pointer;
+}
+#view-photo:hover h3 {
+  opacity: 1;
+}
+
+body.view-open #blurred-background,
+body.view-open #view-photo {
+  display: block;
+}
 .profile-photo {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  border: 4px solid white;
+  box-shadow: 2px 2px 3px var(--box-shadow);
   position: absolute;
-  top: -60px;
+  bottom: -60px;
   left: 20px;
   background-color: lightgray;
   object-fit: cover;
+  transition: all 0.1s ease-in-out;
+}
+.profile-photo:hover {
+  transition: all 0.1s ease-in-out;
+  filter: brightness(0.6) contrast(0.95);
+  cursor: pointer;
 }
 
 .name {
-  margin-top: 60px;
+  margin-top: 70px;
   font-size: 24px;
   font-weight: bold;
+  max-width: max-content;
 }
 
 .headline {
@@ -76,6 +135,28 @@ li {
   border-radius: 20px;
   font-size: 14px;
 }
+.skills-div {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 6px;
+}
+
+.skills-div .skill {
+  display: inline-block;
+  background-color: var(--box-color);
+  color: var(--primary-color);
+  box-shadow: 2px 2px 3px var(--box-shadow);
+  padding: 6px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  font-size: 14px;
+  border: none;
+}
+.skills-div .skill:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
 
 .edit-photo {
   background-color: var(--background-color);
@@ -95,14 +176,6 @@ li {
 .edit-photo:hover {
   background-color: #fff;
   color: black;
-}
-
-#profile-edit {
-  background-color: var(--background-color);
-  border: none;
-}
-#profile-edit:hover {
-  color: var(--text-color);
 }
 
 body.edit-open #container {
@@ -154,7 +227,7 @@ textarea {
 #bio {
   min-height: 70px;
 }
-.edit-btn a {
+.edit-btn {
   width: 21px;
   height: 21px;
   align-items: center;
@@ -163,12 +236,12 @@ textarea {
   color: var(--primary-color);
   scale: 1.5;
   position: absolute;
-  top: 4%;
+  top: 150px;
   right: 5%;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.edit-btn a:hover {
+.edit-btn :hover {
   color: var(--text-color);
 }
 .edit {
@@ -203,13 +276,13 @@ label {
     width: 100%;
     max-width: 800px;
     margin-top: 35px;
+    margin-bottom: 60px;
+    border-radius: 0px;
+    box-shadow: none;
   }
   .edit-photo {
     margin-top: 0px;
     position: absolute;
-  }
-  #popup {
-    margin-top: 0px;
   }
 }
 
@@ -230,57 +303,26 @@ label {
   }
 }
 
-@media (min-width: 1440px) {
-  form {
-    max-width: 400px;
-  }
-
-  form .holder,
-  form .submit {
-    font-size: 1rem;
-    height: 2.8rem;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.75rem;
-  }
-}
-
 @media (max-width: 768px) {
-  .separator {
-    display: block;
-    width: 90%;
-    border: 0;
-    height: 1px;
-    background: var(--text-muted);
-    margin: 1.5rem auto;
-  }
-
-  form {
+  #edit-form {
     width: 100%;
-    max-width: 100%;
-    padding: 1rem;
-    gap: 1rem;
-    box-sizing: border-box;
-  }
-
-  .holder,
-  .submit {
-    font-size: 1rem;
-    height: 3.2rem;
-    width: 100%;
-    box-sizing: border-box;
+    max-width: 450px;
+    margin-top: 35px;
   }
 }
 
 @media (max-width: 480px) {
-  form {
-    padding: 1rem;
-    gap: 1rem;
+  #edit-form {
+    top: 0%;
+    left: 0;
+    transform: none;
+    box-sizing: border-box;
   }
-
-  .holder,
-  .submit {
-    font-size: 0.85rem;
-    padding: 0.75rem;
+  .profile-photo2 {
+    width: 400px;
+    height: 400px;
+  }
+  #view-photo h3 {
+    font-size: 24px;
   }
 }

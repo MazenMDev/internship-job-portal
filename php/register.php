@@ -1,12 +1,8 @@
 <?php
 // Database connection
-$conn = new mysqli("localhost", "root", "", "jobconnect-cs283project");
 
+include 'db_connection.php';
 header('Content-Type: application/json');
-if ($conn->connect_error) {
-    echo json_encode(["status" => "error", "message" => "Error connecting to the database"]);
-    exit;
-}
 
 $fname = trim($_POST['fname']);
 $lname = trim($_POST['lname']);
@@ -14,7 +10,6 @@ $email = trim($_POST['email']);
 $password = $_POST['password'];
 $confirm = $_POST['confirm'];
 $gender = $_POST['gender'];
-$isCompany = 0; // default 0 for regular users
 $theme = "light"; //default theme
 
 if ($password !== $confirm) {
@@ -44,10 +39,10 @@ $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 // Insert into database
 $query = $conn->prepare("
-    INSERT INTO users (First_Name, Last_Name, Email, Password, Gender, is_Company, theme)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO users (First_Name, Last_Name, Email, Password, Gender, theme)
+    VALUES (?, ?, ?, ?, ?, ?)
 ");
-$query->bind_param("sssssis", $fname, $lname, $email, $hashedPassword, $gender, $isCompany, $theme);
+$query->bind_param("ssssss", $fname, $lname, $email, $hashedPassword, $gender, $theme);
 
 if ($query->execute()) {
     echo json_encode(["status" => "success", "message" => "Registration successful!"]);

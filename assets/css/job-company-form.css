@@ -1,3 +1,4 @@
+
 body{
     --background-color: #b9bcbe;
 }
@@ -32,11 +33,11 @@ body{
     border-radius: 6px;
     padding: 20px;
 }
-.section-title{
+.section-title {
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 10px;
-  color: var(--primary-color);   
+  color: var(--primary-color);
 }
 label {
   display: block;
@@ -57,9 +58,9 @@ textarea.large {
   min-height: 100px;
   resize: none;
 }
-.salary{
-    width: 200px;
-    margin-right: 0px;
+.salary {
+  width: 200px;
+  margin-right: 0px;
 }
 .job-time-cat-container{
     border: 1px solid var(--border-color);
@@ -81,68 +82,35 @@ fieldset {
     margin-bottom: 8px;
     color: var(--primary-color);
 }
-.add-button{
-    width: 100%;
-    height: 44px;
-    margin-top: 100px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: all 0.2s ease;
+.skillsLabel {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
-.add-button:hover{
-    background: var(--secondary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.requiredSkills {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
 }
-.option-group {
-    width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid var(--border-color);
-    background: var(--box-color);
-    font-size: 0.9rem;
+.requiredSkills .skill {
+  width: auto;
+  height: 30px;
+  padding: 0 15px;
+  margin: 10px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+  transition: all 0.2s ease;
 }
-
-.option-group option {
-    padding: 6px 10px;
+.requiredSkills .skill:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-select.option-group {
-    width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid var(--border-color);
-    background: var(--box-color);
-    font-size: 0.9rem;
-    cursor: pointer;
-}
-.option-group option:hover {
-    background: var(--primary-color);
-    color: white;
-}
-.optgroup-category {
-    font-weight: bold;
-    color: var(--primary-color);
-}
-.option-category {
-    font-size: 0.9rem;
-    padding-left: 10px;
-    color: #333;
-}
-.optgroup-category {
-    font-weight: bold;
-    color: var(--primary-color);
-}
-.option-category:hover {
-    background: var(--primary-color);
-    color: white;
-}
-

@@ -9,6 +9,17 @@ div<!DOCTYPE html>
     <title>Admin Panel</title>
   </head>
   <body>
+    <div id="loadingScreen">
+      <img
+        src="../assets//imgs/JobConnect.png"
+        alt="logo"
+        class="loadingLogo"
+      />
+      <h1 class="loadingTitle">JobConnect</h1>
+      <div class="spinner">
+        <div class="mainSpinner"></div>
+      </div>
+    </div>
     <div class="mobile-top-nav">
       <div class="logoContainer">
         <img src="../assets//imgs/JobConnect.png" alt="logo" class="logo" />
@@ -224,33 +235,175 @@ div<!DOCTYPE html>
       </div>
     </nav>
 
-    <main id="adminPanel">
+    <button id="closeSideBar">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-x-icon lucide-x"
+      >
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </svg>
+    </button>
+    <aside id="adminAside">
       <h1>Admin Panel</h1>
       <p>Welcome <span id="adminName">Kareem</span></p>
+      <ul>
+        <li><a href="#Statistics">Statistics Overview</a></li>
+        <li><a href="#Messages">Messages</a></li>
+        <li><a href="#usersPanel">Manage Users</a></li>
+        <li><a href="#companyPanel">Manage Companies</a></li>
+        <li><a href="#jobsPanel">Manage Job Postings</a></li>
+        <li><a href="#jobApplication">Manage Job Applications</a></li>
+      </ul>
+    </aside>
 
-
+    <main id="adminPanel">
       <div id="Statistics" class="panel">
         <h2>Statistics Overview</h2>
         <div class="stats-grid">
-            <div class="stat-card">
-                <h3>Total Users</h3>
-                <p id="totalUsers">1,234</p>
-            </div>
-            <div class="stat-card">
-                <h3>Total Companies</h3>
-                <p id="totalCompanies">56</p>
-            </div>
-            <div class="stat-card">
-                <h3>Total Job Postings</h3>
-                <p id="totalJobs">789</p>
-            </div>
-            <div class="stat-card">
-                <h3>Total Applications</h3>
-                <p id="totalApplications">4,567</p>
-            </div>
+          <div class="stat-card">
+            <h3>Total Users</h3>
+            <p id="totalUsers">1,234</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Companies</h3>
+            <p id="totalCompanies">56</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Job Postings</h3>
+            <p id="totalJobs">789</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Applications</h3>
+            <p id="totalApplications">4,567</p>
+          </div>
         </div>
       </div>
-      
+
+      <div id="Messages" class="panel">
+        <h2>Messages</h2>
+        <input
+          type="text"
+          class="search-input"
+          id="messageSearch"
+          placeholder="Search messages..."
+        />
+        <div class="messages-list">
+          <div class="message-item">
+            <div class="message-header">
+              <span class="message-id">Message ID: 101</span>
+              <span class="message-timestamp">2024-06-10 14:32</span>
+            </div>
+            <h4 class="message-name">
+              <span class="fname">Kareem</span> <span class="lname">Ahmed</span>
+            </h4>
+            <a href="mailto:kareem.ahmed@example.com" class="message-email"
+              >kareem.ahmed@example.com</a
+            >
+
+            <h5>Message:</h5>
+            <div class="message-content">
+              <p>Hello, I need help with my account.</p>
+            </div>
+          </div>
+          <div class="message-item">
+            <div class="message-header">
+              <span class="message-id">Message ID: 101</span>
+              <span class="message-timestamp">2024-06-10 14:32</span>
+            </div>
+            <h4 class="message-name">
+              <span class="fname">Kareem</span> <span class="lname">Ahmed</span>
+            </h4>
+            <a href="mailto:kareem.ahmed@example.com" class="message-email"
+              >kareem.ahmed@example.com</a
+            >
+
+            <h5>Message:</h5>
+            <div class="message-content">
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui
+                rerum a reiciendis ducimus voluptatum ratione consequatur
+                officia aspernatur ea magnam explicabo fugiat, atque dolore
+                recusandae enim accusamus quidem molestias perspiciatis quaerat
+                voluptate, quas eum provident amet tempore. Est consequuntur
+                enim temporibus, voluptas repudiandae voluptatibus natus fugiat
+                iusto dicta vero ea eius velit modi explicabo dolorum quia, ad
+                corporis! Consequatur quis neque odio saepe laboriosam vel
+                inventore minus ab cupiditate ullam sequi porro tempore expedita
+                voluptatibus illo quam est perferendis numquam pariatur
+                voluptate, ratione veniam ea alias quo! Exercitationem,
+                eligendi. Dolorum necessitatibus velit sequi iure voluptatem
+                nemo placeat. Delectus, hic at..
+              </p>
+            </div>
+          </div>
+          <div class="message-item">
+            <div class="message-header">
+              <span class="message-id">Message ID: 101</span>
+              <span class="message-timestamp">2024-06-10 14:32</span>
+            </div>
+            <h4 class="message-name">
+              <span class="fname">Kareem</span> <span class="lname">Ahmed</span>
+            </h4>
+            <a href="mailto:kareem.ahmed@example.com" class="message-email"
+              >kareem.ahmed@example.com</a
+            >
+
+            <h5>Message:</h5>
+            <div class="message-content">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
+                ducimus sequi aliquid aperiam numquam, praesentium unde
+                repudiandae vel repellat in fuga maxime architecto esse et culpa
+                debitis temporibus reprehenderit enim. Nulla, dolorem suscipit?
+                Nisi soluta iusto necessitatibus, reiciendis impedit quidem
+                repudiandae a doloribus iure dicta aliquid, at nulla animi
+                blanditiis officia tenetur magni, magnam voluptate eaque non sit
+                odit voluptatem itaque illum? Nisi consequatur, dignissimos quas
+                cum nesciunt, sit quidem reprehenderit dolore unde tempore
+                dolores rerum? Reiciendis ipsam harum ipsum suscipit quod!
+                Dolore, cum vitae. Ratione consequatur porro deleniti similique
+                vel obcaecati nesciunt inventore? Quia, perspiciatis? Iste
+                molestiae id quidem itaque soluta sunt tenetur a est dolorem
+                similique. Facere tempora non doloremque vero dolorum eligendi
+                ab quisquam deserunt inventore, maiores saepe est culpa quod
+                accusantium iste necessitatibus blanditiis, harum distinctio?
+                Itaque quam earum vero possimus nihil aliquid hic sint? Quas,
+                corrupti repellendus. Voluptas, iste. Placeat aliquid odit non.
+                Nesciunt, iure porro dicta dolorum dolor distinctio, sit
+                eligendi numquam officia minus voluptatibus nemo praesentium ex
+                placeat. Commodi maiores accusantium exercitationem quia hic
+                odit accusamus voluptatem nisi, numquam, at beatae ipsum
+                doloremque et quaerat, iusto ratione tenetur deserunt qui
+                similique. Odit voluptatibus dolor tenetur harum reiciendis
+                magni exercitationem non eligendi mollitia suscipit nulla qui,
+                iste quae natus beatae, at culpa nisi nesciunt. Voluptate
+                recusandae quam maiores blanditiis quod cumque obcaecati ipsa,
+                sequi, numquam impedit nesciunt aspernatur corrupti
+                perspiciatis, laborum fugit odit incidunt maxime pariatur ipsum
+                et ad dolorum? Sequi, repellat eos. Assumenda odio nostrum
+                placeat sint commodi. Neque commodi provident molestiae, nisi
+                quia, ab fugit distinctio autem quasi nostrum natus optio qui
+                itaque? Quos nesciunt est distinctio expedita itaque repellendus
+                nemo delectus unde laborum consectetur ipsam, libero odit
+                asperiores commodi! Ex obcaecati iure quis dignissimos quo
+                aperiam fugiat voluptatem in libero tenetur deleniti sint
+                quisquam debitis perspiciatis odio qui necessitatibus, deserunt
+                error.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div id="usersPanel" class="panel">
         <h2>Manage Users</h2>
         <div class="tableContainer">
@@ -441,9 +594,10 @@ div<!DOCTYPE html>
             </tbody>
           </table>
         </div>
-    </div>
+      </div>
     </main>
     <script src="../assets/js/themeToggle.js"></script>
     <script src="../assets/js/Sessions/loggedSession.js"></script>
+    <script src="../assets/js/adminPanel.js"></script>
   </body>
 </html>

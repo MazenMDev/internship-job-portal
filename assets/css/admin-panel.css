@@ -1,15 +1,21 @@
-#adminPanel {
-    margin-top: 50px;
-    padding: 25px;
-    font-size: 1.2rem;
+#adminAside {
+    width: 220px;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    height: calc(100vh - 80px);
+    background-color: var(--box-color);
+    border-right: 2px solid var(--border-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
-
-#adminPanel h1 {
-    font-size: 3.5rem;
-    margin-bottom: 0px;
+#adminAside h1 {
+    margin-top: 40px;
+    font-size: 2rem;
 }
-#adminPanel p {
-    font-size: 1.5rem;
+#adminAside p {
+    font-size: 1rem;
     text-align: center;
 }
 
@@ -17,6 +23,66 @@
     font-weight: bold;
     color: var(--primary-color);
 }
+
+#adminAside ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 2px solid var(--border-color);
+    margin-top: 15px;
+    padding-top: 15px;
+}
+#adminAside li {
+    margin-bottom: 15px;
+}
+#adminAside a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+#adminAside a:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+#closeSideBar {
+    position: fixed;
+    top: 90px;
+    left: 15px;
+    background-color: var(--box-color);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1000;
+}
+#closeSideBar:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+#closeSideBar svg{
+    width: 20px;
+    height: 20px;
+}
+
+#adminPanel {
+    margin-left: 240px;
+    margin-top: 50px;
+    padding: 25px;
+    font-size: 1.2rem;
+}
+
 
 .panel{
     display: flex;
@@ -189,6 +255,84 @@
 .stat-card p {
     font-size: 1.2rem;
     color: var(--text-color);
+}
+
+#Messages{
+    overflow-y: auto;
+    border-radius: 8px;
+    padding: 15px;
+    padding-bottom: 30px;
+}
+#Messages h2{
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+#messageSearch{
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+}
+
+.messages-list{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.message-item{
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+    padding: 20px;
+}
+.message-item:hover{
+    background-color: var(--box-color);
+}
+
+.message-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+.message-timestamp{
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.message-name{
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.message-item h5{
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+.message-content{
+    margin-top: 5px;
+    font-size: 1rem;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.message-email{
+    margin: 0;
+    font-size: 1rem;
+    color: var(--primary-color) !important;
+}
+
+.message-email:hover{
+    text-decoration: underline;
 }
 
 @media (max-width: 768px) {

@@ -13,6 +13,17 @@
     />
   </head>
   <body>
+    <div id="loadingScreen">
+      <img
+        src="../assets//imgs/JobConnect.png"
+        alt="logo"
+        class="loadingLogo"
+      />
+      <h1 class="loadingTitle">JobConnect</h1>
+      <div class="spinner">
+        <div class="mainSpinner"></div>
+      </div>
+    </div>
     <a href="./admin-panel.html" class="admin-panel-link">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -764,14 +775,21 @@
       </form>
     </div>
     <script>
-      // Toggle FAQ card open/close; rotation handled via CSS
       const faqCards = document.querySelectorAll(".faq-card");
 
       faqCards.forEach((card) => {
         card.onclick = () => {
           const isActive = card.classList.contains("active");
-          faqCards.forEach((c) => c.classList.remove("active"));
-          if (!isActive) card.classList.add("active");
+
+          faqCards.forEach((c) => {
+            c.classList.remove("active");
+            c.querySelector(".faq-decorative-btn").textContent = "+";
+          });
+
+          if (!isActive) {
+            card.classList.add("active");
+            card.querySelector(".faq-decorative-btn").textContent = "-";
+          }
         };
       });
     </script>
