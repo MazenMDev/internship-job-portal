@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((data) => {
         if (data.success) {
           document.querySelector(".profile-photo").src = data.image_url;
+          document.querySelector(".profile-nav-photo").src = data.image_url;
+          document.querySelector(".profile-dropdown-photo").src = data.image_url;
         } else {
           alert(data.message || "Error uploading image");
         }
@@ -79,6 +81,17 @@ document.addEventListener("DOMContentLoaded", () => {
       experience_titleInput.value = profile.experienceTitle || "";
       experienceInput.value = profile.experience || "";
     }
+    else
+    {
+      const nameParts = (profile.name || "").split(" ");
+      fnameInput.value = "";
+      lnameInput.value = "";
+
+      bioInput.value = "";
+      aboutInput.value ="";
+      experience_titleInput.value = "";
+      experienceInput.value ="";
+    }
   }
 
   // This function loads data and updates the MAIN PAGE DISPLAY
@@ -90,9 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // Update the text on the page
       displayNameEl.textContent = profile.name || "Profile Name";
       displayHeadlineEl.textContent =
-        profile.headline || "Computer Science Student | Aspiring Web Developer";
+        profile.headline || "";
       displayAboutEl.textContent =
-        profile.about || "Motivated and detail-oriented...";
+        profile.about || "";
       displayExperienceEl.innerHTML = `<strong>${profile.experienceTitle}</strong> <br> ${profile.experience}`;
     }
   }
