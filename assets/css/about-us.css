@@ -590,7 +590,7 @@ button[type="submit"]:active {
     padding: 15px 20px;
   }
   .faq-decorative-btn {
-    right: 15px;
+    font-size: 0.8rem;
   }
   .card-question {
     gap: 10px;

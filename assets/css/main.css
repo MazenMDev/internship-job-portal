@@ -901,7 +901,8 @@ footer {
     border-top: 1px solid var(--border-color);
     border-bottom: none;
     justify-content: center;
-    padding: 8px 0;
+    padding: 8px 0 !important;
+    transform: translateY(1px) !important;
     height: auto;
   }
 
@@ -1050,7 +1051,8 @@ footer {
     border-top: 1px solid var(--border-color);
     border-bottom: none;
     justify-content: center;
-    padding: 6px 0;
+    padding: 6px 0 !important;
+    transform: translateY(1px) !important;
     height: auto;
   }
 
