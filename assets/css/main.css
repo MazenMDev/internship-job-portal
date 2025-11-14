@@ -800,6 +800,9 @@ footer {
     position: relative;
     text-align: center;
   }
+  footer {
+    padding-bottom: 100px;
+  }
 }
 
 @media (min-width: 1025px) {
@@ -1190,5 +1193,10 @@ footer {
     left: 0;
     transform: none;
     box-sizing: border-box;
+  }
+  footer {
+    grid-template-columns: 1fr 1fr;
+    padding: 20px;
+    padding-bottom: 80px;
   }
 }

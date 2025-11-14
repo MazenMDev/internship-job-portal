@@ -310,7 +310,7 @@
 }
 .faq-card.active .faq-decorative-btn {
   color: var(--primary-color);
-  transform: rotate(-45deg);
+
   transition: transform 0.2s ease-in-out;
 }
 
@@ -588,9 +588,6 @@ button[type="submit"]:active {
 @media (max-width: 550px) {
   .faq-card {
     padding: 15px 20px;
-  }
-  .faq-decorative-btn {
-    font-size: 0.8rem;
   }
   .card-question {
     gap: 10px;
