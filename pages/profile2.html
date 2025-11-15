@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
     <link rel="stylesheet" href="../assets/css/main.css" />
-    <link rel="stylesheet" href="../assets/css/profile.css" />
+    <link rel="stylesheet" href="../assets/css/profile2.css" />
 
     <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png" />
     <link
@@ -29,6 +29,174 @@
         <div class="mainSpinner"></div>
       </div>
     </div>
+
+
+    <!-- Sliding panel -->
+    <div id="slidingPanel" class="profile-edit-panel">
+      <button id="closePanel">&times;</button>
+      <h1 id="title" class="editTitle">Edit your profile</h1>
+      <form id="formEdit" class="profile-edit-form">
+        <div class="grid">
+          <div class="inp" id="fname-div">
+            <label for="fname">First Name</label>
+            <input class="holder" type="text" name="fname" id="fname" />
+          </div>
+          <div class="inp" id="lname-div">
+            <label for="lname">Last Name</label>
+            <input class="holder" type="text" name="lname" id="lname" />
+          </div>
+        </div>
+
+        <div class="inp" id="headline-div">
+          <label for="headline">Headline</label>
+          <input
+            class="holder"
+            type="text"
+            name="headline"
+            id="headline"
+            placeholder="e.g., Software Engineer"
+          />
+        </div>
+
+        <div class="inp" id="bio-div">
+          <label for="bio">Bio</label>
+          <textarea
+            class="holder"
+            name="bio"
+            id="bio"
+            placeholder="Short professional bio"
+          ></textarea>
+        </div>
+
+        <div class="inp" id="about-div">
+          <label for="about-edit">About</label>
+          <textarea
+            class="holder"
+            name="about"
+            id="about-edit"
+            placeholder="Detailed information about yourself"
+          ></textarea>
+        </div>
+
+        <!-- Dynamic Experience Section -->
+        <div class="form-section">
+          <h3>Experience</h3>
+          <div id="experience-forms">
+            <div class="dynamic-form-item">
+              <input
+                class="holder"
+                type="text"
+                placeholder="Job Title"
+                data-field="title"
+              />
+              <input
+                class="holder"
+                type="text"
+                placeholder="Company"
+                data-field="company"
+              />
+              <input
+                class="holder"
+                type="text"
+                placeholder="Start Date"
+                data-field="startDate"
+              />
+              <input
+                class="holder"
+                type="text"
+                placeholder="End Date"
+                data-field="endDate"
+              />
+              <textarea
+                class="holder"
+                placeholder="Description"
+                data-field="description"
+              ></textarea>
+              <button type="button" class="remove-btn">Remove</button>
+            </div>
+          </div>
+          <button type="button" id="add-experience" class="add-btn">
+            + Add Experience
+          </button>
+        </div>
+
+        <!-- Dynamic Education Section -->
+        <div class="form-section">
+          <h3>Education</h3>
+          <div id="education-forms">
+            <div class="dynamic-form-item">
+              <input
+                class="holder"
+                type="text"
+                placeholder="Degree"
+                data-field="degree"
+              />
+              <input
+                class="holder"
+                type="text"
+                placeholder="Institution"
+                data-field="institution"
+              />
+              <input
+                class="holder"
+                type="text"
+                placeholder="Year"
+                data-field="year"
+              />
+              <button type="button" class="remove-btn">Remove</button>
+            </div>
+          </div>
+          <button type="button" id="add-education" class="add-btn">
+            + Add Education
+          </button>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="form-section">
+          <h3>Skills</h3>
+          <div class="skills-input-section">
+            <div class="skill-category">
+              <h4>Programming Skills</h4>
+              <div id="programming-skills">
+                <div class="skill-input-item">
+                  <input
+                    type="text"
+                    placeholder="Programming skill"
+                    value="JavaScript"
+                  />
+                  <button type="button" class="remove-btn">Remove</button>
+                </div>
+              </div>
+            </div>
+            <div class="skill-category">
+              <h4>Soft Skills</h4>
+              <div id="soft-skills">
+                <div class="skill-input-item">
+                  <input
+                    type="text"
+                    placeholder="Soft skill"
+                    value="Communication"
+                  />
+                  <button type="button" class="remove-btn">Remove</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" id="add-skill" class="add-btn">
+            + Add Skill
+          </button>
+        </div>
+
+        <div class="form-actions">
+          <input type="submit" value="Save Changes" class="submit" />
+          <button type="button" id="cancel-edit" class="cancel-btn">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+    <div id="panelOverlay"></div>
+
     <a href="./admin-panel.html" class="admin-panel-link">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -224,16 +392,19 @@
                 </button>
               </div>
 
-
-            <div class="dropdown-section settings-dropdown">
+              <div class="dropdown-section settings-dropdown">
                 <h3 class="dropdown-section-title">Account Settings</h3>
                 <button class="settings-toggle" id="settingsToggle">
                   <span>Settings</span>
                   <span class="arrow">▼</span>
                 </button>
                 <div class="settings-menu" id="settingsMenu">
-                  <button class="settings-btn" id="changeEmailBtn">Change Email</button>
-                  <button class="settings-btn" id="forgotPasswordBtn">Forgot Password</button>
+                  <button class="settings-btn" id="changeEmailBtn">
+                    Change Email
+                  </button>
+                  <button class="settings-btn" id="forgotPasswordBtn">
+                    Forgot Password
+                  </button>
                   <a href="#" class="settings-btn signout-btn">Sign Out</a>
                 </div>
               </div>
@@ -320,15 +491,11 @@
         </div>
         <div class="profile-section">
           <div class="name">Profile name</div>
-          <div class="headline">
-           
-          </div>
+          <div class="headline"></div>
 
           <div class="about">
             <h2>About</h2>
-            <p>
-              
-            </p>
+            <p></p>
           </div>
 
           <div class="experience">
@@ -344,7 +511,6 @@
 
           <div class="skills">
             <h2>Skills</h2>
-              
           </div>
         </div>
       </div>
@@ -485,67 +651,8 @@
       </form>
     </div>
 
-    <div id="edit-form">
-      <button id="edit-close">
-        <span class="material-symbols-outlined" id="close"> close </span>
-      </button>
-      <h1 id="title" class="editTitle">Edit your profile</h1>
-      <form id="formEdit">
-        <div class="grid">
-          <div class="inp" id="fname-div">
-            <label for="">First Name</label
-            ><input class="holder" type="text" name="fname" id="fname" />
-          </div>
-          <div class="inp" id="lname-div">
-            <label for="">Last Name</label
-            ><input class="holder" type="text" name="lname" id="lname" />
-          </div>
-        </div>
-        <div class="inp" id="bio-div">
-          <label for="">Bio</label>
-          <textarea class="holder" type="text" name="bio" id="bio"></textarea>
-        </div>
-        <div class="inp" id="about-div">
-          <label for="">About</label
-          ><textarea
-            class="holder"
-            type="text"
-            name="about"
-            id="about-edit"
-          ></textarea>
-        </div>
-        <div class="inp" id="experience-div">
-          <label for="">Experience</label
-          ><input
-            class="holder"
-            id="experience-title"
-            type="text"
-            placeholder="Title"
-          /><textarea
-            class="holder"
-            type="text"
-            name="experience"
-            id="experience"
-            placeholder="Discription"
-          ></textarea>
-        </div>
-        <div class="inp" id="education-div">
-          <label for="">Education</label
-          ><input class="holder" type="text" name="education" id="education" />
-        </div>
-
-        <div class="skills-div">
-          <button id="addSkill" class="skill add-skill">+</button>
-        </div>
-
-        <div class="inp">
-          <input type="submit" value="Save changes" class="submit" />
-        </div>
-      </form>
-    </div>
-
     <script src="../assets/js/themeToggle.js"></script>
-    <script src="../assets/js/profile.js"></script>
+    <script src="../assets/js/profile2.js"></script>
     <script src="../assets/js/popup.js"></script>
     <script src="../assets/js/skills.js"></script>
     <script src="../assets/js/view-image.js"></script>
