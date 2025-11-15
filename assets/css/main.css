@@ -930,6 +930,13 @@ footer {
   transform: scale(1.2);
   background-color: var(--border-color);
 }
+.popup-content .errorPopup{
+  color: var(--error);
+  font-size: 14px;
+  text-align: center;
+  margin-top: -10px;
+}
+
 body.popup-open #blurred-background{
   display: block;
 }

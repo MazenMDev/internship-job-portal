@@ -99,14 +99,6 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
-  let specialCharacters = /[!@#$%^&*()_\-+=.?:{}|~]/g;
-
-  if (!passwordVal.match(specialCharacters)) {
-    errorMsg.textContent =
-      "Password must contain at least one special character.";
-    return;
-  }
-
   let notAllowedChars = /[<>\/\\'"]/g;
   if (passwordVal.match(notAllowedChars)) {
     errorMsg.textContent = "Password contains invalid characters.";

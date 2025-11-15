@@ -62,13 +62,13 @@ function createPopUp(mail = false , password = true){
     popupMail.classList.add("popup-change");
 
     popupMail.innerHTML = `
-      <div class="popup-content">
+      <form class="popup-content">
         <span class="close-mail-btn">&times;</span>
         <h2>Change Email</h2>
         <input type="email" id="newEmail" placeholder="Enter new email" />
         <input type="password" id="currentPassword" placeholder="Enter current password" />
         <button id="submitEmailBtn">Submit</button>
-      </div>
+      </form>
     `;
     document.body.appendChild(popupMail);
     document.querySelector(".close-mail-btn").addEventListener("click", function(){
@@ -81,14 +81,15 @@ function createPopUp(mail = false , password = true){
     popupPass.classList.add("popup-pass");
     popupPass.classList.add("popup-change");
     popupPass.innerHTML = `
-      <div class="popup-content">
+      <form class="popup-content">
         <span class="close-pass-btn">&times;</span>
         <h2>Forgot Password</h2>
         <input type="password" id="currentPassword" placeholder="Enter current password" />
         <input type="password" id="newPassword" placeholder="Enter new password" />
         <input type="password" id="confirmNewPassword" placeholder="Confirm new password" />
+        <p class="errorPopup"></p>
         <button id="submitPassBtn">Submit</button>
-      </div>
+      </form>
     `;
     
     document.body.appendChild(popupPass);
@@ -96,7 +97,73 @@ function createPopUp(mail = false , password = true){
       document.body.classList.remove("popup-open");
       document.body.removeChild(popupPass);
     });
+    
+    document.querySelector(".popup-content").addEventListener("submit", function(e){
+      e.preventDefault();
+      document.querySelector(".errorPopup").textContent = "";
+      const currentPassword = document.getElementById("currentPassword").value;
+      const newPassword = document.getElementById("newPassword").value;
+      const confirmNewPassword = document.getElementById("confirmNewPassword").value;
+      
+      if(newPassword !== confirmNewPassword){
+        document.querySelector(".errorPopup").textContent = "New passwords do not match.";
+        return;
+      }
+      if(newPassword.length < 8){
+        document.querySelector(".errorPopup").textContent = "New password must be at least 8 characters long.";
+        return;
+      }
+      if(!/[A-Z]/.test(newPassword)){
+        document.querySelector(".errorPopup").textContent = "New password must contain at least one uppercase letter.";
+        return;
+      }
+      if(!/[a-z]/.test(newPassword)){
+        document.querySelector(".errorPopup").textContent = "New password must contain at least one lowercase letter.";
+        return;
+      }
+      if(!/[0-9]/.test(newPassword)){
+        document.querySelector(".errorPopup").textContent = "New password must contain at least one digit.";
+        return;
+      }
+      let notAllowedChars = /[<>\/\\'"]/g;
+      if (newPassword.match(notAllowedChars)) {
+        document.querySelector(".errorPopup").textContent = "New password contains invalid characters.";
+        return;
+      }
+
+      for(let char of newPassword){
+        if(char === " "){
+          document.querySelector(".errorPopup").textContent = "New password cannot contain spaces.";
+          return;
+        }
+      }
+      // If the password has nothong wrong, then post data to backend
+      const formData =  new FormData();
+      formData.append("current_password", currentPassword);
+      formData.append("new_password", newPassword);
+      fetch("../php/change-password.php", {
+        method: "POST",
+        body: formData,
+      }).then((res) => res.json()).then((data) => {
+        if(data.status === "success"){
+          
+          const error = document.querySelector(".errorPopup");
+          error.textContent = "Password changed successfully.";
+          error.style.color = "var(--success)";
+          setTimeout(() => {
+            document.body.classList.remove("popup-open");
+            document.body.removeChild(popupPass);
+            error.style.color = "var(--error)";
+            
+            error.textContent = "";
+          }, 1000);
+        } else {
+          document.querySelector(".errorPopup").textContent = data.message;
+        }
+      });
+    });
   }
+  
 
   document.getElementById("blurred-background").addEventListener("click", function(){
     document.body.classList.remove("popup-open");
