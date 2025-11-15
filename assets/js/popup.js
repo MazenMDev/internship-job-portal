@@ -14,4 +14,22 @@ document.addEventListener("DOMContentLoaded", () => {
   openBtn.addEventListener("click", openModal);
   closeBtn.addEventListener("click", closeModal);
   backdrop.addEventListener("click", closeModal);
+  const companyForm = document.getElementById("form");
+  companyForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(companyForm);
+    const response = await fetch("../php/register_company.php", {
+      method: "POST",
+      body: formData,
+    });
+    const result = await response.json();
+    if (result.status === "success") {
+      alert("Company registered successfully!");
+      companyForm.reset();
+      closeModal();
+    } else {
+      alert("Error: " + result.message);
+    }
+  });
 });
