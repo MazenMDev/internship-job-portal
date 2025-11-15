@@ -8,20 +8,14 @@ if (isset($_GET['id'])) {
 
     $session_id = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : null;
 
-    $stmt = $conn->prepare("SELECT Id, Image, First_Name, Last_Name, Email, Bio, Title, Major FROM users WHERE Id = ?");
+    $stmt = $conn->prepare("SELECT user_id AS Id, company_name, company_email, phone_number, street_address, city, state, zip_code, country, user_position, company_url FROM company WHERE user_id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    $stmt = $conn->prepare("SELECT user_id FROM company WHERE user_id = ?");
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $resultCompany = $stmt->get_result();
-    $isCompany = $resultCompany->num_rows > 0;
     if ($row = $result->fetch_assoc()) {
         $row['Id'] = intval($row['Id']);
         $row['is_owner'] = $session_id !== null && $session_id === $row['Id'];
-        $row['is_company'] = $isCompany;
         echo json_encode($row);
     } else {
         echo json_encode(["error" => "User not found"]);
