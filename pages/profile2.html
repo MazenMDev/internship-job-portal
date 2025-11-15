@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
     <link rel="stylesheet" href="../assets/css/main.css" />
-    <link rel="stylesheet" href="../assets/css/profile2.css" />
+    <link rel="stylesheet" href="../assets/css/profile.css" />
 
     <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png" />
     <link
@@ -224,7 +224,19 @@
                 </button>
               </div>
 
-              <a href="#" class="signout-btn">Sign Out</a>
+
+            <div class="dropdown-section settings-dropdown">
+                <h3 class="dropdown-section-title">Account Settings</h3>
+                <button class="settings-toggle" id="settingsToggle">
+                  <span>Settings</span>
+                  <span class="arrow">▼</span>
+                </button>
+                <div class="settings-menu" id="settingsMenu">
+                  <button class="settings-btn" id="changeEmailBtn">Change Email</button>
+                  <button class="settings-btn" id="forgotPasswordBtn">Forgot Password</button>
+                  <a href="#" class="settings-btn signout-btn">Sign Out</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -294,7 +306,7 @@
           />
         </div>
 
-        <div class="edit-btn" id="open-panel">
+        <div class="edit-btn">
           <svg
             id="profile-edit"
             xmlns="http://www.w3.org/2000/svg"
@@ -308,11 +320,15 @@
         </div>
         <div class="profile-section">
           <div class="name">Profile name</div>
-          <div class="headline"></div>
+          <div class="headline">
+           
+          </div>
 
           <div class="about">
             <h2>About</h2>
-            <p></p>
+            <p>
+              
+            </p>
           </div>
 
           <div class="experience">
@@ -328,6 +344,7 @@
 
           <div class="skills">
             <h2>Skills</h2>
+              
           </div>
         </div>
       </div>
@@ -472,79 +489,65 @@
       <button id="edit-close">
         <span class="material-symbols-outlined" id="close"> close </span>
       </button>
-      <div id="edit-panel" class="side-panel">
-        <div class="side-panel-content">
-          <h1 id="title">Edit your profile</h1>
-          <form id="form">
-            <div class="grid">
-              <div class="inp" id="fname-div">
-                <label for="">First Name</label
-                ><input class="holder" type="text" name="fname" id="fname" />
-              </div>
-              <div class="inp" id="lname-div">
-                <label for="">Last Name</label
-                ><input class="holder" type="text" name="lname" id="lname" />
-              </div>
-            </div>
-            <div class="inp" id="bio-div">
-              <label for="">Bio</label>
-              <textarea
-                class="holder"
-                type="text"
-                name="bio"
-                id="bio"
-              ></textarea>
-            </div>
-            <div class="inp" id="about-div">
-              <label for="">About</label
-              ><textarea
-                class="holder"
-                type="text"
-                name="about"
-                id="about-edit"
-              ></textarea>
-            </div>
-            <div class="inp" id="experience-div">
-              <label for="">Experience</label
-              ><input
-                class="holder"
-                id="experience-title"
-                type="text"
-                placeholder="Title"
-              /><textarea
-                class="holder"
-                type="text"
-                name="experience"
-                id="experience"
-                placeholder="Discription"
-              ></textarea>
-            </div>
-            <div class="inp" id="education-div">
-              <label for="">Education</label
-              ><input
-                class="holder"
-                type="text"
-                name="education"
-                id="education"
-              />
-            </div>
-
-            <div class="skills-div">
-              <button id="addSkill" class="skill add-skill">+</button>
-            </div>
-
-            <div class="inp">
-              <input type="submit" value="Save changes" class="submit" />
-            </div>
-          </form>
-
-          <button id="close-panel">Close</button>
+      <h1 id="title" class="editTitle">Edit your profile</h1>
+      <form id="formEdit">
+        <div class="grid">
+          <div class="inp" id="fname-div">
+            <label for="">First Name</label
+            ><input class="holder" type="text" name="fname" id="fname" />
+          </div>
+          <div class="inp" id="lname-div">
+            <label for="">Last Name</label
+            ><input class="holder" type="text" name="lname" id="lname" />
+          </div>
         </div>
-      </div>
+        <div class="inp" id="bio-div">
+          <label for="">Bio</label>
+          <textarea class="holder" type="text" name="bio" id="bio"></textarea>
+        </div>
+        <div class="inp" id="about-div">
+          <label for="">About</label
+          ><textarea
+            class="holder"
+            type="text"
+            name="about"
+            id="about-edit"
+          ></textarea>
+        </div>
+        <div class="inp" id="experience-div">
+          <label for="">Experience</label
+          ><input
+            class="holder"
+            id="experience-title"
+            type="text"
+            placeholder="Title"
+          /><textarea
+            class="holder"
+            type="text"
+            name="experience"
+            id="experience"
+            placeholder="Discription"
+          ></textarea>
+        </div>
+        <div class="inp" id="education-div">
+          <label for="">Education</label
+          ><input class="holder" type="text" name="education" id="education" />
+        </div>
+
+        <div class="skills-div">
+          <button id="addSkill" class="skill add-skill">+</button>
+        </div>
+
+        <div class="inp">
+          <input type="submit" value="Save changes" class="submit" />
+        </div>
+      </form>
     </div>
 
     <script src="../assets/js/themeToggle.js"></script>
-    <script src="../assets/js/profile2.js"></script>
+    <script src="../assets/js/profile.js"></script>
+    <script src="../assets/js/popup.js"></script>
+    <script src="../assets/js/skills.js"></script>
     <script src="../assets/js/view-image.js"></script>
     <script src="../assets/js/Sessions/loggedSession.js"></script>
   </body>

@@ -19,11 +19,6 @@
   padding: 0px 20px 20px 20px;
   position: relative;
 }
-
-#profile-section {
-  transition: left 0.4s ease-in-out;
-  padding: 20px;
-}
 #photo:hover {
   background-color: black;
   color: black;
@@ -104,22 +99,26 @@ body.view-open #view-photo {
 }
 
 .headline {
-  color: gray;
+  color: var(--text-muted);
   font-size: 16px;
   margin-top: 5px;
 }
 
-.about,
-.experience,
-.education,
-.skills {
+.profile-section div:not(.name):not(.headline) {
   margin-top: 25px;
 }
 
+.profile-section a{
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+.profile-section a:hover {
+  text-decoration: underline;
+}
 h2 {
   font-size: 20px;
   color: var(--primary-color);
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 5px;
 }
 
@@ -197,10 +196,8 @@ body.edit-open #edit-form {
 #edit-form {
   display: none;
   position: fixed;
-  top: 0;
-  left: -50%;
-  width: 50%;
-  height: 100vh;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   padding: 24px;
   z-index: 2001;
@@ -211,13 +208,7 @@ body.edit-open #edit-form {
   background-color: var(--box-color);
   border-radius: 20px;
   box-shadow: 0px 30px 50px var(--box-shadow);
-  transition: left 0.4s ease-in-out;
-}
-#edit-form.open{
-    left : 0;
-}
-#profile-section.shift{
-    left : 50%;
+  transition: all 0.2s ease-in-out;
 }
 #edit-close {
   position: absolute;
@@ -285,36 +276,6 @@ label {
 .cover-btn:hover {
   color: var(--text-color);
 }
-
-.side-panel {
-position: fixed;
-top: 0;
-left: -50vw;
-width: 50vw;
-height: 100vh;
-background: #fff;
-box-shadow: 4px 0 10px rgba(0,0,0,0.1);
-z-index: 9999;
-transition: left 0.4s ease;
-overflow-y: auto;
-}
-.side-panel.active {
-left: 0;
-}
-.side-panel-content {
-padding: 2rem;
-}
-body.panel-open::after {
-content: "";
-position: fixed;
-top: 0;
-right: 0;
-width: 50vw;
-height: 100vh;
-background: rgba(0,0,0,0.3);
-z-index: 9000;
-}
-
 
 @media (max-width: 1200px) {
   .profile-container {
