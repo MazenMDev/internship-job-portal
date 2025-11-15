@@ -14,4 +14,22 @@ document.addEventListener("DOMContentLoaded", () => {
   openBtn.addEventListener("click", openModal);
   closeBtn.addEventListener("click", closeModal);
   backdrop.addEventListener("click", closeModal);
+  
+  const settingsToggle = document.getElementById('settingsToggle');
+  const settingsMenu = document.getElementById('settingsMenu');
+  const changeEmailBtn = document.getElementById('changeEmailBtn');
+  const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
+
+  settingsToggle?.addEventListener('click', function() {
+    this.classList.toggle('active');
+    settingsMenu.classList.toggle('active');
+  });
+
+  changeEmailBtn?.addEventListener('click', function() {
+    alert('Change Email clicked');
+  });
+
+  forgotPasswordBtn?.addEventListener('click', function() {
+    alert('Forgot Password clicked');
+  });
 });
