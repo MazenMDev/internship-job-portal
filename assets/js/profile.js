@@ -44,8 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (data.success) {
           document.querySelector(".profile-photo").src = data.image_url;
           document.querySelector(".profile-photo2").src = data.image_url;
-          document.querySelector(".profile-nav-photo").src = data.image_url;
-          document.querySelector(".profile-dropdown-photo").src = data.image_url;
+          document.querySelector(".profile-nav-img").src = data.image_url;
+          document.querySelector(".profile-dropdown-img").src = data.image_url;
         } else {
           alert(data.message || "Error uploading image");
         }

@@ -60,9 +60,7 @@ form.addEventListener("submit", async (e) => {
       } else {
         errorMsg.style.color = "var(--success)";
         errorMsg.textContent = data.message;
-        setTimeout(() => {
-          window.location.href = data.redirect;
-        }, 1000);
+        window.location.href = data.redirect;
       }
     })
     .catch((err) => {
