@@ -38,6 +38,12 @@ if (!password_verify($password, $user['Password'])) {
     exit;
 }
 
+$stmt = $conn->prepare("SELECT user_id FROM company WHERE user_id = ?");
+$stmt->bind_param("i", $user['Id']);
+$stmt->execute();
+$resultCompany = $stmt->get_result();
+$isCompany = $resultCompany->num_rows > 0;
+
 // Login successful — set session
 $_SESSION['user_id'] = $user['Id'];
 $_SESSION['email'] = $email;
@@ -47,6 +53,7 @@ $_SESSION['is_admin'] = $user['is_admin'];
 $_SESSION['title'] = $user['Title'];
 $_SESSION['theme'] = $user['theme'];
 $_SESSION['image'] = $user['Image'];
+$_SESSION['is_company'] = $isCompany;
 
 echo json_encode([
     "status" => "success",
