@@ -75,6 +75,36 @@ function createPopUp(mail = false , password = true){
       document.body.classList.remove("popup-open");
       document.body.removeChild(popupMail);
     });
+    
+    document.querySelector(".popup-content").addEventListener("submit", (Event)=> {
+      Event.preventDefault()
+      const mail= document.getElementById("newEmail").value
+      const password= document.getElementById("currentPassword").value   
+      const formData =  new FormData();
+      formData.append("current_password", password);
+      formData.append("email", mail);
+      fetch("../php/change-email.php", {
+        method: "POST",
+        body: formData,
+      }).then((res) => res.json()).then((data) => {
+        if(data.status === "success"){
+          
+          const error = document.querySelector(".errorPopup");
+          error.textContent = "Password changed successfully.";
+          error.style.color = "var(--success)";
+          setTimeout(() => {
+            document.body.classList.remove("popup-open");
+            document.body.removeChild(popupPass);
+            error.style.color = "var(--error)";
+            
+            error.textContent = "";
+          }, 1000);
+        } else {
+          document.querySelector(".errorPopup").textContent = data.message;
+        }
+
+    });
+    });
   }
   else if(password){
     const popupPass = document.createElement("div");
