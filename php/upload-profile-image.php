@@ -27,6 +27,14 @@ if (!in_array($fileExt, $allowedTypes)) {
     exit;
 }
 
+// delete existing profile images for this user
+foreach ($allowedTypes as $ext) {
+    foreach (glob($uploadDir . "profile_*.{$ext}") as $oldFile) {
+        if (is_file($oldFile)) {
+            @unlink($oldFile);
+        }
+    }
+}
 $filename = "profile_" . time() . ".$fileExt";
 $targetPath = $uploadDir . $filename;
 

@@ -26,8 +26,7 @@ for (let parent in jobCategories) {
 document.getElementById("addSkill").addEventListener("click", function (e) {
   e.preventDefault();
 
-  const addBtn = document.getElementById("addSkill");
-  const container = document.querySelector(".requiredSkills");
+  const container = document.querySelector(".skills-disp");
 
   const skillDiv = document.createElement("div");
   skillDiv.className = "skill";
@@ -35,7 +34,7 @@ document.getElementById("addSkill").addEventListener("click", function (e) {
   skillDiv.setAttribute("data-editing", "true");
   skillDiv.textContent = "";
 
-  container.insertBefore(skillDiv, addBtn);
+  container.appendChild(skillDiv);
   skillDiv.focus();
 
   function finishEditing() {
