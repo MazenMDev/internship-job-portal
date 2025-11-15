@@ -21,27 +21,6 @@ body{
   display: flex;
   flex-direction: row;
 }
-.mid-container {
-    flex: 1.6;
-    background: var(--box-color);
-    padding: 20px;
-    border-radius: 6px;
-    padding: 20px;
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.left-container {
-    flex:1.5;
-    background: var(--box-color);
-    padding: 20px;
-    padding-top: 0px;
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
 .bottom-right{
     flex: 2.5;
     background: var(--box-color);
@@ -88,10 +67,6 @@ body{
   padding: 20px;
   padding-top: 0px;
   padding-bottom: 5px;
-}
-.left-container h3 {
-    font-size: 1.4rem;
-    margin-bottom: 25px;
 }
 .section-title {
   font-size:xx-large;
@@ -274,6 +249,57 @@ select:focus {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+@media (max-width: 768px) {
+  .bottom-row {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .bottom-right, .bottom-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .bottom-up {
+    flex-direction: row;
+  }
+  .bottom-down {
+    width: 100%;
+    margin-top: 10px;
+  }
+  textarea.large {
+    width: 100%;
+    height: 150px;
+  }
+ .requiredSkills,
+.requiredtag {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  height: 120PX;
+}
+.requiredSkills .skills-disp,
+.requiredtag .tag-disp {
+  flex: 1;
+  height: 120px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+#addSkill,
+#addtag {
+  width: 45px;
+  height: 100%;
+  flex-shrink: 0;
+}
+}
+
+
 
 
 
