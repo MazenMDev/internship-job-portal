@@ -311,6 +311,14 @@ label {
     max-width: 450px;
     margin-top: 35px;
   }
+  #view-photo {
+    width: 400px;
+    height: 400px;
+  }
+  .profile-photo2 {
+    width: 400px;
+    height: 400px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -321,8 +329,12 @@ label {
     box-sizing: border-box;
   }
   .profile-photo2 {
-    width: 400px;
-    height: 400px;
+    width: 325px;
+    height: 325px;
+  }
+  #view-photo {
+    width: 325px;
+    height: 325px;
   }
   #view-photo h3 {
     font-size: 24px;

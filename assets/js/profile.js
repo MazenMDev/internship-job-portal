@@ -84,7 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     else
     {
-      const nameParts = (profile.name || "").split(" ");
       fnameInput.value = "";
       lnameInput.value = "";
 
@@ -182,18 +181,15 @@ function fetchProfileData() {
             document.querySelector(
               ".profile-photo"
             ).src = `../ImageStorage/profile.jpeg`;
+            document.querySelector(
+              ".profile-photo2"
+            ).src = `../ImageStorage/profile.jpeg`;
           } else {
             document.querySelector(
               ".profile-photo"
             ).src = `../ImageStorage/${userId}/${data.Image}`;
             document.querySelector(
               ".profile-photo2"
-            ).src = `../ImageStorage/${userId}/${data.Image}`;
-            document.querySelector(
-              ".profile-nav-img"
-            ).src = `../ImageStorage/${userId}/${data.Image}`;
-            document.querySelector(
-              ".profile-dropdown-img"
             ).src = `../ImageStorage/${userId}/${data.Image}`;
           }
 
@@ -220,6 +216,11 @@ function fetchProfileData() {
             document.getElementById("profile-edit").style.display = "block";
           } else {
             document.getElementById("profile-edit").style.display = "none";
+            document.querySelector(".profile-photo").style.cursor = "default";
+            document.querySelector(".profile-photo2").style.cursor = "default";
+            document.querySelector(".profile-photo").style.pointerEvents = "none";
+            document.querySelector(".profile-photo2").style.pointerEvents = "none";
+
           }
         }
       })
