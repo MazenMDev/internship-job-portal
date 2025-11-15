@@ -578,19 +578,7 @@ form {
   color: var(--text-muted);
 }
 
-.signout-btn {
-  display: block;
-  color: var(--text-muted);
-  font-size: 14px;
-  text-decoration: none;
-  border-top: 1px solid var(--border-color);
-  transition: background-color 0.2s ease;
-}
 
-.signout-btn:hover {
-  background-color: var(--sign-out) !important;
-  color: var(--text-color);
-}
 
 .profile-link {
   display: flex !important;
@@ -820,6 +808,9 @@ footer {
   overflow: hidden;
   transition: max-height 0.3s ease;
   margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .settings-menu.active {
@@ -849,6 +840,21 @@ footer {
   background: var(--background-color);
   border-color: var(--primary-color);
   color: var(--primary-color);
+}
+
+.signout-btn {
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+  padding: 10px 16px !important;
+  font-size: 14px;
+  width: calc(100% - 32px);
+  cursor: pointer;
+}
+
+.signout-btn:hover {
+  background-color: var(--sign-out) !important;
+  color: white;
 }
 
 
