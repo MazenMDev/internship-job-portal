@@ -18,9 +18,14 @@
   </head>
   <body>
     <div class="container">
-        <div class="left-container">
-            <h3 class="section-title">Company Information</h3>
-            <div class="form-group">
+      <div class="top">
+        <h3 class="section-title">Company Information</h3>
+      </div>
+      <div class="bottom-row">
+        <div class="bottom-right">
+          <div class="bottom-up">
+            <div class="up-right">
+              <div class="form-group">
               <label for="job">Job Title</label>
               <input type="text" id="job" class="input-box">
             </div>
@@ -28,35 +33,27 @@
               <label for="salary">Salary</label>
               <input type="text" id="salary" class="input-box">
             </div>
-            <div class="form-group">
+
+            </div>
+            <div class="up-left">
+               <div class="form-group">
               <label for="skills">Experience</label>
               <input type="text" id="experience" class="input-box">
             </div>
             <div class="form-group">
-              <label for="skills">Required Skills</label>
-              <div class="requiredSkills skills-div">
-                <div class="skills-disp">
-                </div>
-                <button id="addSkill">+</button>
-              </div>
-            </div>
-        </div>
-        <div class="mid-container">
-          <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" class="input-box large" placeholder="Write a description about the company"></textarea>
-          </div>
-          <div class="form-group">
             <label for="location">Location</label>
             <input type="text" id="location" class="input-box" placeholder="Enter company location">
           </div>
-           <div class="form-group">
-            <label for="link">Website Link</label>
-            <input type="text" id="link" class="input-box" placeholder="Enter company website link">
-           </div>   
+            </div>
+          </div>
+          <div class="bottom-down">
+            <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" class="input-box large" placeholder="Write a description about the company"></textarea>
+          </div>
+          </div>
         </div>
-        
-        <div class="right-container">
+        <div class="bottom-left">
           <aside class="job-time-cat-container">
             <fieldset class="job-type">
                 <h2 class="Options-title">Job-type</h2>
@@ -72,12 +69,24 @@
             </fieldset>
             <div class="form-group">
               <label for="tags">Tags</label>
-              <input type="text" id="tags" class="input-box">
+              <div class="requiredtag tag-div">
+                <div class="tag-disp">
+                </div>
+                <button id="addtag">>></button>
+              </div>
             </div>
-            <button class="add-button">Add</button>
+            <div class="form-group">
+              <label for="skills">Required Skills</label>
+              <div class="requiredSkills skills-div">
+                <div class="skills-disp">
+                </div>
+                <button id="addSkill">>></button>
+              </div>
+            </div>
+            <button class="add-button">Add Jop</button>
         </aside>
         </div>
-
+      </div>
     </div>
     <script src="../assets/js/job-company-form.js" type="module"></script>
   </body>
