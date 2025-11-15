@@ -23,3 +23,4 @@ if (isset($_GET['id'])) {
 } else {
     echo json_encode(["error" => "No ID provided"]);
 }
+?>

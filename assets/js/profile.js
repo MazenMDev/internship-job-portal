@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((data) => {
         if (data.success) {
           document.querySelector(".profile-photo").src = data.image_url;
+          document.querySelector(".profile-photo2").src = data.image_url;
           document.querySelector(".profile-nav-photo").src = data.image_url;
           document.querySelector(".profile-dropdown-photo").src = data.image_url;
         } else {

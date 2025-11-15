@@ -31,7 +31,7 @@
   opacity: 0;
   z-index: 10;
   pointer-events: none;
-  font-size: 30px;
+  font-size:30px;
   color: var(--background-color);
   width: auto;
 }
@@ -41,21 +41,23 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
+  align-items: center;
+  justify-content: center;
   z-index: 2001;
   margin-top: 10px;
   align-items: center;
-  max-width: 600px;
-  min-height: max-content;
+  width: 600px;
+  height: 600px;
   background-color: none;
   border-radius: 50%;
+  box-shadow: 0px 30px 50px var(--box-shadow);
   transition: all 0.2s ease-in-out;
 }
 
 .profile-photo2 {
-  object-fit: cover;
   width: 600px;
   height: 600px;
+  object-fit: cover;
   border-radius: 50%;
 }
 .profile-photo2:hover {
@@ -69,7 +71,7 @@
 
 body.view-open #blurred-background,
 body.view-open #view-photo {
-  display: block;
+  display: flex;
 }
 .profile-photo {
   width: 120px;
