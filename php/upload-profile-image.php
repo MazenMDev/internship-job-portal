@@ -16,6 +16,7 @@ if (!isset($_FILES['profile_image'])) {
 $file = $_FILES['profile_image'];
 $uploadDir = __DIR__ . "/../ImageStorage/$user_id/";
 
+//0777 represents full permission , true makes parent directories if not exist
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true);
 }

@@ -218,7 +218,18 @@
               </button>
             </div>
 
-            <a href="#" class="signout-btn">Sign Out</a>
+            <div class="dropdown-section settings-dropdown">
+                <h3 class="dropdown-section-title">Account Settings</h3>
+                <button class="settings-toggle" id="settingsToggle">
+                  <span>Settings</span>
+                  <span class="arrow">▼</span>
+                </button>
+                <div class="settings-menu" id="settingsMenu">
+                  <button class="settings-btn" id="changeEmailBtn">Change Email</button>
+                  <button class="settings-btn" id="forgotPasswordBtn">Forgot Password</button>
+                  <a href="#" class="settings-btn signout-btn">Sign Out</a>
+                </div>
+             </div>
           </div>
         </div>
       </div>
@@ -648,7 +659,7 @@
       </button>
       <h1 id="title">Register Your Company</h1>
       <form id="form">
-        <div class="inp" id="name">
+        <div class="inp" id="name-div">
           <input
             class="holder"
             type="text"
