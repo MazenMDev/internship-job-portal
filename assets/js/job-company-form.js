@@ -72,3 +72,57 @@ document.getElementById("addSkill").addEventListener("click", function (e) {
     }
   });
 });
+
+
+
+
+
+
+
+document.getElementById("addtag").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const container = document.querySelector(".tag-disp");
+
+  const tagDiv = document.createElement("div"); // consistently lowercase
+  tagDiv.className = "tag";
+  tagDiv.contentEditable = "true";
+  tagDiv.setAttribute("data-editing", "true");
+  tagDiv.textContent = "";
+
+  container.appendChild(tagDiv);
+  tagDiv.focus();
+
+  function finishEditing() {
+    tagDiv.removeAttribute("data-editing");
+    tagDiv.contentEditable = "false";
+
+    if (!tagDiv.textContent.trim()) {
+      tagDiv.remove();
+    } else {
+      tagDiv.textContent = tagDiv.textContent.trim();
+    }
+  }
+
+  tagDiv.addEventListener("keydown", function (ev) {
+    if (ev.key === "Enter") {
+      ev.preventDefault();
+      finishEditing();
+      tagDiv.blur();
+    } else if (ev.key === "Escape") {
+      tagDiv.remove();
+    }
+  });
+
+  tagDiv.addEventListener("blur", function () {
+    if (tagDiv.getAttribute("data-editing")) {
+      finishEditing();
+    }
+  });
+
+  tagDiv.addEventListener("click", function () {
+    if (tagDiv.contentEditable === "false") {
+      tagDiv.remove();
+    }
+  });
+});
