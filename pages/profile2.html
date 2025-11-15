@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/profile2.css" />
+
+    <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&text=close"
+    />
+  </head>
+  <body>
+    <div id="loadingScreen">
+      <img
+        src="../assets//imgs/JobConnect.png"
+        alt="logo"
+        class="loadingLogo"
+      />
+      <h1 class="loadingTitle">JobConnect</h1>
+      <div class="spinner">
+        <div class="mainSpinner"></div>
+      </div>
+    </div>
+    <a href="./admin-panel.html" class="admin-panel-link">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-shield-user-icon lucide-shield-user"
+      >
+        <path
+          d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+        />
+        <path d="M6.376 18.91a6 6 0 0 1 11.249.003" />
+        <circle cx="12" cy="11" r="4" />
+      </svg>
+    </a>
+    <div class="container">
+      <div class="mobile-top-nav">
+        <div class="logoContainer">
+          <img src="../assets//imgs/JobConnect.png" alt="logo" class="logo" />
+          <h1 class="logo-text">JobConnect</h1>
+          <button onclick="themeToggle()" class="themeToggle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-sun-icon lucide-sun"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="m17.66 17.66 1.41 1.41" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="m6.34 17.66-1.41 1.41" />
+              <path d="m19.07 4.93-1.41 1.41" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="mobile-accounts">
+          <a href="./login.html" class="join">Join now</a>
+          <a href="./register.html" class="sign">Sign up</a>
+        </div>
+      </div>
+
+      <nav class="nav-bar">
+        <div class="logoContainer">
+          <img src="../assets//imgs/JobConnect.png" alt="logo" class="logo" />
+          <h1 class="logo-text">JobConnect</h1>
+        </div>
+
+        <div class="mid-nav">
+          <div class="nav-icon">
+            <a href="./landing.html">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="iconForNav"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Home</a
+            >
+          </div>
+          <div class="nav-icon">
+            <a href="./notifications.html">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="iconForNav"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-bell-icon lucide-bell"
+              >
+                <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+                <path
+                  d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
+                />
+              </svg>
+              Notifications</a
+            >
+          </div>
+          <div class="nav-icon">
+            <a href="./jobs.html">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="iconForNav"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M6 3.75A2.75 2.75 0 0 1 8.75 1h2.5A2.75 2.75 0 0 1 14 3.75v.443c.572.055 1.14.122 1.706.2C17.053 4.582 18 5.75 18 7.07v3.469c0 1.126-.694 2.191-1.83 2.54-1.952.599-4.024.921-6.17.921s-4.219-.322-6.17-.921C2.694 12.73 2 11.665 2 10.539V7.07c0-1.321.947-2.489 2.294-2.676A41.047 41.047 0 0 1 6 4.193V3.75Zm6.5 0v.325a41.622 41.622 0 0 0-5 0V3.75c0-.69.56-1.25 1.25-1.25h2.5c.69 0 1.25.56 1.25 1.25ZM10 10a1 1 0 0 0-1 1v.01a1 1 0 0 0 1 1h.01a1 1 0 0 0 1-1V11a1 1 0 0 0-1-1H10Z"
+                  clip-rule="evenodd"
+                />
+                <path
+                  d="M3 15.055v-.684c.126.053.255.1.39.142 2.092.642 4.313.987 6.61.987 2.297 0 4.518-.345 6.61-.987.135-.041.264-.089.39-.142v.684c0 1.347-.985 2.53-2.363 2.686a41.454 41.454 0 0 1-9.274 0C3.985 17.585 3 16.402 3 15.055Z"
+                />
+              </svg>
+              Jobs</a
+            >
+          </div>
+
+          <div class="nav-icon">
+            <a href="./about-us.html">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="iconForNav"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              About us</a
+            >
+          </div>
+
+          <div class="profile-dropdown-container">
+            <a href="#" class="profile-link currentPage">
+              <img
+                src="../assets/imgs/DefaultProfile/profile.jpeg"
+                alt="Profile"
+                class="profile-nav-img profileCurrentPage"
+              />
+              <div class="profileDivC">
+                <span>Me</span>
+                <svg
+                  class="arrowDown"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-chevron-down-icon lucide-chevron-down"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </div>
+            </a>
+
+            <div class="dropdown-content">
+              <div class="profileDataDiv">
+                <img
+                  src="../assets/imgs/DefaultProfile/profile.jpeg"
+                  alt="Profile Picture"
+                  class="profile-dropdown-img"
+                />
+                <div class="profileInfo">
+                  <span class="profileName">Mostafa Mohammed</span>
+                  <span class="profileEducation"
+                    >Student at MSA University</span
+                  >
+                </div>
+              </div>
+              <a href="./profile.html" class="view-profile-btn">View profile</a>
+
+              <div class="dropdown-section">
+                <h3 class="dropdown-section-title">Register your company</h3>
+                <button id="open-btn">
+                  <a href="#" class="dropdown-link company-reg-link"
+                    >Company Register</a
+                  >
+                </button>
+              </div>
+
+              <a href="#" class="signout-btn">Sign Out</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Section -->
+        <div class="account">
+          <a href="./login.html" class="join">Join now</a>
+          <a
+            href="./register.html"
+            class="sign"
+            style="color: var(--background-color)"
+            >Sign up</a
+          >
+          <button onclick="themeToggle()" class="themeToggle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-sun-icon lucide-sun"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="m17.66 17.66 1.41 1.41" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="m6.34 17.66-1.41 1.41" />
+              <path d="m19.07 4.93-1.41 1.41" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <!---->
+      <div id="view-photo">
+        <h3>Upload Image</h3>
+        <img
+          src="../ImageStorage/profile.jpeg"
+          alt="Profile Photo"
+          class="profile-photo2"
+        />
+      </div>
+
+      <!---->
+      <div class="profile-container">
+        <div class="cover-photo">
+          <a class="cover-btn edit">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+              <path
+                fill="currentColor"
+                d="M100.4 417.2C104.5 402.6 112.2 389.3 123 378.5L304.2 197.3L338.1 163.4C354.7 180 389.4 214.7 442.1 267.4L476 301.3L442.1 335.2L260.9 516.4C250.2 527.1 236.8 534.9 222.2 539L94.4 574.6C86.1 576.9 77.1 574.6 71 568.4C64.9 562.2 62.6 553.3 64.9 545L100.4 417.2zM156 413.5C151.6 418.2 148.4 423.9 146.7 430.1L122.6 517L209.5 492.9C215.9 491.1 221.7 487.8 226.5 483.2L155.9 413.5zM510 267.4C493.4 250.8 458.7 216.1 406 163.4L372 129.5C398.5 103 413.4 88.1 416.9 84.6C430.4 71 448.8 63.4 468 63.4C487.2 63.4 505.6 71 519.1 84.6L554.8 120.3C568.4 133.9 576 152.3 576 171.4C576 190.5 568.4 209 554.8 222.5C551.3 226 536.4 240.9 509.9 267.4z"
+              />
+            </svg>
+          </a>
+          <img
+            id="photo"
+            src="../ImageStorage/profile.jpeg"
+            alt="Profile Photo"
+            class="profile-photo"
+          />
+        </div>
+
+        <div class="edit-btn" id="open-panel">
+          <svg
+            id="profile-edit"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 640 640"
+          >
+            <path
+              fill="currentColor"
+              d="M100.4 417.2C104.5 402.6 112.2 389.3 123 378.5L304.2 197.3L338.1 163.4C354.7 180 389.4 214.7 442.1 267.4L476 301.3L442.1 335.2L260.9 516.4C250.2 527.1 236.8 534.9 222.2 539L94.4 574.6C86.1 576.9 77.1 574.6 71 568.4C64.9 562.2 62.6 553.3 64.9 545L100.4 417.2zM156 413.5C151.6 418.2 148.4 423.9 146.7 430.1L122.6 517L209.5 492.9C215.9 491.1 221.7 487.8 226.5 483.2L155.9 413.5zM510 267.4C493.4 250.8 458.7 216.1 406 163.4L372 129.5C398.5 103 413.4 88.1 416.9 84.6C430.4 71 448.8 63.4 468 63.4C487.2 63.4 505.6 71 519.1 84.6L554.8 120.3C568.4 133.9 576 152.3 576 171.4C576 190.5 568.4 209 554.8 222.5C551.3 226 536.4 240.9 509.9 267.4z"
+            />
+          </svg>
+        </div>
+        <div class="profile-section">
+          <div class="name">Profile name</div>
+          <div class="headline"></div>
+
+          <div class="about">
+            <h2>About</h2>
+            <p></p>
+          </div>
+
+          <div class="experience">
+            <h2>Experience</h2>
+          </div>
+
+          <div class="education">
+            <h2>Education</h2>
+            <p>
+              <strong></strong>
+            </p>
+          </div>
+
+          <div class="skills">
+            <h2>Skills</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="blurred-background"></div>
+
+    <div id="companyreg">
+      <button id="close-btn">
+        <span class="material-symbols-outlined" id="close"> close </span>
+      </button>
+      <h1 id="title">Register Your Company</h1>
+      <form id="form">
+        <div class="inp" id="name">
+          <input
+            class="holder"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Company Name"
+            required
+          />
+        </div>
+        <div class="inp" id="email-div">
+          <input
+            class="holder"
+            type="text"
+            name="email"
+            id="email"
+            placeholder="example@company.com"
+            required
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="email-icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+            />
+          </svg>
+        </div>
+        <div class="inp" id="phone">
+          <input
+            type="tel"
+            id="number"
+            name="number"
+            required
+            class="holder"
+            placeholder="Phone Number"
+          />
+        </div>
+        <div class="address">
+          <div class="inp" id="street-address">
+            <input
+              class="holder"
+              type="text"
+              name="street-address"
+              id="street-address"
+              placeholder="Street Address"
+              required
+            />
+          </div>
+          <div class="grid">
+            <div class="inp" id="city">
+              <input
+                class="holder"
+                type="text"
+                name="city"
+                id="city"
+                placeholder="City"
+                required
+              />
+            </div>
+            <div class="inp" id="state">
+              <input
+                class="holder"
+                type="text"
+                name="state"
+                id="state"
+                placeholder="State / Province"
+                required
+              />
+            </div>
+          </div>
+          <div class="grid">
+            <div class="inp" id="postal">
+              <input
+                class="holder"
+                type="text"
+                name="postal"
+                id="postal"
+                placeholder="Postal / Zip Code"
+                required
+              />
+            </div>
+            <div class="inp" id="country">
+              <input
+                class="holder"
+                type="text"
+                name="country"
+                id="country"
+                placeholder="Country"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="inp" id="position">
+          <input
+            class="holder"
+            type="text"
+            name="position"
+            id="position"
+            placeholder="Position"
+            required
+          />
+        </div>
+        <div class="inp" id="link">
+          <input
+            class="holder"
+            type="text"
+            name="link"
+            id="link"
+            placeholder="Company URL"
+            required
+          />
+        </div>
+
+        <div class="inp">
+          <input type="submit" value="Register" class="submit" />
+        </div>
+      </form>
+    </div>
+
+    <div id="edit-form">
+      <button id="edit-close">
+        <span class="material-symbols-outlined" id="close"> close </span>
+      </button>
+      <div id="edit-panel" class="side-panel">
+        <div class="side-panel-content">
+          <h1 id="title">Edit your profile</h1>
+          <form id="form">
+            <div class="grid">
+              <div class="inp" id="fname-div">
+                <label for="">First Name</label
+                ><input class="holder" type="text" name="fname" id="fname" />
+              </div>
+              <div class="inp" id="lname-div">
+                <label for="">Last Name</label
+                ><input class="holder" type="text" name="lname" id="lname" />
+              </div>
+            </div>
+            <div class="inp" id="bio-div">
+              <label for="">Bio</label>
+              <textarea
+                class="holder"
+                type="text"
+                name="bio"
+                id="bio"
+              ></textarea>
+            </div>
+            <div class="inp" id="about-div">
+              <label for="">About</label
+              ><textarea
+                class="holder"
+                type="text"
+                name="about"
+                id="about-edit"
+              ></textarea>
+            </div>
+            <div class="inp" id="experience-div">
+              <label for="">Experience</label
+              ><input
+                class="holder"
+                id="experience-title"
+                type="text"
+                placeholder="Title"
+              /><textarea
+                class="holder"
+                type="text"
+                name="experience"
+                id="experience"
+                placeholder="Discription"
+              ></textarea>
+            </div>
+            <div class="inp" id="education-div">
+              <label for="">Education</label
+              ><input
+                class="holder"
+                type="text"
+                name="education"
+                id="education"
+              />
+            </div>
+
+            <div class="skills-div">
+              <button id="addSkill" class="skill add-skill">+</button>
+            </div>
+
+            <div class="inp">
+              <input type="submit" value="Save changes" class="submit" />
+            </div>
+          </form>
+
+          <button id="close-panel">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../assets/js/themeToggle.js"></script>
+    <script src="../assets/js/profile2.js"></script>
+    <script src="../assets/js/view-image.js"></script>
+    <script src="../assets/js/Sessions/loggedSession.js"></script>
+  </body>
+</html>

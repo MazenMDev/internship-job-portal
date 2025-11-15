@@ -1,0 +1,385 @@
+.profile-container {
+  width: 80%;
+  max-width: 800px;
+  margin: 150px auto;
+  background-color: var(--background-color);
+  border-radius: 20px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.cover-photo {
+  background-color: var(--primary-color);
+  height: 120px;
+  position: relative;
+}
+
+.profile-section {
+  padding: 0px 20px 20px 20px;
+  position: relative;
+}
+
+#profile-section {
+  transition: left 0.4s ease-in-out;
+  padding: 20px;
+}
+#photo:hover {
+  background-color: black;
+  color: black;
+}
+#view-photo h3 {
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  font-size:30px;
+  color: var(--background-color);
+  width: auto;
+}
+#view-photo {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  justify-content: center;
+  z-index: 2001;
+  margin-top: 10px;
+  align-items: center;
+  width: 600px;
+  height: 600px;
+  background-color: none;
+  border-radius: 50%;
+  box-shadow: 0px 30px 50px var(--box-shadow);
+  transition: all 0.2s ease-in-out;
+}
+
+.profile-photo2 {
+  width: 600px;
+  height: 600px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.profile-photo2:hover {
+  transition: all 0.2s ease-in-out;
+  filter: brightness(0.6) contrast(0.95) blur(3px);
+  cursor: pointer;
+}
+#view-photo:hover h3 {
+  opacity: 1;
+}
+
+body.view-open #blurred-background,
+body.view-open #view-photo {
+  display: flex;
+}
+.profile-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 3px var(--box-shadow);
+  position: absolute;
+  bottom: -60px;
+  left: 20px;
+  background-color: lightgray;
+  object-fit: cover;
+  transition: all 0.1s ease-in-out;
+}
+.profile-photo:hover {
+  transition: all 0.1s ease-in-out;
+  filter: brightness(0.6) contrast(0.95);
+  cursor: pointer;
+}
+
+.name {
+  margin-top: 70px;
+  font-size: 24px;
+  font-weight: bold;
+  max-width: max-content;
+}
+
+.headline {
+  color: gray;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.about,
+.experience,
+.education,
+.skills {
+  margin-top: 25px;
+}
+
+h2 {
+  font-size: 20px;
+  color: var(--primary-color);
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.skills span {
+  display: inline-block;
+  background-color: var(--box-color);
+  color: var(--primary-color);
+  box-shadow: 2px 2px 3px var(--box-shadow);
+  padding: 6px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+.skills-div {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 6px;
+}
+
+.skills-div .skill {
+  display: inline-block;
+  background-color: var(--box-color);
+  color: var(--primary-color);
+  box-shadow: 2px 2px 3px var(--box-shadow);
+  padding: 6px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  font-size: 14px;
+  border: none;
+}
+.skills-div .skill:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.edit-photo {
+  background-color: var(--background-color);
+  width: 21px;
+  height: 21px;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  color: var(--primary-color);
+  scale: 1.5;
+  position: absolute;
+  top: 6%;
+  left: 120px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.edit-photo:hover {
+  background-color: #fff;
+  color: black;
+}
+
+body.edit-open #container {
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+body.edit-open #blurred-background,
+body.edit-open #edit-form {
+  display: block;
+}
+#edit-form {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  padding: 24px;
+  z-index: 2001;
+  margin-top: 10px;
+  align-items: center;
+  max-width: 600px;
+  min-height: max-content;
+  background-color: var(--box-color);
+  border-radius: 20px;
+  box-shadow: 0px 30px 50px var(--box-shadow);
+  transition: left 0.4s ease-in-out;
+}
+#edit-form.open{
+    left : 0;
+}
+#profile-section.shift{
+    left : 50%;
+}
+#edit-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  border: none;
+  font-size: 20px;
+  background-color: var(--box-color);
+  color: var(--text-color);
+  transition: all 0.2s ease-in-out;
+}
+#edit-close:hover {
+  background-color: var(--box-color);
+  color: var(--primary-color);
+  transform: none;
+}
+textarea {
+  min-height: 100px;
+  resize: none;
+  font: 1em sans-serif;
+}
+#bio {
+  min-height: 70px;
+}
+.edit-btn {
+  width: 21px;
+  height: 21px;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  color: var(--primary-color);
+  scale: 1.5;
+  position: absolute;
+  top: 150px;
+  right: 5%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.edit-btn :hover {
+  color: var(--text-color);
+}
+.edit {
+  display: none;
+}
+label {
+  padding-left: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+.cover-btn {
+  width: 21px;
+  height: 21px;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  color: var(--background-color);
+  scale: 1.5;
+  position: absolute;
+  top: 70%;
+  right: 3%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.cover-btn:hover {
+  color: var(--text-color);
+}
+
+.side-panel {
+position: fixed;
+top: 0;
+left: -50vw;
+width: 50vw;
+height: 100vh;
+background: #fff;
+box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+z-index: 9999;
+transition: left 0.4s ease;
+overflow-y: auto;
+}
+.side-panel.active {
+left: 0;
+}
+.side-panel-content {
+padding: 2rem;
+}
+body.panel-open::after {
+content: "";
+position: fixed;
+top: 0;
+right: 0;
+width: 50vw;
+height: 100vh;
+background: rgba(0,0,0,0.3);
+z-index: 9000;
+}
+
+
+@media (max-width: 1200px) {
+  .profile-container {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 35px;
+    margin-bottom: 60px;
+    border-radius: 0px;
+    box-shadow: none;
+  }
+  .edit-photo {
+    margin-top: 0px;
+    position: absolute;
+  }
+}
+
+@media (min-width: 1024px) {
+  form {
+    max-width: 420px;
+    gap: 1.3rem;
+  }
+
+  .holder {
+    height: 3.2rem;
+    font-size: 1rem;
+  }
+
+  .submit {
+    height: 3.2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #edit-form {
+    width: 100%;
+    max-width: 450px;
+    margin-top: 35px;
+  }
+  #view-photo {
+    width: 400px;
+    height: 400px;
+  }
+  .profile-photo2 {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  #edit-form {
+    top: 0%;
+    left: 0;
+    transform: none;
+    box-sizing: border-box;
+  }
+  .profile-photo2 {
+    width: 325px;
+    height: 325px;
+  }
+  #view-photo {
+    width: 325px;
+    height: 325px;
+  }
+  #view-photo h3 {
+    font-size: 24px;
+  }
+}
