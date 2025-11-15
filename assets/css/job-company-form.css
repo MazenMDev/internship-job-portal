@@ -106,6 +106,56 @@ fieldset {
     margin-bottom: 8px;
     color: var(--primary-color);
 }
+select.option-group {
+    width: 100%;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: var(--box-color);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+.optgroup-category {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.option-category {
+    font-size: 0.9rem;
+    padding-left: 10px;
+    color: #333;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.option-category:hover {
+    background: var(--primary-color);
+    color: white;
+}
+select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+.add-button {
+    width: 100%;
+    height: 44px;
+    margin-top: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+.add-button:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
 .skillsLabel {
   margin-top: 20px;
   font-size: 0.9rem;
@@ -138,38 +188,8 @@ fieldset {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-select.option-group {
-    width: 100%;
-    padding: 5px;
-    border-radius: 6px;
-    border: 1px solid var(--border-color);
-    background: var(--box-color);
-    font-size: 0.9rem;
-    cursor: pointer;
-}
-.optgroup-category {
-    font-weight: bold;
-    color: var(--primary-color);
-}
-.option-category {
-    font-size: 0.9rem;
-    padding-left: 10px;
-    color: #333;
-    outline: none;
-    transition: all 0.2s ease;
-}
-.option-category:hover {
-    background: var(--primary-color);
-    color: white;
-}
-select:focus {
-    border-color: var(--primary-color);
-    outline: none;
-}
-.add-button {
-    width: 100%;
-    height: 44px;
-    margin-top: 130px;
+#addSkill{
+    width: 90px;
     background-color: var(--primary-color);
     color: white;
     border: none;
@@ -183,7 +203,7 @@ select:focus {
     gap: 10px;
     transition: all 0.2s ease;
 }
-.add-button:hover {
+#addSkill:hover {
     background: var(--secondary-color);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
