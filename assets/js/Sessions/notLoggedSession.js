@@ -86,6 +86,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       document.querySelector(".view-profile-btn").href =
         "../../../pages/profile.html?id=" + data.user_id;
+
+        document.querySelector(".signout-btn").addEventListener("click", async () => {
+        await fetch("../php/logout.php");
+        window.location.href = "./login.html";
+      });
     }
   } catch (error) {
     console.error("Error checking session:", error);
