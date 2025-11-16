@@ -1356,8 +1356,8 @@ body.popup-open #blurred-background{
     height: 22px;
   }
   #companyreg {
-    top: 10%;
-    left: 0;
+    top: 0px;
+    left: 0px;
     transform: none;
     box-sizing: border-box;
     padding-top:0px;
