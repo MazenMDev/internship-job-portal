@@ -73,7 +73,25 @@ form.addEventListener("submit", async (e) => {
     confirmPassword.value.trim());
 
   // PASSWORD VALIDATIONS
-
+  let numbers = /[0-9]/g;
+  
+  const f_name = document.getElementById("fname").value.trim();
+  const l_name = document.getElementById("lname").value.trim();
+  if (f_name.length === 0 || l_name.length === 0) {
+    errorMsg.textContent = "First name and Last name cannot be empty.";
+    return;
+  }
+  
+  if(f_name.value.match(numbers) || l_name.value.match(numbers)){
+    errorMsg.textContent = "Names cannot contain numbers.";
+    return;
+  }
+  let specialChars = /[!@#$%^&*(),.?":{}|<>]/g;
+  if (f_name.value.match(specialChars) || l_name.value.match(specialChars)) {
+    errorMsg.textContent = "Names cannot contain special characters.";
+    return;
+  }
+  
   if (passwordVal.length < 8) {
     errorMsg.textContent = "Password must be at least 8 characters long.";
     return;
@@ -93,7 +111,6 @@ form.addEventListener("submit", async (e) => {
     return;
   }
   //regular expression to check for numbers
-  let numbers = /[0-9]/g;
   if (!passwordVal.match(numbers)) {
     errorMsg.textContent = "Password must contain at least one number.";
     return;

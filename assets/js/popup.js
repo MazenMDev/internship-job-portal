@@ -65,8 +65,8 @@ function createPopUp(mail = false , password = true){
       <form class="popup-content">
         <span class="close-mail-btn">&times;</span>
         <h2>Change Email</h2>
-        <input type="email" id="newEmail" placeholder="Enter new email" />
-        <input type="password" id="currentPassword" placeholder="Enter current password" />
+        <input type="email"  id="newEmail" required placeholder="Enter new email" />
+        <input type="password" id="currentPassword" required placeholder="Enter current password" />
         <button id="submitEmailBtn">Submit</button>
       </form>
     `;
@@ -114,9 +114,9 @@ function createPopUp(mail = false , password = true){
       <form class="popup-content">
         <span class="close-pass-btn">&times;</span>
         <h2>Forgot Password</h2>
-        <input type="password" id="currentPassword" placeholder="Enter current password" />
-        <input type="password" id="newPassword" placeholder="Enter new password" />
-        <input type="password" id="confirmNewPassword" placeholder="Confirm new password" />
+        <input type="password" id="currentPassword" required placeholder="Enter current password" />
+        <input type="password" id="newPassword" required placeholder="Enter new password" />
+        <input type="password" id="confirmNewPassword" required placeholder="Confirm new password" />
         <p class="errorPopup"></p>
         <button id="submitPassBtn">Submit</button>
       </form>
