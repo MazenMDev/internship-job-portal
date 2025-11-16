@@ -372,7 +372,6 @@ label {
 .form-section {
     margin-bottom: 30px;
     padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
 }
 
 .section-header {
@@ -534,7 +533,100 @@ label {
     margin-right: 0; 
 }
 
+.profile-toggle{
+    color: var(--text-color);
+    background-color: var(--background-color);
+    width: 500%;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+    transition: background 0.2s;
+    font-size: 20px;
+    font-weight: 600;
+}
 
+.education-toggle{
+    color: var(--text-color);
+    background-color: var(--background-color);
+    width: 380%;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+    transition: background 0.2s;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.courses-toggle{
+    color: var(--text-color);
+    background-color: var(--background-color);
+    width: 430%;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+    transition: background 0.2s;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.projects-toggle{
+    color: var(--text-color);
+    background-color: var(--background-color);
+    width: 430%;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+    transition: background 0.2s;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.skills-toggle{
+    color: var(--text-color);
+    background-color: var(--background-color);
+    width: 550%;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+    transition: background 0.2s;
+    font-size: 20px;
+    font-weight: 600;
+}
 
 
 @media (max-width: 768px) {
