@@ -1360,6 +1360,8 @@ body.popup-open #blurred-background{
     left: 0;
     transform: none;
     box-sizing: border-box;
+    padding-top:0px;
+    margin-top:0px;
   }
   footer {
     grid-template-columns: 1fr 1fr;
