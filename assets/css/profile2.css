@@ -277,7 +277,297 @@ label {
   color: var(--text-color);
 }
 
+.edit-panel {
+    position: fixed;
+    top: 0;
+    left: -50%;
+    width: 40%;
+    height: 100%;
+    background-color: var(--background-color);
+    box-shadow: 2px 0 10px var(--box-shadow);
+    z-index: 1001;
+    padding: 20px;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
 
+.edit-panel:target {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    left: 0; 
+}
+
+.panel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.edit-panel:target ~ .panel-overlay {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.edit-btn {
+    position: absolute;
+    top: 150px;
+    right: 5%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    z-index: 10;
+    width: 21px;
+    height: 21px;
+}
+
+.edit-btn:hover {
+    background-color: var(--border-color);
+    transform: scale(1.1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 5px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.close-btn:hover {
+    background-color: var(--border-color);
+    color: var(--primary-color);
+}
+
+.form-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h3 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.edit-heading-btn {
+    font-size: 12px;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background: none;
+    border: none;
+}
+
+.edit-heading-btn:hover {
+    background-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--box-color);
+    color: var(--text-color);
+    font-family: inherit;
+    resize: vertical;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.entries-container {
+    margin-bottom: 10px;
+}
+
+.entry-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--box-color);
+}
+
+.entry-item input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 5px;
+    color: var(--text-color);
+}
+
+.entry-item input:focus {
+    outline: none;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: var(--error);
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.remove-btn:hover {
+    background-color: var(--error);
+    color: white;
+}
+
+.add-entry-btn {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px dashed var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.add-entry-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.save-btn {
+    padding: 12px 24px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.save-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.cancel-btn {
+    padding: 12px 24px;
+    background-color: var(--text-muted);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.cancel-btn:hover {
+    background-color: #6b7280;
+}
+
+
+.profile-container {
+    position: relative;
+    z-index: 1;
+}
+
+.edit-panel:target ~ .container .profile-container {
+    margin-right: 0; 
+}
+
+
+
+
+@media (max-width: 768px) {
+    .edit-panel {
+        width: 85%;
+        left: -85%;
+    }
+    
+    .edit-panel:target {
+        left: 0; 
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .save-btn,
+    .cancel-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .edit-panel {
+        width: 100%;
+        left: -100%;
+    }
+    
+    .edit-panel:target {
+        left: 0;
+    }
+}
 
 @media (max-width: 1200px) {
   .profile-container {

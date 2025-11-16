@@ -30,172 +30,106 @@
       </div>
     </div>
 
+    <!-- Edit Panel -->
+    <div id="edit-panel" class="edit-panel">
+      <a href="#" class="close-btn">&times;</a>
+      <h2>Edit Profile</h2>
 
-    <!-- Sliding panel -->
-    <div id="slidingPanel" class="profile-edit-panel">
-      <button id="closePanel">&times;</button>
-      <h1 id="title" class="editTitle">Edit your profile</h1>
-      <form id="formEdit" class="profile-edit-form">
-        <div class="grid">
-          <div class="inp" id="fname-div">
-            <label for="fname">First Name</label>
-            <input class="holder" type="text" name="fname" id="fname" />
-          </div>
-          <div class="inp" id="lname-div">
-            <label for="lname">Last Name</label>
-            <input class="holder" type="text" name="lname" id="lname" />
-          </div>
-        </div>
-
-        <div class="inp" id="headline-div">
-          <label for="headline">Headline</label>
-          <input
-            class="holder"
-            type="text"
-            name="headline"
-            id="headline"
-            placeholder="e.g., Software Engineer"
-          />
-        </div>
-
-        <div class="inp" id="bio-div">
-          <label for="bio">Bio</label>
-          <textarea
-            class="holder"
-            name="bio"
-            id="bio"
-            placeholder="Short professional bio"
-          ></textarea>
-        </div>
-
-        <div class="inp" id="about-div">
-          <label for="about-edit">About</label>
-          <textarea
-            class="holder"
-            name="about"
-            id="about-edit"
-            placeholder="Detailed information about yourself"
-          ></textarea>
-        </div>
-
-        <!-- Dynamic Experience Section -->
+      <form>
+        <!-- Profile Section -->
         <div class="form-section">
-          <h3>Experience</h3>
-          <div id="experience-forms">
-            <div class="dynamic-form-item">
+          <div class="section-header">
+            <h3>Profile</h3>
+          </div>
+          <div class="input-group">
+            <textarea
+              class="form-input"
+              placeholder="Enter your professional summary..."
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Education Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <h3>Education</h3>
+          </div>
+          <div class="entries-container">
+            <div class="entry-item">
               <input
-                class="holder"
                 type="text"
-                placeholder="Job Title"
-                data-field="title"
+                class="form-input"
+                placeholder="Degree, Institution, Duration"
               />
-              <input
-                class="holder"
-                type="text"
-                placeholder="Company"
-                data-field="company"
-              />
-              <input
-                class="holder"
-                type="text"
-                placeholder="Start Date"
-                data-field="startDate"
-              />
-              <input
-                class="holder"
-                type="text"
-                placeholder="End Date"
-                data-field="endDate"
-              />
-              <textarea
-                class="holder"
-                placeholder="Description"
-                data-field="description"
-              ></textarea>
-              <button type="button" class="remove-btn">Remove</button>
+              <button type="button" class="remove-btn">&times;</button>
             </div>
           </div>
-          <button type="button" id="add-experience" class="add-btn">
-            + Add Experience
-          </button>
+          <button type="button" class="add-entry-btn">+ Add Entry</button>
         </div>
 
-        <!-- Dynamic Education Section -->
+        <!-- Courses Section -->
         <div class="form-section">
-          <h3>Education</h3>
-          <div id="education-forms">
-            <div class="dynamic-form-item">
+          <div class="section-header">
+            <h3>Courses</h3>
+          </div>
+          <div class="entries-container">
+            <div class="entry-item">
               <input
-                class="holder"
                 type="text"
-                placeholder="Degree"
-                data-field="degree"
+                class="form-input"
+                placeholder="Course Name, Institution, Duration"
               />
-              <input
-                class="holder"
-                type="text"
-                placeholder="Institution"
-                data-field="institution"
-              />
-              <input
-                class="holder"
-                type="text"
-                placeholder="Year"
-                data-field="year"
-              />
-              <button type="button" class="remove-btn">Remove</button>
+              <button type="button" class="remove-btn">&times;</button>
             </div>
           </div>
-          <button type="button" id="add-education" class="add-btn">
-            + Add Education
-          </button>
+          <button type="button" class="add-entry-btn">+ Add Entry</button>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <h3>Projects</h3>
+          </div>
+          <div class="entries-container">
+            <div class="entry-item">
+              <input
+                type="text"
+                class="form-input"
+                placeholder="Project Name, Description, Date"
+              />
+              <button type="button" class="remove-btn">&times;</button>
+            </div>
+          </div>
+          <button type="button" class="add-entry-btn">+ Add Entry</button>
         </div>
 
         <!-- Skills Section -->
         <div class="form-section">
-          <h3>Skills</h3>
-          <div class="skills-input-section">
-            <div class="skill-category">
-              <h4>Programming Skills</h4>
-              <div id="programming-skills">
-                <div class="skill-input-item">
-                  <input
-                    type="text"
-                    placeholder="Programming skill"
-                    value="JavaScript"
-                  />
-                  <button type="button" class="remove-btn">Remove</button>
-                </div>
-              </div>
-            </div>
-            <div class="skill-category">
-              <h4>Soft Skills</h4>
-              <div id="soft-skills">
-                <div class="skill-input-item">
-                  <input
-                    type="text"
-                    placeholder="Soft skill"
-                    value="Communication"
-                  />
-                  <button type="button" class="remove-btn">Remove</button>
-                </div>
-              </div>
+          <div class="section-header">
+            <h3>Skills</h3>
+          </div>
+          <div class="entries-container">
+            <div class="entry-item">
+              <input
+                type="text"
+                class="form-input"
+                placeholder="Skill category: skill1, skill2, skill3"
+              />
+              <button type="button" class="remove-btn">&times;</button>
             </div>
           </div>
-          <button type="button" id="add-skill" class="add-btn">
-            + Add Skill
-          </button>
+          <button type="button" class="add-entry-btn">+ Add Entry</button>
         </div>
 
         <div class="form-actions">
-          <input type="submit" value="Save Changes" class="submit" />
-          <button type="button" id="cancel-edit" class="cancel-btn">
-            Cancel
-          </button>
+          <button type="submit" class="save-btn">Save Profile</button>
+          <a href="#" class="cancel-btn">Cancel</a>
         </div>
       </form>
     </div>
-    <div id="panelOverlay"></div>
+
+    <!-- Overlay -->
+    <a href="#" class="panel-overlay"></a>
 
     <a href="./admin-panel.html" class="admin-panel-link">
       <svg
@@ -447,208 +381,210 @@
           </button>
         </div>
       </nav>
+      <div class="main-content">
+        <!---->
+        <div id="view-photo">
+          <h3>Upload Image</h3>
+          <img
+            src="../ImageStorage/profile.jpeg"
+            alt="Profile Photo"
+            class="profile-photo2"
+          />
+        </div>
 
-      <!---->
-      <div id="view-photo">
-        <h3>Upload Image</h3>
-        <img
-          src="../ImageStorage/profile.jpeg"
-          alt="Profile Photo"
-          class="profile-photo2"
-        />
-      </div>
+        <!---->
+        <div class="profile-container">
+          <div class="cover-photo">
+            <a class="cover-btn edit">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                <path
+                  fill="currentColor"
+                  d="M100.4 417.2C104.5 402.6 112.2 389.3 123 378.5L304.2 197.3L338.1 163.4C354.7 180 389.4 214.7 442.1 267.4L476 301.3L442.1 335.2L260.9 516.4C250.2 527.1 236.8 534.9 222.2 539L94.4 574.6C86.1 576.9 77.1 574.6 71 568.4C64.9 562.2 62.6 553.3 64.9 545L100.4 417.2zM156 413.5C151.6 418.2 148.4 423.9 146.7 430.1L122.6 517L209.5 492.9C215.9 491.1 221.7 487.8 226.5 483.2L155.9 413.5zM510 267.4C493.4 250.8 458.7 216.1 406 163.4L372 129.5C398.5 103 413.4 88.1 416.9 84.6C430.4 71 448.8 63.4 468 63.4C487.2 63.4 505.6 71 519.1 84.6L554.8 120.3C568.4 133.9 576 152.3 576 171.4C576 190.5 568.4 209 554.8 222.5C551.3 226 536.4 240.9 509.9 267.4z"
+                />
+              </svg>
+            </a>
+            <img
+              id="photo"
+              src="../ImageStorage/profile.jpeg"
+              alt="Profile Photo"
+              class="profile-photo"
+            />
+          </div>
 
-      <!---->
-      <div class="profile-container">
-        <div class="cover-photo">
-          <a class="cover-btn edit">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+          <a href="#edit-panel" class="edit-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 640 640"
+              width="21"
+              height="21"
+            >
               <path
                 fill="currentColor"
                 d="M100.4 417.2C104.5 402.6 112.2 389.3 123 378.5L304.2 197.3L338.1 163.4C354.7 180 389.4 214.7 442.1 267.4L476 301.3L442.1 335.2L260.9 516.4C250.2 527.1 236.8 534.9 222.2 539L94.4 574.6C86.1 576.9 77.1 574.6 71 568.4C64.9 562.2 62.6 553.3 64.9 545L100.4 417.2zM156 413.5C151.6 418.2 148.4 423.9 146.7 430.1L122.6 517L209.5 492.9C215.9 491.1 221.7 487.8 226.5 483.2L155.9 413.5zM510 267.4C493.4 250.8 458.7 216.1 406 163.4L372 129.5C398.5 103 413.4 88.1 416.9 84.6C430.4 71 448.8 63.4 468 63.4C487.2 63.4 505.6 71 519.1 84.6L554.8 120.3C568.4 133.9 576 152.3 576 171.4C576 190.5 568.4 209 554.8 222.5C551.3 226 536.4 240.9 509.9 267.4z"
               />
             </svg>
           </a>
-          <img
-            id="photo"
-            src="../ImageStorage/profile.jpeg"
-            alt="Profile Photo"
-            class="profile-photo"
-          />
-        </div>
+          <div class="profile-section">
+            <div class="name">Profile name</div>
+            <div class="headline"></div>
 
-        <div class="edit-btn">
-          <svg
-            id="profile-edit"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 640 640"
-          >
-            <path
-              fill="currentColor"
-              d="M100.4 417.2C104.5 402.6 112.2 389.3 123 378.5L304.2 197.3L338.1 163.4C354.7 180 389.4 214.7 442.1 267.4L476 301.3L442.1 335.2L260.9 516.4C250.2 527.1 236.8 534.9 222.2 539L94.4 574.6C86.1 576.9 77.1 574.6 71 568.4C64.9 562.2 62.6 553.3 64.9 545L100.4 417.2zM156 413.5C151.6 418.2 148.4 423.9 146.7 430.1L122.6 517L209.5 492.9C215.9 491.1 221.7 487.8 226.5 483.2L155.9 413.5zM510 267.4C493.4 250.8 458.7 216.1 406 163.4L372 129.5C398.5 103 413.4 88.1 416.9 84.6C430.4 71 448.8 63.4 468 63.4C487.2 63.4 505.6 71 519.1 84.6L554.8 120.3C568.4 133.9 576 152.3 576 171.4C576 190.5 568.4 209 554.8 222.5C551.3 226 536.4 240.9 509.9 267.4z"
-            />
-          </svg>
-        </div>
-        <div class="profile-section">
-          <div class="name">Profile name</div>
-          <div class="headline"></div>
+            <div class="about">
+              <h2>About</h2>
+              <p></p>
+            </div>
 
-          <div class="about">
-            <h2>About</h2>
-            <p></p>
-          </div>
+            <div class="experience">
+              <h2>Experience</h2>
+            </div>
 
-          <div class="experience">
-            <h2>Experience</h2>
-          </div>
+            <div class="education">
+              <h2>Education</h2>
+              <p>
+                <strong></strong>
+              </p>
+            </div>
 
-          <div class="education">
-            <h2>Education</h2>
-            <p>
-              <strong></strong>
-            </p>
-          </div>
-
-          <div class="skills">
-            <h2>Skills</h2>
+            <div class="skills">
+              <h2>Skills</h2>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div id="blurred-background"></div>
+      <div id="blurred-background"></div>
 
-    <div id="companyreg">
-      <button id="close-btn">
-        <span class="material-symbols-outlined" id="close"> close </span>
-      </button>
-      <h1 id="title">Register Your Company</h1>
-      <form id="form">
-        <div class="inp" id="name">
-          <input
-            class="holder"
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Company Name"
-            required
-          />
-        </div>
-        <div class="inp" id="email-div">
-          <input
-            class="holder"
-            type="text"
-            name="email"
-            id="email"
-            placeholder="example@company.com"
-            required
-          />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="email-icon"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
-            />
-          </svg>
-        </div>
-        <div class="inp" id="phone">
-          <input
-            type="tel"
-            id="number"
-            name="number"
-            required
-            class="holder"
-            placeholder="Phone Number"
-          />
-        </div>
-        <div class="address">
-          <div class="inp" id="street-address">
+      <div id="companyreg">
+        <button id="close-btn">
+          <span class="material-symbols-outlined" id="close"> close </span>
+        </button>
+        <h1 id="title">Register Your Company</h1>
+        <form id="form">
+          <div class="inp" id="name">
             <input
               class="holder"
               type="text"
-              name="street-address"
-              id="street-address"
-              placeholder="Street Address"
+              name="name"
+              id="name"
+              placeholder="Company Name"
               required
             />
           </div>
-          <div class="grid">
-            <div class="inp" id="city">
+          <div class="inp" id="email-div">
+            <input
+              class="holder"
+              type="text"
+              name="email"
+              id="email"
+              placeholder="example@company.com"
+              required
+            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="email-icon"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+              />
+            </svg>
+          </div>
+          <div class="inp" id="phone">
+            <input
+              type="tel"
+              id="number"
+              name="number"
+              required
+              class="holder"
+              placeholder="Phone Number"
+            />
+          </div>
+          <div class="address">
+            <div class="inp" id="street-address">
               <input
                 class="holder"
                 type="text"
-                name="city"
-                id="city"
-                placeholder="City"
+                name="street-address"
+                id="street-address"
+                placeholder="Street Address"
                 required
               />
             </div>
-            <div class="inp" id="state">
-              <input
-                class="holder"
-                type="text"
-                name="state"
-                id="state"
-                placeholder="State / Province"
-                required
-              />
+            <div class="grid">
+              <div class="inp" id="city">
+                <input
+                  class="holder"
+                  type="text"
+                  name="city"
+                  id="city"
+                  placeholder="City"
+                  required
+                />
+              </div>
+              <div class="inp" id="state">
+                <input
+                  class="holder"
+                  type="text"
+                  name="state"
+                  id="state"
+                  placeholder="State / Province"
+                  required
+                />
+              </div>
+            </div>
+            <div class="grid">
+              <div class="inp" id="postal">
+                <input
+                  class="holder"
+                  type="text"
+                  name="postal"
+                  id="postal"
+                  placeholder="Postal / Zip Code"
+                  required
+                />
+              </div>
+              <div class="inp" id="country">
+                <input
+                  class="holder"
+                  type="text"
+                  name="country"
+                  id="country"
+                  placeholder="Country"
+                  required
+                />
+              </div>
             </div>
           </div>
-          <div class="grid">
-            <div class="inp" id="postal">
-              <input
-                class="holder"
-                type="text"
-                name="postal"
-                id="postal"
-                placeholder="Postal / Zip Code"
-                required
-              />
-            </div>
-            <div class="inp" id="country">
-              <input
-                class="holder"
-                type="text"
-                name="country"
-                id="country"
-                placeholder="Country"
-                required
-              />
-            </div>
+          <div class="inp" id="position">
+            <input
+              class="holder"
+              type="text"
+              name="position"
+              id="position"
+              placeholder="Position"
+              required
+            />
           </div>
-        </div>
-        <div class="inp" id="position">
-          <input
-            class="holder"
-            type="text"
-            name="position"
-            id="position"
-            placeholder="Position"
-            required
-          />
-        </div>
-        <div class="inp" id="link">
-          <input
-            class="holder"
-            type="text"
-            name="link"
-            id="link"
-            placeholder="Company URL"
-            required
-          />
-        </div>
+          <div class="inp" id="link">
+            <input
+              class="holder"
+              type="text"
+              name="link"
+              id="link"
+              placeholder="Company URL"
+              required
+            />
+          </div>
 
-        <div class="inp">
-          <input type="submit" value="Register" class="submit" />
-        </div>
-      </form>
+          <div class="inp">
+            <input type="submit" value="Register" class="submit" />
+          </div>
+        </form>
+      </div>
     </div>
 
     <script src="../assets/js/themeToggle.js"></script>
