@@ -11,6 +11,7 @@ CREATE TABLE company(
     registered_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     company_url VARCHAR(255) NOT NULL,
     user_position VARCHAR(255) NOT NULL,
+    description VARCHAR(500) ,
     FOREIGN KEY (user_id) REFERENCES users(Id) ON DELETE CASCADE
     	
 );
