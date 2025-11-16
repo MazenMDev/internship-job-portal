@@ -1358,11 +1358,20 @@ body.popup-open #blurred-background{
   #companyreg {
     top: 0px;
     left: 0px;
+    height: 100%;
+    width: 100%;
     transform: none;
     box-sizing: border-box;
     padding-top:0px;
     margin-top:0px;
   }
+  #companyreg #title{
+    margin-top: 60px;
+  }
+  #companyreg form {
+    margin-top: 60px;
+  }
+
   footer {
     grid-template-columns: 1fr 1fr;
     padding: 20px;
