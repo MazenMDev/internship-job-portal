@@ -941,6 +941,10 @@ body.popup-open #blurred-background{
   display: block;
 }
 
+body.open-company-popup #blurred-background{
+  display: block;
+}
+
 @keyframes loadingAnimation {
   0% {
     transform: translateX(-100%);

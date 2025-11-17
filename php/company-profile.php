@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
 
     $session_id = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : null;
 
-    $stmt = $conn->prepare("SELECT user_id AS Id, company_name, company_email, phone_number, street_address, city, state, zip_code, country, user_position, company_url FROM company WHERE user_id = ?");
+    $stmt = $conn->prepare("SELECT user_id AS Id, company_name, company_email, phone_number, street_address, city, state, zip_code, country, user_position, company_url , description FROM company WHERE user_id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();

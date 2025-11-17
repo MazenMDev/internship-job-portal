@@ -277,6 +277,76 @@ label {
   color: var(--text-color);
 }
 
+#cvCard {
+  display: flex;
+  gap: 12px;
+  padding: 4px 8px;
+  background-color: var(--box-color);
+  border-radius: 16px;
+  border: 2px solid var(--border-color);
+  text-decoration: none;
+  color: var(--text-color);
+  max-width: max-content;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+#cvCard:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  cursor: pointer;
+  border: 2px solid var(--primary-color);
+}
+#cvCard:hover .cvIcon {
+  stroke: var(--background-color);
+  border: 2px solid var(--background-color);
+}
+
+#cvCard:hover .uploadName, #cvCard:hover .cvMain span, #cvCard:hover .cvMain span svg {
+  color: var(--background-color);
+}
+#cvCard:hover .cvMain span svg {
+  stroke: var(--background-color);
+}
+.cvIcon {
+  stroke: var(--primary-color);
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  padding: 3px;
+  margin-top: 0;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cvMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 0 !important;
+}
+
+.uploadName {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0px !important;
+}
+
+.cvMain span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--secondary-color);
+}
+.cvMain span svg {
+  stroke: var(--secondary-color);
+  width: 16px;
+  height: 16px;
+}
+
 @media (max-width: 1200px) {
   .profile-container {
     width: 100%;

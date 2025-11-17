@@ -247,14 +247,14 @@ function fetchProfileData() {
   }
 }
 
-function showCompanyInfo(companyData , data){
+function showCompanyInfo(companyData){
 
   document.querySelector(".profile-section").innerHTML = `
     <div class="name">${companyData.company_name}</div>
     <div class="headline">${companyData.company_email}</div>
     <div class="about">
       <h2>About Us</h2>
-      <p>${data.Bio || ""}</p>
+      <p>${companyData.description || ""}</p>
     </div>
 
     <div class"phone-number">
@@ -290,14 +290,14 @@ function showCompanyInfo(companyData , data){
   `;
 }
 
-function changeFormToCompanyProfile(companyData , data){
+function changeFormToCompanyProfile(companyData){
   document.querySelector(".editTitle").textContent = "Edit your Company profile";
   document.getElementById("formEdit").innerHTML = `
           <div class="inp" id="name-div">
             <label for="companyName">Company Name</label
             ><input class="holder" type="text" name="companyName" id="companyName" />
           </div>
-        <div class="inp" id="bio-div">
+        <div class="inp" id="desc-div">
           <label for="companyDesc">Description</label>
           <textarea class="holder" type="text" name="companyDesc" id="companyDesc"></textarea>
         </div>
@@ -342,7 +342,7 @@ function changeFormToCompanyProfile(companyData , data){
         </div>
   `;
   document.getElementById("companyName").value = companyData.company_name || "";
-  document.getElementById("companyDesc").value = data.Bio || "";
+  document.getElementById("companyDesc").value = companyData.description || "";
   document.getElementById("phone-number").value = companyData.phone_number || "";
   document.getElementById("website").value = companyData.company_url || "";
   document.getElementById("companyCountry").value = companyData.country || "";

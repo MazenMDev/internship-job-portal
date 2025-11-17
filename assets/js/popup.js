@@ -67,6 +67,7 @@ function createPopUp(mail = false , password = true){
         <h2>Change Email</h2>
         <input type="email"  id="newEmail" required placeholder="Enter new email" />
         <input type="password" id="currentPassword" required placeholder="Enter current password" />
+        <p class="errorPopup"></p>
         <button id="submitEmailBtn">Submit</button>
       </form>
     `;
@@ -90,11 +91,11 @@ function createPopUp(mail = false , password = true){
         if(data.status === "success"){
           
           const error = document.querySelector(".errorPopup");
-          error.textContent = "Password changed successfully.";
+          error.textContent = "Email changed successfully.";
           error.style.color = "var(--success)";
           setTimeout(() => {
             document.body.classList.remove("popup-open");
-            document.body.removeChild(popupPass);
+            document.body.removeChild(popupMail);
             error.style.color = "var(--error)";
             
             error.textContent = "";
