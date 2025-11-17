@@ -290,7 +290,7 @@ function showCompanyInfo(companyData){
   `;
 }
 
-function changeFormToCompanyProfile(companyData , data){
+function changeFormToCompanyProfile(companyData){
   document.querySelector(".editTitle").textContent = "Edit your Company profile";
   document.getElementById("formEdit").innerHTML = `
           <div class="inp" id="name-div">
@@ -342,7 +342,7 @@ function changeFormToCompanyProfile(companyData , data){
         </div>
   `;
   document.getElementById("companyName").value = companyData.company_name || "";
-  document.getElementById("companyDesc").value = data.Bio || "";
+  document.getElementById("companyDesc").value = companyData.description || "";
   document.getElementById("phone-number").value = companyData.phone_number || "";
   document.getElementById("website").value = companyData.company_url || "";
   document.getElementById("companyCountry").value = companyData.country || "";
