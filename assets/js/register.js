@@ -82,7 +82,7 @@ form.addEventListener("submit", async (e) => {
     return;
   }
   
-  if(f_name.value.match(numbers) || l_name.value.match(numbers)){
+  if (numbers.test(f_name) || numbers.test(l_name)) {
     errorMsg.textContent = "Names cannot contain numbers.";
     return;
   }

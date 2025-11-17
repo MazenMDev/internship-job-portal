@@ -5,7 +5,7 @@
     transform: translate(-50%, -50%);
     width: clamp(300px, 90%, 1200px);
     max-height: 90vh;
-    overflow-y: auto;
+    overflow-y: hidden;
     background-color: transparent;
     z-index: 2000;
 }
@@ -37,6 +37,7 @@
     background-color: var(--background-color);
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    overflow-y: auto;
 }
 .top{
   background-color: var(--primary-color);

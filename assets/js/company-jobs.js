@@ -104,15 +104,17 @@ document.getElementById("post-job-button").addEventListener("click", () => {
     document.body.appendChild(popup);
     document.body.classList.add("open-company-popup");
     document.getElementById("blurred-background").addEventListener("click", () => {
-        document.body.removeChild(popup);
-        if(document.body.classList.contains("open-company-popup"))
+        if(document.body.contains(popup)){
+            document.body.removeChild(popup);
+        }
             document.body.classList.remove("open-company-popup");
     });
 
     document.getElementById("close-btn-company").addEventListener("click", () => {
-        document.body.removeChild(popup);
-        if(document.body.classList.contains("open-company-popup"))
-            document.body.classList.remove("open-company-popup");
+        if(document.body.contains(popup)){
+            document.body.removeChild(popup);
+        }
+        document.body.classList.remove("open-company-popup");
     });
 
 
