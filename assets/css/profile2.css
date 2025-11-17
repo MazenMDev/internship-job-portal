@@ -551,7 +551,7 @@ label {
   display:none;
   max-height: 0px;
   transition: max-height 0.6s ease;
-  padding:10px;
+  padding:25px;
   overflow:hidden;
   background-color: var(--background-color);
   border-bottom-left-radius: 5px;
