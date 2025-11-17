@@ -247,14 +247,14 @@ function fetchProfileData() {
   }
 }
 
-function showCompanyInfo(companyData , data){
+function showCompanyInfo(companyData){
 
   document.querySelector(".profile-section").innerHTML = `
     <div class="name">${companyData.company_name}</div>
     <div class="headline">${companyData.company_email}</div>
     <div class="about">
       <h2>About Us</h2>
-      <p>${data.Bio || ""}</p>
+      <p>${companyData.description || ""}</p>
     </div>
 
     <div class"phone-number">
@@ -297,7 +297,7 @@ function changeFormToCompanyProfile(companyData , data){
             <label for="companyName">Company Name</label
             ><input class="holder" type="text" name="companyName" id="companyName" />
           </div>
-        <div class="inp" id="bio-div">
+        <div class="inp" id="desc-div">
           <label for="companyDesc">Description</label>
           <textarea class="holder" type="text" name="companyDesc" id="companyDesc"></textarea>
         </div>
