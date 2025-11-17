@@ -669,7 +669,7 @@ label {
 }
 
 .custom-cv-button:hover {
-  background-color: #d4d4d4;
+  background-color: var(--box-color);
 }
 
 .button-icon {
@@ -682,6 +682,17 @@ label {
   text-align: center; 
   flex-grow: 1; 
   white-space: nowrap; 
+}
+
+.entry-textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px; /* Space between entries */
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    resize: vertical; /* Allow user to resize vertically */
+    min-height: 80px; /* Minimum height for a decent area */
 }
 
 
