@@ -4,16 +4,17 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: clamp(300px, 90%, 1200px);
-    max-height: 90vh;
+    max-height: 95vh;
     overflow-y: hidden;
     background-color: transparent;
     z-index: 2000;
 }
 
 #close-btn-company {
-    position: absolute;
-    top: 15px;
-    right: 20px;
+    position: fixed;
+    top: 50px;
+    right: 40px;
+    z-index: 2100;
     background-color: transparent;
     border: none;
     padding: 10px;
@@ -43,16 +44,21 @@
 }
 .container-company-popup::-webkit-scrollbar {
   width: 8px;
+  right: 10px;
+  border-radius: 4px;
 }
 .container-company-popup::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar-color);
+  background-color: var(--scrollBar);
   border-radius: 4px;
 }
 .container-company-popup::-webkit-scrollbar-track {
-  background-color: var(--scrollbar-track-color);
+  background-color: var(--box-color);
+  border-radius: 4px;
 }
 
 .top{
+  position: sticky;
+  top: 0;
   background-color: var(--primary-color);
   border-radius: 20px 20px 0px 0px;
   height: 100px;
