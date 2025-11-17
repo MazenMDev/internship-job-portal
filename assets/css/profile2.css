@@ -372,9 +372,6 @@ label {
   color: var(--primary-color);
 }
 
-.form-section {
-}
-
 .section-header {
   display: flex;
   justify-content: space-between;
