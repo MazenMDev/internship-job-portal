@@ -279,10 +279,9 @@ label {
 
 .edit-panel {
     position: fixed;
-    top: 0;
-    left: -50%;
-    width: 40%;
-    height: 100%;
+    top: 80px;
+    width: 30%;
+    height: calc(100% - 80px);
     background-color: var(--background-color);
     box-shadow: 2px 0 10px var(--box-shadow);
     z-index: 1001;
@@ -292,6 +291,10 @@ label {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    align-items: center;
 }
 
 .edit-panel:target {
@@ -370,19 +373,16 @@ label {
 }
 
 .form-section {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
+
 }
 
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
 }
 
 .section-header h3 {
-    margin: 0;
     color: var(--primary-color);
     font-size: 18px;
 }
@@ -533,99 +533,23 @@ label {
     margin-right: 0; 
 }
 
-.profile-toggle{
-    color: var(--text-color);
-    background-color: var(--background-color);
-    width: 500%;
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 18px 22px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
-    transition: background 0.2s;
-    font-size: 20px;
-    font-weight: 600;
+.edit-panel .form-section button:hover {
+    background: var(--hover-color, #ddd);
 }
 
-.education-toggle{
-    color: var(--text-color);
-    background-color: var(--background-color);
-    width: 380%;
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 18px 22px;
-    display: flex;
-    align-items: center;
+.edit-panel .form-section button {
+    width: 100% !important;        
+    display: flex;                 
     justify-content: space-between;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
-    transition: background 0.2s;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.courses-toggle{
-    color: var(--text-color);
-    background-color: var(--background-color);
-    width: 430%;
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 18px 22px;
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
+    background: #fbecec;
     border: none;
-    outline: none;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
-    transition: background 0.2s;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.projects-toggle{
-    color: var(--text-color);
-    background-color: var(--background-color);
-    width: 430%;
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 18px 22px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    border-radius: 8px;
     cursor: pointer;
-    border: none;
-    outline: none;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
-    transition: background 0.2s;
     font-size: 20px;
+    box-sizing: border-box;
     font-weight: 600;
-}
-
-.skills-toggle{
-    color: var(--text-color);
-    background-color: var(--background-color);
-    width: 550%;
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 18px 22px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
-    transition: background 0.2s;
-    font-size: 20px;
-    font-weight: 600;
+    padding: 0px 0px;
 }
 
 
@@ -709,7 +633,7 @@ label {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px) { 
   #edit-form {
     top: 0%;
     left: 0;
