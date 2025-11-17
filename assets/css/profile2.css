@@ -531,24 +531,45 @@ label {
   margin-right: 0;
 }
 
-.edit-panel .form-section button:hover {
-  background: var(--hover-color, #ddd);
+.accordion{
+  width:440px;
 }
 
-.edit-panel .form-section button {
-  width: 100% !important;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fbecec;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 20px;
-  box-sizing: border-box;
-  font-weight: 600;
-  padding: 0px 0px;
+.accordion-item{
+  margin-bottom: 5px;
 }
+
+.accordion-header{
+  background-color: var(--box-color);
+  padding:10px;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-radius:6px;
+  box-shadow:2px 2px 3px var(--box-shadow);
+}
+
+.accordion-content{
+  display:none;
+  max-height: 0px;
+  transition: max-height 0.6s ease;
+  padding:10px;
+  overflow:hidden;
+  background-color: var(--background-color);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.accordion-header .arrow{
+  transition: transform 0.3s ease;
+}
+
+.accordion-content.active{
+  display:block;
+  max-height:1000px;
+}
+
 
 @media (max-width: 768px) {
   .edit-panel {
