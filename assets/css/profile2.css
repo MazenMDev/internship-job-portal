@@ -279,10 +279,9 @@ label {
 
 .edit-panel {
     position: fixed;
-    top: 0;
-    left: -50%;
-    width: 40%;
-    height: 100%;
+    top: 80px;
+    width: 30%;
+    height: calc(100% - 80px);
     background-color: var(--background-color);
     box-shadow: 2px 0 10px var(--box-shadow);
     z-index: 1001;
@@ -292,6 +291,10 @@ label {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    align-items: center;
 }
 
 .edit-panel:target {
@@ -370,20 +373,16 @@ label {
 }
 
 .form-section {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
+
 }
 
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
 }
 
 .section-header h3 {
-    margin: 0;
     color: var(--primary-color);
     font-size: 18px;
 }
@@ -534,7 +533,24 @@ label {
     margin-right: 0; 
 }
 
+.edit-panel .form-section button:hover {
+    background: var(--hover-color, #ddd);
+}
 
+.edit-panel .form-section button {
+    width: 100% !important;        
+    display: flex;                 
+    justify-content: space-between;
+    align-items: center;
+    background: #fbecec;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 20px;
+    box-sizing: border-box;
+    font-weight: 600;
+    padding: 0px 0px;
+}
 
 
 @media (max-width: 768px) {
@@ -617,7 +633,7 @@ label {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px) { 
   #edit-form {
     top: 0%;
     left: 0;
