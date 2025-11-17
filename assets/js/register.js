@@ -87,7 +87,7 @@ form.addEventListener("submit", async (e) => {
     return;
   }
   let specialChars = /[!@#$%^&*(),.?":{}|<>]/g;
-  if (f_name.value.match(specialChars) || l_name.value.match(specialChars)) {
+  if (specialChars.test(f_name) || specialChars.test(l_name)) {
     errorMsg.textContent = "Names cannot contain special characters.";
     return;
   }

@@ -38,7 +38,20 @@
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(90vh - 80px);
 }
+.container-company-popup::-webkit-scrollbar {
+  width: 8px;
+}
+.container-company-popup::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color);
+  border-radius: 4px;
+}
+.container-company-popup::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-color);
+}
+
 .top{
   background-color: var(--primary-color);
   border-radius: 20px 20px 0px 0px;
