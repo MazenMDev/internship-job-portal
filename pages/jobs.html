@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" />
     <link rel="stylesheet" href="../assets/css/jobs.css" />
     <link rel="stylesheet" href="../assets/css/job-form.css" />
+    <link rel="stylesheet" href="../assets/css/job-company-form.css" />
     <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png" />
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=close,search"
@@ -201,7 +203,7 @@
               </div>
             </a>
 
-          <div class="dropdown-content">
+            <div class="dropdown-content">
               <div class="profileDataDiv">
                 <img
                   src="../assets/imgs/DefaultProfile/profile.jpeg"
@@ -233,8 +235,12 @@
                   <span class="arrow">▼</span>
                 </button>
                 <div class="settings-menu" id="settingsMenu">
-                  <button class="settings-btn" id="changeEmailBtn">Change Email</button>
-                  <button class="settings-btn" id="forgotPasswordBtn">Change Password</button>
+                  <button class="settings-btn" id="changeEmailBtn">
+                    Change Email
+                  </button>
+                  <button class="settings-btn" id="forgotPasswordBtn">
+                    Change Password
+                  </button>
                   <a href="#" class="settings-btn signout-btn">Sign Out</a>
                 </div>
               </div>
@@ -277,6 +283,89 @@
           </button>
         </div>
       </nav>
+      <div id="company-job">
+        <h1 id="post-job-heading" class="company-job-heading">
+          Welcome, <span class="companyName">JobConnect</span>
+        </h1>
+        <p class="company-job-subtitle">
+          Create and publish a new job listing for your company.
+        </p>
+
+        <div class="company-posting">
+          <div class="company-stats-grid">
+            <div class="stat-item">
+              <span class="stat-number">25</span>
+              <span class="stat-label">Active Listings</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">120</span>
+              <span class="stat-label">Applications Received</span>
+            </div>
+          </div>
+
+          <div id="company-posted-container">
+            <button id="post-job-button">Post a Job</button>
+            <h2 class="posted-jobs-heading">Your Posted Jobs</h2>
+
+            <div class="company-posted-grid">
+              <div class="posted-job">
+                <div class="svg-job-background"></div>
+                <span class="company-job-title">Software Engineer</span>
+                <div class="job-status-container">
+                  <div class="status-indicator"></div>
+                  <span class="job-status">In Active</span>
+                </div>
+                <span class="applicant-count">45 Applicants</span>
+                <svg
+                  class="manage-company-form"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"
+                >
+                  <circle cx="12" cy="12" r="1" />
+                  <circle cx="12" cy="5" r="1" />
+                  <circle cx="12" cy="19" r="1" />
+                </svg>
+              </div>
+
+              <div class="posted-job">
+                <div class="svg-job-background"></div>
+                <span class="company-job-title">Software Engineer</span>
+                <div class="job-status-container">
+                  <div class="status-indicator active"></div>
+                  <span class="job-status">Active</span>
+                </div>
+                <span class="applicant-count">45 Applicants</span>
+                <svg
+                  class="manage-company-form"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"
+                >
+                  <circle cx="12" cy="12" r="1" />
+                  <circle cx="12" cy="5" r="1" />
+                  <circle cx="12" cy="19" r="1" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="main-container">
         <aside class="job-filter-sidebar">
           <button id="close-filter-button">x</button>
@@ -573,9 +662,9 @@
     <script src="../assets/js/Sessions/notLoggedSession.js"></script>
     <script src="../assets/js/navBar.js"></script>
     <script src="../assets/js/themeToggle.js"></script>
+    <script src="../assets/js/company-jobs.js"></script>
     <script type="module" src="../assets/js/jobs.js"></script>
     <script type="module" src="../assets/js/jobForm.js"></script>
     <script src="../assets/js/popup.js"></script>
-
   </body>
 </html>

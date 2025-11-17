@@ -1,13 +1,42 @@
-
-body{
-    --background-color: #b9bcbe;
+.popup-form-company{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(300px, 90%, 1200px);
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: transparent;
+    z-index: 2000;
 }
-.container{
-    max-width: 900px;
+
+#close-btn-company {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: background-color 0.2s ease;
+
+}
+
+#close-btn-company:hover {
+    background-color: white;
+}
+
+.container-company-popup{
+    position: relative;
+    width: 100%;
     margin: 40px auto;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--background-color);
     border-radius: 20px;
-     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 .top{
   background-color: var(--primary-color);
