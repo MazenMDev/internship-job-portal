@@ -23,16 +23,45 @@ $company_id = $company['user_id'];
 
 // Get jobs
 $statjob = $conn->prepare('
-    SELECT jobs.*, job_skills.skill, job_tags.tag
-    FROM jobs
-    LEFT JOIN job_skills ON job_skills.job_id = jobs.job_id
-    LEFT JOIN job_tags ON job_tags.job_id = jobs.job_id
-    WHERE jobs.company_id = ?
+    SELECT * FROM jobs
+    WHERE company_id = ?
+    ORDER BY created_at DESC
 ');
 $statjob->bind_param('i', $company_id);
 $statjob->execute();
 $result = $statjob->get_result();
+$jobs = array();
+while($job = $result->fetch_assoc()){
+    $jobs[] = $job;
+}
+$stattags = $conn->prepare('
+    SELECT tag FROM job_tags 
+    WHERE job_id = ?
+');
 
-$jobs = $result->fetch_all(MYSQLI_ASSOC);
-echo json_encode($jobs);
+foreach($jobs as & $job){
+    $stattags->bind_param('i', $job['job_id']);
+    $stattags->execute();
+    $tags =array();
+    $result = $stattags->get_result();
+    while($tag = $result->fetch_assoc()){
+        $tags[] = $tag['tag'];
+    }
+    $job['tag'] = $tags;
+}
+$statskill = $conn->prepare('
+    SELECT skill FROM job_skills
+    WHERE job_id = ?
+');
+foreach($jobs as & $job){
+    $statskill->bind_param('i', $job['job_id']);
+    $statskill->execute();
+    $skill =array();
+    $result = $statskill->get_result();
+    while($skill = $result->fetch_assoc()){
+        $skills[] = $skill['skill'];
+    }
+    $job['skill'] = $skills;
+}
+echo json_encode($job);
 ?>
