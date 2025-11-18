@@ -44,6 +44,16 @@
             exit;
         }
 
+        if(count($skills) > 20) {
+            echo json_encode(['success' => false, 'message' => 'You can add a maximum of 20 skills.']);
+            exit;
+        }
+        if(count($tags) > 7) {
+            echo json_encode(['success' => false, 'message' => 'You can add a maximum of 10 tags.']);
+            exit;
+        }
+
+
         $stmt = $conn->prepare("INSERT INTO jobs (company_id, job_title, salary_min, salary_max, experience, location, job_description, job_type, category) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
        
         $stmt->bind_param("isiisssss", $company_id, $title, $salary_min, $salary_max, $experience, $location, $description, $job_type, $category);
