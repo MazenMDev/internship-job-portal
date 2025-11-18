@@ -222,6 +222,13 @@ select:focus {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+.input-box #job-description {
+  height: 150px;
+  width: 99% !important;
+  outline: var(--primary-color);
+  resize: none;
+  overflow-y: auto;
+}
 .skillsLabel {
   margin-top: 20px;
   font-size: 0.9rem;
@@ -317,7 +324,7 @@ select:focus {
     margin-top: 10px;
   }
   textarea.large {
-    width: 100%;
+    width: 85%;
     height: 150px;
   }
  .requiredSkills,
@@ -349,6 +356,13 @@ select:focus {
 }
 
 
+#addSkill:disabled,
+#addtag:disabled {
+    background: grey;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
 
 
 

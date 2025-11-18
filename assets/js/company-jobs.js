@@ -6,6 +6,10 @@ async function fetchUserData() {
   return data;
 }
 
+let maxTags = 7,
+  currentTags = 0;
+let maxSkills = 20,
+  currentSkills = 0;
 import jobCategories from "./jobCategories.js";
 await fetchUserData();
 if (userData && userData.company_name) {
@@ -49,22 +53,22 @@ if (userData && userData.company_name) {
             <div class="up-right">
               <div class="form-group">
               <label for="job">Job Title</label>
-              <input type="text" id="job" class="input-box">
+              <input type="text" placeholder="Enter job title" id="job" maxlength="100" class="input-box">
             </div>
             <div class="form-group">
               <label for="salary">Salary</label>
-              <input type="text" id="salary" class="input-box">
+              <input type="text" placeholder="12000-16000" maxlength="20" id="salary" class="input-box">
             </div>
 
             </div>
             <div class="up-left">
                <div class="form-group">
               <label for="skills">Experience</label>
-              <input type="text" id="experience" class="input-box">
+              <input type="text" placeholder="Enter experience" maxlength="50" id="experience" class="input-box">
             </div>
             <div class="form-group">
             <label for="location">Location</label>
-            <input type="text" id="location" class="input-box" placeholder="Enter company location">
+            <input type="text" id="location" maxlength="100" class="input-box" placeholder="Enter company location">
           </div>
             </div>
           </div>
@@ -72,7 +76,8 @@ if (userData && userData.company_name) {
             <div class="form-group">
             <label for="description">Description</label>
             <textarea id="description" class="input-box large" placeholder="Write a description about the company"></textarea>
-          </div>
+            <p class="char-count" id="descCharCount">0/500</p>
+            </div>
           </div>
         </div>
         <div class="bottom-left">
@@ -105,13 +110,34 @@ if (userData && userData.company_name) {
                 <button id="addSkill">>></button>
               </div>
             </div>
-            <button class="add-button">Add Job</button>
+            <p class="error-message" id="jobErrorMessage"></p>
+            <button id="addJobSubmit" class="add-button">Add Job</button>
         </aside>
         </div>
       </div>
     </div>
     `;
     document.body.appendChild(popup);
+    document.querySelector(
+      ".input-box#location"
+    ).value = `${userData.city}, ${userData.country}`;
+    document.querySelector(
+      ".input-box#description"
+    ).placeholder = `${userData.company_name} is a company based in ${userData.city}, ${userData.country}. We are looking to hire talented individuals to join our team.`;
+    document
+      .querySelector(".input-box#description")
+      .addEventListener("input", function () {
+        const charCount = document.getElementById("descCharCount");
+        charCount.textContent = `${this.value.length}/500`;
+        if (
+          document.querySelector(".input-box#description").value.length > 499
+        ) {
+          document.querySelector(".input-box#description").value = document
+            .querySelector(".input-box#description")
+            .value.slice(0, 499);
+        }
+      });
+
     document.body.classList.add("open-company-popup");
     document
       .getElementById("blurred-background")
@@ -157,6 +183,9 @@ if (userData && userData.company_name) {
 
     document.getElementById("addSkill").addEventListener("click", function (e) {
       e.preventDefault();
+      if (currentSkills >= maxSkills) {
+        return;
+      }
 
       const container = document.querySelector(".skills-disp");
 
@@ -168,16 +197,30 @@ if (userData && userData.company_name) {
 
       container.appendChild(skillDiv);
       skillDiv.focus();
+      currentSkills++;
+
+      if (currentSkills >= maxSkills) {
+        document.getElementById("addSkill").disabled = true;
+      } else {
+        document.getElementById("addSkill").disabled = false;
+      }
 
       function finishEditing() {
         skillDiv.removeAttribute("data-editing");
         skillDiv.contentEditable = "false";
 
-        //  remove it if user left it empty
         if (!skillDiv.textContent.trim()) {
           skillDiv.remove();
+          currentSkills--;
+          
+          if (currentSkills >= maxSkills) {
+            document.getElementById("addSkill").disabled = true;
+          } else {
+            document.getElementById("addSkill").disabled = false;
+          }
+        } else {
+          skillDiv.textContent = skillDiv.textContent.trim();
         }
-        skillDiv.textContent = skillDiv.textContent.trim();
       }
 
       skillDiv.addEventListener("keydown", function (ev) {
@@ -187,6 +230,13 @@ if (userData && userData.company_name) {
           skillDiv.blur();
         } else if (ev.key === "Escape") {
           skillDiv.remove();
+          currentSkills--;
+          
+          if (currentSkills >= maxSkills) {
+            document.getElementById("addSkill").disabled = true;
+          } else {
+            document.getElementById("addSkill").disabled = false;
+          }
         }
       });
 
@@ -201,13 +251,23 @@ if (userData && userData.company_name) {
       skillDiv.addEventListener("click", function () {
         if (skillDiv.contentEditable === "false") {
           skillDiv.remove();
+          currentSkills--;
+          
+          // Update button state after removal
+          if (currentSkills >= maxSkills) {
+            document.getElementById("addSkill").disabled = true;
+          } else {
+            document.getElementById("addSkill").disabled = false;
+          }
         }
       });
     });
 
     document.getElementById("addtag").addEventListener("click", function (e) {
       e.preventDefault();
-
+      if (currentTags >= maxTags) {
+        return;
+      }
       const container = document.querySelector(".tag-disp");
 
       const tagDiv = document.createElement("div"); // consistently lowercase
@@ -218,6 +278,14 @@ if (userData && userData.company_name) {
 
       container.appendChild(tagDiv);
       tagDiv.focus();
+      currentTags++;
+
+      // Update button state
+      if (currentTags >= maxTags) {
+        document.getElementById("addtag").disabled = true;
+      } else {
+        document.getElementById("addtag").disabled = false;
+      }
 
       function finishEditing() {
         tagDiv.removeAttribute("data-editing");
@@ -225,6 +293,13 @@ if (userData && userData.company_name) {
 
         if (!tagDiv.textContent.trim()) {
           tagDiv.remove();
+          currentTags--;
+          
+          if (currentTags >= maxTags) {
+            document.getElementById("addtag").disabled = true;
+          } else {
+            document.getElementById("addtag").disabled = false;
+          }
         } else {
           tagDiv.textContent = tagDiv.textContent.trim();
         }
@@ -237,6 +312,13 @@ if (userData && userData.company_name) {
           tagDiv.blur();
         } else if (ev.key === "Escape") {
           tagDiv.remove();
+          currentTags--;
+          
+          if (currentTags >= maxTags) {
+            document.getElementById("addtag").disabled = true;
+          } else {
+            document.getElementById("addtag").disabled = false;
+          }
         }
       });
 
@@ -249,15 +331,111 @@ if (userData && userData.company_name) {
       tagDiv.addEventListener("click", function () {
         if (tagDiv.contentEditable === "false") {
           tagDiv.remove();
+          currentTags--;
+          
+          if (currentTags >= maxTags) {
+            document.getElementById("addtag").disabled = true;
+          } else {
+            document.getElementById("addtag").disabled = false;
+          }
         }
       });
     });
+    document.getElementById("addJobSubmit").addEventListener("click", () => {
+      const errorMessageEl = document.getElementById("jobErrorMessage");
+      //collect data and send to server
+      const title = document.querySelector(".input-box#job").value.trim();
+      if (title.length === 0) {
+        errorMessageEl.textContent = "Job title cannot be empty.";
+        return;
+      }
+
+      const salary = document.querySelector(".input-box#salary").value.trim();
+      if (salary.length === 0) {
+        errorMessageEl.textContent = "Salary cannot be empty.";
+        return;
+      }
+      // salary format: 12000-16000 (allow optional spaces)
+      const salaryPattern = /^\d{1,7}\s*-\s*\d{1,7}/;
+      if (!salaryPattern.test(salary)) {
+        errorMessageEl.textContent = "Salary must be in format: ex:12000-16000";
+        return;
+      }
+
+      const [minStr, maxStr] = salary.split("-").map((s) => s.trim());
+      const minSalary = parseInt(minStr, 10);
+      const maxSalary = parseInt(maxStr, 10);
+
+      if (Number.isNaN(minSalary) || Number.isNaN(maxSalary)) {
+        errorMessageEl.textContent = "Invalid salary numbers.";
+        return;
+      }
+
+      if (minSalary > maxSalary) {
+        errorMessageEl.textContent =
+          "Minimum salary cannot be greater than maximum salary.";
+        return;
+      }
+      const experience = document
+        .querySelector(".input-box#experience")
+        .value.trim();
+      if (experience.length === 0) {
+        errorMessageEl.textContent = "Experience cannot be empty.";
+        return;
+      }
+      const location = document
+        .querySelector(".input-box#location")
+        .value.trim();
+      if (location.length === 0) {
+        errorMessageEl.textContent = "Location cannot be empty.";
+        return;
+      }
+
+      const description = document
+        .querySelector(".input-box#description")
+        .value.trim();
+      if (description.length === 0) {
+        errorMessageEl.textContent = "Description cannot be empty.";
+        return;
+      }
+      const jobType = document.querySelector(".job-type .option-group").value;
+      const category = document.querySelector(
+        ".job-categories .option-group"
+      ).value;
+
+      const skillElements = document.querySelectorAll(".skills-disp .skill");
+      let skills = Array.from(skillElements).map((el) => {
+        return el.textContent.trim();
+      });
+      skills = skills.filter((s) => {
+        return s.length > 0;
+      });
+      const tagElements = document.querySelectorAll(".tag-disp .tag");
+      let tags = Array.from(tagElements).map((el) => {
+        return el.textContent.trim();
+      });
+      tags = tags.filter((s) => {
+        return s.length > 0;
+      });
+      const jobData = {
+        title,
+        salary: { min: minSalary, max: maxSalary },
+        experience,
+        location,
+        description,
+        jobType,
+        category,
+        skills,
+        tags,
+      };
+      
+    });
   });
-  
+
   const companyNameEl = document.querySelector(".companyName");
   if (companyNameEl) companyNameEl.textContent = userData.company_name;
-  
 
+  document.getElementById("company-job").style.display = "block";
 } else {
   const companyJobEl = document.getElementById("company-job");
   if (companyJobEl) companyJobEl.style.display = "none";
