@@ -76,7 +76,7 @@ if (userData && userData.company_name) {
             <div class="form-group">
             <label for="description">Description</label>
             <textarea id="description" class="input-box large" placeholder="Write a description about the company"></textarea>
-            <p class="char-count" id="descCharCount">0/500</p>
+            <p class="char-count" id="descCharCount">max: 0/2000</p>
             </div>
           </div>
         </div>
@@ -128,13 +128,13 @@ if (userData && userData.company_name) {
       .querySelector(".input-box#description")
       .addEventListener("input", function () {
         const charCount = document.getElementById("descCharCount");
-        charCount.textContent = `${this.value.length}/500`;
+        charCount.textContent = `max: ${this.value.length}/2000`;
         if (
-          document.querySelector(".input-box#description").value.length > 499
+          document.querySelector(".input-box#description").value.length > 1999
         ) {
           document.querySelector(".input-box#description").value = document
             .querySelector(".input-box#description")
-            .value.slice(0, 499);
+            .value.slice(0, 1999);
         }
       });
 
@@ -417,18 +417,48 @@ if (userData && userData.company_name) {
       tags = tags.filter((s) => {
         return s.length > 0;
       });
-      const jobData = {
-        title,
-        salary: { min: minSalary, max: maxSalary },
-        experience,
-        location,
-        description,
-        jobType,
-        category,
-        skills,
-        tags,
-      };
       
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('salary_min', minSalary);
+      formData.append('salary_max', maxSalary);
+      formData.append('experience', experience);
+      formData.append('location', location);
+      formData.append('description', description);
+      formData.append('jobType', jobType);
+      formData.append('category', category);
+      formData.append('skills', JSON.stringify(skills));
+      formData.append('tags', JSON.stringify(tags));
+
+      const submitBtn = document.getElementById("addJobSubmit");
+      submitBtn.disabled = true;
+      errorMessageEl.style.color = "orange";
+      errorMessageEl.textContent = "Loading...";
+
+      fetch("../php/post_job.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+        errorMessageEl.textContent = "";
+        errorMessageEl.style.color = "red";
+        submitBtn.disabled = false;
+        window.location.reload();
+          } else {
+        errorMessageEl.style.color = "red";
+        errorMessageEl.textContent = data.message || "Error posting job.";
+        submitBtn.disabled = false;
+          }
+        })
+        .catch((err) => {
+          errorMessageEl.style.color = "red";
+          errorMessageEl.textContent =
+        "Network error while posting job. Please try again.";
+          submitBtn.disabled = false;
+          console.error(err);
+        });
     });
   });
 
