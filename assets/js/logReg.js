@@ -40,12 +40,19 @@ function getLabelForInput(input) {
 
 // Update login form labels
 function updateLoginLabels() {
-  // Only target login text inputs; avoid submit buttons
-  const inputs = document.querySelectorAll("#email, #password");
+  // Only target login box inputs
+  const loginBoxEl = document.querySelector("#loginBox");
+  if (!loginBoxEl) return;
+
+  const inputs = loginBoxEl.querySelectorAll(
+    "input[type='email'], input[type='password']"
+  );
   inputs.forEach((input) => {
     const label = getLabelForInput(input);
     if (!label) return;
     const text = (label.textContent || "").trim();
+    if (!text) return;
+
     label.innerHTML = text
       .split("")
       .map(
@@ -67,9 +74,12 @@ function updateLoginLabels() {
 
 // Update register form labels
 function updateRegLabels() {
-  // Only target register text/password/email fields; skip radios/submit
-  const inputs = document.querySelectorAll(
-    "#fname, #lname, #email, #password, #confirm"
+  // Only target register box inputs
+  const registerBoxEl = document.querySelector("#registerBox");
+  if (!registerBoxEl) return;
+
+  const inputs = registerBoxEl.querySelectorAll(
+    "input[type='text'], input[type='email'], input[type='password']"
   );
   inputs.forEach((input) => {
     const label = getLabelForInput(input);
@@ -120,3 +130,59 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, 100);
 });
+
+// Get elements first
+const body = document.body;
+const loginBox = document.querySelector("#loginBox");
+const registerBox = document.querySelector("#registerBox");
+
+// Set initial state based on URL hash or default to login
+if (loginBox && registerBox) {
+  const hash = window.location.hash;
+
+  if (hash === "#register") {
+    body.classList.remove("show-login");
+    body.classList.add("show-register");
+    loginBox.classList.add("hidden");
+    registerBox.classList.remove("hidden");
+  } else {
+    body.classList.remove("show-register");
+    body.classList.add("show-login");
+    loginBox.classList.remove("hidden");
+    registerBox.classList.add("hidden");
+  }
+}
+
+// Toggle between login and register within the page
+const goRegisterBtn = document.querySelector("#goRegister");
+const goLoginBtn = document.querySelector("#goLogin");
+
+if (goRegisterBtn) {
+  goRegisterBtn.onclick = (e) => {
+    e.preventDefault();
+    body.classList.remove("show-login");
+    body.classList.add("show-register");
+
+    if (loginBox && registerBox) {
+      loginBox.classList.remove("active");
+      registerBox.classList.add("active");
+      loginBox.classList.add("hidden");
+      registerBox.classList.remove("hidden");
+    }
+  };
+}
+
+if (goLoginBtn) {
+  goLoginBtn.onclick = (e) => {
+    e.preventDefault();
+    body.classList.remove("show-register");
+    body.classList.add("show-login");
+
+    if (registerBox && loginBox) {
+      registerBox.classList.remove("active");
+      loginBox.classList.add("active");
+      registerBox.classList.add("hidden");
+      loginBox.classList.remove("hidden");
+    }
+  };
+}

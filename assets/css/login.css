@@ -14,12 +14,11 @@ body {
   font-family: var(--main-font-family);
 }
 
-
 .logoContainer {
   position: fixed;
   top: 15px;
   left: 15px;
-  z-index: 1000;
+  z-index: 9999;
   display: flex;
   align-items: center;
   padding-left: 20px;
@@ -48,10 +47,71 @@ body {
   margin-top: -20px;
 }
 
+.container,
+.rightCont {
+  opacity: 0; 
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.show-register .container {
+  transform: translateX(-100%);
+  opacity: 1;
+}
+
+body.show-register .rightCont {
+  transform: translateX(90%);
+  opacity: 1;
+}
+
+body.show-login .container {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+body.show-login .rightCont {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.hidden {
+  display: none !important;
+}
+
 #form {
   scale: calc(1.04);
   margin: 20px;
 }
+
+#loginBox,
+#registerBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#loginBox form,
+#registerBox form {
+  padding: 20px 40px;
+}
+
+/* #loginBox{
+  animation: fadeUp 0.6s ease forwards;
+}
+#registerBox{
+  animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} */
 
 .rightCont {
   flex: 1;
@@ -66,6 +126,19 @@ body {
   overflow: hidden;
   scale: calc(1.15);
 }
+
+.rightCont::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to left,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  z-index: 0;
+}
+
 .innerCont {
   display: flex;
   flex-direction: column;
@@ -78,7 +151,7 @@ body {
 }
 
 .rightCont h1 {
-  color: var(--text-color);
+  color: #fff;
   font-size: 1.8rem;
   text-align: center;
   margin-bottom: 0.8rem;
@@ -86,7 +159,7 @@ body {
 }
 
 .rightCont p {
-  color: var(--text-muted);
+  color: #fff;
   font-size: 0.95rem;
   text-align: center;
   margin-bottom: 1rem;
@@ -102,7 +175,6 @@ body {
 .svg-container img {
   max-width: 85%;
   height: auto;
-  
 }
 
 form {
@@ -221,23 +293,6 @@ h1 {
 #changePage a:hover {
   text-decoration: underline;
 }
-
-
-.innerCont, .container {
-  animation: fadeUp 0.8s ease both;
-}
-
-@keyframes fadeUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(20px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0);
-  }
-}
-
 
 /* Generic labels for inputs on login/register pages */
 .reg {
@@ -386,6 +441,16 @@ label {
   }
 }
 
+@media (max-width: 1160px) {
+  .logoContainer {
+    position: fixed !important;
+    top: 15px !important;
+    left: 15px !important;
+    z-index: 9999 !important;
+    display: flex !important;
+  }
+}
+
 @media (min-width: 1024px) {
   html,
   body {
@@ -488,9 +553,9 @@ label {
   }
 
   .logoContainer {
-    position: absolute;
-    top: 20px;
-    left: 0;
+    position: absolute !important;
+    top: 20px !important;
+    left: 0 !important;
     padding: 0;
     margin-bottom: 1rem;
     justify-content: center;
@@ -507,10 +572,14 @@ label {
     flex: unset;
     width: 100%;
     margin-top: 0;
+    margin-bottom: 80px !important;
     padding: 120px 1rem 1rem;
     height: auto;
     box-sizing: border-box;
     overflow-y: visible;
+  }
+  .container {
+    margin-bottom: 20px !important;
   }
 
   .rightCont::before {
@@ -523,6 +592,61 @@ label {
       var(--secondary-color)
     );
     z-index: 0;
+  }
+
+  body.show-register .rightCont {
+    animation: fadeRightContReg 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+  }
+  @keyframes fadeRightContReg {
+    from {
+      opacity: 0.2;
+      transform: translateX(0%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0%);
+    }
+  }
+
+  body.show-register .container {
+    animation: fadeContReg 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+  }
+  @keyframes fadeContReg {
+    from {
+      opacity: 0.2;
+      transform: translateX(0%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0%);
+    }
+  }
+  body.show-login .rightCont {
+    animation: fadeRightContLogin 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+  }
+  @keyframes fadeRightContLogin {
+    from {
+      opacity: 0.2;
+      transform: translateX(0%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0%);
+    }
+  }
+
+  body.show-login .container {
+    animation: fadeContLogin 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+  }
+  @keyframes fadeContLogin {
+    from {
+      opacity: 0.2;
+      transform: translateX(0%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0%);
+    }
   }
 
   .innerCont {

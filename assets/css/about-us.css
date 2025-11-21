@@ -67,7 +67,6 @@
   font-size: 0.9rem;
   margin-top: 5px;
   text-align: center;
-  
 }
 
 @media (max-width: 768px) {
@@ -345,6 +344,12 @@
   align-items: start;
 }
 
+.contact-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .page-title {
   font-size: 45px;
   position: relative;
@@ -355,6 +360,7 @@
 }
 
 .page-subtitle {
+  text-align: center;
   font-size: 24px;
   font-weight: 400;
   color: var(--text-color);
@@ -370,20 +376,21 @@
 }
 
 .info {
+  border-left: 4px solid transparent;
   padding: 24px;
   border-radius: 10px;
-  background-color: var(--background-color);
+  background-color: var(--box-color);
   border: 1px solid transparent;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .info:hover {
+  border-left: 4px solid var(--primary-color);
   transform: scale(1.015);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 
-  transition: all 0.13s ease;
+  transition: all 0.1s ease;
 }
 
 .info h3 {

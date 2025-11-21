@@ -6,9 +6,24 @@ async function fetchUserData() {
   return data;
 }
 
+let maxTags = 7,
+  currentTags = 0;
+let maxSkills = 20,
+  currentSkills = 0;
 import jobCategories from "./jobCategories.js";
 await fetchUserData();
 if (userData && userData.company_name) {
+  fetch("../php/get-company-jobs.php")
+  .then((result)=>{
+    return result.json()
+  }
+)
+.then((data)=>{
+  console.log(data)
+})
+.catch((error)=>{
+  console.log(error)
+})
   const svgBackgrounds = [
     `<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' width='100%' height='100%' viewBox='0 0 800 800'><rect fill='#330033' width='800' height='800'/><g fill='none' stroke='#404'  stroke-width='1'><path d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/><path d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/><path d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/><path d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/><path d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/></g><g  fill='#505'><circle  cx='769' cy='229' r='5'/><circle  cx='539' cy='269' r='5'/><circle  cx='603' cy='493' r='5'/><circle  cx='731' cy='737' r='5'/><circle  cx='520' cy='660' r='5'/><circle  cx='309' cy='538' r='5'/><circle  cx='295' cy='764' r='5'/><circle  cx='40' cy='599' r='5'/><circle  cx='102' cy='382' r='5'/><circle  cx='127' cy='80' r='5'/><circle  cx='370' cy='105' r='5'/><circle  cx='578' cy='42' r='5'/><circle  cx='237' cy='261' r='5'/><circle  cx='390' cy='382' r='5'/></g></svg>`,
     `<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' width='100%' height='100%' viewBox='0 0 1080 900'><rect fill='#1AD9FF' width='1080' height='900'/><g fill-opacity='.1'><polygon fill='#444' points='90 150 0 300 180 300'/><polygon points='90 150 180 0 0 0'/><polygon fill='#AAA' points='270 150 360 0 180 0'/><polygon fill='#DDD' points='450 150 360 300 540 300'/><polygon fill='#999' points='450 150 540 0 360 0'/><polygon points='630 150 540 300 720 300'/><polygon fill='#DDD' points='630 150 720 0 540 0'/><polygon fill='#444' points='810 150 720 300 900 300'/><polygon fill='#FFF' points='810 150 900 0 720 0'/><polygon fill='#DDD' points='990 150 900 300 1080 300'/><polygon fill='#444' points='990 150 1080 0 900 0'/><polygon fill='#DDD' points='90 450 0 600 180 600'/><polygon points='90 450 180 300 0 300'/><polygon fill='#666' points='270 450 180 600 360 600'/><polygon fill='#AAA' points='270 450 360 300 180 300'/><polygon fill='#DDD' points='450 450 360 600 540 600'/><polygon fill='#999' points='450 450 540 300 360 300'/><polygon fill='#999' points='630 450 540 600 720 600'/><polygon fill='#FFF' points='630 450 720 300 540 300'/><polygon points='810 450 720 600 900 600'/><polygon fill='#DDD' points='810 450 900 300 720 300'/><polygon fill='#AAA' points='990 450 900 600 1080 600'/><polygon fill='#444' points='990 450 1080 300 900 300'/><polygon fill='#222' points='90 750 0 900 180 900'/><polygon points='270 750 180 900 360 900'/><polygon fill='#DDD' points='270 750 360 600 180 600'/><polygon points='450 750 540 600 360 600'/><polygon points='630 750 540 900 720 900'/><polygon fill='#444' points='630 750 720 600 540 600'/><polygon fill='#AAA' points='810 750 720 900 900 900'/><polygon fill='#666' points='810 750 900 600 720 600'/><polygon fill='#999' points='990 750 900 900 1080 900'/><polygon fill='#999' points='180 0 90 150 270 150'/><polygon fill='#444' points='360 0 270 150 450 150'/><polygon fill='#FFF' points='540 0 450 150 630 150'/><polygon points='900 0 810 150 990 150'/><polygon fill='#222' points='0 300 -90 450 90 450'/><polygon fill='#FFF' points='0 300 90 150 -90 150'/><polygon fill='#FFF' points='180 300 90 450 270 450'/><polygon fill='#666' points='180 300 270 150 90 150'/><polygon fill='#222' points='360 300 270 450 450 450'/><polygon fill='#FFF' points='360 300 450 150 270 150'/><polygon fill='#444' points='540 300 450 450 630 450'/><polygon fill='#222' points='540 300 630 150 450 150'/><polygon fill='#AAA' points='720 300 630 450 810 450'/><polygon fill='#666' points='720 300 810 150 630 150'/><polygon fill='#FFF' points='900 300 810 450 990 450'/><polygon fill='#999' points='900 300 990 150 810 150'/><polygon points='0 600 -90 750 90 750'/><polygon fill='#666' points='0 600 90 450 -90 450'/><polygon fill='#AAA' points='180 600 90 750 270 750'/><polygon fill='#444' points='180 600 270 450 90 450'/><polygon fill='#444' points='360 600 270 750 450 750'/><polygon fill='#999' points='360 600 450 450 270 450'/><polygon fill='#666' points='540 600 630 450 450 450'/><polygon fill='#222' points='720 600 630 750 810 750'/><polygon fill='#FFF' points='900 600 810 750 990 750'/><polygon fill='#222' points='900 600 990 450 810 450'/><polygon fill='#DDD' points='0 900 90 750 -90 750'/><polygon fill='#444' points='180 900 270 750 90 750'/><polygon fill='#FFF' points='360 900 450 750 270 750'/><polygon fill='#AAA' points='540 900 630 750 450 750'/><polygon fill='#FFF' points='720 900 810 750 630 750'/><polygon fill='#222' points='900 900 990 750 810 750'/><polygon fill='#222' points='1080 300 990 450 1170 450'/><polygon fill='#FFF' points='1080 300 1170 150 990 150'/><polygon points='1080 600 990 750 1170 750'/><polygon fill='#666' points='1080 600 1170 450 990 450'/><polygon fill='#DDD' points='1080 900 1170 750 990 750'/></g></svg>`,
@@ -49,22 +64,22 @@ if (userData && userData.company_name) {
             <div class="up-right">
               <div class="form-group">
               <label for="job">Job Title</label>
-              <input type="text" id="job" class="input-box">
+              <input type="text" placeholder="Enter job title" id="job" maxlength="100" class="input-box">
             </div>
             <div class="form-group">
               <label for="salary">Salary</label>
-              <input type="text" id="salary" class="input-box">
+              <input type="text" placeholder="12000-16000" maxlength="20" id="salary" class="input-box">
             </div>
 
             </div>
             <div class="up-left">
                <div class="form-group">
               <label for="skills">Experience</label>
-              <input type="text" id="experience" class="input-box">
+              <input type="text" placeholder="Enter experience" maxlength="50" id="experience" class="input-box">
             </div>
             <div class="form-group">
             <label for="location">Location</label>
-            <input type="text" id="location" class="input-box" placeholder="Enter company location">
+            <input type="text" id="location" maxlength="100" class="input-box" placeholder="Enter company location">
           </div>
             </div>
           </div>
@@ -72,7 +87,8 @@ if (userData && userData.company_name) {
             <div class="form-group">
             <label for="description">Description</label>
             <textarea id="description" class="input-box large" placeholder="Write a description about the company"></textarea>
-          </div>
+            <p class="char-count" id="descCharCount">max: 0/2000</p>
+            </div>
           </div>
         </div>
         <div class="bottom-left">
@@ -105,13 +121,34 @@ if (userData && userData.company_name) {
                 <button id="addSkill">>></button>
               </div>
             </div>
-            <button class="add-button">Add Job</button>
+            <p class="error-message" id="jobErrorMessage"></p>
+            <button id="addJobSubmit" class="add-button">Add Job</button>
         </aside>
         </div>
       </div>
     </div>
     `;
     document.body.appendChild(popup);
+    document.querySelector(
+      ".input-box#location"
+    ).value = `${userData.city}, ${userData.country}`;
+    document.querySelector(
+      ".input-box#description"
+    ).placeholder = `${userData.company_name} is a company based in ${userData.city}, ${userData.country}. We are looking to hire talented individuals to join our team.`;
+    document
+      .querySelector(".input-box#description")
+      .addEventListener("input", function () {
+        const charCount = document.getElementById("descCharCount");
+        charCount.textContent = `max: ${this.value.length}/2000`;
+        if (
+          document.querySelector(".input-box#description").value.length > 1999
+        ) {
+          document.querySelector(".input-box#description").value = document
+            .querySelector(".input-box#description")
+            .value.slice(0, 1999);
+        }
+      });
+
     document.body.classList.add("open-company-popup");
     document
       .getElementById("blurred-background")
@@ -157,6 +194,9 @@ if (userData && userData.company_name) {
 
     document.getElementById("addSkill").addEventListener("click", function (e) {
       e.preventDefault();
+      if (currentSkills >= maxSkills) {
+        return;
+      }
 
       const container = document.querySelector(".skills-disp");
 
@@ -168,16 +208,30 @@ if (userData && userData.company_name) {
 
       container.appendChild(skillDiv);
       skillDiv.focus();
+      currentSkills++;
+
+      if (currentSkills >= maxSkills) {
+        document.getElementById("addSkill").disabled = true;
+      } else {
+        document.getElementById("addSkill").disabled = false;
+      }
 
       function finishEditing() {
         skillDiv.removeAttribute("data-editing");
         skillDiv.contentEditable = "false";
 
-        //  remove it if user left it empty
         if (!skillDiv.textContent.trim()) {
           skillDiv.remove();
+          currentSkills--;
+          
+          if (currentSkills >= maxSkills) {
+            document.getElementById("addSkill").disabled = true;
+          } else {
+            document.getElementById("addSkill").disabled = false;
+          }
+        } else {
+          skillDiv.textContent = skillDiv.textContent.trim();
         }
-        skillDiv.textContent = skillDiv.textContent.trim();
       }
 
       skillDiv.addEventListener("keydown", function (ev) {
@@ -187,6 +241,13 @@ if (userData && userData.company_name) {
           skillDiv.blur();
         } else if (ev.key === "Escape") {
           skillDiv.remove();
+          currentSkills--;
+          
+          if (currentSkills >= maxSkills) {
+            document.getElementById("addSkill").disabled = true;
+          } else {
+            document.getElementById("addSkill").disabled = false;
+          }
         }
       });
 
@@ -201,13 +262,23 @@ if (userData && userData.company_name) {
       skillDiv.addEventListener("click", function () {
         if (skillDiv.contentEditable === "false") {
           skillDiv.remove();
+          currentSkills--;
+          
+          // Update button state after removal
+          if (currentSkills >= maxSkills) {
+            document.getElementById("addSkill").disabled = true;
+          } else {
+            document.getElementById("addSkill").disabled = false;
+          }
         }
       });
     });
 
     document.getElementById("addtag").addEventListener("click", function (e) {
       e.preventDefault();
-
+      if (currentTags >= maxTags) {
+        return;
+      }
       const container = document.querySelector(".tag-disp");
 
       const tagDiv = document.createElement("div"); // consistently lowercase
@@ -218,6 +289,14 @@ if (userData && userData.company_name) {
 
       container.appendChild(tagDiv);
       tagDiv.focus();
+      currentTags++;
+
+      // Update button state
+      if (currentTags >= maxTags) {
+        document.getElementById("addtag").disabled = true;
+      } else {
+        document.getElementById("addtag").disabled = false;
+      }
 
       function finishEditing() {
         tagDiv.removeAttribute("data-editing");
@@ -225,6 +304,13 @@ if (userData && userData.company_name) {
 
         if (!tagDiv.textContent.trim()) {
           tagDiv.remove();
+          currentTags--;
+          
+          if (currentTags >= maxTags) {
+            document.getElementById("addtag").disabled = true;
+          } else {
+            document.getElementById("addtag").disabled = false;
+          }
         } else {
           tagDiv.textContent = tagDiv.textContent.trim();
         }
@@ -237,6 +323,13 @@ if (userData && userData.company_name) {
           tagDiv.blur();
         } else if (ev.key === "Escape") {
           tagDiv.remove();
+          currentTags--;
+          
+          if (currentTags >= maxTags) {
+            document.getElementById("addtag").disabled = true;
+          } else {
+            document.getElementById("addtag").disabled = false;
+          }
         }
       });
 
@@ -249,16 +342,144 @@ if (userData && userData.company_name) {
       tagDiv.addEventListener("click", function () {
         if (tagDiv.contentEditable === "false") {
           tagDiv.remove();
+          currentTags--;
+          
+          if (currentTags >= maxTags) {
+            document.getElementById("addtag").disabled = true;
+          } else {
+            document.getElementById("addtag").disabled = false;
+          }
         }
       });
     });
+    document.getElementById("addJobSubmit").addEventListener("click", () => {
+      const errorMessageEl = document.getElementById("jobErrorMessage");
+      //collect data and send to server
+      const title = document.querySelector(".input-box#job").value.trim();
+      if (title.length === 0) {
+        errorMessageEl.textContent = "Job title cannot be empty.";
+        return;
+      }
+
+      const salary = document.querySelector(".input-box#salary").value.trim();
+      if (salary.length === 0) {
+        errorMessageEl.textContent = "Salary cannot be empty.";
+        return;
+      }
+      // salary format: 12000-16000 (allow optional spaces)
+      const salaryPattern = /^\d{1,7}\s*-\s*\d{1,7}/;
+      if (!salaryPattern.test(salary)) {
+        errorMessageEl.textContent = "Salary must be in format: ex:12000-16000";
+        return;
+      }
+
+      const [minStr, maxStr] = salary.split("-").map((s) => s.trim());
+      const minSalary = parseInt(minStr, 10);
+      const maxSalary = parseInt(maxStr, 10);
+
+      if (Number.isNaN(minSalary) || Number.isNaN(maxSalary)) {
+        errorMessageEl.textContent = "Invalid salary numbers.";
+        return;
+      }
+
+      if (minSalary > maxSalary) {
+        errorMessageEl.textContent =
+          "Minimum salary cannot be greater than maximum salary.";
+        return;
+      }
+      const experience = document
+        .querySelector(".input-box#experience")
+        .value.trim();
+      if (experience.length === 0) {
+        errorMessageEl.textContent = "Experience cannot be empty.";
+        return;
+      }
+      const location = document
+        .querySelector(".input-box#location")
+        .value.trim();
+      if (location.length === 0) {
+        errorMessageEl.textContent = "Location cannot be empty.";
+        return;
+      }
+
+      const description = document
+        .querySelector(".input-box#description")
+        .value.trim();
+      if (description.length === 0) {
+        errorMessageEl.textContent = "Description cannot be empty.";
+        return;
+      }
+      const jobType = document.querySelector(".job-type .option-group").value;
+      const category = document.querySelector(
+        ".job-categories .option-group"
+      ).value;
+
+      const skillElements = document.querySelectorAll(".skills-disp .skill");
+      let skills = Array.from(skillElements).map((el) => {
+        return el.textContent.trim();
+      });
+      skills = skills.filter((s) => {
+        return s.length > 0;
+      });
+      const tagElements = document.querySelectorAll(".tag-disp .tag");
+      let tags = Array.from(tagElements).map((el) => {
+        return el.textContent.trim();
+      });
+      tags = tags.filter((s) => {
+        return s.length > 0;
+      });
+      
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('salary_min', minSalary);
+      formData.append('salary_max', maxSalary);
+      formData.append('experience', experience);
+      formData.append('location', location);
+      formData.append('description', description);
+      formData.append('jobType', jobType);
+      formData.append('category', category);
+      formData.append('skills', JSON.stringify(skills));
+      formData.append('tags', JSON.stringify(tags));
+
+      const submitBtn = document.getElementById("addJobSubmit");
+      submitBtn.disabled = true;
+      errorMessageEl.style.color = "orange";
+      errorMessageEl.textContent = "Loading...";
+
+      fetch("../php/post_job.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+        errorMessageEl.textContent = "";
+        errorMessageEl.style.color = "red";
+        submitBtn.disabled = false;
+        window.location.reload();
+          } else {
+        errorMessageEl.style.color = "red";
+        errorMessageEl.textContent = data.message || "Error posting job.";
+        submitBtn.disabled = false;
+          }
+        })
+        .catch((err) => {
+          errorMessageEl.style.color = "red";
+          errorMessageEl.textContent =
+        "Network error while posting job. Please try again.";
+          submitBtn.disabled = false;
+          console.error(err);
+        });
+    });
   });
-  
+
   const companyNameEl = document.querySelector(".companyName");
   if (companyNameEl) companyNameEl.textContent = userData.company_name;
-  
 
+  document.getElementById("company-job").style.display = "block";
+  
 } else {
   const companyJobEl = document.getElementById("company-job");
   if (companyJobEl) companyJobEl.style.display = "none";
 }
+
