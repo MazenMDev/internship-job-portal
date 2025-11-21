@@ -133,13 +133,13 @@ if (loginBox && registerBox) {
   if (hash === "#register") {
     body.classList.remove("show-login");
     body.classList.add("show-register");
-    loginBox.style.display = "none";
-    registerBox.style.display = "block";
+      registerBox.classList.remove("hidden");
+      loginBox.classList.add("hidden");
   } else {
     body.classList.remove("show-register");
     body.classList.add("show-login");
-    loginBox.style.display = "block";
-    registerBox.style.display = "none";
+    registerBox.classList.add("hidden");
+    loginBox.classList.remove("hidden");
   }
 }
 
@@ -156,8 +156,8 @@ if (goRegisterBtn) {
     if (loginBox && registerBox) {
       loginBox.classList.remove("active");
       registerBox.classList.add("active");
-      loginBox.style.display = "none";
-      registerBox.style.display = "block";
+      registerBox.classList.remove("hidden");
+      loginBox.classList.add("hidden");
     }
   };
 }
@@ -171,8 +171,8 @@ if (goLoginBtn) {
     if (registerBox && loginBox) {
       registerBox.classList.remove("active");
       loginBox.classList.add("active");
-      registerBox.style.display = "none";
-      loginBox.style.display = "block";
+      registerBox.classList.add("hidden");
+      loginBox.classList.remove("hidden");
     }
   };
 }

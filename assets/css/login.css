@@ -18,7 +18,7 @@ body {
   position: fixed;
   top: 15px;
   left: 15px;
-  z-index: 1000;
+  z-index: 9999;
   display: flex;
   align-items: center;
   padding-left: 20px;
@@ -101,10 +101,45 @@ body.show-login .container {
   }
 }
 
+.hidden {
+  display: none !important;
+}
+
 #form {
   scale: calc(1.04);
   margin: 20px;
 }
+
+#loginBox,
+#registerBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#loginBox form,
+#registerBox form {
+  padding: 20px 40px;
+}
+
+/* #loginBox{
+  animation: fadeUp 0.6s ease forwards;
+}
+#registerBox{
+  animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} */
 
 .rightCont {
   flex: 1;
@@ -287,17 +322,6 @@ h1 {
   text-decoration: underline;
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Generic labels for inputs on login/register pages */
 .reg {
   position: relative;
@@ -445,6 +469,16 @@ label {
   }
 }
 
+@media (max-width: 1160px) {
+  .logoContainer {
+    position: fixed !important;
+    top: 15px !important;
+    left: 15px !important;
+    z-index: 9999 !important;
+    display: flex !important;
+  }
+}
+
 @media (min-width: 1024px) {
   html,
   body {
@@ -547,9 +581,9 @@ label {
   }
 
   .logoContainer {
-    position: absolute;
-    top: 20px;
-    left: 0;
+    position: absolute !important;
+    top: 20px !important;
+    left: 0 !important;
     padding: 0;
     margin-bottom: 1rem;
     justify-content: center;
@@ -566,10 +600,14 @@ label {
     flex: unset;
     width: 100%;
     margin-top: 0;
+    margin-bottom: 80px !important;
     padding: 120px 1rem 1rem;
     height: auto;
     box-sizing: border-box;
     overflow-y: visible;
+  }
+  .container {
+    margin-bottom: 20px !important;
   }
 
   .rightCont::before {
@@ -582,6 +620,61 @@ label {
       var(--secondary-color)
     );
     z-index: 0;
+  }
+
+  body.show-register .rightCont {
+    animation: fadeRightContReg 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+  }
+  @keyframes fadeRightContReg {
+    from {
+      opacity: 0.2;
+      transform: translateX(0%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0%);
+    }
+  }
+
+  body.show-register .container {
+    animation: fadeContReg 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+  }
+  @keyframes fadeContReg {
+    from {
+      opacity: 0.2;
+      transform: translateX(0%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0%);
+    }
+  }
+  body.show-login .rightCont {
+    animation: fadeRightContLogin 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+  }
+  @keyframes fadeRightContLogin {
+    from {
+      opacity: 0.2;
+      transform: translateX(0%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0%);
+    }
+  }
+
+  body.show-login .container {
+    animation: fadeContLogin 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+  }
+  @keyframes fadeContLogin {
+    from {
+      opacity: 0.2;
+      transform: translateX(0%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0%);
+    }
   }
 
   .innerCont {
