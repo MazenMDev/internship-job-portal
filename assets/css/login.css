@@ -46,59 +46,31 @@ body {
   overflow-y: visible;
   margin-top: -20px;
 }
-body.show-register .rightCont {
-  animation: fadeRightContReg 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
-}
-@keyframes fadeRightContReg {
-  from {
-    opacity: 0.2;
-    transform: translateX(0%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(90%);
-  }
+
+.container,
+.rightCont {
+  opacity: 0; 
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body.show-register .container {
-  animation: fadeContReg 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+  transform: translateX(-100%);
+  opacity: 1;
 }
-@keyframes fadeContReg {
-  from {
-    opacity: 0.2;
-    transform: translateX(0%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-100%);
-  }
-}
-body.show-login .rightCont {
-  animation: fadeRightContLogin 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
-}
-@keyframes fadeRightContLogin {
-  from {
-    opacity: 0.2;
-    transform: translateX(90%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0%);
-  }
+
+body.show-register .rightCont {
+  transform: translateX(90%);
+  opacity: 1;
 }
 
 body.show-login .container {
-  animation: fadeContLogin 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+  transform: translateX(0%);
+  opacity: 1;
 }
-@keyframes fadeContLogin {
-  from {
-    opacity: 0.2;
-    transform: translateX(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0%);
-  }
+
+body.show-login .rightCont {
+  transform: translateX(0%);
+  opacity: 1;
 }
 
 .hidden {
