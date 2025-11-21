@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobConnect - Login/Register</title>
+
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/login.css" />
+    <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+
+  <body class="show-login">
+    <div class="logoContainer">
+      <img src="../assets/imgs/JobConnect.png" alt="Logo" />
+      <h1>JobConnect</h1>
+      <button onclick="themeToggle()" class="themeToggle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-sun-icon lucide-sun"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2" />
+          <path d="M12 20v2" />
+          <path d="m4.93 4.93 1.41 1.41" />
+          <path d="m17.66 17.66 1.41 1.41" />
+          <path d="M2 12h2" />
+          <path d="M20 12h2" />
+          <path d="m6.34 17.66-1.41 1.41" />
+          <path d="m19.07 4.93-1.41 1.41" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="rightCont">
+      <div class="innerCont">
+        <h1>Find Your Dream Job</h1>
+        <p>
+          Join JobConnect to explore thousands of internships and job
+          opportunities tailored for you.
+        </p>
+        <div class="svg-container">
+          <img src="../assets/svg/Business.svg" alt="Business Illustration" />
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <hr class="separator" />
+
+      <div id="loginBox" class="authBox active">
+        <h1>Welcome!</h1>
+
+        <form action="../php/login.php" method="POST">
+          <div class="inp">
+            <input
+              class="holder"
+              type="email"
+              name="email"
+              id="email"
+              required
+            />
+            <label for="email">Email</label>
+          </div>
+
+          <div class="inp">
+            <input class="holder" type="password" name="password" required />
+            <label>Password</label>
+          </div>
+
+          <input type="submit" value="Login" class="submit" />
+
+          <h2 id="errorMsg"></h2>
+        </form>
+
+        <h2 id="changePage">
+          Don't have an account?
+          <a href="#" id="goRegister">Register</a>
+        </h2>
+      </div>
+
+      <div id="registerBox" class="authBox">
+        <h1>Join Us!</h1>
+
+        <form action="../php/register.php" method="POST">
+          <div class="reg">
+            <input type="text" name="fname" required class="holder" />
+            <label class="reg-label">First Name</label>
+          </div>
+
+          <div class="reg">
+            <input type="text" name="lname" required class="holder" />
+            <label class="reg-label">Last Name</label>
+          </div>
+
+          <div class="reg">
+            <input type="email" name="email" required class="holder" />
+            <label class="reg-label">Email</label>
+          </div>
+
+          <div class="reg">
+            <input type="password" name="password" required class="holder" />
+            <label class="reg-label">Password</label>
+          </div>
+
+          <div class="reg">
+            <input type="password" name="confirm" required class="holder" />
+            <label class="reg-label">Confirm Password</label>
+          </div>
+
+          <div class="reg gender-box">
+            <label class="gender-label">Gender:</label>
+            <div class="gender-options">
+              <label
+                ><input type="radio" name="gender" value="male" required />
+                Male</label
+              >
+              <label
+                ><input type="radio" name="gender" value="female" required />
+                Female</label
+              >
+            </div>
+          </div>
+
+          <input type="submit" value="Confirm" class="submit" />
+
+          <h2 id="errorMsg"></h2>
+        </form>
+
+        <h2 id="changePage">
+          Already have an account?
+          <a href="#" id="goLogin">Login</a>
+        </h2>
+      </div>
+    </div>
+
+    <a href="./landing.html" id="goBack">&lt; Go Back</a>
+    <script src="../assets/js/themeToggle.js"></script>
+    <script src="../assets/js/logReg.js"></script>
+  </body>
+</html>

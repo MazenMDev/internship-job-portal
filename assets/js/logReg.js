@@ -120,3 +120,59 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, 100);
 });
+
+// Get elements first
+const body = document.body;
+const loginBox = document.querySelector("#loginBox");
+const registerBox = document.querySelector("#registerBox");
+
+// Set initial state based on URL hash or default to login
+if (loginBox && registerBox) {
+  const hash = window.location.hash;
+
+  if (hash === "#register") {
+    body.classList.remove("show-login");
+    body.classList.add("show-register");
+    loginBox.style.display = "none";
+    registerBox.style.display = "block";
+  } else {
+    body.classList.remove("show-register");
+    body.classList.add("show-login");
+    loginBox.style.display = "block";
+    registerBox.style.display = "none";
+  }
+}
+
+// Toggle between login and register within the page
+const goRegisterBtn = document.querySelector("#goRegister");
+const goLoginBtn = document.querySelector("#goLogin");
+
+if (goRegisterBtn) {
+  goRegisterBtn.onclick = (e) => {
+    e.preventDefault();
+    body.classList.remove("show-login");
+    body.classList.add("show-register");
+
+    if (loginBox && registerBox) {
+      loginBox.classList.remove("active");
+      registerBox.classList.add("active");
+      loginBox.style.display = "none";
+      registerBox.style.display = "block";
+    }
+  };
+}
+
+if (goLoginBtn) {
+  goLoginBtn.onclick = (e) => {
+    e.preventDefault();
+    body.classList.remove("show-register");
+    body.classList.add("show-login");
+
+    if (registerBox && loginBox) {
+      registerBox.classList.remove("active");
+      loginBox.classList.add("active");
+      registerBox.style.display = "none";
+      loginBox.style.display = "block";
+    }
+  };
+}

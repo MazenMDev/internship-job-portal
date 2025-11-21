@@ -14,7 +14,6 @@ body {
   font-family: var(--main-font-family);
 }
 
-
 .logoContainer {
   position: fixed;
   top: 15px;
@@ -47,6 +46,60 @@ body {
   overflow-y: visible;
   margin-top: -20px;
 }
+body.show-register .rightCont {
+  animation: fadeRightContReg 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+}
+@keyframes fadeRightContReg {
+  from {
+    opacity: 0.2;
+    transform: translateX(0%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(90%);
+  }
+}
+
+body.show-register .container {
+  animation: fadeContReg 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+}
+@keyframes fadeContReg {
+  from {
+    opacity: 0.2;
+    transform: translateX(0%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-100%);
+  }
+}
+body.show-login .rightCont {
+  animation: fadeRightContLogin 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+}
+@keyframes fadeRightContLogin {
+  from {
+    opacity: 0.2;
+    transform: translateX(90%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+body.show-login .container {
+  animation: fadeContLogin 0.8s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+}
+@keyframes fadeContLogin {
+  from {
+    opacity: 0.2;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
 
 #form {
   scale: calc(1.04);
@@ -66,6 +119,19 @@ body {
   overflow: hidden;
   scale: calc(1.15);
 }
+
+.rightCont::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to left,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  z-index: 0;
+}
+
 .innerCont {
   display: flex;
   flex-direction: column;
@@ -78,7 +144,7 @@ body {
 }
 
 .rightCont h1 {
-  color: var(--text-color);
+  color: #fff;
   font-size: 1.8rem;
   text-align: center;
   margin-bottom: 0.8rem;
@@ -86,7 +152,7 @@ body {
 }
 
 .rightCont p {
-  color: var(--text-muted);
+  color: #fff;
   font-size: 0.95rem;
   text-align: center;
   margin-bottom: 1rem;
@@ -102,7 +168,6 @@ body {
 .svg-container img {
   max-width: 85%;
   height: auto;
-  
 }
 
 form {
@@ -222,22 +287,16 @@ h1 {
   text-decoration: underline;
 }
 
-
-.innerCont, .container {
-  animation: fadeUp 0.8s ease both;
-}
-
 @keyframes fadeUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(20px); 
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  to { 
-    opacity: 1; 
+  to {
+    opacity: 1;
     transform: translateY(0);
   }
 }
-
 
 /* Generic labels for inputs on login/register pages */
 .reg {
