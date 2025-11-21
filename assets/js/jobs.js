@@ -1,5 +1,6 @@
 //Import the job categories from jobcategories script
 import jobCategories from "./jobCategories.js";
+import { showJobDetails } from "./jobForm.js";
 
 // put icons for each main category
 const categoryIcons = {
@@ -24,139 +25,147 @@ const categoryIcons = {
 // dummy jobs until we make the backend
 let jobListings = [
   {
-    id: 1,
-    title: "Software Engineer",
-    company: "Google",
+    job_id: 1,
+    job_title: "Software Engineer",
+    company_name: "Google",
+    company_id: 1,
     category: "Software Development",
-    type: "Part time",
-    salary: "$24000-$32000",
+    job_type: "Part time",
+    salary: "$24000-$3200",
     location: "Cairo, EG",
     experience: "2-4 years",
-    datePosted: "2025-10-10 20:00:00",
+    created_at: "2025-10-10 20:00:00",
     logo: "../assets/imgs/dummyJobCompanyImages/google-company.jpg",
-    description:
+    job_description:
       "As a Software Engineer at Google, you will be part of a dynamic and innovative environment that values creativity, problem-solving, and technical excellence. You will collaborate with cross-functional teams to design, build, and optimize scalable web and cloud-based applications. The ideal candidate should have a strong grasp of modern JavaScript frameworks, experience in developing RESTful APIs, and the ability to translate product requirements into clean and efficient code. This position offers opportunities for mentorship, career growth, and exposure to global-scale projects.",
-    skills: ["JavaScript", "React", "Node.js", "API Design"],
-    tags: ["Frontend", "Backend", "Web Development"],
+    skill: ["JavaScript", "React", "Node.js", "API Design"],
+    tag: ["Frontend", "Backend", "Web Development"],
     website: "https://careers.google.com",
   },
   {
     id: 2,
-    title: "Marketing Specialist",
-    company: "Coca-Cola",
+    job_title: "Marketing Specialist",
+    company_name: "Coca-Cola",
+    company_id: 2,
     category: "Digital Marketing",
-    type: "Full time",
+    job_type: "Full time",
     salary: "$28000-$35000",
     experience: "3-5 years",
     location: "Atlanta, GA",
-    datePosted: "2025-10-08 09:20:00",
+    created_at: "2025-10-08 09:20:00",
     logo: "../assets/imgs/dummyJobCompanyImages/cocacola.jpg",
-    description:
+    job_description:
       "Join Coca-Cola’s digital marketing team and play a key role in shaping online campaigns that reach millions of customers worldwide. As a Marketing Specialist, you will develop creative strategies for social media engagement, manage advertising budgets, analyze performance data, and coordinate with design and product teams to ensure brand consistency. Candidates should possess strong analytical skills, an understanding of digital trends, and experience using tools such as Google Analytics and Meta Ads Manager. This role encourages innovative thinking and offers the opportunity to work on global brand campaigns.",
-    skills: ["SEO", "Google Ads", "Social Media Management", "Analytics"],
-    tags: ["Marketing", "Advertising", "Branding"],
+    skill: ["SEO", "Google Ads", "Social Media Management", "Analytics"],
+    tag: ["Marketing", "Advertising", "Branding"],
     website: "https://www.coca-colacompany.com/careers",
   },
   {
     id: 3,
-    title: "Cloud Engineer",
-    company: "Amazon",
+    job_title: "Cloud Engineer",
+    company_name: "Amazon",
+    company_id: 3,
     category: "Cloud Computing",
-    type: "Part Time",
+    job_type: "Part Time",
     salary: "$130000-$190000",
     experience: "6+ years",
     location: "Smart Village, Giza",
-    datePosted: "2025-10-06 11:55:00",
+    created_at: "2025-10-06 11:55:00",
     logo: "../assets/imgs/dummyJobCompanyImages/amazon.jpeg",
-    description:
+    job_description:
       "As a Cloud Engineer at Amazon, you will architect, deploy, and maintain secure and scalable infrastructure across AWS services. You’ll collaborate closely with DevOps teams to implement CI/CD pipelines, monitor cloud performance, and automate processes using Terraform and AWS CloudFormation. The ideal candidate should have experience with container technologies like Docker and Kubernetes, strong networking knowledge, and a passion for improving system reliability and scalability. This is an excellent opportunity to work within a fast-paced environment where innovation drives every decision.",
-    skills: ["AWS", "Docker", "Kubernetes", "CI/CD"],
-    tags: ["Cloud", "DevOps", "Infrastructure"],
+    skill: ["AWS", "Docker", "Kubernetes", "CI/CD"],
+    tag: ["Cloud", "DevOps", "Infrastructure"],
     website: "https://aws.amazon.com/careers/",
   },
   {
     id: 4,
-    title: "Registered Nurse",
-    company: "Mayo Clinic",
+    job_title: "Registered Nurse",
+    company_name: "Mayo Clinic",
+    company_id: 4,
     category: "Medical & Nursing",
-    type: "Part Time",
+    job_type: "Part Time",
     salary: "$55000-$75000",
     experience: "2+ years",
     location: "Rochester, MN",
-    datePosted: "2025-10-07 08:45:00",
+    created_at: "2025-10-07 08:45:00",
     logo: "../assets/imgs/dummyJobCompanyImages/mayo-clinic.jpeg",
-    description:
+    job_description:
       "The Registered Nurse at Mayo Clinic will provide patient-centered care in one of the most respected healthcare institutions in the world. You will be responsible for assessing patient health, administering medications, assisting with procedures, and collaborating with physicians to develop effective treatment plans. Candidates should have strong communication skills, the ability to remain calm under pressure, and a compassionate approach to patient care. Working at Mayo Clinic offers continuous learning opportunities and access to cutting-edge medical research and technologies.",
-    skills: ["Patient Care", "CPR", "EMR Systems", "Teamwork"],
-    tags: ["Healthcare", "Nursing"],
+    skill: ["Patient Care", "CPR", "EMR Systems", "Teamwork"],
+    tag: ["Healthcare", "Nursing"],
     website: "https://jobs.mayoclinic.org",
   },
   {
     id: 5,
-    title: "Accountant",
-    company: "PwC",
+    job_title: "Accountant",
+    company_name: "PwC",
+    company_id: 5,
     category: "Accounting",
-    type: "Full time",
+    job_type: "Full time",
     salary: "$40000-$60000",
     experience: "2-3 years",
     location: "London, UK",
-    datePosted: "2025-10-04 12:00:00",
+    created_at: "2025-10-04 12:00:00",
     logo: "../assets/imgs/dummyJobCompanyImages/pwc.jpg",
-    description:
+    job_description:
       "As an Accountant at PwC, you’ll be responsible for managing client accounts, preparing financial reports, analyzing budgets, and ensuring regulatory compliance. You will work with a diverse set of clients and collaborate with audit and consulting teams to provide strategic financial insights. The position requires a strong understanding of accounting principles, attention to detail, and proficiency in financial software tools. This role offers a collaborative environment where you’ll have opportunities to grow within one of the world’s leading professional services firms.",
-    skills: ["Excel", "Financial Analysis", "QuickBooks", "Tax Preparation"],
-    tags: ["Finance", "Auditing", "Tax"],
+    skill: ["Excel", "Financial Analysis", "QuickBooks", "Tax Preparation"],
+    tag: ["Finance", "Auditing", "Tax"],
     website: "https://www.pwc.com/careers",
   },
   {
     id: 6,
-    title: "Civil Engineer",
-    company: "Bechtel",
+    job_title: "Civil Engineer",
+    company_name: "Bechtel",
+    company_id: 6,
     category: "Architecture",
-    type: "InternShip",
+    job_type: "InternShip",
     salary: "$1000-$1200",
     experience: "Student",
     location: "Houston, TX",
-    datePosted: "2025-10-29 17:32:00",
+    created_at: "2025-10-29 17:32:00",
     logo: "../assets/imgs/dummyJobCompanyImages/bechtel.png",
-    description:
+    job_description:
       "Bechtel is offering an internship opportunity for aspiring Civil Engineers looking to gain real-world experience in infrastructure development. As an intern, you will assist project managers and senior engineers in drafting designs, inspecting construction sites, and preparing reports. You will learn how to use tools like AutoCAD, perform basic structural analysis, and understand project documentation processes. This internship provides an excellent foundation for students passionate about construction, design, and sustainable engineering practices.",
-    skills: ["AutoCAD", "Project Management", "Structural Design"],
-    tags: ["Engineering", "Construction", "Internship"],
+    skill: ["AutoCAD", "Project Management", "Structural Design"],
+    tag: ["Engineering", "Construction", "Internship"],
     website: "https://jobs.bechtel.com",
   },
   {
     id: 7,
-    title: "Biology Teacher",
-    company: "Springfield High School",
+    job_title: "Biology Teacher",
+    company_name: "Springfield High School",
+    company_id: 7,
     category: "Teaching & Tutoring",
-    type: "Full time",
+    job_type: "Full time",
     salary: "$35000-$48000",
     experience: "3+ years",
     location: "Springfield, IL",
-    datePosted: "2025-10-02 08:15:00",
+    created_at: "2025-10-02 08:15:00",
     logo: "../assets/imgs/dummyJobCompanyImages/springfield.jpeg",
-    description:
+    job_description:
       "We are seeking a dedicated Biology Teacher to join Springfield High School’s science department. The candidate will be responsible for preparing lesson plans, conducting laboratory experiments, and fostering a love for science among students. You will also evaluate student performance, maintain a safe classroom environment, and collaborate with other teachers to develop interdisciplinary projects. A strong passion for education and the ability to engage students through interactive teaching methods are essential for success in this role.",
-    skills: ["Teaching", "Biology", "Classroom Management", "Lesson Planning"],
-    tags: ["Education", "Science"],
+    skill: ["Teaching", "Biology", "Classroom Management", "Lesson Planning"],
+    tag: ["Education", "Science"],
     website: "https://springfieldhigh.edu/careers",
   },
   {
     id: 8,
-    title: "iOS Developer",
-    company: "Apple",
+    job_title: "iOS Developer",
+    company_name: "Apple",
+    company_id: 8,
     category: "Mobile App Development",
-    type: "Remote",
+    job_type: "Remote",
     salary: "$34000-$45000",
     experience: "4-6 years",
     location: "Cupertino, CA",
-    datePosted: "2025-10-05 14:18:00",
+    created_at: "2025-10-05 14:18:00",
     logo: "../assets/imgs/dummyJobCompanyImages/apple.jpeg",
-    description:
+    job_description:
       "As an iOS Developer at Apple, you will design, develop, and maintain mobile applications that deliver exceptional user experiences. You’ll collaborate with designers, backend developers, and product managers to bring creative ideas to life. The ideal candidate should have strong experience with Swift and Xcode, a deep understanding of Apple’s Human Interface Guidelines, and a commitment to writing clean and maintainable code. This role provides the opportunity to work on apps that reach millions of users while staying at the forefront of mobile innovation.",
-    skills: ["Swift", "Xcode", "UI/UX Design", "REST APIs"],
-    tags: ["Mobile", "iOS", "App Development"],
+    skill: ["Swift", "Xcode", "UI/UX Design", "REST APIs"],
+    tag: ["Mobile", "iOS", "App Development"],
     website: "https://jobs.apple.com",
   },
 ];
@@ -297,7 +306,7 @@ function renderPage(page) {
     jobCard.classList.add("job-card");
     jobCard.setAttribute("data-id", job.id);
     jobCard.innerHTML = `
-        <div class="job-date">${timeSince(job.datePosted)}</div>
+        <div class="job-date">${timeSince(job.created_at)}</div>
         <svg class="job-bookmark ${
           userBookMarks.includes(job.id) ? "bookmarked" : ""
         }" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -305,12 +314,12 @@ function renderPage(page) {
         </svg>
         <div class="job-main-content">
                 <div class="company-logo">
-                        <img src="${job.logo}" alt="${job.company} Logo">
+                        <img src="${job.logo}" alt="${job.company_name} Logo">
                 </div>
                 <div class="job-info">
                         <div class="job-header-info">
-                                <h3 class="job-title">${job.title}</h3>
-                                <p class="company-name">${job.company}</p>
+                                <h3 class="job-title">${job.job_title}</h3>
+                                <p class="company-name">${job.company_name}</p>
                         </div>
                         <div class="job-details-row">
                                 <div class="job-detail-item">
@@ -323,7 +332,7 @@ function renderPage(page) {
                                                 <polyline points="12,6 12,12 16,14"></polyline>
                                         </svg>
                                         <span class="job-type-badge">${
-                                          job.type
+                                          job.job_type
                                         }</span>
                                 </div>
                                 <div class="job-detail-item">
@@ -354,6 +363,12 @@ function renderPage(page) {
     jobCard.querySelector(".job-bookmark").addEventListener("click", () => {
       toggleBookmark(job.id);
     });
+    
+    // Add event listener to job details button
+    jobCard.querySelector(".job-form-button").addEventListener("click", () => {
+      showJobDetails(job);
+    });
+    
     //put the job at the end of the job container
     jobContainer.appendChild(jobCard);
   });
@@ -559,7 +574,6 @@ function showSubcategories(parent) {
       inp.checked = allSelected;
       toggleCategory(inp.value);
     });
-    console.log(selectedCategories);
   });
 
   const goBackCatBtn = document.createElement("button");
@@ -686,7 +700,6 @@ function searchJobs(keyword) {
 // class="search-bar"
 
 const applyButton = document.querySelector(".apply-button");
-console.log(selectedCategories);
 if (applyButton) {
   applyButton.addEventListener("click", function () {
     inputSearch();

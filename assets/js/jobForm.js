@@ -6,18 +6,9 @@ import {
   userBookMarks,
 } from "./jobs.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.addEventListener("click", (e) => {
-    const button = e.target.closest(".job-form-button");
-    if (!button) return;
-
-    const parentJobCard = button.closest(".job-card");
-    if (!parentJobCard) return;
-
-    const jobId = Number(parentJobCard.getAttribute("data-id"));
-    const job = jobListings.find((job) => job.id === jobId);
-    const blurDiv = document.createElement("div");
-    blurDiv.classList.add("ParentBlurDiv");
+function showJobDetails(job) {
+  const blurDiv = document.createElement("div");
+  blurDiv.classList.add("ParentBlurDiv");
 
     const formDiv = document.createElement("div");
     formDiv.classList.add("formDiv");
@@ -65,13 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
     lowerDiv.appendChild(formRightDiv);
 
     document.body.appendChild(blurDiv);
-  });
-});
+}
 
 function rightDivContent(job, formRightDiv) {
   formRightDiv.innerHTML = `
     <form class="application-form">
-      <h2 class="application-form-title">Apply for ${job.title}</h2>
+      <h2 class="application-form-title">Apply for ${job.job_title}</h2>
       <label for="full-name">Full Name <span class="required">*</span></label>
       <input type="text" id="full-name" name="full-name" required />
       <label for="email">Email Address <span class="required">*</span></label>
@@ -98,15 +88,15 @@ function leftDivContent(job, formLeftDiv) {
   formLeftDiv.innerHTML = `
   <div class="details-container">
     <h2 class="job-description-title">Job Description</h2>
-    <p class="job-description-content">${job.description}</p>
+    <p class="job-description-content">${job.job_description}</p>
     <h2 class="job-skills-title">Required Skills</h2>
     <ul class="job-skills-list">
-      ${job.skills.map(skill => `<li class="job-skill">${skill}</li>`).join("")}
+      ${job.skill.map(skill => `<li class="job-skill">${skill}</li>`).join("")}
     </ul>
 
     <h2 class="job-tags-title">Tags:</h2>
     <div class="job-tags-container">
-      ${job.tags.map(tag => `<span class="job-tag">${tag}</span>`).join("")}
+      ${job.tag.map(tag => `<span class="job-tag">${tag}</span>`).join("")}
     </div> 
 
     <a href="${job.website}" target="_blank" class="companyWebsite">
@@ -127,13 +117,13 @@ function upperDivContent(job, upperDiv) {
               <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
       </svg>
     <div class="job-info-form">
-        <p class="job-posted-time-form">${timeSince(job.datePosted)}</p>
+        <p class="job-posted-time-form">${timeSince(job.created_at)}</p>
         
         <div class="job-header-form">
-          <img src="${job.logo}" alt="${job.company} Logo" class="job-logo-form" />
+          <img src="${job.logo}" alt="${job.company_name} Logo" class="job-logo-form" />
           <div class="job-header-info">
-            <h2 class="job-title-form">${job.title}</h2>
-            <p class="job-company-form">${job.company}</p>
+            <h2 class="job-title-form">${job.job_title}</h2>
+            <p class="job-company-form">${job.company_name}</p>
           </div>
         </div>
 
@@ -150,7 +140,7 @@ function upperDivContent(job, upperDiv) {
                        <polyline points="12,6 12,12 16,14"></polyline>
                </svg>
                <span>${
-                 job.type
+                 job.job_type
                }</span>
 
             </div>
@@ -191,3 +181,5 @@ function upperDivContent(job, upperDiv) {
   }
 
 }
+
+export { showJobDetails };

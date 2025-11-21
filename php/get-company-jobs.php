@@ -56,12 +56,12 @@ $statskill = $conn->prepare('
 foreach($jobs as & $job){
     $statskill->bind_param('i', $job['job_id']);
     $statskill->execute();
-    $skill =array();
+    $skills = [];
     $result = $statskill->get_result();
     while($skill = $result->fetch_assoc()){
         $skills[] = $skill['skill'];
     }
     $job['skill'] = $skills;
 }
-echo json_encode($job);
+echo json_encode($jobs);
 ?>
