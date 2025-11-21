@@ -45,4 +45,49 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    
 });
+window.onload = function () {
+  const yearsContainer = document.getElementById("years");
+  const currentYear = new Date().getFullYear();
+
+  for (let year = currentYear; year >= 1980; year--) {
+    const yearDiv = document.createElement("div");
+    yearDiv.textContent = year;
+    yearDiv.dataset.year = year;
+    yearsContainer.appendChild(yearDiv);
+  }
+
+  const dateInput = document.getElementById("dateInput");
+  const date = document.getElementById("prof-date-dropdown");
+  let selectedMonth = null;
+
+  dateInput.addEventListener("click", function (event) {
+    date.style.display = date.style.display === "flex" ? "none" : "flex";
+    event.stopPropagation();
+  });
+
+  document.querySelectorAll(".months div").forEach((month) => {
+    month.addEventListener("click", function () {
+      selectedMonth = this.dataset.month;
+    });
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!date.contains(event.target) && event.target !== dateInput) {
+      date.style.display = "none";
+    }
+  });
+
+  yearsContainer.addEventListener("click", function (event) {
+    if (event.target.tagName === "DIV") {
+      const year = event.target.dataset.year;
+      if (selectedMonth) {
+        dateInput.value = `${selectedMonth}/${year}`;
+        date.style.display = "none";
+        selectedMonth = null;
+      }
+    }
+  });
+};

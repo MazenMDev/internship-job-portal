@@ -93,27 +93,103 @@
             </div>
           </div>
 
+          <!-- Experience Section -->
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-briefcase-business-icon lucide-briefcase-business"
+              >
+                <path d="M12 12h.01" />
+                <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                <path d="M22 13a18.15 18.15 0 0 1-20 0" />
+                <rect width="20" height="14" x="2" y="6" rx="2" />
+              </svg>
+              Experience
+              <span class="arrow">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="experience-entries-container">
+                <textarea
+                  class="form-input entry-textarea"
+                  placeholder="Software Developer at Company Y "
+                ></textarea>
+              </div>
+
+              <div class="date-picker">
+                <label class="date-label">Start Date</label>
+
+                <input
+                  type="text"
+                  id="dateInput"
+                  class="date-input"
+                  placeholder="MM/YYYY"
+                  readonly
+                />
+
+                <div class="prof-date-dropdown" id="prof-date-dropdown">
+                  <div class="months">
+                    <div data-month="01">Jan</div>
+                    <div data-month="02">Feb</div>
+                    <div data-month="03">Mar</div>
+                    <div data-month="04">Apr</div>
+                    <div data-month="05">May</div>
+                    <div data-month="06">Jun</div>
+                    <div data-month="07">Jul</div>
+                    <div data-month="08">Aug</div>
+                    <div data-month="09">Sep</div>
+                    <div data-month="10">Oct</div>
+                    <div data-month="11">Nov</div>
+                    <div data-month="12">Dec</div>
+                  </div>
+
+                  <!-- Divider Line -->
+                  <div class="divider"> </div>
+
+                  <!-- Scrollable years -->
+                  <div class="years" id="years"></div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="add-entry-btn"
+                data-target="experience"
+              >
+                + Add Experience
+              </button>
+            </div>
+          </div>
+
           <!-- Education Section -->
           <div class="accordion-item">
             <div class="accordion-header">
               <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-graduation-cap-icon lucide-graduation-cap"
-          >
-            <path
-              d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"
-            />
-            <path d="M22 10v6" />
-            <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
-          </svg>
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-graduation-cap-icon lucide-graduation-cap"
+              >
+                <path
+                  d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"
+                />
+                <path d="M22 10v6" />
+                <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+              </svg>
               Education
               <span class="arrow">▼</span>
             </div>
@@ -135,9 +211,7 @@
             </div>
           </div>
 
-          
-
-          <!-- Experience Section -->
+          <!-- courses Section -->
           <div class="accordion-item">
             <div class="accordion-header">
               <svg
@@ -643,6 +717,14 @@
 
             <div class="education">
               <h2>Education</h2>
+            </div>
+
+            <div class="courses">
+              <h2>Courses</h2>
+            </div>
+
+            <div class="projeccts">
+              <h2>Projects</h2>
             </div>
 
             <div class="skills">

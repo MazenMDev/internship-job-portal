@@ -19,10 +19,12 @@
   padding: 0px 20px 20px 20px;
   position: relative;
 }
+
 #photo:hover {
   background-color: black;
   color: black;
 }
+
 #view-photo h3 {
   top: 45%;
   left: 50%;
@@ -35,6 +37,7 @@
   color: var(--background-color);
   width: auto;
 }
+
 #view-photo {
   display: none;
   position: fixed;
@@ -60,11 +63,13 @@
   object-fit: cover;
   border-radius: 50%;
 }
+
 .profile-photo2:hover {
   transition: all 0.2s ease-in-out;
   filter: brightness(0.6) contrast(0.95) blur(3px);
   cursor: pointer;
 }
+
 #view-photo:hover h3 {
   opacity: 1;
 }
@@ -73,6 +78,7 @@ body.view-open #blurred-background,
 body.view-open #view-photo {
   display: flex;
 }
+
 .profile-photo {
   width: 120px;
   height: 120px;
@@ -85,6 +91,7 @@ body.view-open #view-photo {
   object-fit: cover;
   transition: all 0.1s ease-in-out;
 }
+
 .profile-photo:hover {
   transition: all 0.1s ease-in-out;
   filter: brightness(0.6) contrast(0.95);
@@ -112,9 +119,11 @@ body.view-open #view-photo {
   color: var(--secondary-color);
   text-decoration: none;
 }
+
 .profile-section a:hover {
   text-decoration: underline;
 }
+
 h2 {
   font-size: 20px;
   color: var(--primary-color);
@@ -141,6 +150,7 @@ li {
   border-radius: 20px;
   font-size: 14px;
 }
+
 .skills-div {
   display: flex;
   flex-wrap: wrap;
@@ -158,6 +168,7 @@ li {
   font-size: 14px;
   border: none;
 }
+
 .skills-div .skill:hover {
   background: var(--secondary-color);
   transform: translateY(-2px);
@@ -179,6 +190,7 @@ li {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
+
 .edit-photo:hover {
   background-color: #fff;
   color: black;
@@ -193,6 +205,7 @@ body.edit-open #blurred-background,
 body.edit-open #edit-form {
   display: block;
 }
+
 #edit-form {
   display: none;
   position: fixed;
@@ -210,6 +223,7 @@ body.edit-open #edit-form {
   box-shadow: 0px 30px 50px var(--box-shadow);
   transition: all 0.2s ease-in-out;
 }
+
 #edit-close {
   position: absolute;
   top: 15px;
@@ -220,19 +234,23 @@ body.edit-open #edit-form {
   color: var(--text-color);
   transition: all 0.2s ease-in-out;
 }
+
 #edit-close:hover {
   background-color: var(--box-color);
   color: var(--primary-color);
   transform: none;
 }
+
 textarea {
   min-height: 100px;
   resize: none;
   font: 1em sans-serif;
 }
+
 #bio {
   min-height: 70px;
 }
+
 .edit-btn {
   width: 21px;
   height: 21px;
@@ -247,18 +265,22 @@ textarea {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
+
 .edit-btn :hover {
   color: var(--text-color);
 }
+
 .edit {
   display: none;
 }
+
 label {
   padding-left: 10px;
   font-size: 12px;
   color: var(--text-muted);
   opacity: 0.7;
 }
+
 .cover-btn {
   width: 21px;
   height: 21px;
@@ -273,6 +295,7 @@ label {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
+
 .cover-btn:hover {
   color: var(--text-color);
 }
@@ -317,7 +340,7 @@ label {
   transition: all 0.3s ease;
 }
 
-.edit-panel:target ~ .panel-overlay {
+.edit-panel:target~.panel-overlay {
   opacity: 1;
   visibility: visible;
   pointer-events: all;
@@ -524,47 +547,47 @@ label {
   z-index: 1;
 }
 
-.edit-panel:target ~ .container .profile-container {
+.edit-panel:target~.container .profile-container {
   margin-right: 0;
 }
 
-.accordion{
-  width:440px;
+.accordion {
+  width: 440px;
 }
 
-.accordion-item{
+.accordion-item {
   margin-bottom: 5px;
 }
 
-.accordion-header{
+.accordion-header {
   background-color: var(--box-color);
-  padding:10px;
-  cursor:pointer;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-radius:6px;
-  box-shadow:2px 2px 3px var(--box-shadow);
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+  box-shadow: 2px 2px 3px var(--box-shadow);
 }
 
-.accordion-content{
-  display:none;
+.accordion-content {
+  display: none;
   max-height: 0px;
   transition: max-height 0.6s ease;
-  padding:25px;
-  overflow:hidden;
+  padding: 25px;
+  overflow: initial;
   background-color: var(--background-color);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
-.accordion-header .arrow{
+.accordion-header .arrow {
   transition: transform 0.3s ease;
 }
 
-.accordion-content.active{
-  display:block;
-  max-height:1000px;
+.accordion-content.active {
+  display: block;
+  max-height: 2000px;
 }
 
 
@@ -588,17 +611,22 @@ label {
   cursor: pointer;
   border: 2px solid var(--primary-color);
 }
+
 #cvCard:hover .cvIcon {
   stroke: var(--background-color);
   border: 2px solid var(--background-color);
 }
 
-#cvCard:hover .uploadName, #cvCard:hover .cvMain span, #cvCard:hover .cvMain span svg {
+#cvCard:hover .uploadName,
+#cvCard:hover .cvMain span,
+#cvCard:hover .cvMain span svg {
   color: var(--background-color);
 }
+
 #cvCard:hover .cvMain span svg {
   stroke: var(--background-color);
 }
+
 .cvIcon {
   stroke: var(--primary-color);
   border-radius: 50%;
@@ -632,11 +660,13 @@ label {
   font-size: 12px;
   color: var(--secondary-color);
 }
+
 .cvMain span svg {
   stroke: var(--secondary-color);
   width: 16px;
   height: 16px;
 }
+
 .hidden-file-input {
   width: 0.1px;
   height: 0.1px;
@@ -648,24 +678,24 @@ label {
 
 .file-upload-wrapper {
   display: flex;
-  align-items: center; 
+  align-items: center;
   padding: 10px 0;
 }
 
 .custom-cv-button {
   display: flex;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: space-between;
   cursor: pointer;
   padding: 10px 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: var(--background-color); 
+  background-color: var(--background-color);
   color: var(--text-color);
   font-size: 16px;
   font-weight: 500;
   transition: background-color 0.2s;
-  min-width: 200px; 
+  min-width: 200px;
 }
 
 .custom-cv-button:hover {
@@ -679,20 +709,113 @@ label {
 }
 
 .file-display-text {
-  text-align: center; 
-  flex-grow: 1; 
-  white-space: nowrap; 
+  text-align: center;
+  flex-grow: 1;
+  white-space: nowrap;
 }
 
 .entry-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px; 
-    border: 1px solid var(--input-border-color);
-    border-radius: 4px;
-    box-sizing: border-box; 
-    resize: vertical; 
-    min-height: 80px; 
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.date-picker {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 4px;
+}
+
+.date-picker label {
+  margin-bottom: 2px;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.date-picker input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border-color);
+  background: var(--box-color);
+  color: var(--text-color);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.prof-date-dropdown {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: var(--box-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 14px;
+  border-radius: 12px;
+  width: 340px;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  column-gap: 14px;
+}
+
+.divider {
+  background: var(--border-color);
+  width: 1px;
+  height: 100%;
+  min-height: 150px;
+}
+
+.months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 14px;
+  column-gap: 5px;
+  padding-right: 2px;
+
+}
+
+.years {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 14px;
+  column-gap: 3px;
+  max-height: 160px;
+  overflow-y: auto;
+  padding-left: 0px;
+}
+
+.years::-webkit-scrollbar {
+  width: 6px;
+}
+
+.years::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
+}
+
+.months div,
+.years div {
+  padding: 2px 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.months div:hover,
+.years div:hover {
+  background: var(--border-color);
+}
+.selected {
+  background: var(--primary-color) !important;
+  color: var(--box-color) !important;
+  font-weight: 600;
 }
 
 
@@ -737,6 +860,7 @@ label {
     border-radius: 0px;
     box-shadow: none;
   }
+
   .edit-photo {
     margin-top: 0px;
     position: absolute;
@@ -766,10 +890,12 @@ label {
     max-width: 450px;
     margin-top: 35px;
   }
+
   #view-photo {
     width: 400px;
     height: 400px;
   }
+
   .profile-photo2 {
     width: 400px;
     height: 400px;
@@ -783,14 +909,17 @@ label {
     transform: none;
     box-sizing: border-box;
   }
+
   .profile-photo2 {
     width: 325px;
     height: 325px;
   }
+
   #view-photo {
     width: 325px;
     height: 325px;
   }
+
   #view-photo h3 {
     font-size: 24px;
   }
