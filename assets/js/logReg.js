@@ -40,12 +40,19 @@ function getLabelForInput(input) {
 
 // Update login form labels
 function updateLoginLabels() {
-  // Only target login text inputs; avoid submit buttons
-  const inputs = document.querySelectorAll("#email, #password");
+  // Only target login box inputs
+  const loginBoxEl = document.querySelector("#loginBox");
+  if (!loginBoxEl) return;
+
+  const inputs = loginBoxEl.querySelectorAll(
+    "input[type='email'], input[type='password']"
+  );
   inputs.forEach((input) => {
     const label = getLabelForInput(input);
     if (!label) return;
     const text = (label.textContent || "").trim();
+    if (!text) return;
+
     label.innerHTML = text
       .split("")
       .map(
@@ -67,9 +74,12 @@ function updateLoginLabels() {
 
 // Update register form labels
 function updateRegLabels() {
-  // Only target register text/password/email fields; skip radios/submit
-  const inputs = document.querySelectorAll(
-    "#fname, #lname, #email, #password, #confirm"
+  // Only target register box inputs
+  const registerBoxEl = document.querySelector("#registerBox");
+  if (!registerBoxEl) return;
+
+  const inputs = registerBoxEl.querySelectorAll(
+    "input[type='text'], input[type='email'], input[type='password']"
   );
   inputs.forEach((input) => {
     const label = getLabelForInput(input);
@@ -133,13 +143,13 @@ if (loginBox && registerBox) {
   if (hash === "#register") {
     body.classList.remove("show-login");
     body.classList.add("show-register");
-      registerBox.classList.remove("hidden");
-      loginBox.classList.add("hidden");
+    loginBox.classList.add("hidden");
+    registerBox.classList.remove("hidden");
   } else {
     body.classList.remove("show-register");
     body.classList.add("show-login");
-    registerBox.classList.add("hidden");
     loginBox.classList.remove("hidden");
+    registerBox.classList.add("hidden");
   }
 }
 
@@ -156,8 +166,8 @@ if (goRegisterBtn) {
     if (loginBox && registerBox) {
       loginBox.classList.remove("active");
       registerBox.classList.add("active");
-      registerBox.classList.remove("hidden");
       loginBox.classList.add("hidden");
+      registerBox.classList.remove("hidden");
     }
   };
 }
