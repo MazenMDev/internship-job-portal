@@ -702,7 +702,6 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   border: 1px solid var(--border-color);
   position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -769,6 +768,86 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
   animation: pulse 2s infinite;
 }
+
+.manage-job-form-overlay{
+  position: absolute;
+  top: -230px;
+  right: -10px;
+  width: 200px;
+  height: 200px;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  border-radius: 16px;
+}
+.manage-job-overlay{
+  background: var(--background-color);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+.close-overlay-btn{
+  position: absolute;
+  top: -20px;
+  right: -10px;
+  background: var(--background-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 6px 10px;
+  border-radius: 50%;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+.close-overlay-btn:hover{
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+.manage-job-overlay h2{
+  margin-top: 0px;
+  color: var(--text-color);
+  font-size: 1.5em;
+}
+.manage-job-overlay button{
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.7em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+.manage-job-overlay .toggle-activation-btn{
+  background: var(--error);
+  color: white;
+  transition: all 0.3s ease;
+}
+.manage-job-overlay .toggle-activation-btn:hover{
+  background: white;
+  color: var(--error);
+  border: 2px solid var(--error);
+}
+
+.manage-job-overlay .view-form-btn{
+  background: var(--primary-color);
+  color: white;
+  transition: all 0.3s ease;
+}
+.manage-job-overlay .view-form-btn:hover{
+  background: white;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+
 
 @keyframes pulse {
   0%, 100% {

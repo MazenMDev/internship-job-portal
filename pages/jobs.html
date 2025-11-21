@@ -295,11 +295,11 @@
         <div class="company-posting">
           <div class="company-stats-grid">
             <div class="stat-item">
-              <span class="stat-number">25</span>
+              <span class="stat-number" id="active-listings">25</span>
               <span class="stat-label">Active Listings</span>
             </div>
             <div class="stat-item">
-              <span class="stat-number">120</span>
+              <span class="stat-number" id="applications-received">120</span>
               <span class="stat-label">Applications Received</span>
             </div>
           </div>
@@ -308,61 +308,7 @@
             <button id="post-job-button">Post a Job</button>
             <h2 class="posted-jobs-heading">Your Posted Jobs</h2>
 
-            <div class="company-posted-grid">
-              <div class="posted-job">
-                <div class="svg-job-background"></div>
-                <span class="company-job-title">Software Engineer</span>
-                <div class="job-status-container">
-                  <div class="status-indicator"></div>
-                  <span class="job-status">In Active</span>
-                </div>
-                <span class="applicant-count">45 Applicants</span>
-                <svg
-                  class="manage-company-form"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"
-                >
-                  <circle cx="12" cy="12" r="1" />
-                  <circle cx="12" cy="5" r="1" />
-                  <circle cx="12" cy="19" r="1" />
-                </svg>
-              </div>
-
-              <div class="posted-job">
-                <div class="svg-job-background"></div>
-                <span class="company-job-title">Software Engineer</span>
-                <div class="job-status-container">
-                  <div class="status-indicator active"></div>
-                  <span class="job-status">Active</span>
-                </div>
-                <span class="applicant-count">45 Applicants</span>
-                <svg
-                  class="manage-company-form"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"
-                >
-                  <circle cx="12" cy="12" r="1" />
-                  <circle cx="12" cy="5" r="1" />
-                  <circle cx="12" cy="19" r="1" />
-                </svg>
-              </div>
-            </div>
+            <div class="company-posted-grid"></div>
           </div>
         </div>
       </div>
