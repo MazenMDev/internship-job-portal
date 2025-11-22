@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = await res.json();
 
     if (!data.logged_in) {
-      window.location.href = "./login.html";
+      window.location.href = "./login-register.html?method=2";
     } else {
       document.querySelectorAll(".sign").forEach((el) => {
         el.style.display = "none";
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       document.querySelector(".signout-btn").addEventListener("click", async () => {
         await fetch("../php/logout.php");
-        window.location.href = "./login.html";
+        window.location.href = "./login-register.html?method=2";
       });
     }
   } catch (error) {

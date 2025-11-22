@@ -138,9 +138,9 @@ const registerBox = document.querySelector("#registerBox");
 
 // Set initial state based on URL hash or default to login
 if (loginBox && registerBox) {
-  const hash = window.location.hash;
-
-  if (hash === "#register") {
+  const urlParam = new URLSearchParams(window.location.search);
+  const method = urlParam.get("method"); 
+  if (method === "1") {
     body.classList.remove("show-login");
     body.classList.add("show-register");
     loginBox.classList.add("hidden");

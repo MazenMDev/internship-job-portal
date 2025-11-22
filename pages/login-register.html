@@ -10,12 +10,14 @@
     <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../assets/js/changeLogReg.js" defer></script>
   </head>
 
   <body class="show-login">
     <div class="logoContainer">
       <img src="../assets/imgs/JobConnect.png" alt="Logo" />
       <h1>JobConnect</h1>
+                    
       <button onclick="themeToggle()" class="themeToggle">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -64,9 +66,9 @@
           <div class="inp">
             <input
               class="holder"
-              type="email"
-              name="email"
-              id="email"
+              type="LogInEmail"
+              name="logInEmail"
+              id="logInEmail"
               required
             />
             <label for="email">Email</label>

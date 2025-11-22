@@ -624,12 +624,10 @@ const manageSlider = () => {
   sliderTrack.style.left = `${left + 2}%`;
   sliderTrack.style.width = `${width - 2}%`;
 };
-
 document.addEventListener("DOMContentLoaded", () => {
   let max = -1;
   let min = 999999999999;
   jobListings.forEach((job) => {
-    // Extract numbers from salary string without using regex
     // Example: "$24000-$32000"
     const parts = job.salary.split("-");
     // parts = ["$24000" , "$32000"] now

@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
             const data = await res.json();
             if (data.success) {
-              window.location.href = "./login.html";
+              window.location.href = "./login-register.html?method=2";
             }
           } catch (error) {
             console.error("Error during logout:", error);
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         document.querySelector(".signout-btn").addEventListener("click", async () => {
         await fetch("../php/logout.php");
-        window.location.href = "./login.html";
+        window.location.href = "./login-register.html?method=2";
       });
     }
   } catch (error) {

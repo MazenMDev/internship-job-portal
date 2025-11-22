@@ -6,6 +6,6 @@ $_SESSION = [];
 session_unset();
 session_destroy();
 
-header("Location: ../pages/login.html");
+header("Location: ../pages/login-register.html?method=2");
 exit;
 ?>

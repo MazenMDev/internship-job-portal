@@ -149,7 +149,7 @@ form.addEventListener("submit", async (e) => {
         errorMsg.style.color = "var(--success)";
         errorMsg.textContent = data.message;
         setTimeout(() => {
-          window.location.href = "./login.html";
+          window.location.href = "./login-register.html?method=2";
         }, 1000);
       }
     })
