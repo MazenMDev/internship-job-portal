@@ -426,15 +426,7 @@ a.currentPage span.material-symbols-outlined {
   backdrop-filter: blur(4px);
   z-index: 2000;
 }
-body.modal-open #container {
-  filter: blur(100px);
-  pointer-events: none;
-}
 
-body.modal-open #blurred-background,
-body.modal-open #companyreg {
-  display: block;
-}
 #companyreg {
   display: none;
   position: fixed;
@@ -577,8 +569,6 @@ form {
   pointer-events: none;
   color: var(--text-muted);
 }
-
-
 
 .profile-link {
   display: flex !important;
@@ -775,7 +765,7 @@ footer {
   width: 100%;
   padding: 10px 12px;
   background: var(--box-color);
-  border: 1px solid var(--border-color);
+  border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -822,7 +812,7 @@ footer {
   width: 100%;
   padding: 10px 12px;
   background: var(--box-color);
-  border: 1px solid var(--border-color);
+  border: none;
   border-radius: 6px;
   text-align: left;
   cursor: pointer;
@@ -838,7 +828,6 @@ footer {
 
 .settings-btn:hover {
   background: var(--background-color);
-  border-color: var(--primary-color);
   color: var(--primary-color);
 }
 
@@ -857,7 +846,7 @@ footer {
   color: white;
 }
 
-.popup-change{
+.popup-change {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -874,19 +863,19 @@ footer {
   width: clamp(300px, 90%, 400px);
   height: max-content;
 }
-.popup-content h2{
+.popup-content h2 {
   margin: 0;
   padding: 0;
   align-self: center;
   font-size: 26px;
   color: var(--text-color);
 }
-.popup-change .popup-content{
+.popup-change .popup-content {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.popup-content input{
+.popup-content input {
   width: 90%;
   align-self: center;
   padding: 10px;
@@ -895,8 +884,8 @@ footer {
   font-size: 16px;
   color: var(--text-color);
   background-color: var(--background-color);
-} 
-.popup-content button{
+}
+.popup-content button {
   width: 50%;
   align-self: center;
   padding: 10px;
@@ -908,13 +897,13 @@ footer {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.popup-change button:hover{
+.popup-change button:hover {
   background-color: var(--background-color);
   color: var(--primary-color);
   transform: translateY(-2px);
 }
 
-.popup-content span{
+.popup-content span {
   border-radius: 12px;
   cursor: pointer;
   font-size: 24px;
@@ -925,23 +914,23 @@ footer {
   transition: all 0.2s ease;
   color: var(--text-muted);
 }
-.popup-content span:hover{
+.popup-content span:hover {
   color: var(--text-color);
   transform: scale(1.2);
   background-color: var(--border-color);
 }
-.popup-content .errorPopup{
+.popup-content .errorPopup {
   color: var(--error);
   font-size: 14px;
   text-align: center;
   margin-top: -10px;
 }
 
-body.popup-open #blurred-background{
+body.popup-open #blurred-background {
   display: block;
 }
 
-body.open-company-popup #blurred-background{
+body.open-company-popup #blurred-background {
   display: block;
 }
 
@@ -1366,10 +1355,10 @@ body.open-company-popup #blurred-background{
     width: 100%;
     transform: none;
     box-sizing: border-box;
-    padding-top:0px;
-    margin-top:0px;
+    padding-top: 0px;
+    margin-top: 0px;
   }
-  #companyreg #title{
+  #companyreg #title {
     margin-top: 60px;
   }
   #companyreg form {
