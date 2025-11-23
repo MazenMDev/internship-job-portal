@@ -26,32 +26,36 @@
   --table-even-row: #e6e6e6ff;
   --table-hover-row: #c8d5d9ff;
   --main-font-family: "Rubik", sans-serif;
+
+  --background-image: url("../imgs/svg/hero.svg");
 }
 
 .darkmode {
   --background-color: #121212;
   --text-color: #f3f4f6;
   --text-muted: #9ca3af;
-
+  
   --error: #ef4444;
   --success: #34d399;
   --warning: #fcd34d;
   --border-color: #334155;
   --sign-out: rgba(255, 0, 0, 0.63);
-
+  
   --box-color: #1e1e1e;
   --formJobColor: 30, 41, 59;
   --box-shadow: none;
   --box-shadow-small: none;
   --nav-bar-scroll: rgba(5, 13, 17, 0.95);
-
+  
   --primary-color: #3282b8;
   --primary-color-rgb: 50, 130, 184;
-
+  
   --brightness: 1;
   --table-even-row: #1a1a1aff;
   --table-hover-row: #233b45ff;
   --secondary-color: #0f4c75;
+
+  --background-image: url("../imgs/svg/dark-hero.svg");
 }
 
 * {

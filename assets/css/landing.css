@@ -14,7 +14,7 @@
 
 .hero::before {
   content: "";
-  background-image: url("../imgs/svg/hero.svg");
+  background-image: var(--background-image);
   background-size: cover;
   background-position: center;
   position: absolute;
