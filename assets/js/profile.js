@@ -1,13 +1,31 @@
+/*1s
+const accordionheaders = document.querySelectorAll(".accordion-header");
+const accordioncontents = document.querySelectorAll(".accordion-content");
+accordionheaders.forEach((header) => {
+    header.addEventListener("click", () => {
+        const accordionitem = header.parentElement;
+        const accordioncontent = accordionitem.querySelector(".accordion-content");
+
+        accordioncontents.forEach((content) => {
+            if (content !== accordioncontent) {
+                content.classList.remove("active");
+                content.style.maxHeight = "0";
+            }
+        });
+
+        accordioncontent.classList.toggle("active");
+
+        if (accordioncontent.classList.contains("active")) {
+            accordioncontent.style.maxHeight = accordioncontent.scrollHeight + "px";
+
+        }
+        else {
+            accordioncontent.style.maxHeight = "0";
+        }
+    });
+});
+1e*/
 document.addEventListener("DOMContentLoaded", () => {
-  // --- Modal Setup ---
-  const editButton = document.getElementById("profile-edit"); // Button to OPEN the modal
-  const closeBtn = document.getElementById("edit-close");
-  const backdrop = document.getElementById("blurred-background");
-
-  // --- Form Element Setup ---
-  // 1. Get the FORM itself using its new unique ID
-  const profileForm = document.getElementById("edit-form");
-
   // 2. Get the INPUTS from the form using their new unique IDs
   const fnameInput = document.getElementById("fname");
   const lnameInput = document.getElementById("lname");
@@ -28,7 +46,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const STORAGE_KEY = "userProfile";
 
-  document.getElementById("profile-edit").addEventListener("click", openModal);
+  /*2s
+    const fileInput = document.getElementById('cv-file-input');
+    const fileDisplayText = document.querySelector('.file-display-text');
+    const defaultText = 'Upload CV'; // Store the default text
+
+    // Set initial text
+    if (fileDisplayText) {
+        fileDisplayText.textContent = defaultText;
+    }
+
+    if (fileInput) {
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                // Change text to the selected file name
+                fileDisplayText.textContent = this.files[0].name;
+            } else {
+                // Reset if the user cancels the dialog
+                fileDisplayText.textContent = defaultText; 
+            }
+        });
+  }
+  2e*/
 
   let selectedImageFile = null;
   function uploadImageToServer(file) {
@@ -109,36 +148,6 @@ document.addEventListener("DOMContentLoaded", () => {
       displayExperienceEl.innerHTML = `<strong>${profile.experienceTitle}</strong> <br> ${profile.experience}`;
     }
   }
-
-  // This is your SAVE function, now corrected
-  function saveProfile(event) {
-    event.preventDefault(); // Stop page from reloading
-
-    // 4. Create the data object using the CORRECT input variables
-    const profileData = {
-      name: `${fnameInput.value} ${lnameInput.value}`.trim(), // Combine first and last name
-      headline: bioInput.value,
-      about: aboutInput.value,
-      experienceTitle: experience_titleInput.value,
-      experience: experienceInput.value,
-    };
-
-    // 5. Save the new data to localStorage
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(profileData));
-
-    alert("Profile saved!");
-    closeModal(); // Close the popup after saving
-    loadProfileDataOntoPage(); // Immediately update the page with the new info
-  }
-
-  // --- Event Listeners ---
-  editButton.addEventListener("click", openModal);
-  closeBtn.addEventListener("click", closeModal);
-  backdrop.addEventListener("click", closeModal);
-
-  // 6. Add the 'submit' listener to the correct FORM variable
-  profileForm.addEventListener("submit", saveProfile);
-
   // --- Initial Page Load ---
   // 7. Load data onto the page when you first visit
   loadProfileDataOntoPage();
@@ -350,6 +359,49 @@ function changeFormToCompanyProfile(companyData){
   document.getElementById("companyCity").value = companyData.city || "";
   document.getElementById("companyStreetAddress").value = companyData.street_address || "";
   document.getElementById("companyZipCode").value = companyData.zip_code || "";
-
-
 } 
+/*3s
+window.onload = function () {
+  const yearsContainer = document.getElementById("years");
+  const currentYear = new Date().getFullYear();
+
+  for (let year = currentYear; year >= 1980; year--) {
+    const yearDiv = document.createElement("div");
+    yearDiv.textContent = year;
+    yearDiv.dataset.year = year;
+    yearsContainer.appendChild(yearDiv);
+  }
+
+  const dateInput = document.getElementById("dateInput");
+  const date = document.getElementById("prof-date-dropdown");
+  let selectedMonth = null;
+
+  dateInput.addEventListener("click", function (event) {
+    date.style.display = date.style.display === "flex" ? "none" : "flex";
+    event.stopPropagation();
+  });
+
+  document.querySelectorAll(".months div").forEach((month) => {
+    month.addEventListener("click", function () {
+      selectedMonth = this.dataset.month;
+    });
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!date.contains(event.target) && event.target !== dateInput) {
+      date.style.display = "none";
+    }
+  });
+
+  yearsContainer.addEventListener("click", function (event) {
+    if (event.target.tagName === "DIV") {
+      const year = event.target.dataset.year;
+      if (selectedMonth) {
+        dateInput.value = `${selectedMonth}/${year}`;
+        date.style.display = "none";
+        selectedMonth = null;
+      }
+    }
+  });
+};
+3e*/

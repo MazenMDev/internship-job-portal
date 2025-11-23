@@ -459,8 +459,10 @@ a.currentPage span.material-symbols-outlined {
   text-decoration: none;
   text-align: center;
   transition: all 0.2s ease;
+  transform: none !important;
 }
 #open-btn:hover {
+  transform: none !important;
   border-radius: 5px;
   background-color: var(--border-color);
   color: var(--text-color);
@@ -759,7 +761,6 @@ footer {
 
 .settings-dropdown {
   position: relative;
-  margin-top: 12px;
 }
 
 .settings-toggle {
@@ -791,10 +792,13 @@ footer {
   transition: transform 0.3s ease;
   font-size: 12px;
   color: var(--text-muted);
+  opacity: 0.3;
 }
 
 .settings-toggle.active .arrow {
   transform: rotate(180deg);
+  color:black;
+  opacity: 0.6;
 }
 
 .settings-menu {
