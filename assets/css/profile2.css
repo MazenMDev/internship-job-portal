@@ -310,7 +310,7 @@ label {
   z-index: 1001;
   padding: 20px;
   transition: left 0.3s ease;
-  overflow-y: auto;
+  overflow: auto;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -318,6 +318,7 @@ label {
   flex-direction: column;
   gap: 20px;
   align-items: center;
+  padding-right: 10px;
 }
 
 .edit-panel:target {
@@ -340,7 +341,7 @@ label {
   transition: all 0.3s ease;
 }
 
-.edit-panel:target ~ .panel-overlay {
+.edit-panel:target~.panel-overlay {
   opacity: 1;
   visibility: visible;
   pointer-events: all;
@@ -547,7 +548,7 @@ label {
   z-index: 1;
 }
 
-.edit-panel:target ~ .container .profile-container {
+.edit-panel:target~.container .profile-container {
   margin-right: 0;
 }
 
@@ -569,26 +570,31 @@ label {
   border-radius: 6px;
   box-shadow: 2px 2px 3px var(--box-shadow);
 }
+
 .accordion-header:hover {
   box-shadow: 0 10px 8px var(--box-shadow);
   transform: translateY(-1px);
 }
+
 .accordion-header:has(+ .accordion-content.active) {
   box-shadow: 0 10px 8px var(--box-shadow);
   transform: translateY(-1px);
 }
+
 .accordion-header .arrow {
   transition: transform 0.3s ease;
 }
+
 .accordion-header:has(+ .accordion-content.active) .arrow {
   transform: rotate(180deg);
 }
+
 .accordion-content {
   display: none;
   max-height: 0px;
   transition: 0.3s ease;
   padding: 25px;
-  overflow: initial;
+  overflow: visible;
   background-color: var(--background-color);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -597,6 +603,7 @@ label {
 .accordion-content.active {
   display: block;
   max-height: 2000px;
+  overflow: visible;
 }
 
 #cvCard {
@@ -733,26 +740,23 @@ label {
   min-height: 80px;
 }
 
-.date-picker {
+.experience-dates {
   display: flex;
-  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.date-picker {
   position: relative;
-  gap: 4px;
+  width: 160px;
 }
 
-.date-picker label {
-  margin-bottom: 2px;
-  font-size: 14px;
-  color: var(--text-color);
-}
-
-.date-picker input {
+.dateInput {
   width: 100%;
   padding: 8px 10px;
-  border: 1px solid var(--border-color);
   background: var(--box-color);
-  color: var(--text-color);
-  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -760,41 +764,35 @@ label {
   position: absolute;
   top: 110%;
   left: 0;
+  width: 340px;
   background: var(--box-color);
   border: 1px solid var(--border-color);
-  color: var(--text-color);
-  padding: 14px;
   border-radius: 12px;
-  width: 340px;
-  z-index: 20;
-  display: grid;
+  padding: 12px;
+  z-index: 5000;
+  display: none;
   grid-template-columns: 1fr 1px 1fr;
-  column-gap: 14px;
+  gap: 10px;
 }
 
 .divider {
-  background: var(--border-color);
   width: 1px;
+  background: var(--border-color);
   height: 100%;
-  min-height: 150px;
 }
 
 .months {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  row-gap: 14px;
-  column-gap: 5px;
-  padding-right: 2px;
+  gap: 10px;
 }
 
 .years {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  row-gap: 14px;
-  column-gap: 3px;
-  max-height: 160px;
+  gap: 10px;
+  max-height: 170px;
   overflow-y: auto;
-  padding-left: 0px;
 }
 
 .years::-webkit-scrollbar {
@@ -808,22 +806,55 @@ label {
 
 .months div,
 .years div {
-  padding: 2px 4px;
+  padding: 6px 4px;
+  text-align: center;
   border-radius: 8px;
   cursor: pointer;
-  text-align: center;
   transition: 0.2s;
+}
+
+.months div.selected,
+.years div.selected {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 6px;
 }
 
 .months div:hover,
 .years div:hover {
   background: var(--border-color);
 }
+
 .selected {
   background: var(--primary-color) !important;
-  color: var(--box-color) !important;
+  color: white !important;
   font-weight: 600;
 }
+
+.bullet-editor {
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  overflow-y: auto;
+}
+
+.bullet-editor ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.bullet-editor li {
+  margin-bottom: 6px;
+}
+
+.bullet-editor:empty::before {
+  content: "Enter information or sub-skills...";
+  color: #aaa;
+}
+
 
 @media (max-width: 768px) {
   .edit-panel {
