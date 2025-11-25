@@ -515,6 +515,14 @@ function addCompanyData(data){
                 </svg>
     `;
     jobDiv.addEventListener("click", (e) => {
+      // Don't navigate if clicking on the manage button, overlay, or any interactive elements
+      if (e.target.closest('.manage-company-form') || 
+          e.target.closest('.manage-job-form-overlay') ||
+          e.target.closest('.toggle-activation-btn') ||
+          e.target.closest('.view-form-btn')) {
+        return;
+      }
+      e.stopPropagation();
       window.location.href = `job-application-view.html?jobId=${job.job_id}`;
     });
     companyJobsContainer.appendChild(jobDiv);
@@ -585,9 +593,6 @@ function jobCardListeners(){
         formData.append('job_id', jobId);
         fetch("../php/toggle-job-activity.php", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
           body: formData,
         })
           .then((response) => response.json())
