@@ -856,6 +856,45 @@ label {
 }
 
 
+.entry-list {
+  margin-bottom: 15px;
+}
+
+.entry-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid #e5e5e5;
+  gap: 12px;
+}
+
+.drag-icon {
+  opacity: 0.4;
+  font-size: 18px;
+  cursor: grab;
+  padding-top: 6px;
+}
+
+.entry-text-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.entry-title {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.entry-institution {
+  font-size: 14px;
+  color: #666;
+}
+
+.hidden {
+  display: none;
+}
+
+
 @media (max-width: 768px) {
   .edit-panel {
     width: 85%;

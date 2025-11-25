@@ -131,3 +131,26 @@ function placeCaretAtEnd(element) {
   sel.removeAllRanges();
   sel.addRange(range);
 }
+
+
+function uploadImageToServer(file) {
+    const formData = new FormData();
+    formData.append("profile_image", file);
+
+    fetch("../../php/upload-profile-image.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          document.querySelector(".profile-photo").src = data.image_url;
+          document.querySelector(".profile-photo2").src = data.image_url;
+          document.querySelector(".profile-nav-img").src = data.image_url;
+          document.querySelector(".profile-dropdown-img").src = data.image_url;
+        } else {
+          alert(data.message || "Error uploading image");
+        }
+      })
+      .catch((err) => console.error(err));
+  }
