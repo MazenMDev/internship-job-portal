@@ -708,6 +708,7 @@ input[type="range"]::-webkit-slider-thumb {
   gap: 12px;
   transition: all 0.3s ease;
   min-height: 220px;
+  cursor: pointer;
 }
 
 .posted-job:hover {

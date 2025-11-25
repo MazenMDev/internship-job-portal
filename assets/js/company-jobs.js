@@ -514,6 +514,9 @@ function addCompanyData(data){
                   <circle cx="12" cy="19" r="1" />
                 </svg>
     `;
+    jobDiv.addEventListener("click", (e) => {
+      window.location.href = `job-application-view.html?jobId=${job.job_id}`;
+    });
     companyJobsContainer.appendChild(jobDiv);
   });
 

@@ -62,7 +62,7 @@
       <div id="loginBox" class="authBox active">
         <h1>Welcome!</h1>
 
-        <form action="../php/login.php" method="POST">
+        <form action="../php/login.php" id="loginForm" method="POST">
           <div class="inp">
             <input
               class="holder"
@@ -75,13 +75,13 @@
           </div>
 
           <div class="inp">
-            <input class="holder" type="password" name="password" required />
-            <label>Password</label>
+            <input class="holder" type="password" name="logInPassword" id="logInPassword" required />
+            <label for="logInPassword">Password</label>
           </div>
 
           <input type="submit" value="Login" class="submit" />
 
-          <h2 id="errorMsg"></h2>
+          <h2 id="errorMsgLogin"></h2>
         </form>
 
         <h2 id="changePage">

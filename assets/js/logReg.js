@@ -186,3 +186,42 @@ if (goLoginBtn) {
     }
   };
 }
+const errorMsgLogin = document.getElementById("errorMsgLogin");
+const form = document.getElementById("loginForm");
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const email = document.getElementById("logInEmail");
+  const password = document.getElementById("logInPassword");
+  
+  let emailVal = email.value = email.value.trim();
+  let passwordVal = password.value = password.value.trim();
+
+  if (emailVal === "" || passwordVal === "") {
+    errorMsgLogin.textContent = "Please fill in all fields.";
+    return;
+  }
+  const formData = new FormData();
+  formData.append("email", emailVal);
+  formData.append("password", passwordVal);
+
+  fetch("../php/login.php", {
+    method: "POST",
+    body: formData,
+  }).then(async (res) => {
+      if (!res.ok) throw new Error(`HTTP error! ${res.status}`);
+      return await res.json();
+    }).then((data) => {
+      if (data.status === "error") {
+        errorMsgLogin.style.color = "var(--error)";
+        errorMsgLogin.textContent = data.message;
+      } else {
+        errorMsgLogin.style.color = "var(--success)";
+        errorMsgLogin.textContent = data.message;
+        window.location.href = data.redirect;
+      }
+    })
+    .catch((err) => {
+      console.error("Login error:", err);
+      errorMsgLogin.textContent = "Something went wrong. Please try again.";
+    });
+});

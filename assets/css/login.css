@@ -416,7 +416,7 @@ label {
   animation: moveDown 0.3s ease-in-out;
 }
 
-#errorMsg {
+#errorMsg , #errorMsgLogin {
   color: var(--error);
   font-size: 0.9rem;
   text-align: center;
