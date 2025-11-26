@@ -57,6 +57,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (data.last_name) {
         name = name ? `${name} ${data.last_name}` : data.last_name;
       }
+      if(data.title){
+        document.querySelector(".profileEducation").textContent = data.title;
+      }
+      else{
+        document.querySelector(".profileEducation").textContent = "";
+      }
       if (profileEl) {
         profileEl.textContent = name;
       }

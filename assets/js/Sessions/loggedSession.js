@@ -45,7 +45,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.querySelector(".admin-panel-link").style.display =
           data.is_admin ? "block" : "none";
       }
-      document.querySelector(".profileEducation").textContent = data.title;
+      if(data.title){
+        document.querySelector(".profileEducation").textContent = data.title;
+      }
+      else{
+        document.querySelector(".profileEducation").textContent = "";
+      }
 
       if (data.image == "profile.jpeg") {
         document.querySelector(
