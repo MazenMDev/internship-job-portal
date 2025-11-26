@@ -3,6 +3,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const res = await fetch("../php/session_check.php");
     const data = await res.json();
+    /*
+      data example:
+      {
+        "logged_in": true,
+        "user_id": 1,
+        "email": "admin@gmail.com",
+        "first_name": "Kareem",
+        "last_name": "Ahmed",
+        "title": null,
+        "theme": "light",
+        "image": "profile_1763214550.png",
+        "is_admin": 1,
+        "is_company": true
+      }
+    */
+   
     if (!data.logged_in) {
       document.querySelectorAll(".userLogged").forEach((el) => {
         el.style.display = "none";
