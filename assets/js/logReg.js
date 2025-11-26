@@ -129,6 +129,104 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }, 100);
+
+  const loginPass = document.getElementById("logInPassword");
+  const eyeIconLogin = document.querySelector("#loginBox .eyeIconLogin");
+
+  let LogInToggle = false;
+
+  eyeIconLogin.addEventListener("click", () => {
+    LogInToggle = !LogInToggle;
+    if (LogInToggle) {
+      loginPass.type = "text";
+      eyeIconLogin.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off-icon lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>`;
+    } else {
+      loginPass.type = "password";
+      eyeIconLogin.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>`;
+    }
+  });
+
+  loginPass.addEventListener("input", () => {
+    if (loginPass.value.length > 0) {
+      eyeIconLogin.style.display = "inline";
+    } else {
+      eyeIconLogin.classList.add("hideEyeIcon");
+
+      setTimeout(() => {
+        eyeIconLogin.classList.remove("hideEyeIcon");
+        eyeIconLogin.style.display = "none";
+        loginPass.type = "password";
+        LogInToggle = false;
+        eyeIconLogin.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>`;
+      }, 200);
+    }
+  });
+
+  const registerPass = document.getElementById("registerPassword");
+  const confirmPass = document.getElementById("confirmPassword");
+  const eyeIconRegister = document.getElementById("togglePasswordRegister");
+  const eyeIconConfirm = document.getElementById(
+    "togglePasswordConfirmRegister"
+  );
+  let RegisterToggle = false;
+  let ConfirmToggle = false;
+  eyeIconRegister.addEventListener("click", () => {
+    RegisterToggle = !RegisterToggle;
+    if (RegisterToggle) {
+      registerPass.type = "text";
+      eyeIconRegister.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off-icon lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>`;
+    } else {
+      registerPass.type = "password";
+      eyeIconRegister.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>`;
+    }
+  });
+  eyeIconConfirm.addEventListener("click", () => {
+    ConfirmToggle = !ConfirmToggle;
+    if (ConfirmToggle) {
+      confirmPass.type = "text";
+      eyeIconConfirm.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off-icon lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>`;
+    } else {
+      confirmPass.type = "password";
+      eyeIconConfirm.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>`;
+    }
+  });
+
+  registerPass.addEventListener("input", () => {
+    if(registerPass.value.length > 30) {
+      registerPass.value = registerPass.value.slice(0, 30);
+    }
+    if (registerPass.value.length > 0) {
+      eyeIconRegister.style.display = "inline";
+    } else {
+      eyeIconRegister.classList.add("hideEyeIcon");
+
+      setTimeout(() => {
+        eyeIconRegister.classList.remove("hideEyeIcon");
+        eyeIconRegister.style.display = "none";
+        registerPass.type = "password";
+        RegisterToggle = false;
+        eyeIconRegister.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>`;
+      }, 200);
+    }
+  });
+  confirmPass.addEventListener("input", () => {
+    if(confirmPass.value.length > 30) {
+      confirmPass.value = confirmPass.value.slice(0, 30);
+    }
+    if (confirmPass.value.length > 0) {
+      eyeIconConfirm.style.display = "inline";
+    } else {
+      eyeIconConfirm.classList.add("hideEyeIcon");
+
+      setTimeout(() => {
+        eyeIconConfirm.classList.remove("hideEyeIcon");
+        eyeIconConfirm.style.display = "none";
+        confirmPass.type = "password";
+        ConfirmToggle = false;
+        eyeIconConfirm.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>`;
+      }, 200);
+    }
+  });
 });
 
 // Get elements first
@@ -139,7 +237,7 @@ const registerBox = document.querySelector("#registerBox");
 // Set initial state based on URL hash or default to login
 if (loginBox && registerBox) {
   const urlParam = new URLSearchParams(window.location.search);
-  const method = urlParam.get("method"); 
+  const method = urlParam.get("method");
   if (method === "1") {
     body.classList.remove("show-login");
     body.classList.add("show-register");
@@ -192,9 +290,9 @@ form.addEventListener("submit", function (e) {
   e.preventDefault();
   const email = document.getElementById("logInEmail");
   const password = document.getElementById("logInPassword");
-  
-  let emailVal = email.value = email.value.trim();
-  let passwordVal = password.value = password.value.trim();
+
+  let emailVal = (email.value = email.value.trim());
+  let passwordVal = (password.value = password.value.trim());
 
   if (emailVal === "" || passwordVal === "") {
     errorMsgLogin.textContent = "Please fill in all fields.";
@@ -207,10 +305,12 @@ form.addEventListener("submit", function (e) {
   fetch("../php/login.php", {
     method: "POST",
     body: formData,
-  }).then(async (res) => {
+  })
+    .then(async (res) => {
       if (!res.ok) throw new Error(`HTTP error! ${res.status}`);
       return await res.json();
-    }).then((data) => {
+    })
+    .then((data) => {
       if (data.status === "error") {
         errorMsgLogin.style.color = "var(--error)";
         errorMsgLogin.textContent = data.message;
@@ -223,5 +323,107 @@ form.addEventListener("submit", function (e) {
     .catch((err) => {
       console.error("Login error:", err);
       errorMsgLogin.textContent = "Something went wrong. Please try again.";
+    });
+});
+
+
+const Regform = document.getElementById("registerForm");
+const errorMsgReg = document.getElementById("errorMsgReg");
+const registerPassword = document.getElementById("registerPassword");
+const confirmPassword = document.getElementById("confirmPassword");
+Regform.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  let passwordVal = (registerPassword.value = registerPassword.value.trim());
+  let confirmPasswordVal = (confirmPassword.value =
+    confirmPassword.value.trim());
+
+  // PASSWORD VALIDATIONS
+  let numbers = /[0-9]/g;
+  
+  const f_name = document.getElementById("fname").value.trim();
+  const l_name = document.getElementById("lname").value.trim();
+  if (f_name.length === 0 || l_name.length === 0) {
+    errorMsgReg.textContent = "First name and Last name cannot be empty.";
+    return;
+  }
+  
+  if (numbers.test(f_name) || numbers.test(l_name)) {
+    errorMsgReg.textContent = "Names cannot contain numbers.";
+    return;
+  }
+  let specialChars = /[!@#$%^&*(),.?":{}|<>]/g;
+  if (specialChars.test(f_name) || specialChars.test(l_name)) {
+    errorMsgReg.textContent = "Names cannot contain special characters.";
+    return;
+  }
+  
+  if (passwordVal.length < 8) {
+    errorMsgReg.textContent = "Password must be at least 8 characters long.";
+    return;
+  }
+  //regular expression to check for lowercase letters
+  let lowerCaseLetters = /[a-z]/g;
+  if (!passwordVal.match(lowerCaseLetters)) {
+    errorMsgReg.textContent =
+      "Password must contain at least one lowercase letter.";
+    return;
+  }
+  //regular expression to check for uppercase letters
+  let upperCaseLetters = /[A-Z]/g;
+  if (!passwordVal.match(upperCaseLetters)) {
+    errorMsgReg.textContent =
+      "Password must contain at least one uppercase letter.";
+    return;
+  }
+  //regular expression to check for numbers
+  if (!passwordVal.match(numbers)) {
+    errorMsgReg.textContent = "Password must contain at least one number.";
+    return;
+  }
+
+  let notAllowedChars = /[<>\/\\'"]/g;
+  if (passwordVal.match(notAllowedChars)) {
+    errorMsgReg.textContent = "Password contains invalid characters.";
+    return;
+  }
+
+  for (let char of passwordVal) {
+    if (char === " ") {
+      errorMsgReg.textContent = "Password cannot contain spaces.";
+      return;
+    }
+  }
+
+  if (passwordVal !== confirmPasswordVal) {
+    errorMsgReg.textContent = "Passwords do not match.";
+    return;
+  }
+
+  errorMsgReg.textContent = "";
+  const formData = new FormData();
+  formData.append("fname", f_name);
+  formData.append("lname", l_name);
+  formData.append("password", passwordVal);
+  formData.append("confirm", confirmPasswordVal);
+  formData.append("email", document.getElementById("registerEmail").value.trim());
+  formData.append("gender", document.querySelector('input[name="gender"]:checked').value);
+
+  fetch("../php/register.php", {
+    method: "POST",
+    body: formData,
+  }).then((res) => res.json()).then((data) => {
+      if (data.status === "error") {
+        errorMsgReg.style.color = "var(--error)";
+        errorMsgReg.textContent = data.message;
+      } else {
+        errorMsgReg.style.color = "var(--success)";
+        errorMsgReg.textContent = data.message;
+        setTimeout(() => {
+          window.location.href = "./login-register.html?method=2";
+        }, 1000);
+      }
+    })
+    .catch(() => {
+      errorMsgReg.textContent = "Something went wrong. Please try again.";
     });
 });

@@ -1,9 +1,18 @@
-
 let userData = null;
 async function fetchUserData() {
   const response = await fetch("../php/company_data.php");
   const data = await response.json();
   userData = data;
+  /*data example:
+    Object
+    city: "Giza"
+    company_name : "JobConnect"
+    company_url: "https://jobconnect.42web.io/pages/landing.html"
+    country: "Egypt"
+    description: ""
+    user_id: 1
+    [[Prototype]]: Object
+  */
   return data;
 }
 
@@ -12,23 +21,26 @@ let maxTags = 7,
 let maxSkills = 20,
   currentSkills = 0;
 import jobCategories from "./jobCategories.js";
-import {showJobDetails} from "./jobForm.js";
+import { showJobDetails } from "./jobForm.js";
 let companyData;
 await fetchUserData();
 if (userData && userData.company_name) {
   fetch("../php/get-company-jobs.php")
-  .then((result)=>{
-    return result.json()
-  }
-)
-.then((data)=>{
-  companyData = data;
-  addCompanyData(data);
-  jobCardListeners();
-})
-.catch((error)=>{
-  console.log(error)
-})
+    .then((result) => {
+      return result.json();
+    })
+    .then((data) => {
+      companyData = data;
+      /*
+        companyData example:
+        company-jobs.js:34 (2) [{…}, {…}]0: {job_id: 2, company_id: 1, job_title: 'test2', job_description: 'test 2Lorem ipsum dolor sit amet, consectetur adip…a qui officia deserunt mollit anim id est laborum', location: 'Fisal, Egypt', …}1: {job_id: 1, company_id: 1, job_title: 'Test Job Posting', job_description: 'Testing the backend for posting the company form data for the 8th time :(', location: 'Fisal, Egypt', …}length: 2[[Prototype]]: Array(0)
+      */
+      addCompanyData(data);
+      jobCardListeners();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   document.getElementById("post-job-button").addEventListener("click", () => {
     const popup = document.createElement("div");
@@ -204,7 +216,7 @@ if (userData && userData.company_name) {
         if (!skillDiv.textContent.trim()) {
           skillDiv.remove();
           currentSkills--;
-          
+
           if (currentSkills >= maxSkills) {
             document.getElementById("addSkill").disabled = true;
           } else {
@@ -223,7 +235,7 @@ if (userData && userData.company_name) {
         } else if (ev.key === "Escape") {
           skillDiv.remove();
           currentSkills--;
-          
+
           if (currentSkills >= maxSkills) {
             document.getElementById("addSkill").disabled = true;
           } else {
@@ -244,7 +256,7 @@ if (userData && userData.company_name) {
         if (skillDiv.contentEditable === "false") {
           skillDiv.remove();
           currentSkills--;
-          
+
           // Update button state after removal
           if (currentSkills >= maxSkills) {
             document.getElementById("addSkill").disabled = true;
@@ -286,7 +298,7 @@ if (userData && userData.company_name) {
         if (!tagDiv.textContent.trim()) {
           tagDiv.remove();
           currentTags--;
-          
+
           if (currentTags >= maxTags) {
             document.getElementById("addtag").disabled = true;
           } else {
@@ -305,7 +317,7 @@ if (userData && userData.company_name) {
         } else if (ev.key === "Escape") {
           tagDiv.remove();
           currentTags--;
-          
+
           if (currentTags >= maxTags) {
             document.getElementById("addtag").disabled = true;
           } else {
@@ -324,7 +336,7 @@ if (userData && userData.company_name) {
         if (tagDiv.contentEditable === "false") {
           tagDiv.remove();
           currentTags--;
-          
+
           if (currentTags >= maxTags) {
             document.getElementById("addtag").disabled = true;
           } else {
@@ -409,18 +421,18 @@ if (userData && userData.company_name) {
       tags = tags.filter((s) => {
         return s.length > 0;
       });
-      
+
       const formData = new FormData();
-      formData.append('title', title);
-      formData.append('salary_min', minSalary);
-      formData.append('salary_max', maxSalary);
-      formData.append('experience', experience);
-      formData.append('location', location);
-      formData.append('description', description);
-      formData.append('jobType', jobType);
-      formData.append('category', category);
-      formData.append('skills', JSON.stringify(skills));
-      formData.append('tags', JSON.stringify(tags));
+      formData.append("title", title);
+      formData.append("salary_min", minSalary);
+      formData.append("salary_max", maxSalary);
+      formData.append("experience", experience);
+      formData.append("location", location);
+      formData.append("description", description);
+      formData.append("jobType", jobType);
+      formData.append("category", category);
+      formData.append("skills", JSON.stringify(skills));
+      formData.append("tags", JSON.stringify(tags));
 
       const submitBtn = document.getElementById("addJobSubmit");
       submitBtn.disabled = true;
@@ -434,20 +446,20 @@ if (userData && userData.company_name) {
         .then((response) => response.json())
         .then((data) => {
           if (data.success) {
-        errorMessageEl.textContent = "";
-        errorMessageEl.style.color = "red";
-        submitBtn.disabled = false;
-        window.location.reload();
+            errorMessageEl.textContent = "";
+            errorMessageEl.style.color = "red";
+            submitBtn.disabled = false;
+            window.location.reload();
           } else {
-        errorMessageEl.style.color = "red";
-        errorMessageEl.textContent = data.message || "Error posting job.";
-        submitBtn.disabled = false;
+            errorMessageEl.style.color = "red";
+            errorMessageEl.textContent = data.message || "Error posting job.";
+            submitBtn.disabled = false;
           }
         })
         .catch((err) => {
           errorMessageEl.style.color = "red";
           errorMessageEl.textContent =
-        "Network error while posting job. Please try again.";
+            "Network error while posting job. Please try again.";
           submitBtn.disabled = false;
           console.error(err);
         });
@@ -458,17 +470,15 @@ if (userData && userData.company_name) {
   if (companyNameEl) companyNameEl.textContent = userData.company_name;
 
   document.getElementById("company-job").style.display = "block";
-  
 } else {
   const companyJobEl = document.getElementById("company-job");
   if (companyJobEl) companyJobEl.style.display = "none";
 }
 
-
-function addCompanyData(data){
+function addCompanyData(data) {
   let countActiveJobs = 0;
   data.forEach((job) => {
-    if(job.is_deleted == 0){
+    if (job.is_deleted == 0) {
       countActiveJobs++;
     }
   });
@@ -480,8 +490,8 @@ function addCompanyData(data){
     const jobDiv = document.createElement("div");
     jobDiv.classList.add("posted-job");
     jobDiv.setAttribute("data-job-id", job.job_id);
-    let activeClass , statusText;
-    if(job.is_deleted == 1){
+    let activeClass, statusText;
+    if (job.is_deleted == 1) {
       activeClass = "";
       statusText = "Inactive";
     } else {
@@ -515,15 +525,24 @@ function addCompanyData(data){
                 </svg>
     `;
     jobDiv.addEventListener("click", (e) => {
+      // Don't navigate if clicking on the manage button, overlay, or any interactive elements
+      if (
+        e.target.closest(".manage-company-form") ||
+        e.target.closest(".manage-job-form-overlay") ||
+        e.target.closest(".toggle-activation-btn") ||
+        e.target.closest(".view-form-btn")
+      ) {
+        return;
+      }
+      e.stopPropagation();
       window.location.href = `job-application-view.html?jobId=${job.job_id}`;
     });
     companyJobsContainer.appendChild(jobDiv);
   });
-
 }
 
-function jobCardListeners(){
-    const svgBackgrounds = [
+function jobCardListeners() {
+  const svgBackgrounds = [
     `<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' width='100%' height='100%' viewBox='0 0 800 800'><rect fill='#330033' width='800' height='800'/><g fill='none' stroke='#404'  stroke-width='1'><path d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/><path d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/><path d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/><path d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/><path d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/></g><g  fill='#505'><circle  cx='769' cy='229' r='5'/><circle  cx='539' cy='269' r='5'/><circle  cx='603' cy='493' r='5'/><circle  cx='731' cy='737' r='5'/><circle  cx='520' cy='660' r='5'/><circle  cx='309' cy='538' r='5'/><circle  cx='295' cy='764' r='5'/><circle  cx='40' cy='599' r='5'/><circle  cx='102' cy='382' r='5'/><circle  cx='127' cy='80' r='5'/><circle  cx='370' cy='105' r='5'/><circle  cx='578' cy='42' r='5'/><circle  cx='237' cy='261' r='5'/><circle  cx='390' cy='382' r='5'/></g></svg>`,
     `<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' width='100%' height='100%' viewBox='0 0 1080 900'><rect fill='#1AD9FF' width='1080' height='900'/><g fill-opacity='.1'><polygon fill='#444' points='90 150 0 300 180 300'/><polygon points='90 150 180 0 0 0'/><polygon fill='#AAA' points='270 150 360 0 180 0'/><polygon fill='#DDD' points='450 150 360 300 540 300'/><polygon fill='#999' points='450 150 540 0 360 0'/><polygon points='630 150 540 300 720 300'/><polygon fill='#DDD' points='630 150 720 0 540 0'/><polygon fill='#444' points='810 150 720 300 900 300'/><polygon fill='#FFF' points='810 150 900 0 720 0'/><polygon fill='#DDD' points='990 150 900 300 1080 300'/><polygon fill='#444' points='990 150 1080 0 900 0'/><polygon fill='#DDD' points='90 450 0 600 180 600'/><polygon points='90 450 180 300 0 300'/><polygon fill='#666' points='270 450 180 600 360 600'/><polygon fill='#AAA' points='270 450 360 300 180 300'/><polygon fill='#DDD' points='450 450 360 600 540 600'/><polygon fill='#999' points='450 450 540 300 360 300'/><polygon fill='#999' points='630 450 540 600 720 600'/><polygon fill='#FFF' points='630 450 720 300 540 300'/><polygon points='810 450 720 600 900 600'/><polygon fill='#DDD' points='810 450 900 300 720 300'/><polygon fill='#AAA' points='990 450 900 600 1080 600'/><polygon fill='#444' points='990 450 1080 300 900 300'/><polygon fill='#222' points='90 750 0 900 180 900'/><polygon points='270 750 180 900 360 900'/><polygon fill='#DDD' points='270 750 360 600 180 600'/><polygon points='450 750 540 600 360 600'/><polygon points='630 750 540 900 720 900'/><polygon fill='#444' points='630 750 720 600 540 600'/><polygon fill='#AAA' points='810 750 720 900 900 900'/><polygon fill='#666' points='810 750 900 600 720 600'/><polygon fill='#999' points='990 750 900 900 1080 900'/><polygon fill='#999' points='180 0 90 150 270 150'/><polygon fill='#444' points='360 0 270 150 450 150'/><polygon fill='#FFF' points='540 0 450 150 630 150'/><polygon points='900 0 810 150 990 150'/><polygon fill='#222' points='0 300 -90 450 90 450'/><polygon fill='#FFF' points='0 300 90 150 -90 150'/><polygon fill='#FFF' points='180 300 90 450 270 450'/><polygon fill='#666' points='180 300 270 150 90 150'/><polygon fill='#222' points='360 300 270 450 450 450'/><polygon fill='#FFF' points='360 300 450 150 270 150'/><polygon fill='#444' points='540 300 450 450 630 450'/><polygon fill='#222' points='540 300 630 150 450 150'/><polygon fill='#AAA' points='720 300 630 450 810 450'/><polygon fill='#666' points='720 300 810 150 630 150'/><polygon fill='#FFF' points='900 300 810 450 990 450'/><polygon fill='#999' points='900 300 990 150 810 150'/><polygon points='0 600 -90 750 90 750'/><polygon fill='#666' points='0 600 90 450 -90 450'/><polygon fill='#AAA' points='180 600 90 750 270 750'/><polygon fill='#444' points='180 600 270 450 90 450'/><polygon fill='#444' points='360 600 270 750 450 750'/><polygon fill='#999' points='360 600 450 450 270 450'/><polygon fill='#666' points='540 600 630 450 450 450'/><polygon fill='#222' points='720 600 630 750 810 750'/><polygon fill='#FFF' points='900 600 810 750 990 750'/><polygon fill='#222' points='900 600 990 450 810 450'/><polygon fill='#DDD' points='0 900 90 750 -90 750'/><polygon fill='#444' points='180 900 270 750 90 750'/><polygon fill='#FFF' points='360 900 450 750 270 750'/><polygon fill='#AAA' points='540 900 630 750 450 750'/><polygon fill='#FFF' points='720 900 810 750 630 750'/><polygon fill='#222' points='900 900 990 750 810 750'/><polygon fill='#222' points='1080 300 990 450 1170 450'/><polygon fill='#FFF' points='1080 300 1170 150 990 150'/><polygon points='1080 600 990 750 1170 750'/><polygon fill='#666' points='1080 600 1170 450 990 450'/><polygon fill='#DDD' points='1080 900 1170 750 990 750'/></g></svg>`,
     `<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' width='100%' height='100%' ><defs><linearGradient id='a' x1='0' x2='0' y1='0' y2='1'><stop offset='0'  stop-color='#17C5FF'/><stop offset='1'  stop-color='#0D62FF'/></linearGradient></defs><pattern id='b'  width='24' height='24' patternUnits='userSpaceOnUse'><circle  fill='#ffffff' cx='12' cy='12' r='12'/></pattern><rect width='100%' height='100%' fill='url(#a)'/><rect width='100%' height='100%' fill='url(#b)' fill-opacity='0.1'/></svg>`,
@@ -542,7 +561,6 @@ function jobCardListeners(){
     const svgElement = job.querySelector(".svg-job-background");
     svgElement.innerHTML = svgBackgrounds[index];
 
-
     //add click event to open job Settings
     const manageFormBtn = job.querySelector(".manage-company-form");
     manageFormBtn.addEventListener("click", (e) => {
@@ -560,34 +578,33 @@ function jobCardListeners(){
         `;
       const $div = $(div).hide().appendTo(job).fadeIn(200);
       const $overlay = $div.find(".manage-job-overlay");
-      const btn = document.getElementById(`view-form-btn-company-${jobId}`); 
+      const btn = document.getElementById(`view-form-btn-company-${jobId}`);
       btn.addEventListener("click", () => {
         const jobId = btn.getAttribute("data-job-id");
         const job = companyData.find((j) => j.job_id == jobId);
-       
+
         // attach company info to the job before opening the form
         const profileImg = document.querySelector(".profile-nav-img");
         Object.assign(job, {
-            company_name: userData?.company_name || "",
-            company_id: userData?.user_id || "",
-            logo: profileImg ? profileImg.src : "",
-            website: userData?.company_url || "",
-            salary: `$${job.salary_min}-${job.salary_max}`
-          });
+          company_name: userData?.company_name || "",
+          company_id: userData?.user_id || "",
+          logo: profileImg ? profileImg.src : "",
+          website: userData?.company_url || "",
+          salary: `$${job.salary_min}-${job.salary_max}`,
+        });
 
         showJobDetails(job);
       });
 
-      const toggleBtn = document.getElementById(`toggle-activation-btn-${jobId}`);
+      const toggleBtn = document.getElementById(
+        `toggle-activation-btn-${jobId}`
+      );
       toggleBtn.addEventListener("click", function () {
         const jobId = this.getAttribute("data-job-id");
         const formData = new FormData();
-        formData.append('job_id', jobId);
+        formData.append("job_id", jobId);
         fetch("../php/toggle-job-activity.php", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
           body: formData,
         })
           .then((response) => response.json())
@@ -601,7 +618,7 @@ function jobCardListeners(){
           .catch((error) => {
             console.error("Error:", error);
           });
-        })
+      });
 
       $overlay.hide().slideDown(200);
 
@@ -615,20 +632,16 @@ function jobCardListeners(){
       });
 
       $(document).on("click", function (e) {
-          $overlay.slideUp(200, function () {
-            $div.fadeOut(200, function () {
-              $div.remove();
-            });
+        $overlay.slideUp(200, function () {
+          $div.fadeOut(200, function () {
+            $div.remove();
           });
+        });
       });
     });
   });
 
- 
-
   document.querySelectorAll(".posted-job").forEach((job) => {
-    job.addEventListener("click", () => {
-    
-    });
+    job.addEventListener("click", () => {});
   });
 }
