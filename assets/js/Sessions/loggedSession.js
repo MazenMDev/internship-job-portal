@@ -1,3 +1,5 @@
+//This js file is added to pages where user is required to be logged in to view
+
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     const res = await fetch("../php/session_check.php");

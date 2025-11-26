@@ -1,3 +1,4 @@
+//This js file is added to pages where user is not required to be logged in to view, such as landing page, jobs page and about us
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     const res = await fetch("../php/session_check.php");
