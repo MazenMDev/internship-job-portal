@@ -63,12 +63,7 @@ function deduceTargetFromButton(btn) {
   if (!txt) return null;
   return txt.toLowerCase().split(" ")[0];
 }
-function coursefields() {
-  return `
-      <label>Course Name</label>
-  `;
-}
-form;
+
 document.addEventListener("click", (e) => {
   if (!e.target.classList.contains("add-entry-btn")) return;
 
@@ -283,13 +278,14 @@ document.addEventListener("click", (e) => {
 
   const editSelect = form.querySelector(".edit-entry-select");
   if (editSelect && editSelect.value !== "") {
-    listRef[Number(editSelect.value)] = data; // update
+    listRef[Number(editSelect.value)] = data;
   } else {
-    listRef.push(data); // add new
+    listRef.push(data);
   }
 
   populateAllDropdowns();
   renderProfileAccordion();
+  updateSectionVisibility();
 
   $(form).slideUp(250, () => form.remove());
   alert("Saved successfully!");
@@ -342,6 +338,7 @@ document.addEventListener("click", (e) => {
   listRef.splice(index, 1); // delete entry
   populateAllDropdowns();
   renderProfileAccordion();
+  updateSectionVisibility();  
   $(form).slideUp(200, () => form.remove());
   alert("Entry deleted.");
 });
@@ -351,11 +348,6 @@ function renderProfileAccordionSection(containerSelector, dataList) {
   const container = document.querySelector(containerSelector);
   if (!container) return;
   container.innerHTML = "";
-
-  if (!dataList.length) {
-    container.innerHTML = `<p class="empty-msg">No entries added.</p>`;
-    return;
-  }
 
   dataList.forEach((item, idx) => {
     const wrapper = document.createElement("div");
@@ -622,6 +614,7 @@ document.addEventListener("click", (e) => {
 
     renderSkills();
     populateSkillDropdown(block);
+    updateSectionVisibility();
     alert("Skill saved!");
     $(block).slideUp(250, () => block.remove());
     return;
@@ -752,189 +745,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+function updateSectionVisibility() {
+  // Courses
+  const coursesSection = document.querySelector(".profile-courses");
+  const coursesContainer = document.querySelector(".profile-courses-container");
+  coursesSection.style.display =
+    coursesContainer.children.length > 0 ? "block" : "none";
 
-const params = new URLSearchParams(window.location.search);
-const userId = params.get("id");
-fetchProfileData();
-function fetchProfileData() {
-  if (userId) {
-    fetch(`../php/profile.php?id=${userId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          document.body.innerHTML = `<h2>${data.error}</h2>`;
-        } else {
-          if (data.Image == "profile.jpeg") {
-            document.querySelector(
-              ".profile-photo"
-            ).src = `../ImageStorage/profile.jpeg`;
-            document.querySelector(
-              ".profile-photo2"
-            ).src = `../ImageStorage/profile.jpeg`;
-          } else {
-            document.querySelector(
-              ".profile-photo"
-            ).src = `../ImageStorage/${userId}/${data.Image}`;
-            document.querySelector(
-              ".profile-photo2"
-            ).src = `../ImageStorage/${userId}/${data.Image}`;
-          }
+  // Projects
+  const projectsSection = document.querySelector(".profile-projects");
+  const projectsContainer = document.querySelector(
+    ".profile-projects-container"
+  );
+  projectsSection.style.display =
+    projectsContainer.children.length > 0 ? "block" : "none";
 
-          document.querySelector(
-            ".profile-section .name"
-          ).textContent = `${data.First_Name} ${data.Last_Name}`;
-
-          if (data.Title) {
-            document.querySelector(".profile-section .headline").textContent =
-              data.Title;
-          } else {
-            document.querySelector(".profile-section .headline").textContent =
-              "";
-          }
-          if (data.Bio) {
-            document.querySelector(".profile-section .about p").textContent =
-              data.Bio;
-          } else {
-            document.querySelector(".profile-section .about p").textContent =
-              "";
-          }
-
-          if (data.is_owner === true) {
-            document.getElementById("profile-edit").style.display = "block";
-          } else {
-            document.getElementById("profile-edit").style.display = "none";
-            document.querySelector(".profile-photo").style.cursor = "default";
-            document.querySelector(".profile-photo2").style.cursor = "default";
-            document.querySelector(".profile-photo").style.pointerEvents = "none";
-            document.querySelector(".profile-photo2").style.pointerEvents = "none";
-
-          }
-          if(data.is_company){
-            fetch("../php/company-profile.php?id=" + userId)
-            .then((res) => res.json())
-            .then((companyData) => {
-              showCompanyInfo(companyData , data);
-              changeFormToCompanyProfile(companyData , data);
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-          }
-
-
-
-        }
-      })
-      .catch((err) => {
-        document.body.innerHTML = `<h2>Error loading profile</h2>`;
-        console.error(err);
-      });
-  } else {
-    //document.body.innerHTML = "<h2>Invalid profile URL</h2>";
-  }
+  // Skills
+  const skillsSection = document.querySelector(".skills-section");
+  const skillsList = document.querySelector(".skills-list");
+  skillsSection.style.display =
+    skillsList.children.length > 0 ? "block" : "none";
 }
 
-function showCompanyInfo(companyData){
-
-  document.querySelector(".profile-section").innerHTML = `
-    <div class="name">${companyData.company_name}</div>
-    <div class="headline">${companyData.company_email}</div>
-    <div class="about">
-      <h2>About Us</h2>
-      <p>${companyData.description || ""}</p>
-    </div>
-
-    <div class"phone-number">
-      <h2>Phone Number</h2>
-      <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
-        <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
-        <a href="tel:${companyData.phone_number || ""}">${companyData.phone_number || ""}</a>
-      </div>
-    </div>
-    
-    <div class="website">
-      <h2>Website</h2>
-      <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
-      <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-icon lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>  
-      <a href="${companyData.company_url || "#"}" target="_blank">${companyData.company_name || ""}</a>
-      </div>
-    </div>
-    
-    <div class="location">
-      <h2>Location</h2>
-      <div style="display:flex; flex-direction:row; align-items:center; gap:2px;">
-      <p>${companyData.country || ""},</p>
-      <p>${companyData.city || ""},</p>
-      <p>${companyData.state || ""},</p>
-      <p>${companyData.street_address || ""},</p>
-      <p>${companyData.zip_code || ""}</p>
-      </div>
-    </div>
-
-    
-
-
-  `;
-}
-
-function changeFormToCompanyProfile(companyData){
-  document.querySelector(".editTitle").textContent = "Edit your Company profile";
-  document.getElementById("formEdit").innerHTML = `
-          <div class="inp" id="name-div">
-            <label for="companyName">Company Name</label
-            ><input class="holder" type="text" name="companyName" id="companyName" />
-          </div>
-        <div class="inp" id="desc-div">
-          <label for="companyDesc">Description</label>
-          <textarea class="holder" type="text" name="companyDesc" id="companyDesc"></textarea>
-        </div>
-        
-        <div class="inp" id="phone-div">
-          <label for="phone-number">Phone Number</label
-          ><input class="holder" type="text" name="phone-number" id="phone-number" />
-        </div>
-        <div class="inp" id="website-div">
-          <label for="website">Website URL</label
-          ><input class="holder" type="text" name="website" id="website" />
-        </div>
-        <div class="grid">
-          <div class="inp" id="country-div">
-            <label for="companyCountry">Country</label
-            ><input class="holder" type="text" name="companyCountry" id="companyCountry" />
-          </div>
-          <div class="inp" id="state-div">
-            <label for="companyState">State</label
-            ><input class="holder" type="text" name="companyState" id="companyState" />
-          </div>
-        </div>
-        <div class="grid">
-          <div class="inp" id="city-div">
-            <label for="companyCity">City</label>
-            <input class="holder" type="text" name="companyCity" id="companyCity" />
-          </div>
-          <div class="inp" id="street-div">
-            <label for="companyStreetAddress">Street Address</label
-            ><input class="holder" type="text" name="companyStreetAddress" id="companyStreetAddress" />
-          </div>
-        </div>
-          <div class="inp" id="zip-div">
-            <label for="companyZipCode">Zip Code</label
-            ><input class="holder" type="text" name="companyZipCode" id="companyZipCode" />
-          </div>
-        
-        
-        
-      <div class="inp">
-          <input type="submit" value="Save changes" class="submit" />
-        </div>
-  `;
-  document.getElementById("companyName").value = companyData.company_name || "";
-  document.getElementById("companyDesc").value = companyData.description || "";
-  document.getElementById("phone-number").value = companyData.phone_number || "";
-  document.getElementById("website").value = companyData.company_url || "";
-  document.getElementById("companyCountry").value = companyData.country || "";
-  document.getElementById("companyState").value = companyData.state || "";
-  document.getElementById("companyCity").value = companyData.city || "";
-  document.getElementById("companyStreetAddress").value = companyData.street_address || "";
-  document.getElementById("companyZipCode").value = companyData.zip_code || "";
-}
+// Run once on page load
+document.addEventListener("DOMContentLoaded", updateSectionVisibility);

@@ -5,8 +5,6 @@
   background-color: var(--background-color);
   border-radius: 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  position: relative;
 }
 
 .cover-photo {
@@ -602,6 +600,7 @@ label {
 
 .accordion-item {
   margin-bottom: 5px;
+  opacity: 0.5;
 }
 
 .accordion-header {
@@ -822,29 +821,7 @@ label {
   white-space: nowrap;
 }
 
-.entry-form {
-  width: 100%;
-  background: var(--background-color);
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 12px;
-  margin-top: 15px;
-  display: none; /* slideDown will show it */
-  position: relative;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-}
 
-.entry-form .input-group {
-  margin-bottom: 18px;
-}
-
-.entry-form label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 6px;
-  font-weight: 500;
-  color: var(--text-color);
-}
 
 .entry-form input,
 .entry-form textarea {
@@ -1028,6 +1005,7 @@ label {
   background: #c7c7c7;
 }
 
+.education-forms-container,
 .courses-forms-container {
   margin-top: 20px;
   display: flex;
@@ -1071,11 +1049,6 @@ label {
   cursor: pointer;
 }
 
-.courses-forms-container {
-  display: flex;
-  flex-direction: column;
-}
-
 
 .profile-education-display,
 .profile-experience-display,
@@ -1086,7 +1059,9 @@ label {
   gap: 20px;
 }
 
-
+.auto-hide-section {
+  display: none;
+}
 .profile-entry {
   background: var(--background-color, #fff);
   border-radius: 12px;
@@ -1113,7 +1088,10 @@ label {
   color: var(--primary-text, #333);
 }
 
+.profile-projects{
+  display:hidden;
 
+}
 .profile-entry .institution {
   font-size: 14px;
   color: var(--secondary-text, #666);
@@ -1220,6 +1198,7 @@ label {
   overflow: hidden;
   background-color: var(--box-color);
   padding: 12px;
+  display:hidden;
 }
 
 .profile-section-header {
