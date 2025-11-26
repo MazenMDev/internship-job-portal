@@ -1,5 +1,22 @@
+const profileList = [];
+const coursesList = [];
+const experienceList = [];
+const educationList = [];
+const projectsList = [];
+const skillsList = [];
+const profileData = {
+  profile: profileList,
+  courses: coursesList,
+  experience: experienceList,
+  education: educationList,
+  projects: projectsList,
+  skills: skillsList,
+};
+
+/* EDIT PANEL*/
 const accordionheaders = document.querySelectorAll(".accordion-header");
 const accordioncontents = document.querySelectorAll(".accordion-content");
+
 accordionheaders.forEach((header) => {
   header.addEventListener("click", () => {
     const accordionitem = header.parentElement;
@@ -8,149 +25,916 @@ accordionheaders.forEach((header) => {
     accordioncontents.forEach((content) => {
       if (content !== accordioncontent) {
         content.classList.remove("active");
-        content.style.maxHeight = "0";
+        content.style.maxHeight = "0px";
       }
     });
 
     accordioncontent.classList.toggle("active");
-
-    if (accordioncontent.classList.contains("active")) {
-      accordioncontent.style.maxHeight = accordioncontent.scrollHeight + "px";
-
-    }
-    else {
-      accordioncontent.style.maxHeight = "0";
-    }
+    accordioncontent.style.maxHeight = accordioncontent.classList.contains(
+      "active"
+    )
+      ? accordioncontent.scrollHeight + "10px"
+      : "0px";
   });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const fileInput = document.getElementById('cv-file-input');
-  const fileDisplayText = document.querySelector('.file-display-text');
-  const defaultText = 'Upload CV';
-  if (fileDisplayText) {
-    fileDisplayText.textContent = defaultText;
-  }
+/* CV UPLOAD*/
+document.addEventListener("DOMContentLoaded", () => {
+  const fileInput = document.getElementById("cv-file-input");
+  const fileDisplayText = document.querySelector(".file-display-text");
+
+  if (fileDisplayText) fileDisplayText.textContent = "Upload CV";
 
   if (fileInput) {
-    fileInput.addEventListener('change', function () {
-      if (this.files && this.files.length > 0) {
-        fileDisplayText.textContent = this.files[0].name;
-      } else {
-        fileDisplayText.textContent = defaultText;
-      }
+    fileInput.addEventListener("change", function () {
+      fileDisplayText.textContent = this.files?.length
+        ? this.files[0].name
+        : "Upload CV";
     });
-  }
-
-
-});
-document.addEventListener("DOMContentLoaded", () => {
-  function setupDatePicker(wrapper) {
-    const input = wrapper.querySelector(".dateInput");
-    const dropdown = wrapper.querySelector(".prof-date-dropdown");
-    const months = wrapper.querySelectorAll(".months div");
-    const yearsBox = wrapper.querySelector(".years");
-
-    let selectedMonth = null;
-    let selectedYear = null;
-
-    if (!yearsBox.dataset.loaded) {
-      const current = new Date().getFullYear();
-      for (let y = current; y >= 1980; y--) {
-        const el = document.createElement("div");
-        el.textContent = y;
-        el.dataset.year = y;
-        yearsBox.appendChild(el);
-      }
-      yearsBox.dataset.loaded = "true";
-    }
-
-    input.addEventListener("click", (e) => {
-      dropdown.style.display =
-        dropdown.style.display === "grid" ? "none" : "grid";
-      e.stopPropagation();
-
-      highlight(months, "month", selectedMonth);
-      highlight(yearsBox.children, "year", selectedYear);
-    });
-
-    months.forEach((m) =>
-      m.addEventListener("click", () => {
-        selectedMonth = m.dataset.month;
-        highlight(months, "month", selectedMonth);
-        updateInput();
-      })
-    );
-
-    yearsBox.addEventListener("click", (e) => {
-      if (e.target.dataset.year) {
-        selectedYear = e.target.dataset.year;
-        highlight(yearsBox.children, "year", selectedYear);
-        updateInput();
-      }
-    });
-
-    function updateInput() {
-      if (selectedMonth) {
-        input.value = `${selectedMonth}/${selectedYear || "YY"}`;
-      }
-      if (selectedMonth && selectedYear) {
-        input.value = `${selectedMonth}/${selectedYear}`;
-        dropdown.style.display = "none";
-      }
-    }
-
-    function highlight(list, type, value) {
-      [...list].forEach((el) => {
-        el.classList.toggle("selected", el.dataset[type] == value);
-      });
-    }
-
-    document.addEventListener("click", (e) => {
-      if (!wrapper.contains(e.target)) dropdown.style.display = "none";
-    });
-  }
-  document.querySelectorAll(".date-picker").forEach(setupDatePicker);
-});
-
-document.addEventListener("input", function (e) {
-  if (e.target.classList.contains("bullet-editor")) {
-    let html = e.target.innerHTML.trim();
-    if (!html.startsWith("<ul")) {
-      e.target.innerHTML = "<ul><li>" + html + "</li></ul>";
-      placeCaretAtEnd(e.target);
-    }
   }
 });
 
-function placeCaretAtEnd(element) {
-  const range = document.createRange();
-  const sel = window.getSelection();
-  range.selectNodeContents(element);
-  range.collapse(false);
-  sel.removeAllRanges();
-  sel.addRange(range);
+function deduceTargetFromButton(btn) {
+  const accItem = btn.closest(".accordion-item");
+  if (!accItem) return null;
+  const header = accItem.querySelector(".accordion-header");
+  if (!header) return null;
+  const txt = header.textContent.trim().split("\n")[0].trim();
+  if (!txt) return null;
+  return txt.toLowerCase().split(" ")[0];
+}
+function coursefields() {
+  return `
+      <label>Course Name</label>
+  `;
+}
+form;
+document.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("add-entry-btn")) return;
+
+  let target = e.target.dataset.target;
+  if (!target) target = deduceTargetFromButton(e.target);
+
+  if (!target) {
+    console.warn("Could not determine add-entry target for button:", e.target);
+    return;
+  }
+
+  const containerSelector = `.${target}-forms-container`;
+  let container = document.querySelector(containerSelector);
+
+  if (!container) {
+    const accContent = e.target.closest(".accordion-content");
+    container = document.createElement("div");
+    container.classList.add(`${target}-forms-container`);
+    accContent.insertBefore(container, e.target);
+  }
+  if (
+    container.querySelector(".entry-form") ||
+    container.querySelector(".course-form")
+  ) {
+    alert("Please finish the open form first.");
+    return;
+  }
+
+  const isCourse = target === "courses";
+  const iseducation = target === "education";
+  const isprojects = target === "projects";
+  const isexperience = target === "experience";
+  const form = document.createElement("div");
+  form.classList.add(isCourse ? "course-form" : "entry-form");
+  form.innerHTML = `
+      <div class="edit-row">
+        <label>Edit Existing</label>
+        <div class="edit-controls">
+            <select class="edit-entry-select">
+              <option value="">-- Select existing ${target} --</option>
+            </select>
+            <button type="button" class="delete-entry-btn" title="Delete">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-trash2-icon lucide-trash-2">
+                    <path d="M10 11v6"/>
+                    <path d="M14 11v6"/>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                    <path d="M3 6h18"/>
+                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                </svg>
+            </button>
+        </div>
+      </div>
+
+      <label>Title</label>
+      <textarea class="title-input"></textarea>
+
+      <label>${isCourse ? "Institution" : " "}
+      ${iseducation ? "School/University" : " "}
+      ${isprojects ? "Project Name" : " "}
+      ${isexperience ? "Company" : " "}
+      
+      </label>
+      <textarea class="institution-input"></textarea>
+
+      <div class="date-picker">
+        <label>Start Date</label>
+        <input type="text" class="dateInput start-date" placeholder="MM/YYYY" readonly>
+        <div class="prof-date-dropdown">
+          <div class="months">
+            <div data-month="01">Jan</div><div data-month="02">Feb</div>
+            <div data-month="03">Mar</div><div data-month="04">Apr</div>
+            <div data-month="05">May</div><div data-month="06">Jun</div>
+            <div data-month="07">Jul</div><div data-month="08">Aug</div>
+            <div data-month="09">Sep</div><div data-month="10">Oct</div>
+            <div data-month="11">Nov</div><div data-month="12">Dec</div>
+          </div>
+          <div class="divider"></div>
+          <div class="years"></div>
+        </div>
+      </div>
+
+      <div class="date-picker">
+        <label>End Date</label>
+        <input type="text" class="dateInput end-date" placeholder="MM/YYYY" readonly>
+        <div class="prof-date-dropdown">
+          <div class="months">
+            <div data-month="01">Jan</div><div data-month="02">Feb</div>
+            <div data-month="03">Mar</div><div data-month="04">Apr</div>
+            <div data-month="05">May</div><div data-month="06">Jun</div>
+            <div data-month="07">Jul</div><div data-month="08">Aug</div>
+            <div data-month="09">Sep</div><div data-month="10">Oct</div>
+            <div data-month="11">Nov</div><div data-month="12">Dec</div>
+          </div>
+          <div class="divider"></div>
+          <div class="years"></div>
+        </div>
+      </div>
+
+      <label>Description</label>
+      <textarea class="description-input"></textarea>
+
+      <button type="button" class="save-entry">Save</button>
+  `;
+
+  $(form).hide();
+  container.appendChild(form);
+  $(form).slideDown(250);
+
+  form.querySelectorAll(".date-picker").forEach((dp) => initDatePicker(dp));
+  populateEditDropdown(form, target);
+});
+
+/* EDIT DROPDOWN*/
+function populateEditDropdown(form, type) {
+  const select = form.querySelector(".edit-entry-select");
+  if (!select) return;
+
+  select.innerHTML = `<option value="">-- Select existing ${type} --</option>`;
+
+  (profileData[type] || []).forEach((item, index) => {
+    const opt = document.createElement("option");
+    opt.value = index;
+    opt.textContent = item.title || `Entry ${index + 1}`;
+    select.appendChild(opt);
+  });
+
+  select.addEventListener("change", () => {
+    const index = select.value;
+    if (index === "") {
+      form.querySelector(".title-input").value = "";
+      form.querySelector(".institution-input").value = "";
+      form.querySelector(".description-input").value = "";
+      form.querySelector(".start-date").value = "";
+      form.querySelector(".end-date").value = "";
+      return;
+    }
+
+    const entry = profileData[type][index];
+    if (!entry) return;
+
+    form.querySelector(".title-input").value = entry.title || "";
+    form.querySelector(".institution-input").value = entry.institution || "";
+    form.querySelector(".description-input").value = entry.description || "";
+    form.querySelector(".start-date").value = entry.start || "";
+    form.querySelector(".end-date").value = entry.end || "";
+  });
 }
 
+function populateAllDropdowns() {
+  document.querySelectorAll(".entry-form, .course-form").forEach((form) => {
+    const select = form.querySelector(".edit-entry-select");
+    if (!select) return;
 
-function uploadImageToServer(file) {
-    const formData = new FormData();
-    formData.append("profile_image", file);
+    const parent = form.parentElement;
+    let type = "courses";
+    if (parent.classList.contains("experience-forms-container"))
+      type = "experience";
+    else if (parent.classList.contains("education-forms-container"))
+      type = "education";
+    else if (parent.classList.contains("projects-forms-container"))
+      type = "projects";
 
-    fetch("../../php/upload-profile-image.php", {
-      method: "POST",
-      body: formData,
-    })
+    select.innerHTML = `<option value="">-- Select existing ${type} --</option>`;
+
+    (profileData[type] || []).forEach((item, index) => {
+      const opt = document.createElement("option");
+      opt.value = index;
+      opt.textContent = item.title || `Entry ${index + 1}`;
+      select.appendChild(opt);
+    });
+  });
+}
+
+/* SAVE ENTRY */
+document.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("save-entry")) return;
+
+  const form = e.target.closest(".entry-form, .course-form");
+  if (!form) return;
+  const container = form.parentElement;
+
+  const data = {
+    title: form.querySelector(".title-input").value.trim(),
+    institution: form.querySelector(".institution-input").value.trim(),
+    start: form.querySelector(".start-date").value,
+    end: form.querySelector(".end-date").value,
+    description: form.querySelector(".description-input").value.trim(),
+  };
+
+  let listRef;
+  if (container.classList.contains("courses-forms-container"))
+    listRef = coursesList;
+  else if (container.classList.contains("experience-forms-container"))
+    listRef = experienceList;
+  else if (container.classList.contains("education-forms-container"))
+    listRef = educationList;
+  else if (container.classList.contains("projects-forms-container"))
+    listRef = projectsList;
+  else {
+    const acc = container.closest(".accordion-item");
+    const headerText = acc
+      ? acc.querySelector(".accordion-header").textContent.trim().toLowerCase()
+      : "";
+    if (headerText.includes("course")) listRef = coursesList;
+    else if (headerText.includes("experience")) listRef = experienceList;
+    else if (headerText.includes("education")) listRef = educationList;
+    else listRef = projectsList;
+  }
+
+  const editSelect = form.querySelector(".edit-entry-select");
+  if (editSelect && editSelect.value !== "") {
+    listRef[Number(editSelect.value)] = data; // update
+  } else {
+    listRef.push(data); // add new
+  }
+
+  populateAllDropdowns();
+  renderProfileAccordion();
+
+  $(form).slideUp(250, () => form.remove());
+  alert("Saved successfully!");
+});
+
+/*DELETE*/
+document.addEventListener("click", (e) => {
+  const delBtn = e.target.closest(".delete-entry-btn");
+  if (!delBtn) return;
+
+  const form = delBtn.closest(".entry-form, .course-form");
+  if (!form) return;
+
+  const select = form.querySelector(".edit-entry-select");
+  if (!select) {
+    alert("No selectable entry found.");
+    return;
+  }
+
+  const indexStr = select.value;
+  if (indexStr === "") {
+    alert("Please select an entry to delete.");
+    return;
+  }
+
+  const index = Number(indexStr);
+  if (isNaN(index)) {
+    alert("Invalid selection.");
+    return;
+  }
+
+  const container = form.parentElement;
+  let listRef;
+  if (container.classList.contains("courses-forms-container"))
+    listRef = coursesList;
+  else if (container.classList.contains("experience-forms-container"))
+    listRef = experienceList;
+  else if (container.classList.contains("education-forms-container"))
+    listRef = educationList;
+  else if (container.classList.contains("projects-forms-container"))
+    listRef = projectsList;
+  else listRef = coursesList;
+
+  if (index < 0 || index >= listRef.length) {
+    alert("Selected entry no longer exists.");
+    populateAllDropdowns();
+    return;
+  }
+
+  listRef.splice(index, 1); // delete entry
+  populateAllDropdowns();
+  renderProfileAccordion();
+  $(form).slideUp(200, () => form.remove());
+  alert("Entry deleted.");
+});
+
+/*PROFILE DISPLAY*/
+function renderProfileAccordionSection(containerSelector, dataList) {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+  container.innerHTML = "";
+
+  if (!dataList.length) {
+    container.innerHTML = `<p class="empty-msg">No entries added.</p>`;
+    return;
+  }
+
+  dataList.forEach((item, idx) => {
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("profile-accordion-item");
+
+    const header = document.createElement("div");
+    header.classList.add("profile-accordion-header");
+    header.textContent = item.title || `Entry ${idx + 1}`;
+
+    const body = document.createElement("div");
+    body.classList.add("profile-accordion-body");
+    body.innerHTML = `
+      <p><strong>Institution:</strong> ${item.institution || "-"}</p>
+      <p><strong>Description:</strong> ${item.description || "-"}</p>
+      <p><strong>Start:</strong> ${item.start || "-"}</p>
+      <p><strong>End:</strong> ${item.end || "-"}</p>
+    `;
+
+    header.addEventListener("click", () => {
+      container.querySelectorAll(".profile-accordion-body").forEach((b) => {
+        if (b !== body) b.classList.remove("open");
+      });
+      body.classList.toggle("open");
+    });
+
+    wrapper.appendChild(header);
+    wrapper.appendChild(body);
+    container.appendChild(wrapper);
+  });
+}
+
+function renderProfileAccordion() {
+  renderProfileAccordionSection(
+    ".profile-experience-container",
+    experienceList
+  );
+  renderProfileAccordionSection(".profile-education-container", educationList);
+  renderProfileAccordionSection(".profile-courses-container", coursesList);
+  renderProfileAccordionSection(".profile-projects-container", projectsList);
+}
+
+/* DATE DROPDOWN*/
+function initDatePicker(wrapper) {
+  const input = wrapper.querySelector(".dateInput");
+  const dropdown = wrapper.querySelector(".prof-date-dropdown");
+  if (!input || !dropdown) return;
+  dropdown.style.display = "none";
+
+  const monthsBox = wrapper.querySelector(".months");
+  const yearsBox = wrapper.querySelector(".years");
+
+  if (!yearsBox.dataset.loaded) {
+    const currentYear = new Date().getFullYear();
+    for (let y = currentYear; y >= 1980; y--) {
+      const div = document.createElement("div");
+      div.textContent = y;
+      div.dataset.year = y;
+      yearsBox.appendChild(div);
+    }
+    yearsBox.dataset.loaded = "true";
+  }
+
+  let selectedMonth = null;
+  let selectedYear = null;
+
+  input.addEventListener("click", (e) => {
+    dropdown.style.display =
+      dropdown.style.display === "grid" ? "none" : "grid";
+    e.stopPropagation();
+  });
+
+  monthsBox.addEventListener("click", (e) => {
+    if (!e.target.dataset.month) return;
+    monthsBox
+      .querySelectorAll("div")
+      .forEach((m) => m.classList.remove("active"));
+    e.target.classList.add("active");
+    selectedMonth = e.target.dataset.month;
+    updateInput();
+  });
+
+  yearsBox.addEventListener("click", (e) => {
+    if (!e.target.dataset.year) return;
+    yearsBox
+      .querySelectorAll("div")
+      .forEach((y) => y.classList.remove("active"));
+    e.target.classList.add("active");
+    selectedYear = e.target.dataset.year;
+    updateInput();
+  });
+
+  function updateInput() {
+    if (selectedMonth)
+      input.value = `${selectedMonth}/${selectedYear || "YYYY"}`;
+    if (selectedMonth && selectedYear) dropdown.style.display = "none";
+  }
+
+  // close dropdown when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = "none";
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".date-picker").forEach((dp) => initDatePicker(dp));
+  populateAllDropdowns();
+  renderProfileAccordion();
+});
+
+/* PROFILE*/
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".save-btn");
+  if (!btn) return;
+
+  e.preventDefault();
+
+  const nameEl = document.getElementById("profile-name");
+  const headlineEl = document.getElementById("profile-headline");
+  const bioEl = document.getElementById("profile-bio");
+
+  profileData.profile = {
+    name: nameEl ? nameEl.value.trim() : "",
+    headline: headlineEl ? headlineEl.value.trim() : "",
+    bio: bioEl ? bioEl.value.trim() : "",
+  };
+
+  const nameContainer = document.querySelector(".name");
+  const headlineContainer = document.querySelector(".headline");
+  const bioContainer = document.querySelector(".Bio p");
+
+  if (nameContainer)
+    nameContainer.textContent = profileData.profile.name || "Profile name";
+  if (headlineContainer)
+    headlineContainer.textContent = profileData.profile.headline || "";
+  if (bioContainer) bioContainer.textContent = profileData.profile.bio || "";
+
+  profileData.skills = [];
+
+  document.querySelectorAll(".accordion-item").forEach((item) => {
+    const headerText =
+      item
+        .querySelector(".accordion-header")
+        ?.textContent.trim()
+        .toLowerCase() || "";
+    if (headerText.includes("skills")) {
+      const content = item.querySelector(".accordion-content");
+      if (content) {
+        const skillInput = content.querySelector(".form-input");
+        const bulletEditor = content.querySelector(".bullet-editor");
+
+        profileData.skills.push({
+          skill: skillInput ? skillInput.value.trim() : "",
+          info: bulletEditor ? bulletEditor.innerHTML.trim() : "",
+        });
+      }
+    }
+  });
+
+  const skillsContainer = document.querySelector(".skills-list");
+  if (skillsContainer) {
+    skillsContainer.innerHTML = "";
+    profileData.skills.forEach((s) => {
+      if (!s.skill && !s.info) return;
+      const li = document.createElement("li");
+      li.innerHTML = `<strong>${escapeHtml(s.skill)}</strong>: ${
+        s.info || "-"
+      }`;
+      skillsContainer.appendChild(li);
+    });
+  }
+
+  console.log("Profile saved:", profileData.profile);
+  console.log("Skills saved:", profileData.skills);
+  console.log("All data:", profileData);
+  alert("Profile & Skills Saved Successfully!");
+});
+
+function escapeHtml(text) {
+  if (!text) return "";
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/* SKILLS */
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".accordion-content")) return;
+  const content = e.target.closest(".accordion-content");
+  const container = content.querySelector(".skills-container");
+  if (!container) return;
+
+  if (e.target.classList.contains("add-skill-btn")) {
+    if (container.querySelector(".skill-block form")) {
+      alert("Please finish the open skill form first.");
+      return;
+    }
+    const form = document.createElement("div");
+    form.classList.add("skill-block");
+
+    form.innerHTML = `
+      <div class="edit-row">
+        <label>Edit Existing</label>
+        <div class="edit-controls">
+            <select class="edit-entry-select">
+              <option value="">-- Select existing --</option>
+            </select>
+            <button type="button" class="delete-entry-btn" title="Delete">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-trash2-icon lucide-trash-2">
+                    <path d="M10 11v6"/>
+                    <path d="M14 11v6"/>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                    <path d="M3 6h18"/>
+                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                </svg>
+            </button>
+        </div>
+      </div>
+
+      <label>Skill</label>
+      <input type="text" class="form-input" placeholder="Enter Skill" />
+
+      <label>Information</label>
+      <div class="editor-area bullet-editor" contenteditable="true">
+        <ul><li></li></ul>
+      </div>
+
+      <div class="skill-controls">
+        <button type="button" class="save-skill-btn">Save</button>
+        <button type="button" class="delete-skill-btn">Delete</button>
+      </div>
+    `;
+    container.appendChild(form);
+    populateSkillDropdown(form);
+    form.querySelector(".form-input")?.focus();
+    return;
+  }
+
+  if (e.target.classList.contains("save-skill-btn")) {
+    const block = e.target.closest(".skill-block");
+    const name = block.querySelector(".form-input").value.trim();
+    const info = block.querySelector(".bullet-editor").innerHTML.trim();
+
+    if (!name) {
+      alert("Skill name cannot be empty.");
+      return;
+    }
+
+    const editSelect = block.querySelector(".edit-skill-select");
+    const index = editSelect?.value;
+
+    if (index !== "" && index !== undefined) {
+      skillsList[Number(index)] = { skill: name, info };
+    } else {
+      skillsList.push({ skill: name, info });
+    }
+
+    renderSkills();
+    populateSkillDropdown(block);
+    alert("Skill saved!");
+    $(block).slideUp(250, () => block.remove());
+    return;
+  }
+
+  if (e.target.classList.contains("delete-skill-btn")) {
+    const block = e.target.closest(".skill-block");
+    const editSelect = block.querySelector(".edit-skill-select");
+    const index = editSelect?.value;
+
+    if (index !== "" && index !== undefined) {
+      skillsList.splice(Number(index), 1);
+      renderSkills();
+    }
+    $(block).slideUp(200, () => block.remove());
+    return;
+  }
+});
+
+function populateSkillDropdown(form) {
+  const select = form.querySelector(".edit-skill-select");
+  if (!select) return;
+
+  select.innerHTML = `<option value="">-- Select existing skill --</option>`;
+  skillsList.forEach((s, idx) => {
+    const opt = document.createElement("option");
+    opt.value = idx;
+    opt.textContent = s.skill || `Skill ${idx + 1}`;
+    select.appendChild(opt);
+  });
+
+  select.addEventListener("change", () => {
+    const index = select.value;
+    if (index === "") {
+      form.querySelector(".form-input").value = "";
+      form.querySelector(".bullet-editor").innerHTML = "<ul><li></li></ul>";
+      return;
+    }
+    const skillData = skillsList[index];
+    form.querySelector(".form-input").value = skillData.skill || "";
+    form.querySelector(".bullet-editor").innerHTML =
+      skillData.info || "<ul><li></li></ul>";
+  });
+}
+
+function renderSkills() {
+  const container = document.querySelector(".skills-list");
+  if (!container) return;
+  container.innerHTML = "";
+
+  skillsList.forEach((s, idx) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<strong>${escapeHtml(s.skill)}</strong>: ${s.info || "-"}`;
+    container.appendChild(li);
+  });
+}
+/* PROFILE PHOTO UPLOAD*/
+document.addEventListener("DOMContentLoaded", () => {
+  const img = document.getElementById("photo");
+  const wrapper = img.parentElement;
+
+  let input = document.getElementById("profile-photo-input");
+  if (!input) {
+    input = document.createElement("input");
+    input.type = "file";
+    input.id = "profile-photo-input";
+    input.accept = "image/*";
+    input.style.display = "none";
+    document.body.appendChild(input);
+  }
+  const navbarImgs = document.querySelectorAll(
+    ".profile-dropdown-img, .profile-nav-img.profileCurrentPage"
+  );
+
+  let modal = document.getElementById("profile-photo-modal");
+  let modalImg;
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "profile-photo-modal";
+    modal.style.cssText = `
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    `;
+
+    modalImg = document.createElement("img");
+    modalImg.style.cssText = `
+      width: 300px;
+      height: 300px;
+      border-radius: 50%; /* circle */
+      object-fit: cover;
+      cursor: pointer; /* click to upload */
+      border: 4px solid white;
+    `;
+
+    modal.appendChild(modalImg);
+    document.body.appendChild(modal);
+  } else {
+    modalImg = modal.querySelector("img");
+  }
+
+  wrapper.addEventListener("click", () => {
+    modalImg.src = img.src;
+    modal.style.display = "flex";
+  });
+
+  modalImg.addEventListener("click", () => input.click());
+
+  input.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file || !file.type.startsWith("image/")) return;
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      img.src = event.target.result;
+      navbarImgs.forEach((navImg) => (navImg.src = event.target.result));
+      modalImg.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.style.display = "none";
+  });
+});
+
+
+const params = new URLSearchParams(window.location.search);
+const userId = params.get("id");
+fetchProfileData();
+function fetchProfileData() {
+  if (userId) {
+    fetch(`../php/profile.php?id=${userId}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.success) {
-          document.querySelector(".profile-photo").src = data.image_url;
-          document.querySelector(".profile-photo2").src = data.image_url;
-          document.querySelector(".profile-nav-img").src = data.image_url;
-          document.querySelector(".profile-dropdown-img").src = data.image_url;
+        if (data.error) {
+          document.body.innerHTML = `<h2>${data.error}</h2>`;
         } else {
-          alert(data.message || "Error uploading image");
+          if (data.Image == "profile.jpeg") {
+            document.querySelector(
+              ".profile-photo"
+            ).src = `../ImageStorage/profile.jpeg`;
+            document.querySelector(
+              ".profile-photo2"
+            ).src = `../ImageStorage/profile.jpeg`;
+          } else {
+            document.querySelector(
+              ".profile-photo"
+            ).src = `../ImageStorage/${userId}/${data.Image}`;
+            document.querySelector(
+              ".profile-photo2"
+            ).src = `../ImageStorage/${userId}/${data.Image}`;
+          }
+
+          document.querySelector(
+            ".profile-section .name"
+          ).textContent = `${data.First_Name} ${data.Last_Name}`;
+
+          if (data.Title) {
+            document.querySelector(".profile-section .headline").textContent =
+              data.Title;
+          } else {
+            document.querySelector(".profile-section .headline").textContent =
+              "";
+          }
+          if (data.Bio) {
+            document.querySelector(".profile-section .about p").textContent =
+              data.Bio;
+          } else {
+            document.querySelector(".profile-section .about p").textContent =
+              "";
+          }
+
+          if (data.is_owner === true) {
+            document.getElementById("profile-edit").style.display = "block";
+          } else {
+            document.getElementById("profile-edit").style.display = "none";
+            document.querySelector(".profile-photo").style.cursor = "default";
+            document.querySelector(".profile-photo2").style.cursor = "default";
+            document.querySelector(".profile-photo").style.pointerEvents = "none";
+            document.querySelector(".profile-photo2").style.pointerEvents = "none";
+
+          }
+          if(data.is_company){
+            fetch("../php/company-profile.php?id=" + userId)
+            .then((res) => res.json())
+            .then((companyData) => {
+              showCompanyInfo(companyData , data);
+              changeFormToCompanyProfile(companyData , data);
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+          }
+
+
+
         }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        document.body.innerHTML = `<h2>Error loading profile</h2>`;
+        console.error(err);
+      });
+  } else {
+    //document.body.innerHTML = "<h2>Invalid profile URL</h2>";
   }
+}
+
+function showCompanyInfo(companyData){
+
+  document.querySelector(".profile-section").innerHTML = `
+    <div class="name">${companyData.company_name}</div>
+    <div class="headline">${companyData.company_email}</div>
+    <div class="about">
+      <h2>About Us</h2>
+      <p>${companyData.description || ""}</p>
+    </div>
+
+    <div class"phone-number">
+      <h2>Phone Number</h2>
+      <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
+        <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+        <a href="tel:${companyData.phone_number || ""}">${companyData.phone_number || ""}</a>
+      </div>
+    </div>
+    
+    <div class="website">
+      <h2>Website</h2>
+      <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
+      <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-icon lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>  
+      <a href="${companyData.company_url || "#"}" target="_blank">${companyData.company_name || ""}</a>
+      </div>
+    </div>
+    
+    <div class="location">
+      <h2>Location</h2>
+      <div style="display:flex; flex-direction:row; align-items:center; gap:2px;">
+      <p>${companyData.country || ""},</p>
+      <p>${companyData.city || ""},</p>
+      <p>${companyData.state || ""},</p>
+      <p>${companyData.street_address || ""},</p>
+      <p>${companyData.zip_code || ""}</p>
+      </div>
+    </div>
+
+    
+
+
+  `;
+}
+
+function changeFormToCompanyProfile(companyData){
+  document.querySelector(".editTitle").textContent = "Edit your Company profile";
+  document.getElementById("formEdit").innerHTML = `
+          <div class="inp" id="name-div">
+            <label for="companyName">Company Name</label
+            ><input class="holder" type="text" name="companyName" id="companyName" />
+          </div>
+        <div class="inp" id="desc-div">
+          <label for="companyDesc">Description</label>
+          <textarea class="holder" type="text" name="companyDesc" id="companyDesc"></textarea>
+        </div>
+        
+        <div class="inp" id="phone-div">
+          <label for="phone-number">Phone Number</label
+          ><input class="holder" type="text" name="phone-number" id="phone-number" />
+        </div>
+        <div class="inp" id="website-div">
+          <label for="website">Website URL</label
+          ><input class="holder" type="text" name="website" id="website" />
+        </div>
+        <div class="grid">
+          <div class="inp" id="country-div">
+            <label for="companyCountry">Country</label
+            ><input class="holder" type="text" name="companyCountry" id="companyCountry" />
+          </div>
+          <div class="inp" id="state-div">
+            <label for="companyState">State</label
+            ><input class="holder" type="text" name="companyState" id="companyState" />
+          </div>
+        </div>
+        <div class="grid">
+          <div class="inp" id="city-div">
+            <label for="companyCity">City</label>
+            <input class="holder" type="text" name="companyCity" id="companyCity" />
+          </div>
+          <div class="inp" id="street-div">
+            <label for="companyStreetAddress">Street Address</label
+            ><input class="holder" type="text" name="companyStreetAddress" id="companyStreetAddress" />
+          </div>
+        </div>
+          <div class="inp" id="zip-div">
+            <label for="companyZipCode">Zip Code</label
+            ><input class="holder" type="text" name="companyZipCode" id="companyZipCode" />
+          </div>
+        
+        
+        
+      <div class="inp">
+          <input type="submit" value="Save changes" class="submit" />
+        </div>
+  `;
+  document.getElementById("companyName").value = companyData.company_name || "";
+  document.getElementById("companyDesc").value = companyData.description || "";
+  document.getElementById("phone-number").value = companyData.phone_number || "";
+  document.getElementById("website").value = companyData.company_url || "";
+  document.getElementById("companyCountry").value = companyData.country || "";
+  document.getElementById("companyState").value = companyData.state || "";
+  document.getElementById("companyCity").value = companyData.city || "";
+  document.getElementById("companyStreetAddress").value = companyData.street_address || "";
+  document.getElementById("companyZipCode").value = companyData.zip_code || "";
+}

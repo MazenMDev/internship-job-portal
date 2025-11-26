@@ -15,52 +15,49 @@
   position: relative;
 }
 
-.profile-section {
-  padding: 0px 20px 20px 20px;
-  position: relative;
-}
-
 #photo:hover {
   background-color: black;
   color: black;
 }
 
-#view-photo h3 {
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: fixed;
-  opacity: 0;
-  z-index: 10;
-  pointer-events: none;
-  font-size: 30px;
-  color: var(--background-color);
-  width: auto;
+.profile-photo-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-#view-photo {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.profile-photo-wrapper:hover .upload-overlay {
+  opacity: 1;
+}
+
+.upload-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2001;
-  margin-top: 10px;
-  align-items: center;
-  width: 600px;
-  height: 600px;
-  background-color: none;
+  font-weight: bold;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
   border-radius: 50%;
-  box-shadow: 0px 30px 50px var(--box-shadow);
-  transition: all 0.2s ease-in-out;
 }
 
 .profile-photo2 {
-  width: 600px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
   border-radius: 50%;
 }
 
@@ -68,6 +65,25 @@
   transition: all 0.2s ease-in-out;
   filter: brightness(0.6) contrast(0.95) blur(3px);
   cursor: pointer;
+}
+
+#profile-photo-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  align-items: center;
+  justify-content: center;
+}
+
+#profile-photo-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
 }
 
 #view-photo:hover h3 {
@@ -341,7 +357,7 @@ label {
   transition: all 0.3s ease;
 }
 
-.edit-panel:target~.panel-overlay {
+.edit-panel:target ~ .panel-overlay {
   opacity: 1;
   visibility: visible;
   pointer-events: all;
@@ -485,19 +501,34 @@ label {
 }
 
 .add-entry-btn {
-  width: 100%;
-  padding: 10px;
-  background: transparent;
-  border: 1px dashed var(--primary-color);
-  color: var(--primary-color);
-  border-radius: 6px;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: 0.3s;
+  margin-top: 10px;
 }
 
 .add-entry-btn:hover {
-  background-color: var(--primary-color);
+  background-color: #005fcc;
+}
+
+.add-btn {
+  display: inline-block;
+  padding: 8px 14px;
+  background: var(--primary-color);
   color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.add-btn:hover {
+  background: var(--primary-color-dark);
 }
 
 .form-actions {
@@ -520,6 +551,19 @@ label {
   text-decoration: none;
   display: inline-block;
   text-align: center;
+}
+
+.save-entry ,
+.save-skill-btn {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
 }
 
 .save-btn:hover {
@@ -548,12 +592,12 @@ label {
   z-index: 1;
 }
 
-.edit-panel:target~.container .profile-container {
+.edit-panel:target ~ .container .profile-container {
   margin-right: 0;
 }
 
 .accordion {
-  width: 440px;
+  width: 430px;
 }
 
 .accordion-item {
@@ -576,11 +620,6 @@ label {
   transform: translateY(-1px);
 }
 
-.accordion-header:has(+ .accordion-content.active) {
-  box-shadow: 0 10px 8px var(--box-shadow);
-  transform: translateY(-1px);
-}
-
 .accordion-header .arrow {
   transition: transform 0.3s ease;
 }
@@ -590,20 +629,74 @@ label {
 }
 
 .accordion-content {
-  display: none;
-  max-height: 0px;
-  transition: 0.3s ease;
-  padding: 25px;
-  overflow: visible;
-  background-color: var(--background-color);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  max-height: 0;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 25px;
+  overflow: hidden;
 }
 
 .accordion-content.active {
-  display: block;
-  max-height: 2000px;
-  overflow: visible;
+  max-height: 4000px;
+  padding:25px;
+}
+
+
+.accordion-content .edit-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+
+.accordion-content .edit-row label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-color, #333);
+  width: 120px; 
+}
+
+.accordion-content .edit-row .edit-controls {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.accordion-content .edit-row select.edit-entry-select,
+.accordion-content .edit-row select.edit-skill-select {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 6px;
+  background-color: var(--input-bg, #fff);
+  color: var(--text-color, #333);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.accordion-content .edit-row select.edit-entry-select:focus,
+.accordion-content .edit-row select.edit-skill-select:focus {
+  outline: none;
+  border-color: var(--primary-color, #007bff);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.accordion-content .edit-row .delete-entry-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--danger-color, #e74c3c);
+  transition: color 0.2s ease;
+}
+
+.accordion-content .edit-row .delete-entry-btn:hover {
+  color: var(--danger-hover, #c0392b);
 }
 
 #cvCard {
@@ -729,6 +822,45 @@ label {
   white-space: nowrap;
 }
 
+.entry-form {
+  width: 100%;
+  background: var(--background-color);
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 15px;
+  display: none; /* slideDown will show it */
+  position: relative;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.entry-form .input-group {
+  margin-bottom: 18px;
+}
+
+.entry-form label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.entry-form input,
+.entry-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  background: var(--background-color);
+}
+
+.entry-form textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
 .entry-textarea {
   width: 100%;
   padding: 10px;
@@ -762,15 +894,15 @@ label {
 
 .prof-date-dropdown {
   position: absolute;
-  top: 110%;
+  top: 46px;
   left: 0;
-  width: 340px;
+  width: 360px;
   background: var(--box-color);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 12px;
   z-index: 5000;
-  display: none;
+  display: grid;
   grid-template-columns: 1fr 1px 1fr;
   gap: 10px;
 }
@@ -811,6 +943,13 @@ label {
   border-radius: 8px;
   cursor: pointer;
   transition: 0.2s;
+}
+
+.prof-date-dropdown .months div.active,
+.prof-date-dropdown .years div.active {
+  background: #4a90e2;
+  color: white;
+  border-radius: 6px;
 }
 
 .months div.selected,
@@ -855,43 +994,276 @@ label {
   color: #aaa;
 }
 
-
-.entry-list {
-  margin-bottom: 15px;
-}
-
-.entry-item {
+.entry-form .buttons {
   display: flex;
-  align-items: flex-start;
-  padding: 14px 0;
-  border-bottom: 1px solid #e5e5e5;
-  gap: 12px;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
 }
 
-.drag-icon {
-  opacity: 0.4;
-  font-size: 18px;
-  cursor: grab;
-  padding-top: 6px;
+.entry-form .save-btn,
+.entry-form .cancel-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  transition: 0.2s;
 }
 
-.entry-text-block {
+.entry-form .save-btn {
+  background: var(--primary-color);
+  color: white;
+}
+
+.entry-form .save-btn:hover {
+  background: var(--primary-color-dark);
+}
+
+.entry-form .cancel-btn {
+  background: #ddd;
+}
+
+.entry-form .cancel-btn:hover {
+  background: #c7c7c7;
+}
+
+.courses-forms-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.course-form {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 15px 0; /* Pushes content below */
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.course-form label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #444;
+}
+
+.course-form textarea,
+.course-form input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  margin: 5px 0 15px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.course-form textarea:focus,
+.course-form input[type="text"]:focus {
+  border-color: var(--main-color, #007bff);
+  outline: none;
+}
+
+.course-form .dateInput {
+  cursor: pointer;
+}
+
+.courses-forms-container {
   display: flex;
   flex-direction: column;
 }
 
-.entry-title {
+
+.profile-education-display,
+.profile-experience-display,
+.profile-courses-display {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.profile-entry {
+  background: var(--background-color, #fff);
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: 0.2s ease;
+}
+
+.profile-entry:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 16px rgba(0, 0, 0, 0.12);
+}
+
+.profile-entry h4 {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
   font-weight: 600;
-  font-size: 15px;
+  color: var(--primary-text, #333);
 }
 
-.entry-institution {
+
+.profile-entry .institution {
   font-size: 14px;
-  color: #666;
+  color: var(--secondary-text, #666);
+  font-weight: 500;
 }
 
-.hidden {
-  display: none;
+
+.profile-entry .date {
+  font-size: 13px;
+  color: var(--secondary-text, #777);
+  font-style: italic;
+}
+
+
+.profile-entry p {
+  font-size: 14px;
+  color: var(--primary-text, #444);
+  margin: 8px 0 0 0;
+  line-height: 1.5;
+}
+
+.edit-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-entry-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+  transition: 0.2s;
+}
+
+.delete-entry-btn:hover {
+  background: #e13d3d;
+  transform: scale(1.08);
+}
+
+.delete-entry-btn:active {
+  transform: scale(0.94);
+}
+
+.profile-accordion-item {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.profile-accordion-header {
+  padding: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #f8f8f8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-accordion-header:hover {
+  background: #f0f0f0;
+}
+
+.profile-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: #fff;
+  padding: 0 15px;
+}
+
+.profile-accordion-body.open {
+  padding: 15px;
+  max-height: 500px; /* large enough to fit content */
+}
+
+.profile-accordion-body strong {
+  color: #555;
+}
+
+/* Optional: Add arrow icon to header */
+.profile-accordion-header::after {
+  content: "▼";
+  font-size: 12px;
+  transition: transform 0.25s ease;
+}
+
+.profile-accordion-body.open ~ .profile-accordion-header::after,
+.profile-accordion-header.active::after {
+  transform: rotate(-180deg);
+}
+
+.profile-section {
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--box-color);
+  padding: 12px;
+}
+
+.profile-section-header {
+  padding: 16px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+
+.profile-section-header:hover {
+  background-color: #e5e5e5;
+}
+
+.profile-section-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease, padding 0.25s ease;
+}
+
+.profile-section-content.open {
+  padding: 12px 20px;
+  max-height: 1000px; /* enough to show all entries */
+}
+
+.save-course-btn {
+  background-color: var(--main-color, #007bff);
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  align-self: flex-start;
+  transition: 0.3s;
+}
+
+.save-course-btn:hover {
+  background-color: #005fcc;
 }
 
 
@@ -915,6 +1287,7 @@ label {
     text-align: center;
   }
 }
+
 
 @media (max-width: 480px) {
   .edit-panel {
