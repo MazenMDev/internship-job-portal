@@ -517,8 +517,9 @@ document.addEventListener("click", (e) => {
     profileData.skills.forEach((s) => {
       if (!s.skill && !s.info) return;
       const li = document.createElement("li");
-      li.innerHTML = `<strong>${escapeHtml(s.skill)}</strong>: ${s.info || "-"
-        }`;
+      li.innerHTML = `<strong>${escapeHtml(s.skill)}</strong>: ${
+        s.info || "-"
+      }`;
       skillsContainer.appendChild(li);
     });
   }
@@ -673,67 +674,6 @@ function renderSkills() {
     container.appendChild(li);
   });
 }
-/* PROFILE PHOTO UPLOAD*/
-document.addEventListener("DOMContentLoaded", () => {
-  let selectedImageFile = null;
-  function uploadImageToServer(file) {
-    const formData = new FormData();
-    formData.append("profile_image", file);
-
-    fetch("../../php/upload-profile-image.php", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          document.querySelector(".profile-photo").src = data.image_url;
-          document.querySelector(".profile-photo2").src = data.image_url;
-          document.querySelector(".profile-nav-img").src = data.image_url;
-          document.querySelector(".profile-dropdown-img").src = data.image_url;
-        } else {
-          alert(data.message || "Error uploading image");
-        }
-      })
-      .catch((err) => console.error(err));
-  }
-
-  function openModal() {
-    loadProfileDataIntoForm();
-    document.body.classList.add("edit-open");
-  }
-  function closeModal() {
-    document.body.classList.remove("edit-open");
-    if (selectedImageFile) {
-      document.querySelector(".profile-photo2").src = "";
-      uploadImageToServer(selectedImageFile);
-      fetchProfileData();
-      selectedImageFile = null;
-    }
-  }
-  document.getElementById("view-photo").addEventListener("click", uploadPhoto);
-  function uploadPhoto() {
-    // create a hidden file input to choose an image
-    const fileInput = document.createElement("input");
-    fileInput.type = "file";
-    fileInput.accept = "image/*";
-    fileInput.click();
-
-    fileInput.onchange = () => {
-      const file = fileInput.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          document.querySelector(".profile-photo2").src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-        selectedImageFile = file;
-      }
-    };
-  }
-});
-
-
 const params = new URLSearchParams(window.location.search);
 const userId = params.get("id");
 fetchProfileData();
@@ -776,8 +716,7 @@ function fetchProfileData() {
             document.querySelector(".profile-section .Bio p").textContent =
               data.Bio;
           } else {
-            document.querySelector(".profile-section .Bio p").textContent =
-              "";
+            document.querySelector(".profile-section .Bio p").textContent = "";
           }
 
           if (data.is_owner === true) {
@@ -786,24 +725,22 @@ function fetchProfileData() {
             document.getElementById("profile-edit").style.display = "none";
             document.querySelector(".profile-photo").style.cursor = "default";
             document.querySelector(".profile-photo2").style.cursor = "default";
-            document.querySelector(".profile-photo").style.pointerEvents = "none";
-            document.querySelector(".profile-photo2").style.pointerEvents = "none";
-
+            document.querySelector(".profile-photo").style.pointerEvents =
+              "none";
+            document.querySelector(".profile-photo2").style.pointerEvents =
+              "none";
           }
-          if(data.is_company){
+          if (data.is_company) {
             fetch("../php/company-profile.php?id=" + userId)
-            .then((res) => res.json())
-            .then((companyData) => {
-              showCompanyInfo(companyData , data);
-              changeFormToCompanyProfile(companyData , data);
-            })
-            .catch((err) => {
-              console.error(err);
-            });
+              .then((res) => res.json())
+              .then((companyData) => {
+                showCompanyInfo(companyData);
+                editCompanyInfo(companyData);
+              })
+              .catch((err) => {
+                console.error(err);
+              });
           }
-
-
-
         }
       })
       .catch((err) => {
@@ -815,8 +752,184 @@ function fetchProfileData() {
   }
 }
 
-function showCompanyInfo(companyData){
+function editCompanyInfo(companyData) {
+  document.querySelector(".edit-panel").innerHTML = `
+  
+    <a href="#" class="close-btn">&times;</a>
+      <h2>Edit Company Profile</h2>
 
+      <form class="edit-form">
+        <div class="accordion">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-id-card-icon lucide-id-card"
+              >
+                <path d="M16 10h2" />
+                <path d="M16 14h2" />
+                <path d="M6.17 15a3 3 0 0 1 5.66 0" />
+                <circle cx="9" cy="11" r="2" />
+                <rect x="2" y="5" width="20" height="14" rx="2" />
+              </svg>
+              Profile 
+              <span class="arrow"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="20px"
+                  viewBox="0 -960 960 960"
+                  width="20px"
+                >
+                  <path
+                    d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div class="accordion-content">
+              <div class="input-group">
+                <label for="profile-name">Company Name</label>
+                <input
+                  type="text"
+                  id="company-name"
+                  class="form-input"
+                  placeholder="Company Name"
+                />
+              </div>
+              <div class="input-group">
+                <label for="profile-headline">Headline</label>
+                <input
+                  type="text"
+                  id="profile-headline"
+                  class="form-input"
+                />
+              </div>
+              <div class="input-group">
+                <label for="profile-bio">About Us</label>
+                <textarea
+                  id="profile-About-us"
+                  class="form-input"
+                ></textarea>
+              </div>
+
+              <div class="input-group">
+                <label for="profile-name">phone number</label>
+                <input
+                  type="tel"
+                  id="Company-number"
+                  class="form-input"
+                  placeholder="Company Number"
+                />
+              </div> 
+              <div class="input-group">
+                <label for="profile-headline">Website</label>
+                <input
+                  type="text"
+                  id="CompanyURL"
+                  class="form-input"
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="profile-headline">City</label>
+                <input
+                  type="text"
+                  id="companyCity"
+                  class="form-input"
+                />
+              </div>
+              <div class="input-group">
+                <label for="profile-headline">Country</label>
+                <input
+                  type="text"
+                  id="Company-country"
+                  class="form-input"
+                />
+              </div>
+              <div class="input-group">
+                <label for="profile-headline">State</label>
+                <input
+                  type="text"
+                  id="companyState"
+                  class="form-input"
+                />
+              </div>
+              <div class="input-group">
+                <label for="profile-headline"> Street Address</label>
+                <input
+                  type="text"
+                  id="companyStreetAddress"
+                  class="form-input"
+                />
+              </div>
+              <div class="input-group">
+                <label for="profile-headline">Zip-Code</label>
+                <input
+                  type="text"
+                  id="companyZipCode"
+                  class="form-input"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="save-btn">Save Profile</button>
+            <a href="#" class="cancel-btn">Cancel</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  `;
+
+  const accordionheaders = document.querySelectorAll(".accordion-header");
+  const accordioncontents = document.querySelectorAll(".accordion-content");
+
+  accordionheaders.forEach((header) => {
+    header.addEventListener("click", () => {
+      const accordionitem = header.parentElement;
+      const accordioncontent =
+        accordionitem.querySelector(".accordion-content");
+
+      accordioncontents.forEach((content) => {
+        if (content !== accordioncontent) {
+          content.classList.remove("active");
+          content.style.maxHeight = "0px";
+        }
+      });
+
+      accordioncontent.classList.toggle("active");
+      accordioncontent.style.maxHeight = accordioncontent.classList.contains(
+        "active"
+      )
+        ? accordioncontent.scrollHeight + "10px"
+        : "0px";
+    });
+  });
+
+  document.getElementById("company-name").value =
+    companyData.company_name || "";
+  document.getElementById("profile-About-us").value =
+    companyData.description || "";
+  document.getElementById("Company-number").value =
+    companyData.phone_number || "";
+  document.getElementById("CompanyURL").value = companyData.company_url || "";
+  document.getElementById("Company-country").value = companyData.country || "";
+  document.getElementById("companyState").value = companyData.state || "";
+  document.getElementById("companyCity").value = companyData.city || "";
+  document.getElementById("companyStreetAddress").value =
+    companyData.street_address || "";
+  document.getElementById("companyZipCode").value = companyData.zip_code || "";
+}
+
+function showCompanyInfo(companyData) {
   document.querySelector(".profile-section").innerHTML = `
     <div class="name">${companyData.company_name}</div>
     <div class="headline">${companyData.company_email}</div>
@@ -829,7 +942,9 @@ function showCompanyInfo(companyData){
       <h2>Phone Number</h2>
       <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
         <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
-        <a href="tel:${companyData.phone_number || ""}">${companyData.phone_number || ""}</a>
+        <a href="tel:${companyData.phone_number || ""}">${
+    companyData.phone_number || ""
+  }</a>
       </div>
     </div>
     
@@ -837,7 +952,9 @@ function showCompanyInfo(companyData){
       <h2>Website</h2>
       <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
       <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-icon lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>  
-      <a href="${companyData.company_url || "#"}" target="_blank">${companyData.company_name || ""}</a>
+      <a href="${companyData.company_url || "#"}" target="_blank">${
+    companyData.company_name || ""
+  }</a>
       </div>
     </div>
     
@@ -851,74 +968,8 @@ function showCompanyInfo(companyData){
       <p>${companyData.zip_code || ""}</p>
       </div>
     </div>
-
-    
-
-
   `;
 }
-
-function changeFormToCompanyProfile(companyData){
-  document.querySelector(".editTitle").textContent = "Edit your Company profile";
-  document.getElementById("formEdit").innerHTML = `
-          <div class="inp" id="name-div">
-            <label for="companyName">Company Name</label
-            ><input class="holder" type="text" name="companyName" id="companyName" />
-          </div>
-        <div class="inp" id="desc-div">
-          <label for="companyDesc">Description</label>
-          <textarea class="holder" type="text" name="companyDesc" id="companyDesc"></textarea>
-        </div>
-        
-        <div class="inp" id="phone-div">
-          <label for="phone-number">Phone Number</label
-          ><input class="holder" type="text" name="phone-number" id="phone-number" />
-        </div>
-        <div class="inp" id="website-div">
-          <label for="website">Website URL</label
-          ><input class="holder" type="text" name="website" id="website" />
-        </div>
-        <div class="grid">
-          <div class="inp" id="country-div">
-            <label for="companyCountry">Country</label
-            ><input class="holder" type="text" name="companyCountry" id="companyCountry" />
-          </div>
-          <div class="inp" id="state-div">
-            <label for="companyState">State</label
-            ><input class="holder" type="text" name="companyState" id="companyState" />
-          </div>
-        </div>
-        <div class="grid">
-          <div class="inp" id="city-div">
-            <label for="companyCity">City</label>
-            <input class="holder" type="text" name="companyCity" id="companyCity" />
-          </div>
-          <div class="inp" id="street-div">
-            <label for="companyStreetAddress">Street Address</label
-            ><input class="holder" type="text" name="companyStreetAddress" id="companyStreetAddress" />
-          </div>
-        </div>
-          <div class="inp" id="zip-div">
-            <label for="companyZipCode">Zip Code</label
-            ><input class="holder" type="text" name="companyZipCode" id="companyZipCode" />
-          </div>
-        
-        
-        
-      <div class="inp">
-          <input type="submit" value="Save changes" class="submit" />
-        </div>
-  `;
-  document.getElementById("companyName").value = companyData.company_name || "";
-  document.getElementById("companyDesc").value = companyData.description || "";
-  document.getElementById("phone-number").value = companyData.phone_number || "";
-  document.getElementById("website").value = companyData.company_url || "";
-  document.getElementById("companyCountry").value = companyData.country || "";
-  document.getElementById("companyState").value = companyData.state || "";
-  document.getElementById("companyCity").value = companyData.city || "";
-  document.getElementById("companyStreetAddress").value = companyData.street_address || "";
-  document.getElementById("companyZipCode").value = companyData.zip_code || "";
-} 
 
 function updateSectionVisibility() {
   // Courses
@@ -959,3 +1010,62 @@ function updateSectionVisibility() {
 }
 
 document.addEventListener("DOMContentLoaded", updateSectionVisibility);
+document.getElementById("profile-edit").addEventListener("click", openModal);
+
+let selectedImageFile = null;
+function uploadImageToServer(file) {
+  const formData = new FormData();
+  formData.append("profile_image", file);
+
+  fetch("../../php/upload-profile-image.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        document.querySelector(".profile-photo").src = data.image_url;
+        document.querySelector(".profile-photo2").src = data.image_url;
+        document.querySelector(".profile-nav-img").src = data.image_url;
+        document.querySelector(".profile-dropdown-img").src = data.image_url;
+      } else {
+        alert(data.message || "Error uploading image");
+      }
+    })
+    .catch((err) => console.error(err));
+}
+
+function openModal() {
+  loadProfileDataIntoForm();
+  document.body.classList.add("edit-open");
+}
+function closeModal() {
+  document.body.classList.remove("edit-open");
+  if (selectedImageFile) {
+    document.querySelector(".profile-photo2").src = "";
+    uploadImageToServer(selectedImageFile);
+    fetchProfileData();
+    selectedImageFile = null;
+  }
+}
+
+document.getElementById("view-photo").addEventListener("click", uploadPhoto);
+function uploadPhoto() {
+  // create a hidden file input to choose an image
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = "image/*";
+  fileInput.click();
+
+  fileInput.onchange = () => {
+    const file = fileInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        document.querySelector(".profile-photo2").src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+      selectedImageFile = file;
+    }
+  };
+}
