@@ -557,7 +557,7 @@ label {
   background-color: #005fcc;
 }
 
-.add-btn {
+.add-btn , .add-skill-btn {
   display: inline-block;
   padding: 8px 14px;
   background: var(--primary-color);
@@ -565,11 +565,13 @@ label {
   border-radius: 8px;
   cursor: pointer;
   transition: 0.2s;
+  border: none;
   font-size: 14px;
 }
 
+
 .add-btn:hover {
-  background: var(--primary-color-dark);
+  background: var(--secondary-color);
 }
 
 .form-actions {
@@ -577,7 +579,7 @@ label {
   gap: 15px;
   justify-content: flex-end;
   margin-top: 30px;
-  padding-top: 20px;
+  padding: 40px 0px;
   border-top: 1px solid var(--border-color);
 }
 
@@ -647,14 +649,29 @@ label {
 #course-accordion,
 #projects-accordion,
 #skills-accordion {
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
+  border: 1px dashed var(--primary-color);
+  
+}
+
+
+#course-accordion .accordion-header,
+#projects-accordion .accordion-header,
+#skills-accordion .accordion-header {
+  background-color: rgba(var(--primary-color-rgb), 0.1) !important;
+  opacity: 0.6
 }
 
 #course-accordion.active,
 #projects-accordion.active,
 #skills-accordion.active {
-  opacity: 1;
+  border: none
+}
+
+#course-accordion.active .accordion-header,
+#projects-accordion.active .accordion-header,
+#skills-accordion.active .accordion-header {
+  background-color: var(--box-color) !important;
+  opacity:1;
 }
 
 .accordion-header {
