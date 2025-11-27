@@ -196,7 +196,7 @@
           </div>
 
           <!-- courses Section -->
-          <div class="accordion-item">
+          <div class="accordion-item" id="course-accordion">
             <div class="accordion-header">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -238,7 +238,7 @@
           </div>
 
           <!-- Projects Section -->
-          <div class="accordion-item">
+          <div class="accordion-item" id="projects-accordion">
             <div class="accordion-header">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -272,12 +272,13 @@
               </span>
             </div>
             <div class="accordion-content">
+              <div class="projects-forms-container"></div>
               <button class="add-entry-btn">+ Add Project</button>
             </div>
           </div>
 
           <!-- Skills Section -->
-          <div class="accordion-item skills-item">
+          <div class="accordion-item" id="skills-accordion">
             <div class="accordion-header">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -625,257 +626,263 @@
           </button>
         </div>
       </nav>
-      <div class="main-content">
-        <div class="profile-container">
-          <div class="cover-photo">
-            <a class="cover-btn edit">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-                <path
-                  fill="currentColor"
-                  d="M100.4 417.2C104.5 402.6 112.2 389.3 123 378.5L304.2 197.3L338.1 163.4C354.7 180 389.4 214.7 442.1 267.4L476 301.3L442.1 335.2L260.9 516.4C250.2 527.1 236.8 534.9 222.2 539L94.4 574.6C86.1 576.9 77.1 574.6 71 568.4C64.9 562.2 62.6 553.3 64.9 545L100.4 417.2zM156 413.5C151.6 418.2 148.4 423.9 146.7 430.1L122.6 517L209.5 492.9C215.9 491.1 221.7 487.8 226.5 483.2L155.9 413.5zM510 267.4C493.4 250.8 458.7 216.1 406 163.4L372 129.5C398.5 103 413.4 88.1 416.9 84.6C430.4 71 448.8 63.4 468 63.4C487.2 63.4 505.6 71 519.1 84.6L554.8 120.3C568.4 133.9 576 152.3 576 171.4C576 190.5 568.4 209 554.8 222.5C551.3 226 536.4 240.9 509.9 267.4z"
-                />
-              </svg>
-            </a>
-            <img
-              id="photo"
-              src="../ImageStorage/profile.jpeg"
-              alt="Profile Photo"
-              class="profile-photo"
-            />
-          </div>
-
-          <a href="#edit-panel" class="edit-btn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 640 640"
-              width="21"
-              height="21"
-            >
+      <div id="view-photo">
+        <h3>Upload Image</h3>
+        <img
+          src="../ImageStorage/profile.jpeg"
+          alt="Profile Photo"
+          class="profile-photo2"
+        />
+      </div>
+      <div class="profile-container">
+        <div class="cover-photo">
+          <a class="cover-btn edit">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
               <path
                 fill="currentColor"
                 d="M100.4 417.2C104.5 402.6 112.2 389.3 123 378.5L304.2 197.3L338.1 163.4C354.7 180 389.4 214.7 442.1 267.4L476 301.3L442.1 335.2L260.9 516.4C250.2 527.1 236.8 534.9 222.2 539L94.4 574.6C86.1 576.9 77.1 574.6 71 568.4C64.9 562.2 62.6 553.3 64.9 545L100.4 417.2zM156 413.5C151.6 418.2 148.4 423.9 146.7 430.1L122.6 517L209.5 492.9C215.9 491.1 221.7 487.8 226.5 483.2L155.9 413.5zM510 267.4C493.4 250.8 458.7 216.1 406 163.4L372 129.5C398.5 103 413.4 88.1 416.9 84.6C430.4 71 448.8 63.4 468 63.4C487.2 63.4 505.6 71 519.1 84.6L554.8 120.3C568.4 133.9 576 152.3 576 171.4C576 190.5 568.4 209 554.8 222.5C551.3 226 536.4 240.9 509.9 267.4z"
               />
             </svg>
           </a>
-          <div class="profile-section">
-            <div class="name">Profile name</div>
-            <div class="headline"></div>
+          <img
+            id="photo"
+            src="../ImageStorage/profile.jpeg"
+            alt="Profile Photo"
+            class="profile-photo"
+          />
+        </div>
 
-            <div class="cv">
-              <a id="cvCard">
-                <svg
-                  class="cvIcon"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="lucide lucide-file-text-icon lucide-file-text"
-                >
-                  <path
-                    d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"
-                  />
-                  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
-                  <path d="M10 9H8" />
-                  <path d="M16 13H8" />
-                  <path d="M16 17H8" />
-                </svg>
-                <div class="cvMain">
-                  <h3 class="uploadName"></h3>
-                  <span
-                    >Download CV
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-download-icon lucide-download"
-                    >
-                      <path d="M12 15V3" />
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                      <path d="m7 10 5 5 5-5" />
-                    </svg>
-                  </span>
-                </div>
-              </a>
-            </div>
+        <a href="#edit-panel" class="edit-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 640 640"
+            width="21"
+            height="21"
+          >
+            <path
+              fill="currentColor"
+              d="M100.4 417.2C104.5 402.6 112.2 389.3 123 378.5L304.2 197.3L338.1 163.4C354.7 180 389.4 214.7 442.1 267.4L476 301.3L442.1 335.2L260.9 516.4C250.2 527.1 236.8 534.9 222.2 539L94.4 574.6C86.1 576.9 77.1 574.6 71 568.4C64.9 562.2 62.6 553.3 64.9 545L100.4 417.2zM156 413.5C151.6 418.2 148.4 423.9 146.7 430.1L122.6 517L209.5 492.9C215.9 491.1 221.7 487.8 226.5 483.2L155.9 413.5zM510 267.4C493.4 250.8 458.7 216.1 406 163.4L372 129.5C398.5 103 413.4 88.1 416.9 84.6C430.4 71 448.8 63.4 468 63.4C487.2 63.4 505.6 71 519.1 84.6L554.8 120.3C568.4 133.9 576 152.3 576 171.4C576 190.5 568.4 209 554.8 222.5C551.3 226 536.4 240.9 509.9 267.4z"
+            />
+          </svg>
+        </a>
+        <div class="profile-section">
+          <div class="name">Profile name</div>
+          <div class="headline"></div>
 
-            <div class="Bio">
-              <h2>Bio</h2>
-              <p></p>
-            </div>
+          <div class="cv">
+            <a id="cvCard">
+              <svg
+                class="cvIcon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-file-text-icon lucide-file-text"
+              >
+                <path
+                  d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"
+                />
+                <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+                <path d="M10 9H8" />
+                <path d="M16 13H8" />
+                <path d="M16 17H8" />
+              </svg>
+              <div class="cvMain">
+                <h3 class="uploadName"></h3>
+                <span
+                  >Download CV
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-download-icon lucide-download"
+                  >
+                    <path d="M12 15V3" />
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <path d="m7 10 5 5 5-5" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+          </div>
 
-            <div class="profile-accordion profile-experience">
-              <h2>Experience</h2>
-              <div class="profile-experience-container"></div>
-            </div>
+          <div class="Bio">
+            <h2>Bio</h2>
+            <p></p>
+          </div>
 
-            <div class="profile-accordion profile-education">
-              <h2>Education</h2>
-              <div class="profile-education-container"></div>
-            </div>
+          <div class="profile-accordion profile-experience">
+            <h2>Experience</h2>
+            <div class="profile-experience-container"></div>
+          </div>
 
-            <div class="profile-courses auto-hide-section">
-              <h2>courses</h2>
-              <div class="profile-courses-container"></div>
-            </div>
+          <div class="profile-accordion profile-education">
+            <h2>Education</h2>
+            <div class="profile-education-container"></div>
+          </div>
 
-            <div class="profile-projects auto-hide-section">
-              <h2>Projects</h2>
-              <div class="profile-projects-container"></div>
-            </div>
+          <div class="profile-courses auto-hide-section">
+            <h2>courses</h2>
+            <div class="profile-courses-container"></div>
+          </div>
 
-            <div class="skills-section auto-hide-section">
-              <h2>skills</h2>
-              <ul class="skills-list"></ul>
-            </div>
+          <div class="profile-projects auto-hide-section">
+            <h2>Projects</h2>
+            <div class="profile-projects-container"></div>
+          </div>
+
+          <div class="skills-section auto-hide-section">
+            <h2>skills</h2>
+            <ul class="skills-list"></ul>
           </div>
         </div>
       </div>
+    </div>
 
-      <div id="blurred-background"></div>
+    <div id="blurred-background"></div>
 
-      <div id="companyreg">
-        <button id="close-btn">
-          <span class="material-symbols-outlined" id="close"> close </span>
-        </button>
-        <h1 id="title">Register Your Company</h1>
-        <form id="form">
-          <div class="inp" id="name">
+    <div id="companyreg">
+      <button id="close-btn">
+        <span class="material-symbols-outlined" id="close"> close </span>
+      </button>
+      <h1 id="title">Register Your Company</h1>
+      <form id="form">
+        <div class="inp" id="name">
+          <input
+            class="holder"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Company Name"
+            required
+          />
+        </div>
+        <div class="inp" id="email-div">
+          <input
+            class="holder"
+            type="text"
+            name="email"
+            id="email"
+            placeholder="example@company.com"
+            required
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="email-icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+            />
+          </svg>
+        </div>
+        <div class="inp" id="phone">
+          <input
+            type="tel"
+            id="number"
+            name="number"
+            required
+            class="holder"
+            placeholder="Phone Number"
+          />
+        </div>
+        <div class="address">
+          <div class="inp" id="street-address">
             <input
               class="holder"
               type="text"
-              name="name"
-              id="name"
-              placeholder="Company Name"
+              name="street-address"
+              id="street-address"
+              placeholder="Street Address"
               required
             />
           </div>
-          <div class="inp" id="email-div">
-            <input
-              class="holder"
-              type="text"
-              name="email"
-              id="email"
-              placeholder="example@company.com"
-              required
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="email-icon"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
-              />
-            </svg>
-          </div>
-          <div class="inp" id="phone">
-            <input
-              type="tel"
-              id="number"
-              name="number"
-              required
-              class="holder"
-              placeholder="Phone Number"
-            />
-          </div>
-          <div class="address">
-            <div class="inp" id="street-address">
+          <div class="grid">
+            <div class="inp" id="city">
               <input
                 class="holder"
                 type="text"
-                name="street-address"
-                id="street-address"
-                placeholder="Street Address"
+                name="city"
+                id="city"
+                placeholder="City"
                 required
               />
             </div>
-            <div class="grid">
-              <div class="inp" id="city">
-                <input
-                  class="holder"
-                  type="text"
-                  name="city"
-                  id="city"
-                  placeholder="City"
-                  required
-                />
-              </div>
-              <div class="inp" id="state">
-                <input
-                  class="holder"
-                  type="text"
-                  name="state"
-                  id="state"
-                  placeholder="State / Province"
-                  required
-                />
-              </div>
-            </div>
-            <div class="grid">
-              <div class="inp" id="postal">
-                <input
-                  class="holder"
-                  type="text"
-                  name="postal"
-                  id="postal"
-                  placeholder="Postal / Zip Code"
-                  required
-                />
-              </div>
-              <div class="inp" id="country">
-                <input
-                  class="holder"
-                  type="text"
-                  name="country"
-                  id="country"
-                  placeholder="Country"
-                  required
-                />
-              </div>
+            <div class="inp" id="state">
+              <input
+                class="holder"
+                type="text"
+                name="state"
+                id="state"
+                placeholder="State / Province"
+                required
+              />
             </div>
           </div>
-          <div class="inp" id="position">
-            <input
-              class="holder"
-              type="text"
-              name="position"
-              id="position"
-              placeholder="Position"
-              required
-            />
+          <div class="grid">
+            <div class="inp" id="postal">
+              <input
+                class="holder"
+                type="text"
+                name="postal"
+                id="postal"
+                placeholder="Postal / Zip Code"
+                required
+              />
+            </div>
+            <div class="inp" id="country">
+              <input
+                class="holder"
+                type="text"
+                name="country"
+                id="country"
+                placeholder="Country"
+                required
+              />
+            </div>
           </div>
-          <div class="inp" id="link">
-            <input
-              class="holder"
-              type="text"
-              name="link"
-              id="link"
-              placeholder="Company URL"
-              required
-            />
-          </div>
+        </div>
+        <div class="inp" id="position">
+          <input
+            class="holder"
+            type="text"
+            name="position"
+            id="position"
+            placeholder="Position"
+            required
+          />
+        </div>
+        <div class="inp" id="link">
+          <input
+            class="holder"
+            type="text"
+            name="link"
+            id="link"
+            placeholder="Company URL"
+            required
+          />
+        </div>
 
-          <div class="inp">
-            <input type="submit" value="Register" class="submit" />
-          </div>
-        </form>
-      </div>
+        <div class="inp">
+          <input type="submit" value="Register" class="submit" />
+        </div>
+      </form>
     </div>
 
     <script src="../assets/js/themeToggle.js"></script>

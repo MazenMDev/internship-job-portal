@@ -14,27 +14,30 @@ const profileData = {
 };
 
 /* EDIT PANEL*/
-const accordionheaders = document.querySelectorAll(".accordion-header");
-const accordioncontents = document.querySelectorAll(".accordion-content");
+document.addEventListener("DOMContentLoaded", () => {
+  const accordionheaders = document.querySelectorAll(".accordion-header");
+  const accordioncontents = document.querySelectorAll(".accordion-content");
 
-accordionheaders.forEach((header) => {
-  header.addEventListener("click", () => {
-    const accordionitem = header.parentElement;
-    const accordioncontent = accordionitem.querySelector(".accordion-content");
+  accordionheaders.forEach((header) => {
+    header.addEventListener("click", () => {
+      const accordionitem = header.parentElement;
+      const accordioncontent =
+        accordionitem.querySelector(".accordion-content");
 
-    accordioncontents.forEach((content) => {
-      if (content !== accordioncontent) {
-        content.classList.remove("active");
-        content.style.maxHeight = "0px";
-      }
+      accordioncontents.forEach((content) => {
+        if (content !== accordioncontent) {
+          content.classList.remove("active");
+          content.style.maxHeight = "0px";
+        }
+      });
+
+      accordioncontent.classList.toggle("active");
+      accordioncontent.style.maxHeight = accordioncontent.classList.contains(
+        "active"
+      )
+        ? accordioncontent.scrollHeight + "10px"
+        : "0px";
     });
-
-    accordioncontent.classList.toggle("active");
-    accordioncontent.style.maxHeight = accordioncontent.classList.contains(
-      "active"
-    )
-      ? accordioncontent.scrollHeight + "10px"
-      : "0px";
   });
 });
 
@@ -338,7 +341,7 @@ document.addEventListener("click", (e) => {
   listRef.splice(index, 1); // delete entry
   populateAllDropdowns();
   renderProfileAccordion();
-  updateSectionVisibility();  
+  updateSectionVisibility();
   $(form).slideUp(200, () => form.remove());
   alert("Entry deleted.");
 });
@@ -514,9 +517,8 @@ document.addEventListener("click", (e) => {
     profileData.skills.forEach((s) => {
       if (!s.skill && !s.info) return;
       const li = document.createElement("li");
-      li.innerHTML = `<strong>${escapeHtml(s.skill)}</strong>: ${
-        s.info || "-"
-      }`;
+      li.innerHTML = `<strong>${escapeHtml(s.skill)}</strong>: ${s.info || "-"
+        }`;
       skillsContainer.appendChild(li);
     });
   }
@@ -673,99 +675,287 @@ function renderSkills() {
 }
 /* PROFILE PHOTO UPLOAD*/
 document.addEventListener("DOMContentLoaded", () => {
-  const img = document.getElementById("photo");
-  const wrapper = img.parentElement;
+  let selectedImageFile = null;
+  function uploadImageToServer(file) {
+    const formData = new FormData();
+    formData.append("profile_image", file);
 
-  let input = document.getElementById("profile-photo-input");
-  if (!input) {
-    input = document.createElement("input");
-    input.type = "file";
-    input.id = "profile-photo-input";
-    input.accept = "image/*";
-    input.style.display = "none";
-    document.body.appendChild(input);
-  }
-  const navbarImgs = document.querySelectorAll(
-    ".profile-dropdown-img, .profile-nav-img.profileCurrentPage"
-  );
-
-  let modal = document.getElementById("profile-photo-modal");
-  let modalImg;
-  if (!modal) {
-    modal = document.createElement("div");
-    modal.id = "profile-photo-modal";
-    modal.style.cssText = `
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    `;
-
-    modalImg = document.createElement("img");
-    modalImg.style.cssText = `
-      width: 300px;
-      height: 300px;
-      border-radius: 50%; /* circle */
-      object-fit: cover;
-      cursor: pointer; /* click to upload */
-      border: 4px solid white;
-    `;
-
-    modal.appendChild(modalImg);
-    document.body.appendChild(modal);
-  } else {
-    modalImg = modal.querySelector("img");
+    fetch("../../php/upload-profile-image.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          document.querySelector(".profile-photo").src = data.image_url;
+          document.querySelector(".profile-photo2").src = data.image_url;
+          document.querySelector(".profile-nav-img").src = data.image_url;
+          document.querySelector(".profile-dropdown-img").src = data.image_url;
+        } else {
+          alert(data.message || "Error uploading image");
+        }
+      })
+      .catch((err) => console.error(err));
   }
 
-  wrapper.addEventListener("click", () => {
-    modalImg.src = img.src;
-    modal.style.display = "flex";
-  });
+  function openModal() {
+    loadProfileDataIntoForm();
+    document.body.classList.add("edit-open");
+  }
+  function closeModal() {
+    document.body.classList.remove("edit-open");
+    if (selectedImageFile) {
+      document.querySelector(".profile-photo2").src = "";
+      uploadImageToServer(selectedImageFile);
+      fetchProfileData();
+      selectedImageFile = null;
+    }
+  }
+  document.getElementById("view-photo").addEventListener("click", uploadPhoto);
+  function uploadPhoto() {
+    // create a hidden file input to choose an image
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+    fileInput.click();
 
-  modalImg.addEventListener("click", () => input.click());
-
-  input.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if (!file || !file.type.startsWith("image/")) return;
-
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      img.src = event.target.result;
-      navbarImgs.forEach((navImg) => (navImg.src = event.target.result));
-      modalImg.src = event.target.result;
+    fileInput.onchange = () => {
+      const file = fileInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.querySelector(".profile-photo2").src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+        selectedImageFile = file;
+      }
     };
-    reader.readAsDataURL(file);
-  });
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) modal.style.display = "none";
-  });
+  }
 });
+
+
+const params = new URLSearchParams(window.location.search);
+const userId = params.get("id");
+fetchProfileData();
+function fetchProfileData() {
+  if (userId) {
+    fetch(`../php/profile.php?id=${userId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          document.body.innerHTML = `<h2>${data.error}</h2>`;
+        } else {
+          if (data.Image == "profile.jpeg") {
+            document.querySelector(
+              ".profile-photo"
+            ).src = `../ImageStorage/profile.jpeg`;
+            document.querySelector(
+              ".profile-photo2"
+            ).src = `../ImageStorage/profile.jpeg`;
+          } else {
+            document.querySelector(
+              ".profile-photo"
+            ).src = `../ImageStorage/${userId}/${data.Image}`;
+            document.querySelector(
+              ".profile-photo2"
+            ).src = `../ImageStorage/${userId}/${data.Image}`;
+          }
+
+          document.querySelector(
+            ".profile-section .name"
+          ).textContent = `${data.First_Name} ${data.Last_Name}`;
+
+          if (data.Title) {
+            document.querySelector(".profile-section .headline").textContent =
+              data.Title;
+          } else {
+            document.querySelector(".profile-section .headline").textContent =
+              "";
+          }
+          if (data.Bio) {
+            document.querySelector(".profile-section .about p").textContent =
+              data.Bio;
+          } else {
+            document.querySelector(".profile-section .about p").textContent =
+              "";
+          }
+
+          if (data.is_owner === true) {
+            document.getElementById("profile-edit").style.display = "block";
+          } else {
+            document.getElementById("profile-edit").style.display = "none";
+            document.querySelector(".profile-photo").style.cursor = "default";
+            document.querySelector(".profile-photo2").style.cursor = "default";
+            document.querySelector(".profile-photo").style.pointerEvents = "none";
+            document.querySelector(".profile-photo2").style.pointerEvents = "none";
+
+          }
+          if(data.is_company){
+            fetch("../php/company-profile.php?id=" + userId)
+            .then((res) => res.json())
+            .then((companyData) => {
+              showCompanyInfo(companyData , data);
+              changeFormToCompanyProfile(companyData , data);
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+          }
+
+
+
+        }
+      })
+      .catch((err) => {
+        document.body.innerHTML = `<h2>Error loading profile</h2>`;
+        console.error(err);
+      });
+  } else {
+    //document.body.innerHTML = "<h2>Invalid profile URL</h2>";
+  }
+}
+
+function showCompanyInfo(companyData){
+
+  document.querySelector(".profile-section").innerHTML = `
+    <div class="name">${companyData.company_name}</div>
+    <div class="headline">${companyData.company_email}</div>
+    <div class="about">
+      <h2>About Us</h2>
+      <p>${companyData.description || ""}</p>
+    </div>
+
+    <div class"phone-number">
+      <h2>Phone Number</h2>
+      <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
+        <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+        <a href="tel:${companyData.phone_number || ""}">${companyData.phone_number || ""}</a>
+      </div>
+    </div>
+    
+    <div class="website">
+      <h2>Website</h2>
+      <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
+      <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-icon lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>  
+      <a href="${companyData.company_url || "#"}" target="_blank">${companyData.company_name || ""}</a>
+      </div>
+    </div>
+    
+    <div class="location">
+      <h2>Location</h2>
+      <div style="display:flex; flex-direction:row; align-items:center; gap:2px;">
+      <p>${companyData.country || ""},</p>
+      <p>${companyData.city || ""},</p>
+      <p>${companyData.state || ""},</p>
+      <p>${companyData.street_address || ""},</p>
+      <p>${companyData.zip_code || ""}</p>
+      </div>
+    </div>
+
+    
+
+
+  `;
+}
+
+function changeFormToCompanyProfile(companyData){
+  document.querySelector(".editTitle").textContent = "Edit your Company profile";
+  document.getElementById("formEdit").innerHTML = `
+          <div class="inp" id="name-div">
+            <label for="companyName">Company Name</label
+            ><input class="holder" type="text" name="companyName" id="companyName" />
+          </div>
+        <div class="inp" id="desc-div">
+          <label for="companyDesc">Description</label>
+          <textarea class="holder" type="text" name="companyDesc" id="companyDesc"></textarea>
+        </div>
+        
+        <div class="inp" id="phone-div">
+          <label for="phone-number">Phone Number</label
+          ><input class="holder" type="text" name="phone-number" id="phone-number" />
+        </div>
+        <div class="inp" id="website-div">
+          <label for="website">Website URL</label
+          ><input class="holder" type="text" name="website" id="website" />
+        </div>
+        <div class="grid">
+          <div class="inp" id="country-div">
+            <label for="companyCountry">Country</label
+            ><input class="holder" type="text" name="companyCountry" id="companyCountry" />
+          </div>
+          <div class="inp" id="state-div">
+            <label for="companyState">State</label
+            ><input class="holder" type="text" name="companyState" id="companyState" />
+          </div>
+        </div>
+        <div class="grid">
+          <div class="inp" id="city-div">
+            <label for="companyCity">City</label>
+            <input class="holder" type="text" name="companyCity" id="companyCity" />
+          </div>
+          <div class="inp" id="street-div">
+            <label for="companyStreetAddress">Street Address</label
+            ><input class="holder" type="text" name="companyStreetAddress" id="companyStreetAddress" />
+          </div>
+        </div>
+          <div class="inp" id="zip-div">
+            <label for="companyZipCode">Zip Code</label
+            ><input class="holder" type="text" name="companyZipCode" id="companyZipCode" />
+          </div>
+        
+        
+        
+      <div class="inp">
+          <input type="submit" value="Save changes" class="submit" />
+        </div>
+  `;
+  document.getElementById("companyName").value = companyData.company_name || "";
+  document.getElementById("companyDesc").value = companyData.description || "";
+  document.getElementById("phone-number").value = companyData.phone_number || "";
+  document.getElementById("website").value = companyData.company_url || "";
+  document.getElementById("companyCountry").value = companyData.country || "";
+  document.getElementById("companyState").value = companyData.state || "";
+  document.getElementById("companyCity").value = companyData.city || "";
+  document.getElementById("companyStreetAddress").value = companyData.street_address || "";
+  document.getElementById("companyZipCode").value = companyData.zip_code || "";
+} 
 
 function updateSectionVisibility() {
   // Courses
   const coursesSection = document.querySelector(".profile-courses");
+  const editCourses = document.getElementById("course-accordion");
   const coursesContainer = document.querySelector(".profile-courses-container");
-  coursesSection.style.display =
-    coursesContainer.children.length > 0 ? "block" : "none";
-
+  if (coursesContainer.children.length > 0) {
+    coursesSection.style.display = "block";
+    editCourses.classList.add("active");
+  } else {
+    coursesSection.style.display = "none";
+    editCourses.classList.remove("active");
+  }
   // Projects
   const projectsSection = document.querySelector(".profile-projects");
+  const editProjects = document.getElementById("projects-accordion");
   const projectsContainer = document.querySelector(
     ".profile-projects-container"
   );
-  projectsSection.style.display =
-    projectsContainer.children.length > 0 ? "block" : "none";
-
+  if (projectsContainer.children.length > 0) {
+    projectsSection.style.display = "block";
+    editProjects.classList.add("active");
+  } else {
+    projectsSection.style.display = "none";
+    editProjects.classList.remove("active");
+  }
   // Skills
   const skillsSection = document.querySelector(".skills-section");
+  const editSkills = document.getElementById("skills-accordion");
   const skillsList = document.querySelector(".skills-list");
-  skillsSection.style.display =
-    skillsList.children.length > 0 ? "block" : "none";
+  if (skillsList.children.length > 0) {
+    skillsSection.style.display = "block";
+    editSkills.classList.add("active");
+  } else {
+    skillsSection.style.display = "none";
+    editSkills.classList.remove("active");
+  }
 }
 
-// Run once on page load
 document.addEventListener("DOMContentLoaded", updateSectionVisibility);
