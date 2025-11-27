@@ -523,10 +523,6 @@ document.addEventListener("click", (e) => {
       skillsContainer.appendChild(li);
     });
   }
-
-  console.log("Profile saved:", profileData.profile);
-  console.log("Skills saved:", profileData.skills);
-  console.log("All data:", profileData);
   alert("Profile & Skills Saved Successfully!");
 });
 
@@ -700,23 +696,25 @@ function fetchProfileData() {
               ".profile-photo2"
             ).src = `../ImageStorage/${userId}/${data.Image}`;
           }
+          if (!data.is_company) {
+            document.querySelector(
+              ".profile-section .name"
+            ).textContent = `${data.First_Name} ${data.Last_Name}`;
 
-          document.querySelector(
-            ".profile-section .name"
-          ).textContent = `${data.First_Name} ${data.Last_Name}`;
-
-          if (data.Title) {
-            document.querySelector(".profile-section .headline").textContent =
-              data.Title;
-          } else {
-            document.querySelector(".profile-section .headline").textContent =
-              "";
-          }
-          if (data.Bio) {
-            document.querySelector(".profile-section .Bio p").textContent =
-              data.Bio;
-          } else {
-            document.querySelector(".profile-section .Bio p").textContent = "";
+            if (data.Title) {
+              document.querySelector(".profile-section .headline").textContent =
+                data.Title;
+            } else {
+              document.querySelector(".profile-section .headline").textContent =
+                "";
+            }
+            if (data.Bio) {
+              document.querySelector(".profile-section .Bio p").textContent =
+                data.Bio;
+            } else {
+              document.querySelector(".profile-section .Bio p").textContent =
+                "";
+            }
           }
 
           if (data.is_owner === true) {
@@ -1039,6 +1037,9 @@ function openModal() {
   loadProfileDataIntoForm();
   document.body.classList.add("edit-open");
 }
+
+const backdrop = document.getElementById("blurred-background");
+if (backdrop) backdrop.addEventListener("click", closeModal);
 function closeModal() {
   document.body.classList.remove("edit-open");
   if (selectedImageFile) {
