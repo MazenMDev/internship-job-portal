@@ -10,6 +10,9 @@
 }
 
 .formDiv {
+  opacity: 1 !important;
+  isolation: isolate;
+  background: var(--box-color);
   position: fixed;
   top: 50%;
   left: 50%;
@@ -386,11 +389,6 @@
 }
 
 @media (max-width: 768px) {
-  .ParentBlurDiv {
-    backdrop-filter: none;
-    background: var(--box-color);
-  }
-  
   .formDiv {
     position: fixed;
     top: 0;
