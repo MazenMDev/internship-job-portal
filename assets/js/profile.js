@@ -773,10 +773,10 @@ function fetchProfileData() {
               "";
           }
           if (data.Bio) {
-            document.querySelector(".profile-section .about p").textContent =
+            document.querySelector(".profile-section .Bio p").textContent =
               data.Bio;
           } else {
-            document.querySelector(".profile-section .about p").textContent =
+            document.querySelector(".profile-section .Bio p").textContent =
               "";
           }
 
