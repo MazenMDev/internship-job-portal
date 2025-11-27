@@ -681,6 +681,21 @@ function fetchProfileData() {
         if (data.error) {
           document.body.innerHTML = `<h2>${data.error}</h2>`;
         } else {
+          /*
+            data example:
+            {
+                 "Id": 1,
+                 "Image": "profile_1764273163.png",
+                 "First_Name": "Kareem",
+                 "Last_Name": "Ahmed",
+                 "Email": "admin@gmail.com",
+                 "Bio": null,
+                 "Title": null,
+                 "Major": null,
+                 "is_owner": true,
+                 "is_company": true
+            }
+          */
           if (data.Image == "profile.jpeg") {
             document.querySelector(
               ".profile-photo"
@@ -732,6 +747,24 @@ function fetchProfileData() {
             fetch("../php/company-profile.php?id=" + userId)
               .then((res) => res.json())
               .then((companyData) => {
+                console.log(companyData);
+                /*
+                {
+                  "Id": 1,
+                  "company_name": "JobConnect",
+                  "company_email": "JobConnect@gmail.com",
+                  "phone_number": "01111111111",
+                  "street_address": "october",
+                  "city": "Giza",
+                  "state": "Giza",
+                  "zip_code": "123123123",
+                  "country": "Egypt",
+                  "user_position": "leader",
+                  "company_url": "https://jobconnect.42web.io/pages/landing.html",
+                  "description": "",
+                  "is_owner": true
+                }
+                */
                 showCompanyInfo(companyData);
                 editCompanyInfo(companyData);
               })
