@@ -3,13 +3,14 @@
   max-width: 800px;
   margin: 150px auto;
   background-color: var(--background-color);
-  border-radius: 20px;
+  border-radius: 0px 0px 20px 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 .cover-photo {
   background-color: var(--primary-color);
   height: 120px;
+  border-radius: 20px 20px 0px 0px;
   position: relative;
 }
 
@@ -317,7 +318,6 @@ label {
 .edit-panel {
   position: fixed;
   top: 80px;
-  width: 30%;
   height: calc(100% - 80px);
   background-color: var(--background-color);
   box-shadow: 2px 0 10px var(--box-shadow);
@@ -551,7 +551,7 @@ label {
   text-align: center;
 }
 
-.save-entry ,
+.save-entry,
 .save-skill-btn {
   background-color: var(--primary-color);
   color: var(--background-color);
@@ -636,9 +636,8 @@ label {
 
 .accordion-content.active {
   max-height: 4000px;
-  padding:25px;
+  padding: 25px;
 }
-
 
 .accordion-content .edit-row {
   display: flex;
@@ -647,12 +646,11 @@ label {
   margin-bottom: 10px;
 }
 
-
 .accordion-content .edit-row label {
   font-weight: 500;
   font-size: 0.9rem;
   color: var(--text-color, #333);
-  width: 120px; 
+  width: 120px;
 }
 
 .accordion-content .edit-row .edit-controls {
@@ -820,8 +818,6 @@ label {
   flex-grow: 1;
   white-space: nowrap;
 }
-
-
 
 .entry-form input,
 .entry-form textarea {
@@ -1049,7 +1045,6 @@ label {
   cursor: pointer;
 }
 
-
 .profile-education-display,
 .profile-experience-display,
 .profile-courses-display {
@@ -1088,9 +1083,8 @@ label {
   color: var(--primary-text, #333);
 }
 
-.profile-projects{
-  display:hidden;
-
+.profile-projects {
+  display: hidden;
 }
 .profile-entry .institution {
   font-size: 14px;
@@ -1098,13 +1092,11 @@ label {
   font-weight: 500;
 }
 
-
 .profile-entry .date {
   font-size: 13px;
   color: var(--secondary-text, #777);
   font-style: italic;
 }
-
 
 .profile-entry p {
   font-size: 14px;
@@ -1194,11 +1186,11 @@ label {
 .profile-section {
   margin-bottom: 16px;
   border: 1px solid #ddd;
-  border-radius: 10px;
+  border-radius: 0px 0px 20px 20px;
   overflow: hidden;
   background-color: var(--box-color);
   padding: 12px;
-  display:hidden;
+  display: hidden;
 }
 
 .profile-section-header {
@@ -1245,37 +1237,55 @@ label {
   background-color: #005fcc;
 }
 
+@media (max-width: 480px) {
+  .profile-photo2 {
+    width: 325px;
+    height: 325px;
+  }
 
-@media (max-width: 768px) {
+  #view-photo {
+    width: 325px;
+    height: 325px;
+  }
+
+  #view-photo h3 {
+    font-size: 24px;
+  }
   .edit-panel {
-    width: 85%;
-    left: -85%;
-  }
-
-  .edit-panel:target {
-    left: 0;
-  }
-
-  .form-actions {
-    flex-direction: column;
-  }
-
-  .save-btn,
-  .cancel-btn {
-    width: 100%;
-    text-align: center;
+    width: 100% !important;
+    padding-left: 0px !important;
+    padding-bottom: 500px;
+    top: 0px;
+    left: 0px;
   }
 }
 
-
-@media (max-width: 480px) {
-  .edit-panel {
-    width: 100%;
-    left: -100%;
+@media (max-width: 768px) {
+  #view-photo {
+    width: 400px;
+    height: 400px;
   }
 
-  .edit-panel:target {
-    left: 0;
+  .profile-photo2 {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .edit-form {
+    max-width: 420px;
+    gap: 1.3rem;
+  }
+
+  .holder {
+    height: 3.2rem;
+    font-size: 1rem;
+  }
+
+  .submit {
+    height: 3.2rem;
+    font-size: 1rem;
   }
 }
 
@@ -1293,62 +1303,29 @@ label {
     margin-top: 0px;
     position: absolute;
   }
-}
-
-@media (min-width: 1024px) {
-  form {
+  .edit-panel {
+    width: 100% !important;
+    padding-left: 0px;
+    padding-bottom: 500px;
+    top: 0px;
+    left: 0px;
+  }
+  .form-actions {
+    flex-direction: column;
+  }
+  .edit-form {
     max-width: 420px;
     gap: 1.3rem;
   }
-
-  .holder {
-    height: 3.2rem;
-    font-size: 1rem;
-  }
-
-  .submit {
-    height: 3.2rem;
-    font-size: 1rem;
+  .close-btn {
+    right: 20px;
   }
 }
-
-@media (max-width: 768px) {
-  #edit-form {
-    width: 100%;
-    max-width: 450px;
-    margin-top: 35px;
+@media (max-width: 1350px) {
+  .edit-panel {
+    width: 30%;
   }
-
-  #view-photo {
-    width: 400px;
-    height: 400px;
-  }
-
-  .profile-photo2 {
-    width: 400px;
-    height: 400px;
-  }
-}
-
-@media (max-width: 480px) {
-  #edit-form {
-    top: 0%;
-    left: 0;
-    transform: none;
-    box-sizing: border-box;
-  }
-
-  .profile-photo2 {
-    width: 325px;
-    height: 325px;
-  }
-
-  #view-photo {
-    width: 325px;
-    height: 325px;
-  }
-
-  #view-photo h3 {
-    font-size: 24px;
+  .accordion {
+    width: 100% !important;
   }
 }
