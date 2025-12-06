@@ -34,7 +34,7 @@
     </div>
 
     <!-- Edit Panel -->
-    <div id="edit-panel"  class="edit-panel">
+    <div id="edit-panel" class="edit-panel">
       <a href="#" class="close-btn">&times;</a>
       <h2>Edit Profile</h2>
 
@@ -78,12 +78,22 @@
             <div class="accordion-content">
               <div class="input-group">
                 <label for="profile-name">Name</label>
-                <input
-                  type="text"
-                  id="profile-name"
-                  class="form-input"
-                  placeholder="Full Name"
-                />
+                <div class="name-grid">
+                  <input
+                    type="text"
+                    id="first-name"
+                    class="form-input"
+                    name="fname"
+                    placeholder="First Name"
+                  />
+                  <input
+                    type="text"
+                    id="last-name"
+                    class="form-input"
+                    name="lname"
+                    placeholder="Last Name"
+                  />
+                </div>
               </div>
               <div class="input-group">
                 <label for="profile-headline">Headline</label>
@@ -666,7 +676,10 @@
           </svg>
         </a>
         <div class="profile-section">
-          <div class="name">Profile name</div>
+          <div class="name">
+            <span class="first-name">Profile</span>
+            <span class="last-name">Name</span>
+          </div>
           <div class="headline"></div>
 
           <div class="cv">
