@@ -1,11 +1,3 @@
-$("#open-btn").click(function () {
-  $("#companyreg").show();
-  $("#blurred-background").show();
-});
-$("#close-btn , #blurred-background").click(function () {
-  $("#companyreg").hide();
-  $("#blurred-background").hide();
-});
 document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("open-btn");
   const closeBtn = document.getElementById("close-btn");

@@ -3,6 +3,48 @@ include 'db_connection.php';
 session_start();
 header('Content-Type: application/json');
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(["error" => "Not logged in"]);
+        exit;
+    }
+
+    $user_id   = intval($_SESSION['user_id']);
+    $firstName = isset($_POST['fname']) ? $_POST['fname'] : '';
+    $lastName  = isset($_POST['lname']) ? $_POST['lname'] : '';
+    $headline  = isset($_POST['headline']) ? $_POST['headline'] : '';
+    $bio       = isset($_POST['bio']) ? $_POST['bio'] : '';
+
+    // update all four columns
+    $stmt = $conn->prepare(
+        "UPDATE users 
+         SET First_Name = ?, Last_Name = ?, Title = ?, Bio = ?
+         WHERE Id = ?"
+    );
+    $stmt->bind_param("ssssi", $firstName, $lastName, $headline, $bio, $user_id);
+    $stmt->execute();
+
+    // return updated row
+    $stmt = $conn->prepare(
+        "SELECT Id, Image, First_Name, Last_Name, Email, Bio, Title, Major
+         FROM users
+         WHERE Id = ?"
+    );
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        echo json_encode($row);
+    } else {
+        echo json_encode(["error" => "User not found"]);
+    }
+
+    exit;
+}
+
+
+
 if (isset($_GET['id'])) {
     $user_id = intval($_GET['id']);
 

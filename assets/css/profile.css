@@ -166,10 +166,7 @@ body.view-open #view-photo {
   color: var(--text-muted);
   font-size: 16px;
   margin-top: 5px;
-}
-
-.profile-section div:not(.name):not(.headline) {
-  margin-top: 25px;
+  margin-bottom: 5px;
 }
 
 .profile-section a {
@@ -835,6 +832,7 @@ label {
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 14px;
+   color: var(--text-color);
   background: var(--background-color);
 }
 

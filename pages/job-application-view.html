@@ -285,8 +285,8 @@
         </div>
       </nav>
     </div>
-    
-   <div id="blurred-background"></div>
+
+    <div id="blurred-background"></div>
 
     <main class="job-application-view-main">
       <section class="job-details">
@@ -300,16 +300,12 @@
         <p class="job-creation-date"></p>
         <div class="job-description">
           <h3>Job Description</h3>
-          <p id="job-description">
-           
-         </p>
+          <p id="job-description"></p>
         </div>
         <div class="job-required-skills">
           <h3>Required Skills</h3>
           <ul id="skills-required">
-            <li>
-             
-            </li>
+            <li></li>
             <li></li>
             <li></li>
             <li></li>
@@ -330,30 +326,32 @@
       <section class="job-applications">
         <h1 class="section-title">Applications Received</h1>
         <div class="num-application-cards">
-          <span>Total Applications: <span id="total-applications">25</span></span>
+          <span
+            >Total Applications: <span id="total-applications">25</span></span
+          >
         </div>
         <div class="application-filters">
-            <label for="statusFilter">Filter by Status:</label>
-            <select id="statusFilter" class="status-filter-dropdown">
-                <option value="all">All</option>
-                <option value="pending">Pending</option>
-                <option value="accepted">Accepted</option>
-                <option value="rejected">Rejected</option>
-                <option value="on-hold">Pending</option>
-            </select>
-            <div class="filter-separator"></div>
-            <label for="sortOrder">Sort by Application Date:</label>
-            <select id="sortOrder" class="sort-order-dropdown">
-                <option value="newest">Newest to Oldest</option>
-                <option value="oldest">Oldest to Newest</option>
-            </select>
+          <label for="statusFilter">Filter by Status:</label>
+          <select id="statusFilter" class="status-filter-dropdown">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="accepted">Accepted</option>
+            <option value="rejected">Rejected</option>
+            <option value="on-hold">Pending</option>
+          </select>
+          <div class="filter-separator"></div>
+          <label for="sortOrder">Sort by Application Date:</label>
+          <select id="sortOrder" class="sort-order-dropdown">
+            <option value="newest">Newest to Oldest</option>
+            <option value="oldest">Oldest to Newest</option>
+          </select>
 
-            <div class="filter-separator"></div>
-            <button id="clearFiltersBtn" class="clear-filters-btn">Clear Filters</button>
+          <div class="filter-separator"></div>
+          <button id="clearFiltersBtn" class="clear-filters-btn">
+            Clear Filters
+          </button>
         </div>
-        <div class="applicants" id="applicants">
-       
-        </div>
+        <div class="applicants" id="applicants"></div>
       </section>
     </main>
     <script src="../assets/js/Sessions/loggedSession.js"></script>

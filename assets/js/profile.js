@@ -13,6 +13,60 @@ const profileData = {
   skills: skillsList,
 };
 
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector(".edit-form");
+
+  const fInput = document.getElementById("first-name");
+  const lInput = document.getElementById("last-name");
+  const hInput = document.getElementById("profile-headline");
+  const bInput = document.getElementById("profile-bio");
+
+  const fDisplay = document.querySelector(".profile-section .first-name");
+  const lDisplay = document.querySelector(".profile-section .last-name");
+  const hDisplay = document.querySelector(".profile-section .headline");
+  const bDisplay = document.querySelector(".Bio p");
+
+  const params = new URLSearchParams(location.search);
+  const id = params.get("id");
+
+  // --- Load from DB on page open ---
+  fetch(`../php/profile.php?id=${id}`)
+    .then(r => r.json())
+    .then(data => {
+      fDisplay.textContent = data.First_Name;
+      lDisplay.textContent = data.Last_Name;
+      hDisplay.textContent = data.Title;
+      bDisplay.textContent = data.Bio;
+
+      fInput.value = data.First_Name;
+      lInput.value = data.Last_Name;
+      hInput.value = data.Title;
+      bInput.value = data.Bio;
+    });
+
+  // --- Save to DB & update text ---
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const fd = new FormData();
+    fd.append("fname", fInput.value);
+    fd.append("lname", lInput.value);
+    fd.append("headline", hInput.value);
+    fd.append("bio", bInput.value);
+
+    fetch("../php/profile.php", { method: "POST", body: fd })
+      .then(r => r.json())
+      .then(data => {
+        fDisplay.textContent = data.First_Name;
+        lDisplay.textContent = data.Last_Name;
+        hDisplay.textContent = data.Title;
+        bDisplay.textContent = data.Bio;
+      });
+  });
+});
+
+
+
 /* EDIT PANEL*/
 document.addEventListener("DOMContentLoaded", () => {
   const accordionheaders = document.querySelectorAll(".accordion-header");
@@ -463,6 +517,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* PROFILE*/
+/*
 document.addEventListener("click", (e) => {
   const btn = e.target.closest(".save-btn");
   if (!btn) return;
@@ -535,7 +590,7 @@ function escapeHtml(text) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
-
+*/
 /* SKILLS */
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".accordion-content")) return;
@@ -712,9 +767,8 @@ function fetchProfileData() {
             ).src = `../ImageStorage/${userId}/${data.Image}`;
           }
           if (!data.is_company) {
-            document.querySelector(
-              ".profile-section .name"
-            ).textContent = `${data.First_Name} ${data.Last_Name}`;
+            document.querySelector(".first-name").textContent = data.First_Name;
+            document.querySelector(".last-name").textContent = data.Last_Name;
 
             if (data.Title) {
               document.querySelector(".profile-section .headline").textContent =

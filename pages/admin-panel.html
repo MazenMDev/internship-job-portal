@@ -196,17 +196,21 @@ div<!DOCTYPE html>
             </div>
 
             <div class="dropdown-section settings-dropdown">
-                <h3 class="dropdown-section-title">Account Settings</h3>
-                <button class="settings-toggle" id="settingsToggle">
-                  <span>Settings</span>
-                  <span class="arrow">▼</span>
+              <h3 class="dropdown-section-title">Account Settings</h3>
+              <button class="settings-toggle" id="settingsToggle">
+                <span>Settings</span>
+                <span class="arrow">▼</span>
+              </button>
+              <div class="settings-menu" id="settingsMenu">
+                <button class="settings-btn" id="changeEmailBtn">
+                  Change Email
                 </button>
-                <div class="settings-menu" id="settingsMenu">
-                  <button class="settings-btn" id="changeEmailBtn">Change Email</button>
-                  <button class="settings-btn" id="forgotPasswordBtn">Change Password</button>
-                  <a href="#" class="settings-btn signout-btn">Sign Out</a>
-                </div>
+                <button class="settings-btn" id="forgotPasswordBtn">
+                  Change Password
+                </button>
+                <a href="#" class="settings-btn signout-btn">Sign Out</a>
               </div>
+            </div>
           </div>
         </div>
       </div>
@@ -613,6 +617,5 @@ div<!DOCTYPE html>
     <script src="../assets/js/adminPanel.js"></script>
     <script src="../assets/js/popup.js"></script>
     <script src="../assets/js/navBar.js"></script>
-   
   </body>
 </html>
