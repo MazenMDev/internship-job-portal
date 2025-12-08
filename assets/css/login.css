@@ -294,6 +294,27 @@ h1 {
   text-decoration: underline;
 }
 
+#changetoregcomp {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+#changetoregcomp a {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+#changetoregcomp a:hover {
+  text-decoration: underline;
+}
+
 /* Generic labels for inputs on login/register pages */
 .reg {
   position: relative;
@@ -423,6 +444,87 @@ label {
   margin-top: 5px;
 }
 
+
+#companyRegisterForm {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: var(--background-color);
+  box-sizing: border-box;
+}
+
+#companyRegisterForm .inp {
+  margin-top: 20px;
+}
+
+#companyRegisterForm .holder,
+#companyRegisterForm .submit {
+  width: 100%;
+}
+
+#companyRegisterForm .address {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#companyRegisterForm .grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+#email-div-company {
+  position: relative;
+}
+
+#email-div-company .email-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  width: 1.1rem;
+  height: 1.1rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  #companyRegisterForm {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  #companyRegisterForm .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #companyRegisterForm {
+    padding: 1rem;
+  }
+
+  #companyRegisterForm .holder,
+  #companyRegisterForm .submit {
+    font-size: 0.85rem;
+    height: 3.0rem;
+  }
+
+  #companyRegisterForm .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 @keyframes moveUp {
   0% {
     transform: translateY(7px);
@@ -454,7 +556,8 @@ label {
 @media (min-width: 1024px) {
   html,
   body {
-    overflow: hidden; /* no page scrollbars on desktop */
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   body {
@@ -462,7 +565,7 @@ label {
   }
 
   .container {
-    padding: 1.5rem 2rem;
+    padding: 1rem 1.5rem; 
   }
 
   .rightCont {
@@ -486,22 +589,18 @@ label {
   }
 
   form {
-    max-width: 420px;
-    gap: 1.1rem; /* slightly tighter to help avoid overflow */
+    max-height: calc(100vh - 180px); 
+    overflow-y: auto;                
   }
 
-  h1 {
-    font-size: 2rem;
+   h1 {
+    font-size: 1.7rem; 
   }
 
-  .holder {
-    height: 3rem;
-    font-size: 1rem;
-  }
-
+  .holder,
   .submit {
-    height: 3rem;
-    font-size: 1rem;
+    height: 2.7rem;    
+    font-size: 0.95rem;
   }
 }
 
