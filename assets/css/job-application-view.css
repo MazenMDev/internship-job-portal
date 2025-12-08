@@ -345,6 +345,7 @@
   z-index: 2000;
   border: 1px solid var(--border-color);
   animation: popupFadeIn 0.3s ease-out;
+  overflow: hidden;
 }
 
 @keyframes popupFadeIn {
@@ -365,6 +366,8 @@
   padding: 30px;
   position: relative;
   text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .popup-content-job-application::-webkit-scrollbar {
@@ -372,7 +375,8 @@
 }
 
 .popup-content-job-application::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color);
+  background-color: var(--text-muted);
+  opacity: 0.4;
   border-radius: 10px;
 }
 
