@@ -432,6 +432,7 @@ a.currentPage span.material-symbols-outlined {
 }
 
 #companyreg {
+  all: revert;
   display: none;
   position: fixed;
   top: 50%;
@@ -500,7 +501,6 @@ form {
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 1fr;
-  margin-top: 5px;
   gap: 5px;
 }
 .inp {
