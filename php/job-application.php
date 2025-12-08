@@ -57,22 +57,52 @@ if (empty($_POST['experience_level'] ?? '') || !in_array($_POST['experience_leve
 }
 
 
+$resume = null;
+if(empty($_FILES['resume'] ?? '')){
+    $errors['resume']="Resume upload is required.";
+}else{
+    $resume = $_FILES['resume'];
+}
+
 if (empty($errors)) {
     $application_data = [
+        'user_id' => $_SESSION['user_id'] ?? null,
+        'job_id' => $_POST['job_id'] ?? null,
         'full_name' => $full_name,
         'email' => $email,
         'experience_level' => $experience_level,
         'cover_letter' => $cover_letter,
         'additional_note' => $note,
-        'resume_path' => $resume_path,
-        'submission_time' => date('Y-m-d H:i:s')
+        'resume' => $resume
     ];
     
+    $stmt = $conn->prepare("INSERT INTO job_applications (user_id, job_id, full_name, email, experience_level, cover_letter, additional_note, resume) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
-    echo json_encode([
+    $stmt->bind_param(
+        "iissssss",
+        $application_data['user_id'],
+        $application_data['job_id'],
+        $application_data['full_name'],
+        $application_data['email'],
+        $application_data['experience_level'],
+        $application_data['cover_letter'],
+        $application_data['additional_note'],
+        $application_data['resume']
+    );
+    if ($stmt->execute()) {
+        echo json_encode([
         'success' => true, 
         'message' => 'Application submitted successfully!'
-    ]);
+        ]);
+
+    } else {
+        echo json_encode([
+            'success' => false, 
+            'message' => 'Database error: ' . $stmt->error
+        ]);
+    }
+
+    
 } else {
     echo json_encode([
         'success' => false, 
@@ -80,8 +110,5 @@ if (empty($errors)) {
         'errors' => $errors
     ]);
 }
-
-exit; 
-?>
 
 ?>
