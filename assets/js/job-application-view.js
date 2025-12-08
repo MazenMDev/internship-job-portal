@@ -55,6 +55,17 @@ const dummyApplications = [
 
 const urlParams = new URLSearchParams(window.location.search);
 const JobId = urlParams.get("jobId");
+const formdata = new FormData();
+formdata.append("jobid", JobId)
+fetch('/php/job-application-view.php', { 
+        method: 'POST',
+        body: formdata
+    })
+    .then((Response) => Response.json())
+    .then((data)=>{
+    console.log(data);
+    })
+
 const job = dummyJobs.find((job) => job.id == JobId);
 if (job) {
     $(document).ready(function () {

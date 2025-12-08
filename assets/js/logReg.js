@@ -267,6 +267,8 @@ if (goRegisterBtn) {
       loginBox.classList.add("hidden");
       registerBox.classList.remove("hidden");
     }
+
+     showUserRegisterForm();
   };
 }
 
@@ -282,6 +284,8 @@ if (goLoginBtn) {
       registerBox.classList.add("hidden");
       loginBox.classList.remove("hidden");
     }
+
+    showUserRegisterForm();
   };
 }
 const errorMsgLogin = document.getElementById("errorMsgLogin");
@@ -427,3 +431,56 @@ Regform.addEventListener("submit", async (e) => {
       errorMsgReg.textContent = "Something went wrong. Please try again.";
     });
 });
+
+
+const regCompanyLink = document.getElementById("regcomp");
+const userRegisterForm = document.getElementById("registerForm");
+const companyRegisterForm = document.getElementById("companyRegisterForm");
+const changeToRegComp = document.getElementById("changetoregcomp");
+
+let isCompanyRegister = false;
+
+function showUserRegisterForm() {
+  if (!userRegisterForm || !companyRegisterForm) return;
+  userRegisterForm.classList.remove("hidden");
+  companyRegisterForm.classList.add("hidden");
+  isCompanyRegister = false;
+
+  // reset link text to default
+  if (changeToRegComp) {
+    changeToRegComp.innerHTML = `
+      Want to register a company?
+      <a id="regcomp">Register</a>
+    `;
+  }
+}
+
+function showCompanyRegisterForm() {
+  if (!userRegisterForm || !companyRegisterForm) return;
+  userRegisterForm.classList.add("hidden");
+  companyRegisterForm.classList.remove("hidden");
+  isCompanyRegister = true;
+
+  // change text to "Register an account"
+  if (changeToRegComp) {
+    changeToRegComp.innerHTML = `
+      Register an account
+      <a id="regcomp">Register</a>
+    `;
+  }
+}
+
+if (changeToRegComp) {
+  changeToRegComp.addEventListener("click", (e) => {
+    const target = e.target;
+    if (!(target instanceof HTMLElement)) return;
+    if (target.id !== "regcomp") return;
+
+    e.preventDefault();
+    if (isCompanyRegister) {
+      showUserRegisterForm();
+    } else {
+      showCompanyRegisterForm();
+    }
+  });
+}
