@@ -27,7 +27,7 @@
   opacity: 0;
   z-index: 10;
   pointer-events: none;
-  font-size:30px;
+  font-size: 30px;
   color: var(--background-color);
   width: auto;
 }
@@ -71,7 +71,6 @@
   filter: brightness(0.6) contrast(0.95) blur(3px);
   cursor: pointer;
 }
-
 
 .profile-photo-wrapper:hover .upload-overlay {
   opacity: 1;
@@ -157,7 +156,7 @@ body.view-open #view-photo {
 }
 
 .name {
-  margin-top: 70px;
+  margin-top: 65px;
   font-size: 24px;
   font-weight: bold;
   max-width: max-content;
@@ -254,51 +253,6 @@ li {
   color: black;
 }
 
-body.edit-open #container {
-  filter: blur(100px);
-  pointer-events: none;
-}
-
-body.edit-open #blurred-background,
-body.edit-open #edit-form {
-  display: block;
-}
-
-#edit-form {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 24px;
-  z-index: 2001;
-  margin-top: 10px;
-  align-items: center;
-  max-width: 600px;
-  min-height: max-content;
-  background-color: var(--box-color);
-  border-radius: 20px;
-  box-shadow: 0px 30px 50px var(--box-shadow);
-  transition: all 0.2s ease-in-out;
-}
-
-#edit-close {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  border: none;
-  font-size: 20px;
-  background-color: var(--box-color);
-  color: var(--text-color);
-  transition: all 0.2s ease-in-out;
-}
-
-#edit-close:hover {
-  background-color: var(--box-color);
-  color: var(--primary-color);
-  transform: none;
-}
-
 textarea {
   min-height: 100px;
   resize: none;
@@ -307,25 +261,6 @@ textarea {
 
 #bio {
   min-height: 70px;
-}
-
-.edit-btn {
-  width: 21px;
-  height: 21px;
-  align-items: center;
-  border: none;
-  border-radius: 50%;
-  color: var(--primary-color);
-  scale: 1.5;
-  position: absolute;
-  top: 150px;
-  right: 5%;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.edit-btn :hover {
-  color: var(--text-color);
 }
 
 .edit {
@@ -405,27 +340,24 @@ label {
 }
 
 .edit-btn {
+  width: 21px;
+  height: 21px;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  color: var(--primary-color);
+  scale: 1.5;
   position: absolute;
   top: 150px;
   right: 5%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  color: var(--primary-color);
-  text-decoration: none;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
   padding: 10px;
-  border-radius: 50%;
-  transition: all 0.2s ease;
-  z-index: 10;
-  width: 21px;
-  height: 21px;
 }
 
 .edit-btn:hover {
   background-color: var(--border-color);
+  color: var(--text-color);
   transform: scale(1.1);
 }
 
@@ -482,7 +414,14 @@ label {
 .input-group {
   margin-bottom: 15px;
 }
-
+.name-grid {
+  position: relative;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 5px;
+  gap: 25px;
+}
 .form-input {
   width: 100%;
   padding: 10px;
@@ -492,6 +431,7 @@ label {
   color: var(--text-color);
   font-family: inherit;
   resize: vertical;
+  transition: all 0.2s ease;
 }
 
 .form-input:focus {
@@ -557,7 +497,8 @@ label {
   background-color: #005fcc;
 }
 
-.add-btn , .add-skill-btn {
+.add-btn,
+.add-skill-btn {
   display: inline-block;
   padding: 8px 14px;
   background: var(--primary-color);
@@ -568,7 +509,6 @@ label {
   border: none;
   font-size: 14px;
 }
-
 
 .add-btn:hover {
   background: var(--secondary-color);
@@ -650,28 +590,26 @@ label {
 #projects-accordion,
 #skills-accordion {
   border: 1px dashed var(--primary-color);
-  
 }
-
 
 #course-accordion .accordion-header,
 #projects-accordion .accordion-header,
 #skills-accordion .accordion-header {
   background-color: rgba(var(--primary-color-rgb), 0.1) !important;
-  opacity: 0.6
+  opacity: 0.6;
 }
 
 #course-accordion.active,
 #projects-accordion.active,
 #skills-accordion.active {
-  border: none
+  border: none;
 }
 
 #course-accordion.active .accordion-header,
 #projects-accordion.active .accordion-header,
 #skills-accordion.active .accordion-header {
   background-color: var(--box-color) !important;
-  opacity:1;
+  opacity: 1;
 }
 
 .accordion-header {
@@ -1256,7 +1194,6 @@ label {
 
 .profile-section {
   margin-bottom: 16px;
-  border: 1px solid #ddd;
   border-radius: 0px 0px 20px 20px;
   overflow: hidden;
   background-color: var(--box-color);
