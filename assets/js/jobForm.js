@@ -79,9 +79,35 @@ function rightDivContent(job, formRightDiv) {
         <option value="mid-level">Mid Level</option>
         <option value="senior-level">Senior Level</option>
       </select>
-      <button type="submit">Submit Application</button>
+      <button type="submit" id="${job.job_id}">Submit Application</button>
     </form>
   `;
+  const form = formRightDiv.querySelector("form.application-form");
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    formData.append("job_id", job.job_id);
+
+    try {
+      const response = await fetch("../php/job-application.php", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert(result.message);
+        form.reset();
+      } else {
+        alert("Error: " + result.message);
+      }
+    } catch (error) {
+      alert("An error occurred while submitting the application.");
+      console.error("Error:", error);
+    }
+  });
 }
 
 function leftDivContent(job, formLeftDiv) {

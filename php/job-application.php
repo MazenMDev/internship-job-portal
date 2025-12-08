@@ -16,11 +16,11 @@ $errors = [];
 $success = false;
 
 // FULL NAME VALIDATION
-if(empty(trim($_POST['full_name']?? '')))
+if(empty(trim($_POST['full-name']?? '')))
 {
-    $errors['full_name']= "Full Name is required.";
+    $errors['full-name']= "Full Name is required.";
 }else{
-    $full_name= filter_var(trim($_POST['full name']), FILTER_SANITIZE_STRING);
+    $full_name= filter_var(trim($_POST['full-name']), FILTER_SANITIZE_STRING);
 }
 
 
@@ -38,10 +38,10 @@ if(empty(trim($_POST['email']?? '')))
 
 // COVER LETTER VALIDATION
 
-if(empty(trim($_POST['cover_letter']?? ''))){
-    $errors['cover_letter']="Cover letter is required";
+if(empty(trim($_POST['cover-letter']?? ''))){
+    $errors['cover-letter']="Cover letter is required";
 }else{
-    $cover_letter= filter_var(trim($_POST['cover_letter']), FILTER_SANITIZE_STRING);
+    $cover_letter= filter_var(trim($_POST['cover-letter']), FILTER_SANITIZE_STRING);
 }
 
 // additional note
@@ -50,44 +50,43 @@ $note = filter_var($_POST['note'] ?? '', FILTER_SANITIZE_STRING);
 
 // ex level validation
 $valid_levels = ['entry-level', 'mid-level', 'senior-level'];
-if (empty($_POST['experience_level'] ?? '') || !in_array($_POST['experience_level'], $valid_levels)) {
-    $errors['experience_level'] = "Experience Level selection is invalid or missing.";
+if (empty($_POST['experience-level'] ?? '') || !in_array($_POST['experience-level'], $valid_levels)) {
+    $errors['experience-level'] = "Experience Level selection is invalid or missing.";
 } else {
-    $experience_level = filter_var($_POST['experience_level'], FILTER_SANITIZE_STRING);
+    $experience_level = filter_var($_POST['experience-level'], FILTER_SANITIZE_STRING);
 }
 
 
-$resume = null;
-if(empty($_FILES['resume'] ?? '')){
-    $errors['resume']="Resume upload is required.";
-}else{
-    $resume = $_FILES['resume'];
-}
+//$resume = null;
+//if(empty($_POST['resume'] ?? '')){
+//    $errors['resume']="Resume upload is required.";
+//}else{
+//    $resume = $_POST['resume'];
+//}
 
 if (empty($errors)) {
     $application_data = [
         'user_id' => $_SESSION['user_id'] ?? null,
-        'job_id' => $_POST['job_id'] ?? null,
+        'job_id' => (int)$_POST['job_id'] ?? null,
         'full_name' => $full_name,
         'email' => $email,
         'experience_level' => $experience_level,
         'cover_letter' => $cover_letter,
         'additional_note' => $note,
-        'resume' => $resume
+        //'resume' => $resume
     ];
     
-    $stmt = $conn->prepare("INSERT INTO job_applications (user_id, job_id, full_name, email, experience_level, cover_letter, additional_note, resume) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO job_applications (user_id, job_id, full_name, email, experience_level, cover_letter, additional_note) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
     $stmt->bind_param(
-        "iissssss",
+        "iisssss",
         $application_data['user_id'],
         $application_data['job_id'],
         $application_data['full_name'],
         $application_data['email'],
         $application_data['experience_level'],
         $application_data['cover_letter'],
-        $application_data['additional_note'],
-        $application_data['resume']
+        $application_data['additional_note']
     );
     if ($stmt->execute()) {
         echo json_encode([
@@ -106,7 +105,7 @@ if (empty($errors)) {
 } else {
     echo json_encode([
         'success' => false, 
-        'message' => 'Submission failed Please correct the errors below.',
+        'message' => "Submission failed Please correct the errors below. " . json_encode($errors),
         'errors' => $errors
     ]);
 }
