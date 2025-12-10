@@ -491,7 +491,7 @@ label {
 }
 
 .add-entry-btn:hover {
-  background-color: #005fcc;
+  background-color:var(--secondary-color);
 }
 
 .add-btn,
@@ -507,6 +507,7 @@ label {
   font-size: 14px;
 }
 
+.add-skill-btn:hover,
 .add-btn:hover {
   background: var(--secondary-color);
 }
@@ -534,7 +535,7 @@ label {
 }
 
 .save-entry,
-.save-skill-btn {
+.skill-controls button{
   background-color: var(--primary-color);
   color: var(--background-color);
   border: none;
@@ -544,6 +545,13 @@ label {
   cursor: pointer;
   transition: 0.3s;
   margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.save-entry,
+.skill-controls :hover{
+background-color: var(--secondary-color);
+
 }
 
 .save-btn:hover {

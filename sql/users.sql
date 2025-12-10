@@ -16,3 +16,50 @@ CREATE TABLE users (
     cv VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY (Id)
 );
+
+CREATE TABLE experience (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    title VARCHAR(255),
+    institution VARCHAR(255),
+    start_date VARCHAR(20),
+    end_date VARCHAR(20),
+    description TEXT
+);
+
+CREATE TABLE education (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    title VARCHAR(255),
+    institution VARCHAR(255),
+    start_date VARCHAR(20),
+    end_date VARCHAR(20),
+    description TEXT
+);
+
+CREATE TABLE courses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    title VARCHAR(255),
+    institution VARCHAR(255),
+    start_date VARCHAR(20),
+    end_date VARCHAR(20),
+    description TEXT
+);
+
+CREATE TABLE projects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    title VARCHAR(255),
+    institution VARCHAR(255),
+    start_date VARCHAR(20),
+    end_date VARCHAR(20),
+    description TEXT
+);
+
+CREATE TABLE skills (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    skill VARCHAR(255),
+    info TEXT
+);
