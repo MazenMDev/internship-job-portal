@@ -170,6 +170,18 @@ let jobListings = [
   },
 ];
 
+const application_data= {
+  job_id: job.job_id,
+  full_name: form.querySelector('#full-name').value,
+  email: form.querySelector('#email').value,
+  cover_letter: form.querySelector('#cover-letter').value,
+  note: form.querySelector('#note').value,
+  experience_level: form.querySelector('#experience-level').value,
+}
+
+
+
+
 const noFilterArr = jobListings;
 
 const userBookMarks = [];
