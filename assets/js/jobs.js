@@ -175,6 +175,19 @@ const noFilterArr = jobListings;
 const userBookMarks = [];
 const selectedCategories = [];
 
+$(document).ready(function () {
+  fetch('php/getBookMarkedJobs.php')
+    .then(response => response.json())
+    .then(data => {
+      if (data.bookmarked_jobs) {
+        userBookMarks.push(...data.bookmarked_jobs);
+      }
+    })
+    .catch(error => console.error('Error fetching bookmarked jobs:', error));
+
+    console.log(userBookMarks);
+});
+
 function toggleCategory(cat) {
   const index = selectedCategories.indexOf(cat);
   if (index === -1) {
@@ -468,16 +481,29 @@ function updatePages() {
 
 }
 renderPage(currentPage);
+
 function toggleBookmark(jobId) {
   const index = userBookMarks.indexOf(jobId);
-  //search the userBookMarks array for the job id
-  //and if its found (means that its already bookmarked) we remove the class of bookmarked and remove it from the bookmarked class
-  // else if its not found we add the class of bookmarked and add it to the bookmarked array
   if (index === -1) {
     userBookMarks.push(jobId);
   } else {
     userBookMarks.splice(index, 1);
   }
+  
+  const formData = new FormData();
+  formData.append("job_id", jobId);
+  fetch("/php/bookmarkJob.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
   const bookmarkIcons = document.querySelectorAll(
     `.job-card[data-id="${jobId}"] .job-bookmark`
   );
