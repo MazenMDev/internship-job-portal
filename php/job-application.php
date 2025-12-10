@@ -103,7 +103,22 @@ if (empty($errors)) {
         'additional_note' => $note,
         //'resume' => $resume
     ];
-    
+
+    $check_application = $conn->prepare("SELECT application_id FROM job_applications WHERE user_id = ? AND job_id = ?");
+    $check_application->bind_param("ii", $application_data['user_id'], $application_data['job_id']);
+    $check_application->execute();
+    $check_application->store_result();
+
+    if($check_application->num_rows > 0){
+        echo json_encode([
+            'success' => false, 
+            'message' => 'You have already applied for this job.'
+        ]);
+        exit;
+    }
+
+    $check_application->close();
+
     $stmt = $conn->prepare("INSERT INTO job_applications (user_id, job_id, full_name, email, experience_level, cover_letter, additional_note) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
     $stmt->bind_param(
