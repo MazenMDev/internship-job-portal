@@ -11,6 +11,17 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit;
 }
 
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(['success' => false, 'message' => 'User not logged in. Please log in to apply.']);
+    exit;
+}
+
+// Check if job_id is provided
+if (empty($_POST['job_id'])) {
+    echo json_encode(['success' => false, 'message' => 'Job ID not provided.']);
+    exit;
+}
 
 $errors = [];
 $success = false;
@@ -65,9 +76,26 @@ if (empty($_POST['experience-level'] ?? '') || !in_array($_POST['experience-leve
 //}
 
 if (empty($errors)) {
+    $job_id = (int)$_POST['job_id'];
+    
+    // Check if job exists
+    $check_job = $conn->prepare("SELECT job_id FROM jobs WHERE job_id = ?");
+    $check_job->bind_param("i", $job_id);
+    $check_job->execute();
+    $check_job->store_result();
+    
+    if ($check_job->num_rows === 0) {
+        echo json_encode([
+            'success' => false, 
+            'message' => 'The job you are trying to apply for does not exist.'
+        ]);
+        exit;
+    }
+    $check_job->close();
+    
     $application_data = [
-        'user_id' => $_SESSION['user_id'] ?? null,
-        'job_id' => (int)$_POST['job_id'] ?? null,
+        'user_id' => $_SESSION['user_id'],
+        'job_id' => $job_id,
         'full_name' => $full_name,
         'email' => $email,
         'experience_level' => $experience_level,
