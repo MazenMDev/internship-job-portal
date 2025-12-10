@@ -102,6 +102,15 @@ function rightDivContent(job, formRightDiv) {
      if (result.success){
     messageBox.textContent = result.message;
     messageBox.style.color = "green";
+
+     const submitButton = form.querySelector("button[type='submit']");
+    submitButton.disabled = true;
+
+
+   setTimeout(() => {
+    blurDiv.remove();
+    form.remove() // removes the blur overlay
+   }, 2000);
     form.reset();
   } else{
     messageBox.textContent = "Error: " +result.message;
