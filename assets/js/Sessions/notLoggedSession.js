@@ -1,4 +1,6 @@
 //This js file is added to pages where user is not required to be logged in to view, such as landing page, jobs page and about us
+export let isUserLoggedIn = false;
+
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     const res = await fetch("../php/session_check.php");
@@ -20,14 +22,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     */
    
     if (!data.logged_in) {
+      isUserLoggedIn = false;
       document.querySelectorAll(".userLogged").forEach((el) => {
         el.style.display = "none";
       });
-      document.querySelectorAll(".job-form-button").forEach(but => {
-        but.style.setProperty("display", "none", "important");
-      });
+      
       document.querySelector(".admin-panel-link").style.display = "none";
     } else {
+      isUserLoggedIn = true;
       document.querySelectorAll(".sign").forEach((el) => {
         el.style.display = "none";
       });
