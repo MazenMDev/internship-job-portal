@@ -7,7 +7,7 @@ CREATE TABLE notifications (
     user_sender_id  INT NOT NULL,
     sender_type     ENUM('user', 'company') NOT NULL,
     created_at      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (receiver_id) REFERENCES user(Id),
+    FOREIGN KEY (receiver_id) REFERENCES users(Id),
     FOREIGN KEY (form_sender_id) REFERENCES company(user_id),
-    FOREIGN KEY (user_sender_id) REFERENCES user(Id)
+    FOREIGN KEY (user_sender_id) REFERENCES users(Id)
 );
