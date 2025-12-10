@@ -111,7 +111,7 @@ try {
 
    setTimeout(() => {
     blurDiv.remove();
-    form.remove() // removes the blur overlay
+    form.remove();
    }, 2000);
     form.reset();
   } else{
