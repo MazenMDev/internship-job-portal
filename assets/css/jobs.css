@@ -899,6 +899,25 @@ input[type="range"]::-webkit-slider-thumb {
   margin-top: 8px;
 }
 
+.applied-job-submit{
+  background-color: var(--border-color) !important;
+  color: var(--text-muted) !important;
+  disabled: true !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+.applied-job-submit:hover{
+  background-color: var(--border-color) !important;
+  color: var(--text-muted) !important;
+  transform: none !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+.applied-job-card{
+  border: 1px solid var(--text-muted) !important;
+  background: rgba(0, 0, 0, 0.02);
+}
 
 @media (max-width: 1160px) {
   .job-container {

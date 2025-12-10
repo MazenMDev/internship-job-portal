@@ -15,7 +15,7 @@ $USER_ID = $_SESSION['user_id'];
 $statment= $conn->prepare("SELECT * FROM job_applications WHERE user_id=?");
 $statment->bind_param("i", $USER_ID);
 
-if($statment->execute){
+if($statment->execute()){
     $result= $statment->get_result();
     $applications= [];
 

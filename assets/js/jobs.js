@@ -179,6 +179,8 @@ const noFilterArr = jobListings;
 const userBookMarks = [];
 const selectedCategories = [];
 
+const appliedJobs = [];
+
 $(document).ready(function () {
   fetch("/php/getBookMarkedJobs.php")
     .then((response) => response.json())
@@ -201,6 +203,19 @@ $(document).ready(function () {
       showBookmarkedFirst();
     })
     .catch((error) => console.error("Error fetching bookmarked jobs:", error));
+
+  fetch("/php/return-applications.php")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.applications) {
+        const jobIds = data.applications.map(app => app.job_id);
+        appliedJobs.push(...jobIds);
+      }
+      console.log("Applied Jobs:", appliedJobs);
+      // Re-render to apply the 'applied' styling
+      renderPage(currentPage);
+    })
+    .catch((error) => console.error("Error fetching applied jobs:", error));
 });
 
 function toggleCategory(cat) {
@@ -333,11 +348,15 @@ function renderPage(page) {
     const jobCard = document.createElement("div");
     jobCard.classList.add("job-card");
     jobCard.setAttribute("data-id", job.job_id);
+    let applied = false;
+    if (appliedJobs.includes(job.job_id)) {
+      jobCard.classList.add("applied-job-card");
+      applied = true;
+    }
+
     jobCard.innerHTML = `
         <div class="job-date">${timeSince(job.created_at)}</div>
-        <svg class="job-bookmark" style="${!isUserLoggedIn ? 'display: none !important;' : ''} ${
-          userBookMarks.includes(job.job_id) ? "bookmarked" : ""
-        }" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="job-bookmark ${userBookMarks.includes(job.job_id) ? "bookmarked" : ""}" style="${!isUserLoggedIn ? 'display: none !important;' : ''}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
         </svg>
         <div class="job-main-content">
@@ -384,7 +403,7 @@ function renderPage(page) {
                         </div>
                 </div>
                 <div class="job-action-button" style="${!isUserLoggedIn ? 'display: none !important;' : ''}">
-                        <button class="job-form-button">Job Details</button>
+                        <button class="job-form-button${applied ? ' applied-job-submit' : ''}">Job Details</button>
                 </div>
         </div>
     `;
@@ -494,7 +513,6 @@ function updatePages() {
     }
   });
 }
-renderPage(currentPage);
 
 function toggleBookmark(jobId) {
   const index = userBookMarks.indexOf(jobId);
@@ -718,15 +736,14 @@ function searchJobs(keyword) {
   const lowerKeyword = keyword.toLowerCase();
   const filteredJobs = noFilterArr.filter((job) => {
     return (
-      job.title.toLowerCase().includes(lowerKeyword) ||
+      job.job_title.toLowerCase().includes(lowerKeyword) ||
       job.location.toLowerCase().includes(lowerKeyword) ||
-      job.company.toLowerCase().includes(lowerKeyword) ||
+      job.company_name.toLowerCase().includes(lowerKeyword) ||
       job.category.toLowerCase().includes(lowerKeyword) ||
       job.experience.toLowerCase().includes(lowerKeyword) ||
-      job.type.toLowerCase().includes(lowerKeyword) ||
-      job.location.toLowerCase().includes(lowerKeyword) ||
-      job.tags.some((tag) => tag.toLowerCase().includes(lowerKeyword)) ||
-      job.skills.some((skill) => skill.toLowerCase().includes(lowerKeyword))
+      job.job_type.toLowerCase().includes(lowerKeyword) ||
+      job.tag.some((t) => t.toLowerCase().includes(lowerKeyword)) ||
+      job.skill.some((s) => s.toLowerCase().includes(lowerKeyword))
     );
   });
   return filteredJobs;
