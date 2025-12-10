@@ -80,6 +80,8 @@ function rightDivContent(job, formRightDiv) {
         <option value="senior-level">Senior Level</option>
       </select>
       <button type="submit" id="${job.job_id}">Submit Application</button>
+      <p id="form-message" style="margin-top: 10px; font-weight: bold;"></p>
+
     </form>
   `;
   const form = formRightDiv.querySelector("form.application-form");
@@ -89,24 +91,39 @@ function rightDivContent(job, formRightDiv) {
     const formData = new FormData(form);
     formData.append("job_id", job.job_id);
 
-    try {
-      const response = await fetch("../php/job-application.php", {
-        method: "POST",
-        body: formData,
-      });
+const messageBox = document.getElementById("form-message");
 
-      const result = await response.json();
+try {
+  const response = await fetch("../php/job-application.php", {
+    method: "POST",
+    body: formData,
+  });
 
-      if (result.success) {
-        alert(result.message);
-        form.reset();
-      } else {
-        alert("Error: " + result.message);
-      }
-    } catch (error) {
-      alert("An error occurred while submitting the application.");
-      console.error("Error:", error);
-    }
+  const result = await response.json();
+
+  if (result.success){
+    messageBox.textContent = result.message;
+    messageBox.style.color = "green";
+
+     const submitButton = form.querySelector("button[type='submit']");
+    submitButton.disabled = true;
+
+
+   setTimeout(() => {
+    blurDiv.remove();
+    form.remove();
+   }, 2000);
+    form.reset();
+  } else{
+    messageBox.textContent = "Error: " + result.message;
+    messageBox.style.color = "red";
+  }
+
+} catch(error) {
+  messageBox.textContent = "An error occurred while submitting the application.";
+  messageBox.style.color = "red";
+  console.error("Error:", error);
+}
   });
 }
 
