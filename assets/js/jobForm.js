@@ -80,6 +80,8 @@ function rightDivContent(job, formRightDiv) {
         <option value="senior-level">Senior Level</option>
       </select>
       <button type="submit" id="${job.job_id}">Submit Application</button>
+      <p id="form-message" style="margin-top: 10px; font-weight: bold;"></p>
+
     </form>
   `;
   const form = formRightDiv.querySelector("form.application-form");
@@ -97,16 +99,21 @@ function rightDivContent(job, formRightDiv) {
 
       const result = await response.json();
 
-      if (result.success) {
-        alert(result.message);
-        form.reset();
-      } else {
-        alert("Error: " + result.message);
-      }
-    } catch (error) {
-      alert("An error occurred while submitting the application.");
-      console.error("Error:", error);
-    }
+     if (result.success){
+    messageBox.textContent = result.message;
+    messageBox.style.color = "green";
+    form.reset();
+  } else{
+    messageBox.textContent = "Error: " +result.message;
+    messageBox.style.color = "red";
+  }
+
+} catch(error) {
+  const messageBox = document.getElementById("form-message");
+  messageBox.textContent = "An error occurred while submitting the application.";
+  messageBox.style.color = "red";
+  console.error("Error:", error);
+}
   });
 }
 
