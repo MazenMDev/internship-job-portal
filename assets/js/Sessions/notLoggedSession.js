@@ -23,6 +23,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.querySelectorAll(".userLogged").forEach((el) => {
         el.style.display = "none";
       });
+      document.querySelectorAll(".job-form-button").forEach(but => {
+        but.style.setProperty("display", "none", "important");
+      });
       document.querySelector(".admin-panel-link").style.display = "none";
     } else {
       document.querySelectorAll(".sign").forEach((el) => {
