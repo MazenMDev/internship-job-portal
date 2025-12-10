@@ -10,7 +10,7 @@ const categoryIcons = {
   "Marketing & Sales": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-dollar-sign-icon lucide-badge-dollar-sign"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>`,
   "Finance & Accounting": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-landmark-icon lucide-landmark"><path d="M10 18v-7"/><path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M3 22h18"/><path d="M6 18v-7"/></svg>`,
   "Human Resources": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>`,
-  "Engineering": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-ruler-icon lucide-pencil-ruler"><path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"/><path d="m8 6 2-2"/><path d="m18 16 2-2"/><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>`,
+  Engineering: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-ruler-icon lucide-pencil-ruler"><path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"/><path d="m8 6 2-2"/><path d="m18 16 2-2"/><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>`,
   "Science & Healthcare": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain-icon lucide-brain"><path d="M12 18V5"/><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/><path d="M18 18a4 4 0 0 0 2-7.464"/><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/><path d="M6 18a4 4 0 0 1-2-7.464"/><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/></svg>`,
   "Architecture & Construction": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hard-hat-icon lucide-hard-hat"><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M14 6a6 6 0 0 1 6 6v3"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><rect x="2" y="15" width="20" height="4" rx="1"/></svg>`,
   "Education & Training": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap-icon lucide-graduation-cap"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>`,
@@ -19,7 +19,7 @@ const categoryIcons = {
   "Hospitality & Tourism": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tram-front-icon lucide-tram-front"><rect width="16" height="16" x="4" y="3" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="m8 19-2 3"/><path d="m18 22-2-3"/><path d="M8 15h.01"/><path d="M16 15h.01"/></svg>`,
   "Agriculture & Environment": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sprout-icon lucide-sprout"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"/><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"/><path d="M5 21h14"/></svg>`,
   "Manufacturing & Logistics": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-factory-icon lucide-factory"><path d="M12 16h.01"/><path d="M16 16h.01"/><path d="M3 19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5a.5.5 0 0 0-.769-.422l-4.462 2.844A.5.5 0 0 1 15 10.5v-2a.5.5 0 0 0-.769-.422L9.77 10.922A.5.5 0 0 1 9 10.5V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/><path d="M8 16h.01"/></svg>`,
-  "Other": `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-panel-left-icon lucide-layout-panel-left"><rect width="7" height="18" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/></svg>`,
+  Other: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-panel-left-icon lucide-layout-panel-left"><rect width="7" height="18" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/></svg>`,
 };
 
 // dummy jobs until we make the backend
@@ -43,7 +43,7 @@ let jobListings = [
     website: "https://careers.google.com",
   },
   {
-    id: 2,
+    job_id: 2,
     job_title: "Marketing Specialist",
     company_name: "Coca-Cola",
     company_id: 2,
@@ -61,7 +61,7 @@ let jobListings = [
     website: "https://www.coca-colacompany.com/careers",
   },
   {
-    id: 3,
+    job_id: 3,
     job_title: "Cloud Engineer",
     company_name: "Amazon",
     company_id: 3,
@@ -79,7 +79,7 @@ let jobListings = [
     website: "https://aws.amazon.com/careers/",
   },
   {
-    id: 4,
+    job_id: 4,
     job_title: "Registered Nurse",
     company_name: "Mayo Clinic",
     company_id: 4,
@@ -97,7 +97,7 @@ let jobListings = [
     website: "https://jobs.mayoclinic.org",
   },
   {
-    id: 5,
+    job_id: 5,
     job_title: "Accountant",
     company_name: "PwC",
     company_id: 5,
@@ -115,7 +115,7 @@ let jobListings = [
     website: "https://www.pwc.com/careers",
   },
   {
-    id: 6,
+    job_id: 6,
     job_title: "Civil Engineer",
     company_name: "Bechtel",
     company_id: 6,
@@ -133,7 +133,7 @@ let jobListings = [
     website: "https://jobs.bechtel.com",
   },
   {
-    id: 7,
+    job_id: 7,
     job_title: "Biology Teacher",
     company_name: "Springfield High School",
     company_id: 7,
@@ -151,7 +151,7 @@ let jobListings = [
     website: "https://springfieldhigh.edu/careers",
   },
   {
-    id: 8,
+    job_id: 8,
     job_title: "iOS Developer",
     company_name: "Apple",
     company_id: 8,
@@ -176,16 +176,27 @@ const userBookMarks = [];
 const selectedCategories = [];
 
 $(document).ready(function () {
-  fetch('php/getBookMarkedJobs.php')
-    .then(response => response.json())
-    .then(data => {
+  fetch("/php/getBookMarkedJobs.php")
+    .then((response) => response.json())
+    .then((data) => {
       if (data.bookmarked_jobs) {
         userBookMarks.push(...data.bookmarked_jobs);
       }
-    })
-    .catch(error => console.error('Error fetching bookmarked jobs:', error));
+      
+      console.log(userBookMarks);
+      
+      userBookMarks.forEach((jobId) => {
+        const bookmarkIcon = document.querySelector(
+          `.bookmark-icon[data-job-id="${jobId}"]`
+        );
+        if (bookmarkIcon) {
+          bookmarkIcon.classList.add("bookmarked");
+        }
+      });
 
-    console.log(userBookMarks);
+      showBookmarkedFirst();
+    })
+    .catch((error) => console.error("Error fetching bookmarked jobs:", error));
 });
 
 function toggleCategory(cat) {
@@ -222,7 +233,7 @@ function timeSince(date) {
     if (interval.label === "second") {
       return "just now";
     }
-    
+
     let count = Math.floor(seconds / interval.seconds);
     if (count >= 1) {
       return `${count} ${interval.label}${count > 1 ? "s" : ""} ago`;
@@ -317,11 +328,11 @@ function renderPage(page) {
   jobsToDisplay.forEach((job) => {
     const jobCard = document.createElement("div");
     jobCard.classList.add("job-card");
-    jobCard.setAttribute("data-id", job.id);
+    jobCard.setAttribute("data-id", job.job_id);
     jobCard.innerHTML = `
         <div class="job-date">${timeSince(job.created_at)}</div>
         <svg class="job-bookmark ${
-          userBookMarks.includes(job.id) ? "bookmarked" : ""
+          userBookMarks.includes(job.job_id) ? "bookmarked" : ""
         }" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
         </svg>
@@ -374,14 +385,14 @@ function renderPage(page) {
         </div>
     `;
     jobCard.querySelector(".job-bookmark").addEventListener("click", () => {
-      toggleBookmark(job.id);
+      toggleBookmark(job.job_id);
     });
-    
+
     // Add event listener to job details button
     jobCard.querySelector(".job-form-button").addEventListener("click", () => {
       showJobDetails(job);
     });
-    
+
     //put the job at the end of the job container
     jobContainer.appendChild(jobCard);
   });
@@ -478,7 +489,6 @@ function updatePages() {
       renderPage(currentPage);
     }
   });
-
 }
 renderPage(currentPage);
 
@@ -489,7 +499,7 @@ function toggleBookmark(jobId) {
   } else {
     userBookMarks.splice(index, 1);
   }
-  
+
   const formData = new FormData();
   formData.append("job_id", jobId);
   fetch("/php/bookmarkJob.php", {
@@ -518,12 +528,12 @@ function showBookmarkedFirst() {
   const bookmarkedJobs = [];
   //i loop through them in reverse to show the latest bookmarked first
   for (let i = userBookMarks.length - 1; i >= 0; i--) {
-    const job = jobListings.find((j) => j.id === userBookMarks[i]);
+    const job = jobListings.find((j) => j.job_id === userBookMarks[i]);
     if (job) bookmarkedJobs.push(job);
   }
   // Get non bookmarked jobs
   const nonBookmarkedJobs = jobListings.filter(
-    (job) => !userBookMarks.includes(job.id)
+    (job) => !userBookMarks.includes(job.job_id)
   );
   // Combine both to the joblisting with latest bookmarked first
   const sortedJobs = [...bookmarkedJobs, ...nonBookmarkedJobs];
@@ -697,9 +707,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
-
-
 // THESE FUNCTIONS WILL BE REPLACED LATER WITH SQL QUERIES
 
 // FILTERING FUNCTION
@@ -776,7 +783,7 @@ const inputSearch = () => {
       //Removes duplicate jobs from the filtered categories to not add a job twice if its returned from both filters
       jobListings = filterJobs.filter((job) => {
         return filteredCat.some((categ) => {
-          if (categ.id == job.id) {
+          if (categ.job_id == job.job_id) {
             return true;
           }
           return false;

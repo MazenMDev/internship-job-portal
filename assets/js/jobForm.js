@@ -79,7 +79,7 @@ function rightDivContent(job, formRightDiv) {
         <option value="mid-level">Mid Level</option>
         <option value="senior-level">Senior Level</option>
       </select>
-      <button type="submit" id="${job.job_id}">Submit Application</button>
+      <button type="submit" id="${job.job_id}-submit">Submit Application</button>
       <p id="form-message" style="margin-top: 10px; font-weight: bold;"></p>
 
     </form>
@@ -108,7 +108,7 @@ try {
      const submitButton = form.querySelector("button[type='submit']");
     submitButton.disabled = true;
 
-
+   const blurDiv = document.querySelector(".ParentBlurDiv");
    setTimeout(() => {
     blurDiv.remove();
     form.remove();
@@ -155,7 +155,7 @@ function leftDivContent(job, formLeftDiv) {
 function upperDivContent(job, upperDiv) {
   upperDiv.innerHTML = `
   <svg class="job-bookmark form-bookmark ${
-    userBookMarks.includes(job.id) ? "bookmarked" : ""
+    userBookMarks.includes(job.job_id) ? "bookmarked" : ""
   }" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
       </svg>
@@ -218,8 +218,8 @@ function upperDivContent(job, upperDiv) {
       const clicked = e.target.closest(".job-bookmark");
       if (!clicked) return;
       e.stopPropagation();
-      toggleBookmark(job.id);
-      bookmarkEl.classList.toggle("bookmarked", userBookMarks.includes(job.id));
+      toggleBookmark(job.job_id);
+      bookmarkEl.classList.toggle("bookmarked", userBookMarks.includes(job.job_id));
     });
   }
 
