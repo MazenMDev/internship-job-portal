@@ -1,6 +1,7 @@
 //Import the job categories from jobcategories script
 import jobCategories from "./jobCategories.js";
 import { showJobDetails } from "./jobForm.js";
+import { isUserLoggedIn } from "./Sessions/notLoggedSession.js";
 
 // put icons for each main category
 const categoryIcons = {
@@ -170,6 +171,9 @@ let jobListings = [
   },
 ];
 
+
+
+
 const noFilterArr = jobListings;
 
 const userBookMarks = [];
@@ -331,7 +335,7 @@ function renderPage(page) {
     jobCard.setAttribute("data-id", job.job_id);
     jobCard.innerHTML = `
         <div class="job-date">${timeSince(job.created_at)}</div>
-        <svg class="job-bookmark ${
+        <svg class="job-bookmark" style="${!isUserLoggedIn ? 'display: none !important;' : ''} ${
           userBookMarks.includes(job.job_id) ? "bookmarked" : ""
         }" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
@@ -379,7 +383,7 @@ function renderPage(page) {
                                 </div>
                         </div>
                 </div>
-                <div class="job-action-button">
+                <div class="job-action-button" style="${!isUserLoggedIn ? 'display: none !important;' : ''}">
                         <button class="job-form-button">Job Details</button>
                 </div>
         </div>
