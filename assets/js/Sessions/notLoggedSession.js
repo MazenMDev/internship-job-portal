@@ -92,9 +92,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         ).src = `../ImageStorage/${data.user_id}/${data.image}`;
       }
 
-      if (data.is_company) {
-        document.querySelector(".dropdown-section").style.display = "none";
-      }
 
       if (data.theme === "dark") {
         document.body.classList.add("darkmode");
