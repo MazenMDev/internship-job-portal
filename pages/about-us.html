@@ -106,8 +106,8 @@
           >
         </div>
 
-        <div class="nav-icon">
-          <a href="./notifications.html" class="currentPage">
+        <div class="nav-icon userLogged">
+          <a href="./notifications.html">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="iconForNav"
@@ -129,6 +129,7 @@
             Notifications</a
           >
         </div>
+
         <div class="nav-icon">
           <a href="./jobs.html">
             <svg
@@ -151,7 +152,7 @@
         </div>
 
         <div class="nav-icon">
-          <a href="./about-us.html">
+          <a href="./about-us.html" class="currentPage">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -168,7 +169,7 @@
           >
         </div>
 
-        <div class="profile-dropdown-container">
+        <div class="profile-dropdown-container userLogged">
           <a>
             <img
               src="../assets/imgs/DefaultProfile/profile.jpeg"
@@ -208,22 +209,32 @@
               </div>
             </div>
             <a href="./profile.html" class="view-profile-btn">View profile</a>
-
             <div class="dropdown-section settings-dropdown">
-                <h3 class="dropdown-section-title">Account Settings</h3>
-                <button id="open-btn">
-               
+              <h3 class="dropdown-section-title">Account Settings</h3>
+               <button id="open-btn"></button>
+              <button class="settings-toggle" id="settingsToggle">
+                <span>Settings</span>
+                <span class="arrow"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="20px"
+                    viewBox="0 -960 960 960"
+                    width="20px"
+                  >
+                    <path
+                      d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"
+                    /></svg></span>
               </button>
-                <button class="settings-toggle" id="settingsToggle">
-                  <span>Settings</span>
-                  <span class="arrow">▼</span>
+              <div class="settings-menu" id="settingsMenu">
+                <button class="settings-btn" id="changeEmailBtn">
+                  Change Email
                 </button>
-                <div class="settings-menu" id="settingsMenu">
-                  <button class="settings-btn" id="changeEmailBtn">Change Email</button>
-                  <button class="settings-btn" id="forgotPasswordBtn">Change Password</button>
-                  <a href="#" class="settings-btn signout-btn">Sign Out</a>
-                </div>
+                <button class="settings-btn" id="forgotPasswordBtn">
+                  Change Password
+                </button>
+                <a href="#" class="settings-btn signout-btn">Sign Out</a>
               </div>
+            </div>
           </div>
         </div>
       </div>
