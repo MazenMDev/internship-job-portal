@@ -432,6 +432,33 @@ Regform.addEventListener("submit", async (e) => {
     });
 });
 
+// Company register form handler
+const companyForm = document.getElementById("companyRegisterForm");
+const errorMsgCompany = document.getElementById("errorMsgCompany");
+if (companyForm && errorMsgCompany) {
+  companyForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(companyForm);
+    
+    fetch("../php/register-company.php", {
+      method: "POST",
+      body: formData,
+    }).then((res) => res.json()).then((data) => {
+      if (data.status === "error") {
+        errorMsgCompany.style.color = "var(--error)";
+        errorMsgCompany.textContent = data.message;
+      } else {
+        errorMsgCompany.style.color = "var(--success)";
+        errorMsgCompany.textContent = data.message;
+        setTimeout(() => {
+          window.location.href = "./login-register.html?method=2";
+        }, 1000);
+      }
+    }).catch(() => {
+      errorMsgCompany.textContent = "Something went wrong. Please try again.";
+    });
+  });
+}
 
 const regCompanyLink = document.getElementById("regcomp");
 const userRegisterForm = document.getElementById("registerForm");
