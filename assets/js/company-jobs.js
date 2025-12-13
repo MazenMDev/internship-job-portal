@@ -36,6 +36,7 @@ if (userData && userData.company_name) {
         company-jobs.js:34 (2) [{…}, {…}]0: {job_id: 2, company_id: 1, job_title: 'test2', job_description: 'test 2Lorem ipsum dolor sit amet, consectetur adip…a qui officia deserunt mollit anim id est laborum', location: 'Fisal, Egypt', …}1: {job_id: 1, company_id: 1, job_title: 'Test Job Posting', job_description: 'Testing the backend for posting the company form data for the 8th time :(', location: 'Fisal, Egypt', …}length: 2[[Prototype]]: Array(0)
       */
       addCompanyData(data);
+      console.log(companyData);
       jobCardListeners();
     })
     .catch((error) => {
@@ -477,16 +478,16 @@ if (userData && userData.company_name) {
 
 function addCompanyData(data) {
   let countActiveJobs = 0;
-  data.forEach((job) => {
+  data.jobs.forEach((job) => {
     if (job.is_deleted == 0) {
       countActiveJobs++;
     }
   });
   document.getElementById("active-listings").textContent = countActiveJobs;
-  document.getElementById("applications-received").textContent = "0";
+  document.getElementById("applications-received").textContent = data.num_applications;
 
   const companyJobsContainer = document.querySelector(".company-posted-grid");
-  data.forEach((job) => {
+  data.jobs.forEach((job) => {
     const jobDiv = document.createElement("div");
     jobDiv.classList.add("posted-job");
     jobDiv.setAttribute("data-job-id", job.job_id);
@@ -581,7 +582,7 @@ function jobCardListeners() {
       const btn = document.getElementById(`view-form-btn-company-${jobId}`);
       btn.addEventListener("click", () => {
         const jobId = btn.getAttribute("data-job-id");
-        const job = companyData.find((j) => j.job_id == jobId);
+        const job = companyData.jobs.find((j) => j.job_id == jobId);
 
         // attach company info to the job before opening the form
         const profileImg = document.querySelector(".profile-nav-img");

@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!data.logged_in) {
       window.location.href = "./login-register.html?method=2";
     } else {
+      
       if (data.type === "user") {
         userData(data);
       }

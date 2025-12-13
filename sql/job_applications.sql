@@ -8,6 +8,7 @@ CREATE TABLE job_applications (
     experience_level VARCHAR(50) NOT NULL,
     additional_note TEXT,
     cover_letter TEXT,
+    status VARCHAR(50) NOT NULL DEFAULT 'Pending',
     application_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(Id) ON DELETE CASCADE,
     FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON DELETE CASCADE

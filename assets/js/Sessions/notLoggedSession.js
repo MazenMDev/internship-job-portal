@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       
       document.querySelector(".admin-panel-link").style.display = "none";
     } else {
+      isUserLoggedIn = true;
       if (data.type === "user") {
         userData(data);
       }

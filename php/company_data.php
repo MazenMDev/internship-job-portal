@@ -3,7 +3,7 @@
     header('Content-Type: application/json');
     session_start();
     
-    if(!isset($_SESSION['user_id'])) {
+    if(!isset($_SESSION['type'])) {
         echo json_encode(["error" => "User not logged in"]);
         exit();
     };
@@ -13,7 +13,7 @@
     }
 
     $company_id = $_SESSION['company_id'];
-    $stmt = $conn->prepare("SELECT company_name, description, company_url, user_id , country , city FROM company WHERE user_id = ?");
+    $stmt = $conn->prepare("SELECT company_name, description, company_url, company_id , country , city FROM company WHERE company_id = ?");
     $stmt->bind_param("i", $company_id);
     $stmt->execute();
     $result = $stmt->get_result();

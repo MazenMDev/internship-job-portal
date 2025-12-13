@@ -56,45 +56,52 @@ const dummyApplications = [
 const urlParams = new URLSearchParams(window.location.search);
 const JobId = urlParams.get("jobId");
 const formdata = new FormData();
-formdata.append("jobid", JobId)
-fetch('/php/job-application-view.php', { 
-        method: 'POST',
-        body: formdata
-    })
-    .then((Response) => Response.json())
-    .then((data)=>{
-    console.log(data);
-    })
 
-const job = dummyJobs.find((job) => job.id == JobId);
-if (job) {
+formdata.append("jobid", JobId);
+let jobsData = null;
+fetch("/php/job-application-view.php", {
+  method: "POST",
+  body: formdata,
+})
+  .then((Response) => Response.json())
+  .then((data) => {
+    console.log(data);
+    jobsData = data;
+    const job = data.job;
+
     $(document).ready(function () {
-    $(".job-title").text(job.title);
-    $(".company-name").text(job.company);
-    $(".job-location").text(job.location);
-    $(".job-creation-date").text(job.creationDate);
-    $("#job-description").text(job.description);
-    $("#skills-required").empty();
-    job.skillsRequired.forEach(skill => {
-      $("#skills-required").append(`<li>${skill}</li>`);
-    });
-    $("#job-tags").empty();
-    job.tags.forEach(tag => {
-      $("#job-tags").append(`<li class="job-tag">${tag}</li>`);
-    });
-    const applications = dummyApplications.filter((app) => app.jobId == JobId);
-    $("#total-applications").text(applications.length);
-    const applicants = $("#applicants");
-    applicants.empty();
-    applications.forEach((app) => {
-      const applicantCard = `
-        <div class="application-card" data-applicant-id="${app.applicantId}">
+      $(".job-title").text(job.job_title);
+      $(".company-name").text(job.company_name);
+      $(".job-location").text(job.location);
+      $(".job-creation-date").text(job.created_at);
+      $("#job-description").text(job.job_description);
+      $("#skills-required").empty();
+      job.skillsRequired.forEach((skill) => {
+        $("#skills-required").append(`<li>${skill}</li>`);
+      });
+      $("#job-tags").empty();
+      job.tags.forEach((tag) => {
+        $("#job-tags").append(`<li class="job-tag">${tag}</li>`);
+      });
+      const applications = data.data;
+
+      $("#total-applications").text(applications.length);
+      const applicants = $("#applicants");
+      applicants.empty();
+      applications.forEach((app) => {
+        let hasCV = false;
+        if(app.resume && app.resume.trim() !== "") {
+          hasCV = true;
+        }
+        
+        const applicantCard = `
+        <div class="application-card" data-applicant-id="${app.user_id}">
         <a href="/pages/profile.html?id=${
-          app.applicantId
+          app.user_id
         }" class="applicant-profile-link">
-            <img src="/ImageStorage/${app.image}" alt="${
-        app.name
-      }" class="applicant-profile-img" loading="lazy" />
+            <img src="/ImageStorage/users/${app.image}" alt="${
+          app.name
+        }" class="applicant-profile-img" loading="lazy" />
             <h2 class="applicant-name">${app.name}</h2>
         </a>
         <div class="application-status">
@@ -102,9 +109,9 @@ if (job) {
             <div class="status-dot ${app.status.toLowerCase()}"></div>
         </div>
         <p class="applicant-email">${app.email}</p>
-        <p class="application-date">Applied on: ${app.appliedDate}</p>
+        <p class="application-date">Applied on: ${app.application_date}</p>
         <div class="application-actions">
-            <a href="/CVStorage/${
+            <a style = "${hasCV ? '' : 'pointer-events: none; opacity: 0.5; cursor: default;'}" href="/CVStorage/${app.user_id}/${
               app.resume
             }" class="view-resume-btn" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
@@ -119,75 +126,224 @@ if (job) {
               Contact Applicant
             </a>
 
-         <button class="view-application-btn" id="view-application-${app.applicantId}">View Application</button>
+         <button class="view-application-btn" id="view-application-${
+           app.application_id
+         }">View Application</button>
          </div>
         </div>
         `;
-      $(`#view-application-${app.applicantId}`).click(function () {
-        openPopUp(app.applicantId);
+        $(`#view-application-${app.application_id}`).click(function () {
+          openPopUp(app.application_id);
+        });
+
+        const $card = $(applicantCard).hide();
+        applicants.append($card);
+        $card.slideDown(1000);
+        $card
+          .find(`#view-application-${app.application_id}`)
+          .on("click", function () {
+            openPopUp(app.application_id);
+          });
       });
       
-    const $card = $(applicantCard).hide();
-    applicants.append($card);
-    $card.slideDown(1000);
-    $card.find(`#view-application-${app.applicantId}`).on('click', function () {
-      openPopUp(app.applicantId);
-    });});
-  });
-}
+      $("#statusFilter").on("change", function () {
+        filterApplications();
+      });
 
-function openPopUp(applicantId) {
-  const application = dummyApplications.find(
-    (app) => app.applicantId == applicantId
+      $("#sortOrder").on("change", function () {
+        sortApplications();
+      });
+
+      $("#clearFiltersBtn").on("click", function () {
+        clearFilters();
+      });
+
+    });
+
+  });
+
+
+function openPopUp(applicationId) {
+  const application = jobsData.data.find(
+    (app) => app.application_id === applicationId
   );
 
   const popup = document.createElement("div");
   $("body").addClass("popup-open-job-application");
   popup.classList.add("popup-overlay-job-application");
-    popup.innerHTML = `
+  let hasCV = false;
+  if(application.resume && application.resume.trim() !== "") {
+    hasCV = true;
+  }
+  popup.innerHTML = `
     <div class="popup-content-job-application">
       <span class="close-popup-job-application">&times;</span>
       <img src="/ImageStorage/${application.image}" alt="${application.name}" class="popup-applicant-image" />
       <h2 class="popup-applicant-name">${application.name}</h2>
         <p class="popup-applicant-email">Email: ${application.email}</p>
-        <p class="popup-application-date">Applied on: ${application.appliedDate}</p>
+        <p class="popup-application-date">Applied on: ${application.application_date}</p>
         <h3>Cover Letter</h3>
-        <p class="popup-cover-letter">${application.coverLetter}</p>
+        <p class="popup-cover-letter">${application.cover_letter}</p>
         <h3>Additional Note</h3>
-        <p class="popup-additional-note">${application.additionalNote}</p>
-        <p class="popup-experience-level">Experience Level: ${application.experienceLevel}</p>
+        <p class="popup-additional-note">${application.additional_note}</p>
+        <p class="popup-experience-level">Experience Level: ${application.experience_level}</p>
         <div class="popup-actions">
-            <a href="/CVStorage/${application.resume}" class="view-resume-btn-popup" target="_blank">View Resume</a>
+            <a style = "${hasCV ? '' : 'pointer-events: none; opacity: 0.5; cursor: default;'}" href="/CVStorage/${application.resume}" class="view-resume-btn-popup" target="_blank">View Resume</a>
             <a href="mailto:${application.email}" class="contact-applicant-btn-popup">Contact Applicant</a>
-            <a href="/pages/profile.html?id=${application.applicantId}" class="view-full-profile-btn-popup">View Full Profile</a>
+            <a href="/pages/profile.html?id=${application.user_id}" class="view-full-profile-btn-popup">View Full Profile</a>
         </div>
         <div class ="popup-decision-buttons">
-            <button class="accept-btn">Accept</button>
-            <button class="reject-btn">Reject</button>
-            <button class="hold-btn">Hold</button>
+            <button class="accept-btn" id="accept-btn-${application.application_id}">Accept</button>
+            <button class="reject-btn" id="reject-btn-${application.application_id}">Reject</button>
+            <button class="hold-btn" id="hold-btn-${application.application_id}">Hold</button>
         </div>
     </div>
     `;
-    
-    const $popupScoped = $(popup);
-    if (application.status === "Accepted") {
+  
+  const $popupScoped = $(popup);
+  if (application.status === "Accepted") {
+    $popupScoped
+      .find(".accept-btn")
+      .addClass("disabled-button")
+      .prop("disabled", true);
+  }
+  if (application.status === "Rejected") {
+    $popupScoped
+      .find(".reject-btn")
+      .addClass("disabled-button")
+      .prop("disabled", true);
+  }
+  if (application.status === "Pending") {
+    $popupScoped
+      .find(".hold-btn")
+      .addClass("disabled-button")
+      .prop("disabled", true);
+  }
+  
+  $popupScoped.find("#accept-btn-" + application.application_id).on("click", function () {
+    if(application.status !== "Pending") return;
+    const formdata = new FormData();
+    formdata.append("application_id", application.application_id);
+    formdata.append("new_status", "Accepted");
+    fetch("/php/update-application-status.php", {
+      method: "POST",
+      body: formdata,
+    }).then((Response) => Response.json())
+    .then((data) => {
+      if(data.success) {
+        console.log("Application accepted successfully.");
+        application.status = "Accepted";
+        
         $popupScoped.find(".accept-btn").addClass("disabled-button").prop("disabled", true);
-    }
-    if (application.status === "Rejected") {
+        $popupScoped.find(".reject-btn").removeClass("disabled-button").prop("disabled", false);
+        $popupScoped.find(".hold-btn").removeClass("disabled-button").prop("disabled", false);
+        
+        $(`.application-card[data-applicant-id="${application.user_id}"]`)
+          .find(".status-label").text("Accepted");
+        $(`.application-card[data-applicant-id="${application.user_id}"]`)
+          .find(".status-dot").removeClass("pending rejected accepted").addClass("accepted");
+      } else {
+        console.error("Failed to accept application:", data.message);
+        alert("Failed to accept application: " + data.message);
+      }
+      console.log(data);
+    }).catch((error) => {
+      console.error("Error:", error);
+      alert("An error occurred while accepting the application.");
+    });
+  });
+  
+  $popupScoped.find("#reject-btn-" + application.application_id).on("click", function () {
+    if(application.status !== "Pending") return;
+    const formdata = new FormData();
+    formdata.append("application_id", application.application_id);
+    formdata.append("new_status", "Rejected");
+    fetch("/php/update-application-status.php", {
+      method: "POST",
+      body: formdata,
+    }).then((Response) => Response.json())
+    .then((data) => {
+      if(data.success) {
+        console.log("Application rejected successfully.");
+        application.status = "Rejected";
+        
         $popupScoped.find(".reject-btn").addClass("disabled-button").prop("disabled", true);
-    }
-    if (application.status === "Pending") {
-        $popupScoped.find(".hold-btn").addClass("disabled-button").prop("disabled", true);
-    }
-    const $popup = $(popup);
-    $popup.hide().appendTo("body").fadeIn(300);
-    $(".close-popup-job-application").click(function () {
-      popup.remove();
-    $("body").removeClass("popup-open-job-application");
+        $popupScoped.find(".accept-btn").removeClass("disabled-button").prop("disabled", false);
+        $popupScoped.find(".hold-btn").removeClass("disabled-button").prop("disabled", false);
+        
+        $(`.application-card[data-applicant-id="${application.user_id}"]`)
+          .find(".status-label").text("Rejected");
+        $(`.application-card[data-applicant-id="${application.user_id}"]`)
+          .find(".status-dot").removeClass("pending rejected accepted").addClass("rejected");
+      } else {
+        console.error("Failed to reject application:", data.message);
+        alert("Failed to reject application: " + data.message);
+      }
+      console.log(data);
+    }).catch((error) => {
+      console.error("Error:", error);
+      alert("An error occurred while rejecting the application.");
     });
+  });
+  
+  const $popup = $(popup);
+  $popup.hide().appendTo("body").fadeIn(300);
+  $(".close-popup-job-application").click(function () {
+    popup.remove();
+    $("body").removeClass("popup-open-job-application");
+  });
 
-    $("#blurred-background").click(function () {
-      popup.remove();
+  $("#blurred-background").click(function () {
+    popup.remove();
     $("body").removeClass("popup-open-job-application");
-    });
+  });
+}
+
+
+function filterApplications() {
+  const selectedStatus = $("#statusFilter").val().toLowerCase();
+  $(".application-card").each(function () {
+    const status = $(this).find(".status-label").text().toLowerCase();
+    if (selectedStatus === "all" || status === selectedStatus) {
+      $(this).show();
+    } else {
+      $(this).hide();
+    }
+  });
+}
+
+function sortApplications() {
+  const sortOrder = $("#sortOrder").val();
+  const applicants = $("#applicants");
+  const cards = applicants.children(".application-card").get();
+
+  cards.sort(function (a, b) {
+    const dateA = $(a).find(".application-date").text().replace("Applied on: ", "");
+    const dateB = $(b).find(".application-date").text().replace("Applied on: ", "");
+    
+    const parseDate = (dateStr) => {
+      const parts = dateStr.split("/");
+      return new Date(parts[2], parts[1] - 1, parts[0]);
+    };
+    
+    const parsedDateA = parseDate(dateA);
+    const parsedDateB = parseDate(dateB);
+    
+    if (sortOrder === "newest") {
+      return parsedDateB - parsedDateA;
+    } else {
+      return parsedDateA - parsedDateB;
+    }
+  });
+
+  $.each(cards, function (index, card) {
+    applicants.append(card);
+  });
+}
+
+function clearFilters() {
+  $("#statusFilter").val("all");
+  $("#sortOrder").val("newest");
+  $(".application-card").show();
+  sortApplications();
 }

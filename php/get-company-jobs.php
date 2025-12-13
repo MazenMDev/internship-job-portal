@@ -21,6 +21,21 @@ if($result->num_rows == 0){
 $company = $result->fetch_assoc();
 $company_id = $company['company_id']; 
 
+
+$numApplications = $conn->prepare('
+    SELECT COUNT(*) AS numApplications FROM job_applications
+    JOIN jobs ON job_applications.job_id = jobs.job_id
+    WHERE jobs.company_id = ?
+');
+$numApplications->bind_param('i', $company_id);
+$numApplications->execute();
+$result = $numApplications->get_result();
+if($result->num_rows > 0){
+    $data = $result->fetch_assoc();
+    $num_applications = $data['numApplications'];
+} else {
+    $num_applications = 0;
+}
 // Get jobs
 $statjob = $conn->prepare('
     SELECT * FROM jobs
@@ -63,5 +78,9 @@ foreach($jobs as & $job){
     }
     $job['skill'] = $skills;
 }
-echo json_encode($jobs);
+$jobsData = array(
+    'jobs' => $jobs,
+    'num_applications' => $num_applications
+);
+echo json_encode($jobsData);
 ?>
