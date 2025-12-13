@@ -591,18 +591,6 @@ background-color: var(--secondary-color);
 .accordion-item {
   margin-bottom: 5px;
 }
-#course-accordion,
-#projects-accordion,
-#skills-accordion {
-  border: 1px dashed var(--primary-color);
-}
-
-#course-accordion .accordion-header,
-#projects-accordion .accordion-header,
-#skills-accordion .accordion-header {
-  background-color: rgba(var(--primary-color-rgb), 0.1) !important;
-  opacity: 0.6;
-}
 
 #course-accordion.active,
 #projects-accordion.active,
