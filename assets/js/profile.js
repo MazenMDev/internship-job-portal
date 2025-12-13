@@ -739,10 +739,10 @@ function get_user_data(){
           } else {
             document.querySelector(
               ".profile-photo"
-            ).src = `../ImageStorage/${userId}/${data.Image}`;
+            ).src = `../ImageStorage/users/${userId}/${data.Image}`;
             document.querySelector(
               ".profile-photo2"
-            ).src = `../ImageStorage/${userId}/${data.Image}`;
+            ).src = `../ImageStorage/users/${userId}/${data.Image}`;
           }
           if (!data.is_company) {
             document.querySelector(".first-name").textContent = data.First_Name;
@@ -774,35 +774,6 @@ function get_user_data(){
               "none";
             document.querySelector(".profile-photo2").style.pointerEvents =
               "none";
-          }
-          if (data.is_company) {
-            fetch("../php/company-profile.php?id=" + userId)
-              .then((res) => res.json())
-              .then((companyData) => {
-                console.log(companyData);
-                /*
-                {
-                  "Id": 1,
-                  "company_name": "JobConnect",
-                  "company_email": "JobConnect@gmail.com",
-                  "phone_number": "01111111111",
-                  "street_address": "october",
-                  "city": "Giza",
-                  "state": "Giza",
-                  "zip_code": "123123123",
-                  "country": "Egypt",
-                  "user_position": "leader",
-                  "company_url": "https://jobconnect.42web.io/pages/landing.html",
-                  "description": "",
-                  "is_owner": true
-                }
-                */
-                showCompanyInfo(companyData);
-                editCompanyInfo(companyData);
-              })
-              .catch((err) => {
-                console.error(err);
-              });
           }
         }
       })
