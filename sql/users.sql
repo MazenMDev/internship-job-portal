@@ -51,9 +51,7 @@ CREATE TABLE projects (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     title VARCHAR(255),
-    institution VARCHAR(255),
-    start_date VARCHAR(20),
-    end_date VARCHAR(20),
+    link VARCHAR(255),
     description TEXT
 );
 

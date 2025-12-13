@@ -477,80 +477,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* PROFILE*/
-/*
-document.addEventListener("click", (e) => {
-  const btn = e.target.closest(".save-btn");
-  if (!btn) return;
-
-  e.preventDefault();
-
-  const nameEl = document.getElementById("profile-name");
-  const headlineEl = document.getElementById("profile-headline");
-  const bioEl = document.getElementById("profile-bio");
-
-  profileData.profile = {
-    name: nameEl ? nameEl.value.trim() : "",
-    headline: headlineEl ? headlineEl.value.trim() : "",
-    bio: bioEl ? bioEl.value.trim() : "",
-  };
-
-  const nameContainer = document.querySelector(".name");
-  const headlineContainer = document.querySelector(".headline");
-  const bioContainer = document.querySelector(".Bio p");
-
-  if (nameContainer)
-    nameContainer.textContent = profileData.profile.name || "Profile name";
-  if (headlineContainer)
-    headlineContainer.textContent = profileData.profile.headline || "";
-  if (bioContainer) bioContainer.textContent = profileData.profile.bio || "";
-
-  profileData.skills = [];
-
-  document.querySelectorAll(".accordion-item").forEach((item) => {
-    const headerText =
-      item
-        .querySelector(".accordion-header")
-        ?.textContent.trim()
-        .toLowerCase() || "";
-    if (headerText.includes("skills")) {
-      const content = item.querySelector(".accordion-content");
-      if (content) {
-        const skillInput = content.querySelector(".form-input");
-        const bulletEditor = content.querySelector(".bullet-editor");
-
-        profileData.skills.push({
-          skill: skillInput ? skillInput.value.trim() : "",
-          info: bulletEditor ? bulletEditor.innerHTML.trim() : "",
-        });
-      }
-    }
-  });
-
-  const skillsContainer = document.querySelector(".skills-list");
-  if (skillsContainer) {
-    skillsContainer.innerHTML = "";
-    profileData.skills.forEach((s) => {
-      if (!s.skill && !s.info) return;
-      const li = document.createElement("li");
-      li.innerHTML = `<strong>${escapeHtml(s.skill)}</strong>: ${
-        s.info || "-"
-      }`;
-      skillsContainer.appendChild(li);
-    });
-  }
-  alert("Profile & Skills Saved Successfully!");
-});
-
-function escapeHtml(text) {
-  if (!text) return "";
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-*/
 /* SKILLS */
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".accordion-content")) return;
@@ -708,21 +634,7 @@ function get_user_data() {
       if (data.error) {
         document.body.innerHTML = `<h2>${data.error}</h2>`;
       } else {
-        /*
-            data example:
-            {
-                 "Id": 1,
-                 "Image": "profile_1764273163.png",
-                 "First_Name": "Kareem",
-                 "Last_Name": "Ahmed",
-                 "Email": "admin@gmail.com",
-                 "Bio": null,
-                 "Title": null,
-                 "Major": null,
-                 "is_owner": true,
-                 "is_company": true
-            }
-          */
+        console.log(data);
         if (data.Image == "profile.jpeg") {
           document.querySelector(
             ".profile-photo"
@@ -738,34 +650,41 @@ function get_user_data() {
             ".profile-photo2"
           ).src = `../ImageStorage/users/${userId}/${data.Image}`;
         }
-          document.querySelector(".first-name").textContent = data.First_Name;
-          document.querySelector(".last-name").textContent = data.Last_Name;
+        document.querySelector(".first-name").textContent = data.First_Name;
+        document.querySelector(".last-name").textContent = data.Last_Name;
 
-          if (data.Title) {
-            document.querySelector(".profile-section .headline").textContent =
-              data.Title;
-          } else {
-            document.querySelector(".profile-section .headline").textContent =
-              "";
-          }
-          if (data.Bio) {
-            document.querySelector(".profile-section .Bio p").textContent =
-              data.Bio;
-          } else {
-            document.querySelector(".profile-section .Bio p").textContent = "";
-          }
-        }
-
-        if (data.is_owner === true) {
-          document.getElementById("profile-edit").style.display = "block";
+        if (data.Title) {
+          document.querySelector(".profile-section .headline").textContent =
+            data.Title;
         } else {
-          document.getElementById("profile-edit").style.display = "none";
-          document.querySelector(".profile-photo").style.cursor = "default";
-          document.querySelector(".profile-photo2").style.cursor = "default";
-          document.querySelector(".profile-photo").style.pointerEvents = "none";
-          document.querySelector(".profile-photo2").style.pointerEvents =
-            "none";
+          document.querySelector(".profile-section .headline").textContent = "";
         }
+        if (data.Bio) {
+          document.querySelector(".profile-section .Bio p").textContent =
+            data.Bio;
+        } else {
+          document.querySelector(".profile-section .Bio p").textContent = "";
+        }
+      }
+
+      const cvCard = document.getElementById("cvCard");
+      if(data.cv) {
+        cvCard.style.display = "block";
+        cvCard.href = `../CVStorage/${userId}/${data.cv}`;
+      }
+      else{
+        cvCard.style.display = "none";
+      }
+
+      if (data.is_owner === true) {
+        document.getElementById("profile-edit").style.display = "block";
+      } else {
+        document.getElementById("profile-edit").style.display = "none";
+        document.querySelector(".profile-photo").style.cursor = "default";
+        document.querySelector(".profile-photo2").style.cursor = "default";
+        document.querySelector(".profile-photo").style.pointerEvents = "none";
+        document.querySelector(".profile-photo2").style.pointerEvents = "none";
+      }
     })
     .catch((err) => {
       document.body.innerHTML = `<h2>Error loading profile</h2>`;
@@ -795,12 +714,11 @@ function get_company_data() {
         }
       */
 
-
       if (data.error) {
         document.body.innerHTML = `<h2>${data.error}</h2>`;
       } else {
         showCompanyInfo(data);
-          if (data.image == "company.png") {
+        if (data.image == "company.png") {
           document.querySelector(
             ".profile-photo"
           ).src = `../ImageStorage/company.png`;
@@ -816,7 +734,7 @@ function get_company_data() {
           ).src = `../ImageStorage/companies/${userId}/${data.image}`;
         }
 
-         if (data.is_owner === true) {
+        if (data.is_owner === true) {
           document.getElementById("profile-edit").style.display = "block";
         } else {
           document.getElementById("profile-edit").style.display = "none";
@@ -827,7 +745,7 @@ function get_company_data() {
             "none";
         }
 
-        console.log(data)
+        console.log(data);
       }
     })
     .catch((err) => {
@@ -835,7 +753,6 @@ function get_company_data() {
       console.error(err);
     });
 }
-
 
 function showCompanyInfo(companyData) {
   document.querySelector(".profile-section").innerHTML = `
@@ -1056,13 +973,13 @@ function editCompanyInfo(companyData) {
   document.getElementById("companyZipCode").value = companyData.zip_code || "";
 }
 
-
-
 function updateSectionVisibility() {
-// --- Experience ---
+  // --- Experience ---
   const experienceSection = document.querySelector(".profile-experience");
   const editExperience = document.getElementById("experience-accordion");
-  const experienceContainer = document.querySelector(".profile-experience-container");
+  const experienceContainer = document.querySelector(
+    ".profile-experience-container"
+  );
 
   if (experienceContainer && experienceSection) {
     if (experienceContainer.children.length > 0) {
@@ -1077,7 +994,9 @@ function updateSectionVisibility() {
   // --- Education ---
   const educationSection = document.querySelector(".profile-education");
   const editEducation = document.getElementById("education-accordion");
-  const educationContainer = document.querySelector(".profile-education-container");
+  const educationContainer = document.querySelector(
+    ".profile-education-container"
+  );
 
   if (educationContainer && educationSection) {
     if (educationContainer.children.length > 0) {
@@ -1188,3 +1107,108 @@ function uploadPhoto() {
     }
   };
 }
+
+function uploadCVToServer(file) {
+  const formData = new FormData();
+  formData.append("cv_file", file);
+  fetch("../../php/upload_cv.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        alert("CV uploaded successfully!");
+      } else {
+        alert(data.message || "Error uploading CV");
+      }
+    })
+    .catch((err) => console.error(err));
+}
+
+let cvFile = null;
+document.getElementById("cv-file-input").addEventListener("change", function () {
+    const file = this.files[0];
+    cvFile = file;
+});
+
+//--------SAVE-------------------
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".save-btn");
+  if (!btn) return;
+
+  e.preventDefault();
+
+  if (cvFile) {
+    uploadCVToServer(cvFile);
+  }
+
+  const nameEl = document.getElementById("profile-name");
+  const headlineEl = document.getElementById("profile-headline");
+  const bioEl = document.getElementById("profile-bio");
+
+  profileData.profile = {
+    name: nameEl ? nameEl.value.trim() : "",
+    headline: headlineEl ? headlineEl.value.trim() : "",
+    bio: bioEl ? bioEl.value.trim() : "",
+  };
+
+  const nameContainer = document.querySelector(".name");
+  const headlineContainer = document.querySelector(".headline");
+  const bioContainer = document.querySelector(".Bio p");
+
+  if (nameContainer)
+    nameContainer.textContent = profileData.profile.name || "Profile name";
+  if (headlineContainer)
+    headlineContainer.textContent = profileData.profile.headline || "";
+  if (bioContainer) bioContainer.textContent = profileData.profile.bio || "";
+
+  profileData.skills = [];
+
+  document.querySelectorAll(".accordion-item").forEach((item) => {
+    const headerText =
+      item
+        .querySelector(".accordion-header")
+        ?.textContent.trim()
+        .toLowerCase() || "";
+    if (headerText.includes("skills")) {
+      const content = item.querySelector(".accordion-content");
+      if (content) {
+        const skillInput = content.querySelector(".form-input");
+        const bulletEditor = content.querySelector(".bullet-editor");
+
+        profileData.skills.push({
+          skill: skillInput ? skillInput.value.trim() : "",
+          info: bulletEditor ? bulletEditor.innerHTML.trim() : "",
+        });
+      }
+    }
+  });
+
+  const skillsContainer = document.querySelector(".skills-list");
+  if (skillsContainer) {
+    skillsContainer.innerHTML = "";
+    profileData.skills.forEach((s) => {
+      if (!s.skill && !s.info) return;
+      const li = document.createElement("li");
+      li.innerHTML = `<strong>${escapeHtml(s.skill)}</strong>: ${
+        s.info || "-"
+      }`;
+      skillsContainer.appendChild(li);
+    });
+  }
+  alert("Profile & Skills Saved Successfully!");
+});
+
+function escapeHtml(text) {
+  if (!text) return "";
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+//--------------------------

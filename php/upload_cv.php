@@ -5,25 +5,25 @@
     header('Content-Type: application/json');
     
     # Check if a file was uploaded
-    if (!isset($_FILES['cv_file'])) {
-        echo json_encode(['status' => 'error', 'message' => 'No file uploaded or upload error.']);
+    if (!isset($_FILES['cv_file']) || $_FILES['cv_file']['error'] !== UPLOAD_ERR_OK) {
+        echo json_encode(['success' => false, 'message' => 'No file uploaded or upload error.']);
         exit;
     }
-    if($_SESSION['type'] !== 'user') {
-        echo json_encode(['status' => 'error', 'message' => 'Only users can upload CVs.']);
+    if(!isset($_SESSION['type']) || $_SESSION['type'] !== 'user') {
+        echo json_encode(['success' => false, 'message' => 'Only users can upload CVs.']);
         exit;
     }
     
     $file = $_FILES['cv_file'];
     $user_id = $_SESSION['user_id'] ?? null;
     if (!$user_id) {
-        echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
+        echo json_encode(['success' => false, 'message' => 'User not logged in.']);
         exit;
     }
     # Validate file type (only allow PDF or word)
     $allowed_types = ['application/pdf' , 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
     if (!in_array($file['type'], $allowed_types)) {
-        echo json_encode(['status' => 'error', 'message' => 'Invalid file type. Only PDF and Word documents are allowed.']);
+        echo json_encode(['success' => false, 'message' => 'Invalid file type. Only PDF and Word documents are allowed.']);
         exit;
     }
 
@@ -41,9 +41,9 @@
         $stmt->bind_param("si", $file['name'], $user_id);
         $stmt->execute();
         
-        echo json_encode(['status' => 'success', 'message' => 'File uploaded successfully.', 'cv_url' => "../CVStorage/$user_id/" . $file['name']]);
+        echo json_encode(['success' => true, 'message' => 'CV uploaded successfully.', 'cv_url' => "../CVStorage/$user_id/" . $file['name']]);
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Failed to move uploaded file.']);
+        echo json_encode(['success' => false, 'message' => 'Failed to move uploaded file.']);
     }
 
 ?>
