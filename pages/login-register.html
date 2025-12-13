@@ -10,7 +10,6 @@
     <link rel="icon" type="image/png" href="../assets/imgs/JobConnect.png" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="../assets/js/changeLogReg.js" defer></script>
   </head>
 
   <body class="show-login">
@@ -58,7 +57,6 @@
     </div>
 
     <div class="container">
-
       <div id="loginBox" class="authBox active">
         <h1>Welcome!</h1>
 
@@ -75,7 +73,13 @@
           </div>
 
           <div class="inp">
-            <input class="holder" type="password" name="logInPassword" id="logInPassword" required />
+            <input
+              class="holder"
+              type="password"
+              name="logInPassword"
+              id="logInPassword"
+              required
+            />
             <label for="logInPassword">Password</label>
             <div class="eyeIconLogin eyeIcon" id="togglePasswordLogin">
               <svg
@@ -115,22 +119,46 @@
         <!-- USER REGISTER FORM -->
         <form action="../php/register.php" id="registerForm" method="POST">
           <div class="reg">
-            <input type="text" name="fname" id="fname" required class="holder" />
+            <input
+              type="text"
+              name="fname"
+              id="fname"
+              required
+              class="holder"
+            />
             <label class="reg-label" for="fname">First Name</label>
           </div>
 
           <div class="reg">
-            <input type="text" name="lname" id="lname" required class="holder" />
+            <input
+              type="text"
+              name="lname"
+              id="lname"
+              required
+              class="holder"
+            />
             <label class="reg-label" for="lname">Last Name</label>
           </div>
 
           <div class="reg">
-            <input type="email" id="registerEmail" name="registerEmail" required class="holder" />
+            <input
+              type="email"
+              id="registerEmail"
+              name="registerEmail"
+              required
+              class="holder"
+            />
             <label class="reg-label" for="registerEmail">Email</label>
           </div>
 
           <div class="reg">
-            <input type="password" id="registerPassword" name="registerPassword" required class="holder" />
+            <input
+              type="password"
+              id="registerPassword"
+              name="registerPassword"
+              required
+              class="holder"
+            />
             <label class="reg-label" for="registerPassword">Password</label>
             <div class="eyeIconRegister eyeIcon" id="togglePasswordRegister">
               <svg
@@ -154,9 +182,20 @@
           </div>
 
           <div class="reg">
-            <input type="password" id="confirmPassword" name="confirmPassword" required class="holder" />
-            <label class="reg-label" for="confirmPassword">Confirm Password</label>
-            <div class="eyeIconConfirmRegister eyeIcon" id="togglePasswordConfirmRegister">
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              required
+              class="holder"
+            />
+            <label class="reg-label" for="confirmPassword"
+              >Confirm Password</label
+            >
+            <div
+              class="eyeIconConfirmRegister eyeIcon"
+              id="togglePasswordConfirmRegister"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -234,6 +273,69 @@
             </svg>
           </div>
 
+          <div class="inp">
+            <input
+              type="password"
+              id="companyPassword"
+              name="password"
+              required
+              class="holder"
+              placeholder="Password"
+            />
+            <div class="eyeIconCompany eyeIcon" id="togglePasswordCompany">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-eye"
+              >
+                <path
+                  d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+                />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="inp">
+            <input
+              type="password"
+              id="companyConfirmPassword"
+              name="confirmPassword"
+              required
+              class="holder"
+              placeholder="Confirm Password"
+            />
+            <div
+              class="eyeIconCompanyConfirm eyeIcon"
+              id="togglePasswordCompanyConfirm"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-eye"
+              >
+                <path
+                  d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+                />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </div>
+          </div>
+
           <div class="inp" id="phone">
             <input
               type="tel"
@@ -304,17 +406,6 @@
             </div>
           </div>
 
-          <div class="inp" id="position">
-            <input
-              class="holder"
-              type="text"
-              name="position"
-              id="companyPosition"
-              placeholder="Position"
-              required
-            />
-          </div>
-
           <div class="inp" id="link">
             <input
               class="holder"
@@ -329,6 +420,8 @@
           <div class="inp">
             <input type="submit" value="Register" class="submit" />
           </div>
+
+          <h2 id="errorMsgCompany"></h2>
         </form>
 
         <h2 id="changePage">

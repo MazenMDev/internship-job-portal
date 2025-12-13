@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   registerPass.addEventListener("input", () => {
-    if(registerPass.value.length > 30) {
+    if (registerPass.value.length > 30) {
       registerPass.value = registerPass.value.slice(0, 30);
     }
     if (registerPass.value.length > 0) {
@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   confirmPass.addEventListener("input", () => {
-    if(confirmPass.value.length > 30) {
+    if (confirmPass.value.length > 30) {
       confirmPass.value = confirmPass.value.slice(0, 30);
     }
     if (confirmPass.value.length > 0) {
@@ -224,6 +224,74 @@ document.addEventListener("DOMContentLoaded", () => {
         confirmPass.type = "password";
         ConfirmToggle = false;
         eyeIconConfirm.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>`;
+      }, 200);
+    }
+  });
+
+  // COMPANY PASSWORD TOGGLE & VALIDATION
+  const companyPass = document.getElementById("companyPassword");
+  const companyConfirmPass = document.getElementById("companyConfirmPassword");
+  const eyeIconCompany = document.getElementById("togglePasswordCompany");
+  const eyeIconCompanyConfirm = document.getElementById(
+    "togglePasswordCompanyConfirm"
+  );
+  let CompanyToggle = false;
+  let CompanyConfirmToggle = false;
+
+  eyeIconCompany.addEventListener("click", () => {
+    CompanyToggle = !CompanyToggle;
+    if (CompanyToggle) {
+      companyPass.type = "text";
+      eyeIconCompany.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>`;
+    } else {
+      companyPass.type = "password";
+      eyeIconCompany.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>`;
+    }
+  });
+
+  eyeIconCompanyConfirm.addEventListener("click", () => {
+    CompanyConfirmToggle = !CompanyConfirmToggle;
+    if (CompanyConfirmToggle) {
+      companyConfirmPass.type = "text";
+      eyeIconCompanyConfirm.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>`;
+    } else {
+      companyConfirmPass.type = "password";
+      eyeIconCompanyConfirm.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>`;
+    }
+  });
+
+  companyPass.addEventListener("input", () => {
+    if (companyPass.value.length > 30) {
+      companyPass.value = companyPass.value.slice(0, 30);
+    }
+    if (companyPass.value.length > 0) {
+      eyeIconCompany.style.display = "inline";
+    } else {
+      eyeIconCompany.classList.add("hideEyeIcon");
+      setTimeout(() => {
+        eyeIconCompany.classList.remove("hideEyeIcon");
+        eyeIconCompany.style.display = "none";
+        companyPass.type = "password";
+        CompanyToggle = false;
+        eyeIconCompany.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>`;
+      }, 200);
+    }
+  });
+
+  companyConfirmPass.addEventListener("input", () => {
+    if (companyConfirmPass.value.length > 30) {
+      companyConfirmPass.value = companyConfirmPass.value.slice(0, 30);
+    }
+    if (companyConfirmPass.value.length > 0) {
+      eyeIconCompanyConfirm.style.display = "inline";
+    } else {
+      eyeIconCompanyConfirm.classList.add("hideEyeIcon");
+      setTimeout(() => {
+        eyeIconCompanyConfirm.classList.remove("hideEyeIcon");
+        eyeIconCompanyConfirm.style.display = "none";
+        companyConfirmPass.type = "password";
+        CompanyConfirmToggle = false;
+        eyeIconCompanyConfirm.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>`;
       }, 200);
     }
   });
@@ -268,7 +336,7 @@ if (goRegisterBtn) {
       registerBox.classList.remove("hidden");
     }
 
-     showUserRegisterForm();
+    showUserRegisterForm();
   };
 }
 
@@ -330,7 +398,6 @@ form.addEventListener("submit", function (e) {
     });
 });
 
-
 const Regform = document.getElementById("registerForm");
 const errorMsgReg = document.getElementById("errorMsgReg");
 const registerPassword = document.getElementById("registerPassword");
@@ -343,14 +410,14 @@ Regform.addEventListener("submit", async (e) => {
 
   // PASSWORD VALIDATIONS
   let numbers = /[0-9]/g;
-  
+
   const f_name = document.getElementById("fname").value.trim();
   const l_name = document.getElementById("lname").value.trim();
   if (f_name.length === 0 || l_name.length === 0) {
     errorMsgReg.textContent = "First name and Last name cannot be empty.";
     return;
   }
-  
+
   if (numbers.test(f_name) || numbers.test(l_name)) {
     errorMsgReg.textContent = "Names cannot contain numbers.";
     return;
@@ -360,7 +427,7 @@ Regform.addEventListener("submit", async (e) => {
     errorMsgReg.textContent = "Names cannot contain special characters.";
     return;
   }
-  
+
   if (passwordVal.length < 8) {
     errorMsgReg.textContent = "Password must be at least 8 characters long.";
     return;
@@ -409,13 +476,21 @@ Regform.addEventListener("submit", async (e) => {
   formData.append("lname", l_name);
   formData.append("password", passwordVal);
   formData.append("confirm", confirmPasswordVal);
-  formData.append("email", document.getElementById("registerEmail").value.trim());
-  formData.append("gender", document.querySelector('input[name="gender"]:checked').value);
+  formData.append(
+    "email",
+    document.getElementById("registerEmail").value.trim()
+  );
+  formData.append(
+    "gender",
+    document.querySelector('input[name="gender"]:checked').value
+  );
 
   fetch("../php/register.php", {
     method: "POST",
     body: formData,
-  }).then((res) => res.json()).then((data) => {
+  })
+    .then((res) => res.json())
+    .then((data) => {
       if (data.status === "error") {
         errorMsgReg.style.color = "var(--error)";
         errorMsgReg.textContent = data.message;
@@ -432,15 +507,60 @@ Regform.addEventListener("submit", async (e) => {
     });
 });
 
-// Company register form handler
+// COMPANY REGISTER FORM - FULL VALIDATION (replace existing)
 const companyForm = document.getElementById("companyRegisterForm");
 const errorMsgCompany = document.getElementById("errorMsgCompany");
+
+// Declare variables for company password fields
+const companyPass = document.getElementById("companyPassword");
+const companyConfirmPass = document.getElementById("companyConfirmPassword");
+
 if (companyForm && errorMsgCompany) {
   companyForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    
+    let passwordVal = (companyPass.value = companyPass.value.trim());
+    let confirmPasswordVal = (companyConfirmPass.value = companyConfirmPass.value.trim());
+
+    // PASSWORD VALIDATIONS (same as user form)
+    let numbers = /[0-9]/g;
+    if (passwordVal.length < 8) {
+      errorMsgCompany.textContent = "Password must be at least 8 characters long.";
+      return;
+    }
+    let lowerCaseLetters = /[a-z]/g;
+    if (!passwordVal.match(lowerCaseLetters)) {
+      errorMsgCompany.textContent = "Password must contain at least one lowercase letter.";
+      return;
+    }
+    let upperCaseLetters = /[A-Z]/g;
+    if (!passwordVal.match(upperCaseLetters)) {
+      errorMsgCompany.textContent = "Password must contain at least one uppercase letter.";
+      return;
+    }
+    if (!passwordVal.match(numbers)) {
+      errorMsgCompany.textContent = "Password must contain at least one number.";
+      return;
+    }
+    let notAllowedChars = /[<>\/\\'"]/g;
+    if (passwordVal.match(notAllowedChars)) {
+      errorMsgCompany.textContent = "Password contains invalid characters.";
+      return;
+    }
+    for (let char of passwordVal) {
+      if (char === " ") {
+        errorMsgCompany.textContent = "Password cannot contain spaces.";
+        return;
+      }
+    }
+    if (passwordVal !== confirmPasswordVal) {
+      errorMsgCompany.textContent = "Passwords do not match.";
+      return;
+    }
+
     const formData = new FormData(companyForm);
     
-    fetch("../php/register-company.php", {
+    fetch("../php/register_company.php", {
       method: "POST",
       body: formData,
     }).then((res) => res.json()).then((data) => {
@@ -459,6 +579,7 @@ if (companyForm && errorMsgCompany) {
     });
   });
 }
+
 
 const regCompanyLink = document.getElementById("regcomp");
 const userRegisterForm = document.getElementById("registerForm");
