@@ -26,43 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const hDisplay = document.querySelector(".profile-section .headline");
   const bDisplay = document.querySelector(".Bio p");
 
-  const params = new URLSearchParams(location.search);
-  const id = params.get("id");
 
-  // --- Load from DB on page open ---
-  fetch(`../php/profile.php?id=${id}`)
-    .then(r => r.json())
-    .then(data => {
-      fDisplay.textContent = data.First_Name;
-      lDisplay.textContent = data.Last_Name;
-      hDisplay.textContent = data.Title;
-      bDisplay.textContent = data.Bio;
-
-      fInput.value = data.First_Name;
-      lInput.value = data.Last_Name;
-      hInput.value = data.Title;
-      bInput.value = data.Bio;
-    });
-
-  // --- Save to DB & update text ---
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-
-    const fd = new FormData();
-    fd.append("fname", fInput.value);
-    fd.append("lname", lInput.value);
-    fd.append("headline", hInput.value);
-    fd.append("bio", bInput.value);
-
-    fetch("../php/profile.php", { method: "POST", body: fd })
-      .then(r => r.json())
-      .then(data => {
-        fDisplay.textContent = data.First_Name;
-        lDisplay.textContent = data.Last_Name;
-        hDisplay.textContent = data.Title;
-        bDisplay.textContent = data.Bio;
-      });
-  });
 });
 
 
@@ -727,10 +691,24 @@ function renderSkills() {
 }
 const params = new URLSearchParams(window.location.search);
 const userId = params.get("id");
+const Type = params.get("type");
+//url example: profile.html?id=1&type=user
+console.log(`Profile ID: ${userId}, Type: ${Type}`);
 fetchProfileData();
 function fetchProfileData() {
-  if (userId) {
-    fetch(`../php/profile.php?id=${userId}`)
+  if (userId && Type == 'user') {
+    get_user_data();
+  }
+  else if (userId && Type == 'company') {
+    get_company_data();
+  }
+  else {
+    document.body.innerHTML = "<h2>Invalid profile URL</h2>";
+  }
+}
+
+function get_user_data(){
+  fetch(`../php/profile_user.php?id=${userId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
@@ -832,10 +810,8 @@ function fetchProfileData() {
         document.body.innerHTML = `<h2>Error loading profile</h2>`;
         console.error(err);
       });
-  } else {
-    //document.body.innerHTML = "<h2>Invalid profile URL</h2>";
-  }
 }
+
 
 function editCompanyInfo(companyData) {
   document.querySelector(".edit-panel").innerHTML = `
