@@ -3,13 +3,13 @@ include './db_connection.php';
 session_start();
 header('Content-Type: application/json');
 
-if(!isset($_SESSION['user_id'])){
-    echo json_encode(array('error'=> 'User is not signed in'));
+if(!isset($_SESSION['type'])){
+    echo json_encode(array('error'=> 'not signed in'));
     exit;
 }
 
-$stat = $conn->prepare('SELECT user_id FROM company WHERE user_id=?');
-$stat->bind_param('i', $_SESSION['user_id']);
+$stat = $conn->prepare('SELECT company_id FROM company WHERE company_id=?');
+$stat->bind_param('i', $_SESSION['company_id']);
 $stat->execute();
 $result = $stat->get_result();
 
@@ -19,7 +19,7 @@ if($result->num_rows == 0){
 }
 
 $company = $result->fetch_assoc();
-$company_id = $company['user_id']; 
+$company_id = $company['company_id']; 
 
 // Get jobs
 $statjob = $conn->prepare('

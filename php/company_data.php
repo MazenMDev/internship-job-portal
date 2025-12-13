@@ -7,10 +7,14 @@
         echo json_encode(["error" => "User not logged in"]);
         exit();
     };
+    if($_SESSION['type'] !== 'company') {
+        echo json_encode(["error" => "Only companies can access this data"]);
+        exit();
+    }
 
-    $user_id = $_SESSION['user_id'];
+    $company_id = $_SESSION['company_id'];
     $stmt = $conn->prepare("SELECT company_name, description, company_url, user_id , country , city FROM company WHERE user_id = ?");
-    $stmt->bind_param("i", $user_id);
+    $stmt->bind_param("i", $company_id);
     $stmt->execute();
     $result = $stmt->get_result();
     $companyData = $result->fetch_assoc();

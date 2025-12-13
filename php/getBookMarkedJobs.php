@@ -3,6 +3,11 @@
     session_start();
     header('Content-Type: application/json');
 
+    if($_SESSION['type'] !== 'user') {
+        echo json_encode(["error" => "Only users can access bookmarked jobs"]);
+        exit();
+    }
+    
     if(isset($_SESSION['user_id'])) {
         $user_id = intval($_SESSION['user_id']);
 

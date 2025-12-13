@@ -4,6 +4,7 @@ session_start();
 header('Content-Type: application/json');
 
 if (isset($_GET['id'])) {
+    
     $company_id = intval($_GET['id']);
     $session_id = isset($_SESSION['company_id']) ? intval($_SESSION['company_id']) : null;
 
@@ -14,7 +15,12 @@ if (isset($_GET['id'])) {
 
     if ($row = $result->fetch_assoc()) {
         $row['Id'] = intval($row['Id']);
-        $row['is_owner'] = $session_id !== null && $session_id === $row['Id'];
+        
+        if($_SESSION['type'] === 'company') {
+            $row['is_owner'] = $session_id !== null && $session_id === $row['Id'];
+        } else {
+            $row['is_owner'] = false;
+        }
         echo json_encode($row);
     } else {
         echo json_encode(["error" => "Company not found"]);

@@ -10,7 +10,7 @@ $email = trim($_POST['email']);
 $password = $_POST['password'];
 $confirm = $_POST['confirm'];
 $gender = $_POST['gender'];
-$theme = "light"; //default theme
+$theme = "light";
 
 if ($password !== $confirm) {
     echo json_encode(["status" => "error", "message" => "Passwords do not match!"]);

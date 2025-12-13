@@ -9,6 +9,11 @@
         echo json_encode(['status' => 'error', 'message' => 'No file uploaded or upload error.']);
         exit;
     }
+    if($_SESSION['type'] !== 'user') {
+        echo json_encode(['status' => 'error', 'message' => 'Only users can upload CVs.']);
+        exit;
+    }
+    
     $file = $_FILES['cv_file'];
     $user_id = $_SESSION['user_id'] ?? null;
     if (!$user_id) {

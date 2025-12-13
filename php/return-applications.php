@@ -5,8 +5,13 @@ include './db_connection.php';
 session_start();
 header('Content-Type: application/json');
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['type'])) {
     echo json_encode(['success' => false, 'message' => 'User not logged in.']);
+    exit;
+}
+
+if($_SESSION['type'] !== 'user') {
+    echo json_encode(['success' => false, 'message' => 'Only users can view their applications.']);
     exit;
 }
 

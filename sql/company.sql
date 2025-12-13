@@ -11,5 +11,8 @@ CREATE TABLE company(
     country VARCHAR(100) NOT NULL,
     company_url VARCHAR(255) NOT NULL,
     description VARCHAR(500),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    theme VARCHAR(50) NOT NULL DEFAULT 'light',
+    Image VARCHAR(255) DEFAULT 'company.png',
+
 );

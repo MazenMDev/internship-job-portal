@@ -31,7 +31,6 @@ if ($password !== $confirm_password) {
     exit;
 }
 
-// Check if email already exists
 $stmt = $conn->prepare("SELECT company_id FROM company WHERE company_email = ?");
 $stmt->bind_param("s", $company_email);
 $stmt->execute();

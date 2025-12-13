@@ -4,16 +4,19 @@
     header('Content-Type: application/json');
     session_start();
     
-    if(!isset($_SESSION['user_id'])) {
+    if(!isset($_SESSION['type'])) {
         echo json_encode(["error" => "User not logged in"]);
         exit();
     }
-
-    $user_id = $_SESSION['user_id'];
+    if($_SESSION['type'] !== 'company') {
+        echo json_encode(["error" => "Only companies can toggle job activity"]);
+        exit();
+    }
+    $company_id = $_SESSION['company_id'];
 
     // ensure company exists for this user
-    $stmt = $conn->prepare("SELECT user_id FROM company WHERE user_id = ?");
-    $stmt->bind_param("i", $user_id);
+    $stmt = $conn->prepare("SELECT company_id FROM company WHERE company_id = ?");
+    $stmt->bind_param("i", $company_id);
     $stmt->execute();
     $result = $stmt->get_result();
     
@@ -28,10 +31,10 @@
     $stmt = $conn->prepare("
         SELECT j.job_id
         FROM jobs AS j
-        JOIN company AS c ON j.company_id = c.user_id
-        WHERE j.job_id = ? AND c.user_id = ?
+        JOIN company AS c ON j.company_id = c.company_id
+        WHERE j.job_id = ? AND c.company_id = ?
     ");
-    $stmt->bind_param("ii", $job_id, $user_id);
+    $stmt->bind_param("ii", $job_id, $company_id);
     $stmt->execute();
     $result = $stmt->get_result();
 

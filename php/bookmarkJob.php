@@ -3,6 +3,11 @@
     session_start();
     header('Content-Type: application/json');
 
+    if($_SESSION['type'] === 'company'){
+        echo json_encode(["error" => "Companies cannot bookmark jobs"]);
+        exit;
+    }
+    
     if(isset($_SESSION['user_id']) && isset($_POST['job_id'])) {
         $user_id = intval($_SESSION['user_id']);
         $job_id = intval($_POST['job_id']);

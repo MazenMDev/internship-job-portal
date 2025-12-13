@@ -3,14 +3,15 @@
     session_start();
     header('Content-Type: application/json');
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $company_id = $_SESSION['user_id'];
+        
+        $company_id = $_SESSION['company_id'] ?? null;
         
         if (!isset($company_id)) {
             echo json_encode(['success' => false, 'message' => 'User not authenticated.']);
             exit;
         }
 
-        $checkCompanyStmt = $conn->prepare("SELECT user_id FROM company WHERE user_id = ?");
+        $checkCompanyStmt = $conn->prepare("SELECT company_id FROM company WHERE company_id = ?");
         $checkCompanyStmt->bind_param("i", $company_id);
         $checkCompanyStmt->execute();
         $checkCompanyStmt->store_result();

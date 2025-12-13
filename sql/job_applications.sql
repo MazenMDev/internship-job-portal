@@ -9,6 +9,6 @@ CREATE TABLE job_applications (
     additional_note TEXT,
     cover_letter TEXT,
     application_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(Id) ON DELETE CASCADE,
     FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON DELETE CASCADE
 );

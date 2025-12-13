@@ -11,6 +11,11 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit;
 }
 
+if($_SESSION['type'] !== 'user') {
+    echo json_encode(['success' => false, 'message' => 'Only users can apply for jobs.']);
+    exit;
+}
+
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     echo json_encode(['success' => false, 'message' => 'User not logged in. Please log in to apply.']);

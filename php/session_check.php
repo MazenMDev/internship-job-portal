@@ -16,7 +16,7 @@ if (isset($_SESSION['user_id'])) {
         "is_company" => false, // Users only
         "type" => "user"
     ]);
-} elseif (isset($_SESSION['company_id'])) {
+} else if (isset($_SESSION['company_id'])) {
     echo json_encode([
         "logged_in" => true,
         "company_id" => $_SESSION['company_id'],
@@ -25,6 +25,7 @@ if (isset($_SESSION['user_id'])) {
         "theme" => $_SESSION['theme'],
         "is_admin" => false,
         "is_company" => true,
+        "image" => $_SESSION['image'],
         "type" => "company"
     ]);
 } else {

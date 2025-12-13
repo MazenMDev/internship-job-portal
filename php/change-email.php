@@ -2,19 +2,38 @@
     include './db_connection.php';
     session_start();
     header('Content-Type: application/json');
-    $user_id = $_SESSION['user_id'] ?? null;
-    if (!$user_id) {
+    
+    $user_type = $_SESSION['type'] ?? '';
+    $user_id = null;
+    if($user_type){
+        if($user_type === 'user'){
+            $user_id = $_SESSION['user_id'] ?? null;
+        } elseif($user_type === 'company'){
+            $user_id = $_SESSION['company_id'] ?? null;
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Invalid user type.']);
+            exit;
+        }
+    }
+    else{
         echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
         exit;
     }
     
+    if($user_type !== 'user'){
+        echo json_encode(['status' => 'error', 'message' => 'Please contact <a href="./about-us.html#contactForm">support</a> to change company email.']);
+        exit;
+    }
+
+
     $email = $_POST['email'] ?? '';
     $current_password = $_POST['current_password'] ?? '';
     if (empty($email) || empty($current_password)) {
         echo json_encode(['status' => 'error', 'message' => 'Email and current password are required.']);
         exit;
     }
-    # Fetch the current password hash from the database
+
+        
     $stmt = $conn->prepare("SELECT Password FROM users WHERE Id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
