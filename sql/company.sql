@@ -13,6 +13,5 @@ CREATE TABLE company(
     description VARCHAR(500),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     theme VARCHAR(50) NOT NULL DEFAULT 'light',
-    Image VARCHAR(255) DEFAULT 'company.png',
-
+    Image VARCHAR(255) DEFAULT 'company.png'
 );

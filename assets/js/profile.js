@@ -1004,6 +1004,35 @@ function showCompanyInfo(companyData) {
 }
 
 function updateSectionVisibility() {
+// --- Experience ---
+  const experienceSection = document.querySelector(".profile-experience");
+  const editExperience = document.getElementById("experience-accordion");
+  const experienceContainer = document.querySelector(".profile-experience-container");
+
+  if (experienceContainer && experienceSection) {
+    if (experienceContainer.children.length > 0) {
+      experienceSection.style.display = "block";
+      if (editExperience) editExperience.classList.add("active");
+    } else {
+      experienceSection.style.display = "none";
+      if (editExperience) editExperience.classList.remove("active");
+    }
+  }
+
+  // --- Education ---
+  const educationSection = document.querySelector(".profile-education");
+  const editEducation = document.getElementById("education-accordion");
+  const educationContainer = document.querySelector(".profile-education-container");
+
+  if (educationContainer && educationSection) {
+    if (educationContainer.children.length > 0) {
+      educationSection.style.display = "block";
+      if (editEducation) editEducation.classList.add("active");
+    } else {
+      educationSection.style.display = "none";
+      if (editEducation) editEducation.classList.remove("active");
+    }
+  }
   // Courses
   const coursesSection = document.querySelector(".profile-courses");
   const editCourses = document.getElementById("course-accordion");
