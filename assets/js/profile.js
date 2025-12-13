@@ -810,10 +810,10 @@ function get_company_data() {
         } else {
           document.querySelector(
             ".profile-photo"
-          ).src = `../ImageStorage/company/${userId}/${data.image}`;
+          ).src = `../ImageStorage/companies/${userId}/${data.image}`;
           document.querySelector(
             ".profile-photo2"
-          ).src = `../ImageStorage/company/${userId}/${data.image}`;
+          ).src = `../ImageStorage/companies/${userId}/${data.image}`;
         }
 
          if (data.is_owner === true) {

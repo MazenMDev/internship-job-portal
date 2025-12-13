@@ -13,7 +13,7 @@
     
         $session_id = isset($_SESSION['company_id']) ? intval($_SESSION['company_id']) : null;
     
-        $stmt = $conn->prepare("SELECT company_id, company_name, company_email, description, company_url , street_address , city , state , zip_code , country , image FROM company WHERE company_id = ?");
+        $stmt = $conn->prepare("SELECT company_id, company_name, company_email, phone_number , description, company_url , street_address , city , state , zip_code , country , image FROM company WHERE company_id = ?");
         $stmt->bind_param("i", $company_id);
         $stmt->execute();
         $result = $stmt->get_result();
