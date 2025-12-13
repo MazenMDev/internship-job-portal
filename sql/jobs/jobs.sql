@@ -11,5 +11,5 @@ CREATE TABLE jobs(
     salary_min INT(11),
     salary_max INT(11),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (company_id) REFERENCES company(user_id) ON DELETE CASCADE
+    FOREIGN KEY (company_id) REFERENCES company(company_id) ON DELETE CASCADE
 );
