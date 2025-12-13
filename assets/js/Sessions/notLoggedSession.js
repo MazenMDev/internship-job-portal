@@ -129,7 +129,7 @@ function companyData(data) {
     ).src = `../ImageStorage/companies/${data.company_id}/${data.image}`;
   }
   document.querySelector(".view-profile-btn").href =
-    "../../../pages/profile.html?id=" + data.company_id;
+    "../../../pages/profile.html?id=" + data.company_id +"&type=company";
 }
 
 function userData(data) {
@@ -166,5 +166,5 @@ function userData(data) {
     ).src = `../ImageStorage/users/${data.user_id}/${data.image}`;
   }
   document.querySelector(".view-profile-btn").href =
-    "../../../pages/profile.html?id=" + data.user_id;
+    "../../../pages/profile.html?id=" + data.user_id +"&type=user";
 }

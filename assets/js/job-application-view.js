@@ -97,7 +97,7 @@ fetch("/php/job-application-view.php", {
         const applicantCard = `
         <div class="application-card" data-applicant-id="${app.user_id}">
         <a href="/pages/profile.html?id=${
-          app.user_id
+          app.user_id}&type=user
         }" class="applicant-profile-link">
             <img src="/ImageStorage/users/${app.image}" alt="${
           app.name
@@ -190,7 +190,7 @@ function openPopUp(applicationId) {
         <div class="popup-actions">
             <a style = "${hasCV ? '' : 'pointer-events: none; opacity: 0.5; cursor: default;'}" href="/CVStorage/${application.resume}" class="view-resume-btn-popup" target="_blank">View Resume</a>
             <a href="mailto:${application.email}" class="contact-applicant-btn-popup">Contact Applicant</a>
-            <a href="/pages/profile.html?id=${application.user_id}" class="view-full-profile-btn-popup">View Full Profile</a>
+            <a href="/pages/profile.html?id=${application.user_id}&type=user" class="view-full-profile-btn-popup">View Full Profile</a>
         </div>
         <div class ="popup-decision-buttons">
             <button class="accept-btn" id="accept-btn-${application.application_id}">Accept</button>
