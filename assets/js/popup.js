@@ -86,7 +86,7 @@ function createPopUp(mail = false, password = true) {
                 error.textContent = "";
               }, 1000);
             } else {
-              document.querySelector(".errorPopup").textContent = data.message;
+              document.querySelector(".errorPopup").innerHTML = data.message;
             }
           });
       });

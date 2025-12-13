@@ -5,8 +5,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const res = await fetch("../php/session_check.php");
     const data = await res.json();
-    /*
+      /*
       data example:
+      user:
       {
         "logged_in": true,
         "user_id": 1,
@@ -17,9 +18,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         "theme": "light",
         "image": "profile_1763214550.png",
         "is_admin": 1,
-        "is_company": true
+        "is_company": false,
+        "type": "user"
       }
+      company:
+      {
+        "logged_in": true,
+        "company_id": 1,
+        "company_name": "Job Connect Test Account",
+        "company_email": "JobConnect@gmail.com",
+        "theme": "light",
+        "is_admin": false,
+        "is_company": true,
+        "image": "company.png",
+        "type": "company"
+      }
+      
     */
+
    
     if (!data.logged_in) {
       isUserLoggedIn = false;
@@ -29,69 +45,24 @@ document.addEventListener("DOMContentLoaded", async () => {
       
       document.querySelector(".admin-panel-link").style.display = "none";
     } else {
-      isUserLoggedIn = true;
+      if (data.type === "user") {
+        userData(data);
+      }
+      if (data.type === "company") {
+        companyData(data);
+      }
+
       document.querySelectorAll(".sign").forEach((el) => {
         el.style.display = "none";
       });
 
-      document
-        .querySelector(".signout-btn")
-        .addEventListener("click", async () => {
-          try {
-            const res = await fetch("../php/logout.php", {
-              method: "POST",
-            });
-            const data = await res.json();
-            if (data.success) {
-              window.location.href = "./login-register.html?method=2";
-            }
-          } catch (error) {
-            console.error("Error during logout:", error);
-          }
-        });
-
       document.querySelectorAll(".join").forEach((el) => {
         el.style.display = "none";
       });
-
-      const profileEl = document.querySelector(".profileName");
-      let name = "";
-      if (data.first_name) {
-        name = data.first_name;
+      if (document.querySelector(".admin-panel-link")) {
+        document.querySelector(".admin-panel-link").style.display =
+          data.is_admin ? "block" : "none";
       }
-      if (data.last_name) {
-        name = name ? `${name} ${data.last_name}` : data.last_name;
-      }
-      if(data.title){
-        document.querySelector(".profileEducation").textContent = data.title;
-      }
-      else{
-        document.querySelector(".profileEducation").textContent = "";
-      }
-      if (profileEl) {
-        profileEl.textContent = name;
-      }
-
-      document.querySelector(".admin-panel-link").style.display = data.is_admin
-        ? "block"
-        : "none";
-
-      if (data.image == "profile.jpeg") {
-        document.querySelector(
-          ".profile-dropdown-img"
-        ).src = `../ImageStorage/profile.jpeg`;
-        document.querySelector(
-          ".profile-nav-img"
-        ).src = `../ImageStorage/profile.jpeg`;
-      } else {
-        document.querySelector(
-          ".profile-dropdown-img"
-        ).src = `../ImageStorage/${data.user_id}/${data.image}`;
-        document.querySelector(
-          ".profile-nav-img"
-        ).src = `../ImageStorage/${data.user_id}/${data.image}`;
-      }
-
 
       if (data.theme === "dark") {
         document.body.classList.add("darkmode");
@@ -109,13 +80,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
       }
 
-      document.querySelector(".view-profile-btn").href =
-        "../../../pages/profile.html?id=" + data.user_id;
-
-        document.querySelector(".signout-btn").addEventListener("click", async () => {
-        await fetch("../php/logout.php");
-        window.location.href = "./login-register.html?method=2";
-      });
+      document
+        .querySelector(".signout-btn")
+        .addEventListener("click", async () => {
+          await fetch("../php/logout.php");
+          window.location.href = "./login-register.html?method=2";
+        });
     }
   } catch (error) {
     console.error("Error checking session:", error);
@@ -123,3 +93,77 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.getElementById("loadingScreen").style.display = "none";
 });
+
+
+function companyData(data) {
+  const profileEl = document.querySelector(".profileName");
+  let name = "";
+  if (data.company_name) {
+    name = data.company_name;
+  }
+  if (profileEl) {
+    profileEl.textContent = name;
+  }
+
+  if (data.company_email) {
+    document.querySelector(".profileEducation").textContent =
+      data.company_email;
+  } else {
+    document.querySelector(".profileEducation").textContent = "";
+  }
+
+  if (data.image == "company.png") {
+    document.querySelector(
+      ".profile-dropdown-img"
+    ).src = `../ImageStorage/company.png`;
+    document.querySelector(
+      ".profile-nav-img"
+    ).src = `../ImageStorage/company.png`;
+  } else {
+    document.querySelector(
+      ".profile-dropdown-img"
+    ).src = `../ImageStorage/companies/${data.company_id}/${data.image}`;
+    document.querySelector(
+      ".profile-nav-img"
+    ).src = `../ImageStorage/companies/${data.company_id}/${data.image}`;
+  }
+  document.querySelector(".view-profile-btn").href =
+    "../../../pages/profile.html?id=" + data.company_id;
+}
+
+function userData(data) {
+  const profileEl = document.querySelector(".profileName");
+  let name = "";
+  if (data.first_name) {
+    name = data.first_name;
+  }
+  if (data.last_name) {
+    name = name ? `${name} ${data.last_name}` : data.last_name;
+  }
+  if (profileEl) {
+    profileEl.textContent = name;
+  }
+  if (data.title) {
+    document.querySelector(".profileEducation").textContent = data.title;
+  } else {
+    document.querySelector(".profileEducation").textContent = "";
+  }
+
+  if (data.image == "default.png") {
+    document.querySelector(
+      ".profile-dropdown-img"
+    ).src = `../ImageStorage/default.png`;
+    document.querySelector(
+      ".profile-nav-img"
+    ).src = `../ImageStorage/default.png`;
+  } else {
+    document.querySelector(
+      ".profile-dropdown-img"
+    ).src = `../ImageStorage/users/${data.user_id}/${data.image}`;
+    document.querySelector(
+      ".profile-nav-img"
+    ).src = `../ImageStorage/users/${data.user_id}/${data.image}`;
+  }
+  document.querySelector(".view-profile-btn").href =
+    "../../../pages/profile.html?id=" + data.user_id;
+}
