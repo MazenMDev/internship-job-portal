@@ -25,11 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const lDisplay = document.querySelector(".profile-section .last-name");
   const hDisplay = document.querySelector(".profile-section .headline");
   const bDisplay = document.querySelector(".Bio p");
-
-
 });
-
-
 
 /* EDIT PANEL*/
 document.addEventListener("DOMContentLoaded", () => {
@@ -696,25 +692,23 @@ const Type = params.get("type");
 console.log(`Profile ID: ${userId}, Type: ${Type}`);
 fetchProfileData();
 function fetchProfileData() {
-  if (userId && Type == 'user') {
+  if (userId && Type == "user") {
     get_user_data();
-  }
-  else if (userId && Type == 'company') {
+  } else if (userId && Type == "company") {
     get_company_data();
-  }
-  else {
+  } else {
     document.body.innerHTML = "<h2>Invalid profile URL</h2>";
   }
 }
 
-function get_user_data(){
+function get_user_data() {
   fetch(`../php/profile_user.php?id=${userId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          document.body.innerHTML = `<h2>${data.error}</h2>`;
-        } else {
-          /*
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.error) {
+        document.body.innerHTML = `<h2>${data.error}</h2>`;
+      } else {
+        /*
             data example:
             {
                  "Id": 1,
@@ -729,60 +723,161 @@ function get_user_data(){
                  "is_company": true
             }
           */
-          if (data.Image == "profile.jpeg") {
-            document.querySelector(
-              ".profile-photo"
-            ).src = `../ImageStorage/profile.jpeg`;
-            document.querySelector(
-              ".profile-photo2"
-            ).src = `../ImageStorage/profile.jpeg`;
-          } else {
-            document.querySelector(
-              ".profile-photo"
-            ).src = `../ImageStorage/users/${userId}/${data.Image}`;
-            document.querySelector(
-              ".profile-photo2"
-            ).src = `../ImageStorage/users/${userId}/${data.Image}`;
-          }
-          if (!data.is_company) {
-            document.querySelector(".first-name").textContent = data.First_Name;
-            document.querySelector(".last-name").textContent = data.Last_Name;
+        if (data.Image == "profile.jpeg") {
+          document.querySelector(
+            ".profile-photo"
+          ).src = `../ImageStorage/profile.jpeg`;
+          document.querySelector(
+            ".profile-photo2"
+          ).src = `../ImageStorage/profile.jpeg`;
+        } else {
+          document.querySelector(
+            ".profile-photo"
+          ).src = `../ImageStorage/users/${userId}/${data.Image}`;
+          document.querySelector(
+            ".profile-photo2"
+          ).src = `../ImageStorage/users/${userId}/${data.Image}`;
+        }
+          document.querySelector(".first-name").textContent = data.First_Name;
+          document.querySelector(".last-name").textContent = data.Last_Name;
 
-            if (data.Title) {
-              document.querySelector(".profile-section .headline").textContent =
-                data.Title;
-            } else {
-              document.querySelector(".profile-section .headline").textContent =
-                "";
-            }
-            if (data.Bio) {
-              document.querySelector(".profile-section .Bio p").textContent =
-                data.Bio;
-            } else {
-              document.querySelector(".profile-section .Bio p").textContent =
-                "";
-            }
-          }
-
-          if (data.is_owner === true) {
-            document.getElementById("profile-edit").style.display = "block";
+          if (data.Title) {
+            document.querySelector(".profile-section .headline").textContent =
+              data.Title;
           } else {
-            document.getElementById("profile-edit").style.display = "none";
-            document.querySelector(".profile-photo").style.cursor = "default";
-            document.querySelector(".profile-photo2").style.cursor = "default";
-            document.querySelector(".profile-photo").style.pointerEvents =
-              "none";
-            document.querySelector(".profile-photo2").style.pointerEvents =
-              "none";
+            document.querySelector(".profile-section .headline").textContent =
+              "";
+          }
+          if (data.Bio) {
+            document.querySelector(".profile-section .Bio p").textContent =
+              data.Bio;
+          } else {
+            document.querySelector(".profile-section .Bio p").textContent = "";
           }
         }
-      })
-      .catch((err) => {
-        document.body.innerHTML = `<h2>Error loading profile</h2>`;
-        console.error(err);
-      });
+
+        if (data.is_owner === true) {
+          document.getElementById("profile-edit").style.display = "block";
+        } else {
+          document.getElementById("profile-edit").style.display = "none";
+          document.querySelector(".profile-photo").style.cursor = "default";
+          document.querySelector(".profile-photo2").style.cursor = "default";
+          document.querySelector(".profile-photo").style.pointerEvents = "none";
+          document.querySelector(".profile-photo2").style.pointerEvents =
+            "none";
+        }
+    })
+    .catch((err) => {
+      document.body.innerHTML = `<h2>Error loading profile</h2>`;
+      console.error(err);
+    });
 }
 
+function get_company_data() {
+  fetch(`../php/profile_company.php?id=${userId}`)
+    .then((res) => res.json())
+    .then((data) => {
+      /*
+        data:
+        {
+        "company_id": 1,
+        "company_name": "Job Connect Test Account",
+        "company_email": "JobConnect@gmail.com",
+        "description": null,
+        "company_url": "http://localhost:3000/pages/profile.html?id=1#",
+        "street_address": "assdasdasda",
+        "city": "Fisal",
+        "state": "AL Mariotia Fisal",
+        "zip_code": "asdasd",
+        "country": "Egypt",
+        "image": "company.png",
+        "is_owner": true
+        }
+      */
+
+
+      if (data.error) {
+        document.body.innerHTML = `<h2>${data.error}</h2>`;
+      } else {
+        showCompanyInfo(data);
+          if (data.image == "company.png") {
+          document.querySelector(
+            ".profile-photo"
+          ).src = `../ImageStorage/company.png`;
+          document.querySelector(
+            ".profile-photo2"
+          ).src = `../ImageStorage/company.png`;
+        } else {
+          document.querySelector(
+            ".profile-photo"
+          ).src = `../ImageStorage/company/${userId}/${data.image}`;
+          document.querySelector(
+            ".profile-photo2"
+          ).src = `../ImageStorage/company/${userId}/${data.image}`;
+        }
+
+         if (data.is_owner === true) {
+          document.getElementById("profile-edit").style.display = "block";
+        } else {
+          document.getElementById("profile-edit").style.display = "none";
+          document.querySelector(".profile-photo").style.cursor = "default";
+          document.querySelector(".profile-photo2").style.cursor = "default";
+          document.querySelector(".profile-photo").style.pointerEvents = "none";
+          document.querySelector(".profile-photo2").style.pointerEvents =
+            "none";
+        }
+
+        console.log(data)
+      }
+    })
+    .catch((err) => {
+      document.body.innerHTML = `<h2>Error loading profile</h2>`;
+      console.error(err);
+    });
+}
+
+
+function showCompanyInfo(companyData) {
+  document.querySelector(".profile-section").innerHTML = `
+    <div class="name">${companyData.company_name}</div>
+    <div class="headline">${companyData.company_email}</div>
+    <div class="about">
+      <h2>About Us</h2>
+      <p>${companyData.description || ""}</p>
+    </div>
+
+    <div class"phone-number">
+      <h2>Phone Number</h2>
+      <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
+        <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+        <a href="tel:${companyData.phone_number || ""}">${
+    companyData.phone_number || ""
+  }</a>
+      </div>
+    </div>
+    
+    <div class="website">
+      <h2>Website</h2>
+      <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
+      <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-icon lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>  
+      <a href="${companyData.company_url || "#"}" target="_blank">${
+    companyData.company_name || ""
+  }</a>
+      </div>
+    </div>
+    
+    <div class="location">
+      <h2>Location</h2>
+      <div style="display:flex; flex-direction:row; align-items:center; gap:2px;">
+      <p>${companyData.country || ""},</p>
+      <p>${companyData.city || ""},</p>
+      <p>${companyData.state || ""},</p>
+      <p>${companyData.street_address || ""},</p>
+      <p>${companyData.zip_code || ""}</p>
+      </div>
+    </div>
+  `;
+}
 
 function editCompanyInfo(companyData) {
   document.querySelector(".edit-panel").innerHTML = `
@@ -961,47 +1056,7 @@ function editCompanyInfo(companyData) {
   document.getElementById("companyZipCode").value = companyData.zip_code || "";
 }
 
-function showCompanyInfo(companyData) {
-  document.querySelector(".profile-section").innerHTML = `
-    <div class="name">${companyData.company_name}</div>
-    <div class="headline">${companyData.company_email}</div>
-    <div class="about">
-      <h2>About Us</h2>
-      <p>${companyData.description || ""}</p>
-    </div>
 
-    <div class"phone-number">
-      <h2>Phone Number</h2>
-      <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
-        <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
-        <a href="tel:${companyData.phone_number || ""}">${
-    companyData.phone_number || ""
-  }</a>
-      </div>
-    </div>
-    
-    <div class="website">
-      <h2>Website</h2>
-      <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
-      <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-icon lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>  
-      <a href="${companyData.company_url || "#"}" target="_blank">${
-    companyData.company_name || ""
-  }</a>
-      </div>
-    </div>
-    
-    <div class="location">
-      <h2>Location</h2>
-      <div style="display:flex; flex-direction:row; align-items:center; gap:2px;">
-      <p>${companyData.country || ""},</p>
-      <p>${companyData.city || ""},</p>
-      <p>${companyData.state || ""},</p>
-      <p>${companyData.street_address || ""},</p>
-      <p>${companyData.zip_code || ""}</p>
-      </div>
-    </div>
-  `;
-}
 
 function updateSectionVisibility() {
   // Courses
