@@ -1,3 +1,21 @@
+$(window).on('load', function() {
+  if($('.container').length > 0){
+  $('.container').css('opacity', '0').animate({opacity: 1}, 500);
+  
+ 
+  $('.container > *').each(function(i) {
+    $(this).css('opacity', '0').delay(i * 50).animate({opacity: 1}, 400);
+  });
+}
+ else if( $("main") .length > 0){
+    $('main').css('opacity', '0').animate({opacity: 1}, 500);
+    $('main > *').each(function(i) {
+      $(this).css('opacity', '0').delay(i * 50).animate({opacity: 1}, 400);
+    });
+  }
+  
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("open-btn");
   const closeBtn = document.getElementById("close-btn");
@@ -203,3 +221,4 @@ function createPopUp(mail = false, password = true) {
       }
     });
 }
+
