@@ -33,6 +33,19 @@
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0755, true);
     }
+
+    # get older cv and delete it if it exists
+    $stmt = $conn->prepare("SELECT cv FROM users WHERE Id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $old_cv = $row['cv'];
+        if ($old_cv && file_exists($upload_dir . $old_cv)) {
+            unlink($upload_dir . $old_cv);
+        }
+    }
+    
     $target_path = $upload_dir . $file['name'];
     # Move the uploaded file to the target directory
     if (move_uploaded_file($file['tmp_name'], $target_path)) {
