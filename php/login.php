@@ -48,7 +48,7 @@ if ($isCompanyEmail) {
     exit;
 }
 
-$stmt = $conn->prepare("SELECT Id, Password, First_Name, Last_Name, Title, Image, is_admin, theme FROM users WHERE Email = ?");
+$stmt = $conn->prepare("SELECT Id, Password, First_Name, Last_Name, Title, Image, is_admin, theme , cv FROM users WHERE Email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -75,6 +75,7 @@ $_SESSION['image'] = $user['Image'];
 $_SESSION['is_admin'] = $user['is_admin'];
 $_SESSION['is_company'] = false;
 $_SESSION['type'] = 'user';
+$_SESSION['cv'] = $user['cv'];
 
 echo json_encode([
     "status" => "success",

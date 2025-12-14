@@ -28,8 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.remove("modal-open");
   }
 
-  openBtn.addEventListener("click", openModal);
-  closeBtn.addEventListener("click", closeModal);
+  if(openBtn && closeBtn){
+    openBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+  }
 
   const settingsToggle = document.getElementById("settingsToggle");
   const settingsMenu = document.getElementById("settingsMenu");

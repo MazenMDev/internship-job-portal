@@ -80,11 +80,12 @@ if (empty($_POST['experience-level'] ?? '') || !in_array($_POST['experience-leve
 //    $resume = $_POST['resume'];
 //}
 
+
 if (empty($errors)) {
     $job_id = (int)$_POST['job_id'];
     
     // Check if job exists
-    $check_job = $conn->prepare("SELECT job_id FROM jobs WHERE job_id = ?");
+    $check_job = $conn->prepare("SELECT job_id , is_deleted FROM jobs WHERE job_id = ?");
     $check_job->bind_param("i", $job_id);
     $check_job->execute();
     $check_job->store_result();
@@ -96,8 +97,18 @@ if (empty($errors)) {
         ]);
         exit;
     }
+    if($check_job->num_rows > 0){
+        $check_job->bind_result($job_id, $is_deleted);
+        $check_job->fetch();
+        if($is_deleted){
+            echo json_encode([
+                'success' => false, 
+                'message' => 'The job you are trying to apply for is no longer available.'
+            ]);
+            exit;
+        }
+    }
     $check_job->close();
-    
     $application_data = [
         'user_id' => $_SESSION['user_id'],
         'job_id' => $job_id,

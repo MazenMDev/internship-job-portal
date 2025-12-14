@@ -1,6 +1,6 @@
 //This js file is added to pages where user is not required to be logged in to view, such as landing page, jobs page and about us
-export let isUserLoggedIn = false;
-
+export let isUserLoggedIn = false , isCompany = false;
+export let userDataExport = {};
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     const res = await fetch("../php/session_check.php");
@@ -39,6 +39,8 @@ document.addEventListener("DOMContentLoaded", async () => {
    
     if (!data.logged_in) {
       isUserLoggedIn = false;
+      isCompany = false;
+      userDataExport = {};
       document.querySelectorAll(".userLogged").forEach((el) => {
         el.style.display = "none";
       });
@@ -46,6 +48,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.querySelector(".admin-panel-link").style.display = "none";
     } else {
       isUserLoggedIn = true;
+      userDataExport = data;
+      if(data.type == "company"){
+        isCompany = true;
+      }
       if (data.type === "user") {
         userData(data);
       }

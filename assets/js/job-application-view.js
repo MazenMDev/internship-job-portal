@@ -97,9 +97,8 @@ fetch("/php/job-application-view.php", {
         const applicantCard = `
         <div class="application-card" data-applicant-id="${app.user_id}">
         <a href="/pages/profile.html?id=${
-          app.user_id}&type=user
-        }" class="applicant-profile-link">
-            <img src="/ImageStorage/users/${app.image}" alt="${
+          app.user_id}&type=user" class="applicant-profile-link">
+            <img src="/ImageStorage/users/${app.user_id}/${app.image}" alt="${
           app.name
         }" class="applicant-profile-img" loading="lazy" />
             <h2 class="applicant-name">${app.name}</h2>
@@ -178,7 +177,7 @@ function openPopUp(applicationId) {
   popup.innerHTML = `
     <div class="popup-content-job-application">
       <span class="close-popup-job-application">&times;</span>
-      <img src="/ImageStorage/${application.image}" alt="${application.name}" class="popup-applicant-image" />
+      <img src="/ImageStorage/users/${application.user_id}/${application.image}" alt="${application.name}" class="popup-applicant-image" />
       <h2 class="popup-applicant-name">${application.name}</h2>
         <p class="popup-applicant-email">Email: ${application.email}</p>
         <p class="popup-application-date">Applied on: ${application.application_date}</p>

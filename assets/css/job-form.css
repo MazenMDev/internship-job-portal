@@ -388,6 +388,68 @@
   background: var(--secondary-color);
 }
 
+.label-with-tooltip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tooltip-icon {
+  display: inline-flex;
+  align-items: center;
+  cursor: help;
+  color: var(--primary-color);
+}
+
+.tooltip-icon svg {
+  transition: color 0.2s ease;
+}
+
+.tooltip-icon:hover svg {
+  color: var(--secondary-color);
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  position: fixed;
+  background-color: var(--text-color);
+  color: var(--box-color);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  z-index: 99999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+  white-space: normal;
+  max-width: 350px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tooltip-icon:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.application-notice {
+  background: rgba(127, 0, 0, 0.05);
+  border: 1px solid var(--error);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  
+}
+
+.application-notice-text {
+  color: var(--error);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
 @media (max-width: 768px) {
   .formDiv {
     position: fixed;

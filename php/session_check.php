@@ -14,7 +14,8 @@ if (isset($_SESSION['user_id'])) {
         "image" => $_SESSION['image'],
         "is_admin" => $_SESSION['is_admin'],
         "is_company" => false, // Users only
-        "type" => "user"
+        "type" => "user",
+        "cv" => $_SESSION['cv']
     ]);
 } else if (isset($_SESSION['company_id'])) {
     echo json_encode([
