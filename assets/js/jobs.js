@@ -210,9 +210,15 @@ $(document).ready(function () {
       if (data.applications) {
         const jobIds = data.applications.map(app => app.job_id);
         appliedJobs.push(...jobIds);
+
       }
       console.log("Applied Jobs:", appliedJobs);
-      // Re-render to apply the 'applied' styling
+      if(isCompany===false && isUserLoggedIn===true){
+        document.getElementById("applied-jobs-count").textContent = appliedJobs.length;
+        document.getElementById("user-applied-jobs").style.display = appliedJobs.length >=0 ? "block" : "none";
+      }
+
+
       renderPage(currentPage);
     })
     .catch((error) => console.error("Error fetching applied jobs:", error));
