@@ -2,14 +2,20 @@
 session_start();
 include 'db_connection.php';
 
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
+if ( !isset($_SESSION['type'])) {
     echo json_encode(["error" => "Not logged in"]);
     exit;
 }
 
-
+if ( ($_SESSION["type"] === 'user')) {
 $current_user_id = $_SESSION['user_id']; 
-$current_receiver_type = $_SESSION['role'];
+$current_receiver_type = 1;
+}
+
+else {
+    $current_user_id = $_SESSION['company_id']; 
+    $current_receiver_type = 2;
+}
 
 
 $stmt = $conn->prepare("SELECT * FROM notifications 

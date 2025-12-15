@@ -48,12 +48,11 @@ document.addEventListener("DOMContentLoaded", function() {
     
 function loadNotifications() {
         fetch("../php/notification.php",{
-             method: "POST",
-             body:formData,
         })
 
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             const notifList = document.getElementById('notification-list');
             const notifCount = document.getElementById('notification-count');
           

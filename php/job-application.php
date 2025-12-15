@@ -147,11 +147,37 @@ if (empty($errors)) {
         $application_data['cover_letter'],
         $application_data['additional_note']
     );
+
+
     if ($stmt->execute()) {
         echo json_encode([
         'success' => true, 
         'message' => 'Application submitted successfully!'
         ]);
+        $stmt = $conn->prepare("SELECT job_title,company_id FROM jobs where job_id = ?");
+        $stmt->bind_param( "i",$application_data['job_id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if($result->num_rows > 0){
+            $result = $result->fetch_assoc();
+            $job_title = $result['job_title'];
+            $company_id = intval($result['company_id']);
+        }
+        $stmt = $conn->prepare("SELECT company_name from company where company_id = ?");
+        $stmt->bind_param("i",$company_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if($result->num_rows > 0){
+            $result = $result->fetch_assoc();
+            $company_name = $result["company_name"];
+        }
+        $title_notif='Application Submitted';
+        $desc_notif ='You have been Submitted a job application for'.$company_name .' and for postion' .$job_title;
+
+        $stmt = $conn->prepare("INSERT INTO notifications (receiver_type , receiver_id, sender_id,sender_type,title, description) VALUES (1, ?, ?, 3, ?, ?)");
+        $stmt->bind_param("iiss",$application_data['user_id'],$application_data['job_id'], $title_notif,$desc_notif) ;
+        $stmt->execute();
+        
 
     } else {
         echo json_encode([
