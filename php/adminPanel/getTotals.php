@@ -16,5 +16,6 @@
     ");
     $stmt->execute();
     $result = $stmt->get_result()->fetch_assoc();
+    $result['first_name'] = $_SESSION['first_name'];
     echo json_encode($result);
 ?>

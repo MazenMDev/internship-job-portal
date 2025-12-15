@@ -93,6 +93,7 @@ closeSideBar.addEventListener('click', function() {
 
 //---------------------TOTALS----------------------
 function handleTotals(){
+    $adminName = $("#adminName");
     $totalUsers = $('#totalUsers');
     $totalCompanies = $('#totalCompanies');
     $totalJobs = $('#totalJobs');
@@ -108,6 +109,7 @@ function handleTotals(){
         $totalCompanies.text(data.total_companies);
         $totalJobs.text(data.total_jobs);
         $totalApplications.text(data.total_applications);
+        $adminName.text(data.first_name);
     }).catch(error => console.error('Error fetching totals:', error));
 }
 
