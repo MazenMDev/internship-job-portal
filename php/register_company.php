@@ -42,15 +42,13 @@ if ($result->num_rows > 0) {
 
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-$stmt = $conn->prepare("INSERT INTO company (company_name, company_email, password, phone_number, street_address, city, state, zip_code, country, company_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO verify_company (company_name, company_email, password, company_phone, company_address, company_city, company_state, company_zip, company_country, company_website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 $stmt->bind_param("ssssssssss", $company_name, $company_email, $hashed_password, $company_phone, $company_address, $company_city, $company_state, $company_zip, $company_country, $company_link);
-
 if ($stmt->execute()) {
-    echo json_encode(["status" => "success", "message" => "Company registered successfully! Please login."]);
+    echo json_encode(["status" => "success", "message" => "Registration successful. Please allow up to 3 working days for verification."]);
 } else {
-    echo json_encode(["status" => "error", "message" => "Failed to register company."]);
+    echo json_encode(["status" => "error", "message" => "Registration failed. Please try again."]);
 }
-
 $stmt->close();
 $conn->close();
 ?>

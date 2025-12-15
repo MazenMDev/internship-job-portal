@@ -48,6 +48,17 @@ if ($isCompanyEmail) {
     exit;
 }
 
+$stmt = $conn->prepare("SELECT verification_id, password, company_name, company_email, company_phone, company_address, company_city, company_state, company_zip, company_country, company_website, created_at FROM verify_company WHERE company_email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$verifyResult = $stmt->get_result();
+$isVerifyCompanyEmail = $verifyResult->num_rows > 0;
+$stmt->close();
+if ($isVerifyCompanyEmail) {
+    echo json_encode(["status" => "error", "message" => "Your company registration is still under verification. Please wait for approval."]);
+    exit;
+}
+
 $stmt = $conn->prepare("SELECT Id, Password, First_Name, Last_Name, Title, Image, is_admin, theme , cv FROM users WHERE Email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
