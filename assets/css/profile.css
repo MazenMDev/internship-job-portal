@@ -1186,7 +1186,7 @@ background-color: var(--secondary-color);
 
 .profile-accordion-body.open ~ .profile-accordion-header::after,
 .profile-accordion-header.active::after {
-  transform: rotate(-180deg);
+  transform: rotate(180deg);
 }
 
 .profile-section {
