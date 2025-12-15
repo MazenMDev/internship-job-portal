@@ -13,14 +13,26 @@
     $sql = '';
     $stmt = null;
 
-    if (isset($_SESSION['user_id'])) {
+    if (isset($_SESSION['type'])) {
 
-        $user_id = $_SESSION['user_id'];
+
+        if($_SESSION['type'] === 'user') {
+            $user_id = $_SESSION['user_id'];
+        
         $sql = "INSERT INTO contact_us (email, message, user_Id, first_name, last_name)
         VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssiss", $email, $message, $user_id, $first_name, $last_name);
 
+        }
+        else if($_SESSION['type'] === 'company') {
+            $company_id = $_SESSION['company_id'];
+            $sql = "INSERT INTO contact_us (email, message, company_id, first_name, last_name)
+            VALUES (?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssiss", $email, $message, $company_id, $first_name, $last_name);
+        }
+        
     } else {
         $sql = "INSERT INTO contact_us (email, message, first_name, last_name)
         VALUES (?, ?, ?, ?)";
