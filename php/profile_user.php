@@ -3,126 +3,93 @@ include 'db_connection.php';
 session_start();
 header('Content-Type: application/json');
 
+$userId = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : null;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_SESSION['user_id'])) {
-        echo json_encode(["error" => "Not logged in"]);
+    if (!$userId) { echo json_encode(["error" => "Not logged in"]); exit; }
+
+    $input = json_decode(file_get_contents('php://input'), true);
+
+    if ($input) {
+        // --- 1. SAFER CHECK: Only update Basic Info if 'fname' is actually sent ---
+        // We use array_key_exists to be 100% sure the key is in the JSON payload
+        if (array_key_exists('fname', $input)) {
+            $fname = $input['fname'] ?? '';
+            $lname = $input['lname'] ?? '';
+            $title = $input['title'] ?? '';
+            $bio   = $input['bio']   ?? '';
+
+            // Only update if we have at least a first name (safety net)
+            if (!empty($fname)) {
+                $stmt = $conn->prepare("UPDATE users SET First_Name=?, Last_Name=?, Title=?, Bio=? WHERE Id=?");
+                $stmt->bind_param("ssssi", $fname, $lname, $title, $bio, $userId);
+                $stmt->execute();
+            }
+        }
+
+        // --- 2. Update Lists (Experience, Education, etc.) ---
+        $tables = [
+            'experience' => ['title', 'institution', 'start_date', 'end_date', 'description'],
+            'education'  => ['title', 'institution', 'start_date', 'end_date', 'description'],
+            'courses'    => ['title', 'institution', 'start_date', 'end_date', 'description'],
+            'projects'   => ['title', 'institution', 'start_date', 'end_date', 'description'],
+            'skills'     => ['skill', 'info'] 
+        ];
+
+        foreach ($tables as $tableName => $columns) {
+            // Only touch the table if the specific list is included in the JSON
+            if (isset($input[$tableName])) {
+                // Delete old entries
+                $conn->query("DELETE FROM $tableName WHERE user_id = $userId");
+
+                // Insert new entries
+                if (!empty($input[$tableName])) {
+                    foreach ($input[$tableName] as $entry) {
+                        $cols = ['user_id']; 
+                        $vals = [$userId];
+                        $types = "i"; 
+
+                        foreach ($columns as $col) {
+                            $cols[] = $col;
+                            // Ensure we handle empty strings safely
+                            $vals[] = isset($entry[$col]) ? $entry[$col] : '';
+                            $types .= "s";
+                        }
+
+                        $colSql = implode(", ", $cols);
+                        $valSql = implode(", ", array_fill(0, count($cols), "?"));
+                        
+                        $stmt = $conn->prepare("INSERT INTO $tableName ($colSql) VALUES ($valSql)");
+                        $stmt->bind_param($types, ...$vals);
+                        $stmt->execute();
+                    }
+                }
+            }
+        }
+        echo json_encode(["success" => true]);
         exit;
     }
-
-    $user_id   = intval($_SESSION['user_id']);
-    $firstName = isset($_POST['fname']) ? $_POST['fname'] : '';
-    $lastName  = isset($_POST['lname']) ? $_POST['lname'] : '';
-    $headline  = isset($_POST['headline']) ? $_POST['headline'] : '';
-    $bio       = isset($_POST['bio']) ? $_POST['bio'] : '';
-
-    // update all four columns
-    $stmt = $conn->prepare(
-        "UPDATE users 
-         SET First_Name = ?, Last_Name = ?, Title = ?, Bio = ?
-         WHERE Id = ?"
-    );
-    $stmt->bind_param("ssssi", $firstName, $lastName, $headline, $bio, $user_id);
-    $stmt->execute();
-
-    // return updated row
-    $stmt = $conn->prepare(
-        "SELECT Id, Image, First_Name, Last_Name, Email, Bio, Title, Major
-         FROM users
-         WHERE Id = ?"
-    );
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($row = $result->fetch_assoc()) {
-        echo json_encode($row);
-    } else {
-        echo json_encode(["error" => "User not found"]);
-    }
-
-    exit;
 }
 
-
-
+// ... (The GET section remains the same) ...
 if (isset($_GET['id'])) {
-    $user_id = intval($_GET['id']);
-
-    $session_id = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : null;
-
-    $stmt = $conn->prepare("SELECT Id, Image, cv, First_Name, Last_Name, Email, Bio, Title, Major FROM users WHERE Id = ?");
-    $stmt->bind_param("i", $user_id);
+    $targetId = intval($_GET['id']);
+    $stmt = $conn->prepare("SELECT Id, First_Name, Last_Name, Email, Bio, Title, Image, cv FROM users WHERE Id = ?");
+    $stmt->bind_param("i", $targetId);
     $stmt->execute();
     $result = $stmt->get_result();
-    
-    if ($row = $result->fetch_assoc()) {
-        $row['Id'] = intval($row['Id']);
-        $row['is_owner'] = $session_id !== null && $session_id === $row['Id'];
+    $data = $result->fetch_assoc();
 
-        $getCourses = $conn->prepare(
-            "SELECT id, title , institution , start_date, end_date , description FROM courses WHERE user_id = ?" );
-        $getCourses->bind_param("i", $user_id);
-        $getCourses->execute();
-        $coursesResult = $getCourses->get_result();
-        $courses = [];
-        while ($course = $coursesResult->fetch_assoc()) {
-            $course['id'] = intval($course['id']);
-            $courses[] = $course;
+    if ($data) {
+        $data['is_owner'] = ($userId === $targetId);
+        $tables = ['experience', 'education', 'courses', 'projects', 'skills'];
+        foreach ($tables as $table) {
+            $res = $conn->query("SELECT * FROM $table WHERE user_id = $targetId");
+            $data[$table] = $res->fetch_all(MYSQLI_ASSOC);
         }
-        $row['courses'] = $courses;
-
-        $getEducation = $conn->prepare(
-            "SELECT id , title , institution, start_date , end_date , description FROM education WHERE user_id = ?" );
-        $getEducation->bind_param("i", $user_id);
-        $getEducation->execute();
-        $educationResult = $getEducation->get_result();
-        $education = [];
-        while ($edu = $educationResult->fetch_assoc()) {
-            $edu['id'] = intval($edu['id']);
-            $education[] = $edu;
-        }
-        $row['education'] = $education;
-
-        $getExperience = $conn->prepare(
-            "SELECT id , title , institution, start_date , end_date , description FROM experience WHERE user_id = ?" );
-        $getExperience->bind_param("i", $user_id);
-        $getExperience->execute();
-        $experienceResult = $getExperience->get_result();
-        $experience = [];
-        while ($exp = $experienceResult->fetch_assoc()) {
-            $exp['id'] = intval($exp['id']);
-            $experience[] = $exp;
-        }   
-        $row['experience'] = $experience;
-
-        $getProjects = $conn->prepare(
-            "SELECT id , title , link, description FROM projects WHERE user_id = ?" );
-        $getProjects->bind_param("i", $user_id);
-        $getProjects->execute();
-        $projectsResult = $getProjects->get_result();
-        $projects = [];
-        while ($proj = $projectsResult->fetch_assoc()) {
-            $proj['id'] = intval($proj['id']);
-            $projects[] = $proj;
-        }
-        $row['projects'] = $projects;
-
-        $getSkills = $conn->prepare(
-            "SELECT id , skill , info FROM skills WHERE user_id = ?" );
-        $getSkills->bind_param("i", $user_id);
-        $getSkills->execute();
-        $skillsResult = $getSkills->get_result();
-        $skills = [];
-        while ($skill = $skillsResult->fetch_assoc()) {
-            $skill['id'] = intval($skill['id']);
-            $skills[] = $skill;
-        }
-        $row['skills'] = $skills;
-        echo json_encode($row);
+        echo json_encode($data);
     } else {
         echo json_encode(["error" => "User not found"]);
     }
-} else {
-    echo json_encode(["error" => "No ID provided"]);
 }
 ?>

@@ -15,17 +15,39 @@ const profileData = {
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector(".edit-form");
-
-  const fInput = document.getElementById("first-name");
-  const lInput = document.getElementById("last-name");
-  const hInput = document.getElementById("profile-headline");
-  const bInput = document.getElementById("profile-bio");
-
-  const fDisplay = document.querySelector(".profile-section .first-name");
-  const lDisplay = document.querySelector(".profile-section .last-name");
-  const hDisplay = document.querySelector(".profile-section .headline");
-  const bDisplay = document.querySelector(".Bio p");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault(); // Stop the browser from submitting/refreshing
+      // You can also call your save function here if you want "Enter" to save:
+      // document.querySelector(".save-btn").click(); 
+    });
+  }
 });
+
+function saveAllDataToBackend() {
+  const payload = {
+    experience: experienceList,
+    education: educationList,
+    courses: coursesList,
+    projects: projectsList,
+    skills: skillsList
+  };
+
+  fetch('../php/profile_user.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.success) {
+      console.log("Auto-saved to database");
+    } else {
+      console.error("Save failed", data);
+    }
+  })
+  .catch(err => console.error("Error saving:", err));
+}
 
 /* EDIT PANEL*/
 document.addEventListener("DOMContentLoaded", () => {
@@ -227,8 +249,8 @@ function populateEditDropdown(form, type) {
     form.querySelector(".title-input").value = entry.title || "";
     form.querySelector(".institution-input").value = entry.institution || "";
     form.querySelector(".description-input").value = entry.description || "";
-    form.querySelector(".start-date").value = entry.start || "";
-    form.querySelector(".end-date").value = entry.end || "";
+    form.querySelector(".start-date").value = entry.start_date || "";
+    form.querySelector(".end-date").value = entry.end_date || "";
   });
 }
 
@@ -268,8 +290,8 @@ document.addEventListener("click", (e) => {
   const data = {
     title: form.querySelector(".title-input").value.trim(),
     institution: form.querySelector(".institution-input").value.trim(),
-    start: form.querySelector(".start-date").value,
-    end: form.querySelector(".end-date").value,
+    start_date: form.querySelector(".start-date").value,
+    end_date: form.querySelector(".end-date").value,
     description: form.querySelector(".description-input").value.trim(),
   };
 
@@ -303,6 +325,8 @@ document.addEventListener("click", (e) => {
   populateAllDropdowns();
   renderProfileAccordion();
   updateSectionVisibility();
+
+  saveAllDataToBackend();
 
   $(form).slideUp(250, () => form.remove());
   alert("Saved successfully!");
@@ -356,6 +380,9 @@ document.addEventListener("click", (e) => {
   populateAllDropdowns();
   renderProfileAccordion();
   updateSectionVisibility();
+
+  saveAllDataToBackend();
+
   $(form).slideUp(200, () => form.remove());
   alert("Entry deleted.");
 });
@@ -379,8 +406,8 @@ function renderProfileAccordionSection(containerSelector, dataList) {
     body.innerHTML = `
       <p><strong>Institution:</strong> ${item.institution || "-"}</p>
       <p><strong>Description:</strong> ${item.description || "-"}</p>
-      <p><strong>Start:</strong> ${item.start || "-"}</p>
-      <p><strong>End:</strong> ${item.end || "-"}</p>
+      <p><strong>Start:</strong> ${item.start_date || "-"}</p>
+      <p><strong>End:</strong> ${item.end_date || "-"}</p>
     `;
 
     header.addEventListener("click", () => {
@@ -476,7 +503,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderProfileAccordion();
 });
 
-/* PROFILE*/
 /* SKILLS */
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".accordion-content")) return;
@@ -634,56 +660,55 @@ function get_user_data() {
       if (data.error) {
         document.body.innerHTML = `<h2>${data.error}</h2>`;
       } else {
-        console.log(data);
+        // 1. Update Profile Image
         if (data.Image == "profile.jpeg") {
-          document.querySelector(
-            ".profile-photo"
-          ).src = `../ImageStorage/profile.jpeg`;
-          document.querySelector(
-            ".profile-photo2"
-          ).src = `../ImageStorage/profile.jpeg`;
+          document.querySelector(".profile-photo").src = `../ImageStorage/profile.jpeg`;
+          document.querySelector(".profile-photo2").src = `../ImageStorage/profile.jpeg`;
         } else {
-          document.querySelector(
-            ".profile-photo"
-          ).src = `../ImageStorage/users/${userId}/${data.Image}`;
-          document.querySelector(
-            ".profile-photo2"
-          ).src = `../ImageStorage/users/${userId}/${data.Image}`;
+          document.querySelector(".profile-photo").src = `../ImageStorage/users/${userId}/${data.Image}`;
+          document.querySelector(".profile-photo2").src = `../ImageStorage/users/${userId}/${data.Image}`;
         }
+
+        // 2. Update Text Display
         document.querySelector(".first-name").textContent = data.First_Name;
         document.querySelector(".last-name").textContent = data.Last_Name;
+        document.querySelector(".profile-section .headline").textContent = data.Title || "";
+        document.querySelector(".profile-section .Bio p").textContent = data.Bio || "";
 
-        if (data.Title) {
-          document.querySelector(".profile-section .headline").textContent =
-            data.Title;
+        /* --- 3. PRE-FILL INPUTS (Moved here from Company function) --- */
+        const fInput = document.getElementById("first-name");
+        const lInput = document.getElementById("last-name");
+        const hInput = document.getElementById("profile-headline");
+        const bInput = document.getElementById("profile-bio");
+
+        if (fInput) fInput.value = data.First_Name || "";
+        if (lInput) lInput.value = data.Last_Name || "";
+        if (hInput) hInput.value = data.Title || "";
+        if (bInput) bInput.value = data.Bio || "";
+
+        /* --- 4. LOAD LISTS FROM DB (Moved here from Company function) --- */
+        if (data.experience) experienceList.splice(0, experienceList.length, ...data.experience);
+        if (data.education) educationList.splice(0, educationList.length, ...data.education);
+        if (data.courses) coursesList.splice(0, coursesList.length, ...data.courses);
+        if (data.projects) projectsList.splice(0, projectsList.length, ...data.projects);
+        if (data.skills) skillsList.splice(0, skillsList.length, ...data.skills);
+
+        // 5. Render UI
+        renderProfileAccordion();
+        renderSkills();
+        populateAllDropdowns();
+        updateSectionVisibility();
+
+        // 6. Handle Edit Button Visibility
+        if (data.is_owner === true) {
+          document.getElementById("profile-edit").style.display = "block";
         } else {
-          document.querySelector(".profile-section .headline").textContent = "";
+          document.getElementById("profile-edit").style.display = "none";
+          const p1 = document.querySelector(".profile-photo");
+          const p2 = document.querySelector(".profile-photo2");
+          if(p1) { p1.style.cursor = "default"; p1.style.pointerEvents = "none"; }
+          if(p2) { p2.style.cursor = "default"; p2.style.pointerEvents = "none"; }
         }
-        if (data.Bio) {
-          document.querySelector(".profile-section .Bio p").textContent =
-            data.Bio;
-        } else {
-          document.querySelector(".profile-section .Bio p").textContent = "";
-        }
-      }
-
-      const cvCard = document.getElementById("cvCard");
-      if(data.cv) {
-        cvCard.style.display = "block";
-        cvCard.href = `../CVStorage/${userId}/${data.cv}`;
-      }
-      else{
-        cvCard.style.display = "none";
-      }
-
-      if (data.is_owner === true) {
-        document.getElementById("profile-edit").style.display = "block";
-      } else {
-        document.getElementById("profile-edit").style.display = "none";
-        document.querySelector(".profile-photo").style.cursor = "default";
-        document.querySelector(".profile-photo2").style.cursor = "default";
-        document.querySelector(".profile-photo").style.pointerEvents = "none";
-        document.querySelector(".profile-photo2").style.pointerEvents = "none";
       }
     })
     .catch((err) => {
@@ -714,11 +739,12 @@ function get_company_data() {
         }
       */
 
+
       if (data.error) {
         document.body.innerHTML = `<h2>${data.error}</h2>`;
       } else {
         showCompanyInfo(data);
-        if (data.image == "company.png") {
+          if (data.image == "company.png") {
           document.querySelector(
             ".profile-photo"
           ).src = `../ImageStorage/company.png`;
@@ -734,7 +760,7 @@ function get_company_data() {
           ).src = `../ImageStorage/companies/${userId}/${data.image}`;
         }
 
-        if (data.is_owner === true) {
+         if (data.is_owner === true) {
           document.getElementById("profile-edit").style.display = "block";
         } else {
           document.getElementById("profile-edit").style.display = "none";
@@ -745,7 +771,7 @@ function get_company_data() {
             "none";
         }
 
-        console.log(data);
+        console.log(data)
       }
     })
     .catch((err) => {
@@ -753,6 +779,7 @@ function get_company_data() {
       console.error(err);
     });
 }
+
 
 function showCompanyInfo(companyData) {
   document.querySelector(".profile-section").innerHTML = `
@@ -973,13 +1000,13 @@ function editCompanyInfo(companyData) {
   document.getElementById("companyZipCode").value = companyData.zip_code || "";
 }
 
+
+
 function updateSectionVisibility() {
-  // --- Experience ---
+// Experience
   const experienceSection = document.querySelector(".profile-experience");
   const editExperience = document.getElementById("experience-accordion");
-  const experienceContainer = document.querySelector(
-    ".profile-experience-container"
-  );
+  const experienceContainer = document.querySelector(".profile-experience-container");
 
   if (experienceContainer && experienceSection) {
     if (experienceContainer.children.length > 0) {
@@ -991,12 +1018,10 @@ function updateSectionVisibility() {
     }
   }
 
-  // --- Education ---
+  // Education
   const educationSection = document.querySelector(".profile-education");
   const editEducation = document.getElementById("education-accordion");
-  const educationContainer = document.querySelector(
-    ".profile-education-container"
-  );
+  const educationContainer = document.querySelector(".profile-education-container");
 
   if (educationContainer && educationSection) {
     if (educationContainer.children.length > 0) {
@@ -1071,7 +1096,6 @@ function uploadImageToServer(file) {
 }
 
 function openModal() {
-  loadProfileDataIntoForm();
   document.body.classList.add("edit-open");
 }
 
@@ -1108,107 +1132,69 @@ function uploadPhoto() {
   };
 }
 
-function uploadCVToServer(file) {
-  const formData = new FormData();
-  formData.append("cv_file", file);
-  fetch("../../php/upload_cv.php", {
-    method: "POST",
-    body: formData,
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.success) {
-        alert("CV uploaded successfully!");
-      } else {
-        alert(data.message || "Error uploading CV");
-      }
-    })
-    .catch((err) => console.error(err));
-}
-
-let cvFile = null;
-document.getElementById("cv-file-input").addEventListener("change", function () {
-    const file = this.files[0];
-    cvFile = file;
-});
-
-//--------SAVE-------------------
-
+/* MAIN PROFILE SAVE LOGIC */
 document.addEventListener("click", (e) => {
+  // Check if the clicked element is the "Save" button
   const btn = e.target.closest(".save-btn");
   if (!btn) return;
 
+  // 1. IMPORTANT: Stop the page from refreshing
   e.preventDefault();
 
-  if (cvFile) {
-    uploadCVToServer(cvFile);
-  }
+  // 2. Get values from the input fields
+  const fInput = document.getElementById("first-name");
+  const lInput = document.getElementById("last-name");
+  const hInput = document.getElementById("profile-headline");
+  const bInput = document.getElementById("profile-bio");
 
-  const nameEl = document.getElementById("profile-name");
-  const headlineEl = document.getElementById("profile-headline");
-  const bioEl = document.getElementById("profile-bio");
+  const fname = fInput ? fInput.value.trim() : "";
+  const lname = lInput ? lInput.value.trim() : "";
+  const title = hInput ? hInput.value.trim() : "";
+  const bio   = bInput ? bInput.value.trim() : "";
 
-  profileData.profile = {
-    name: nameEl ? nameEl.value.trim() : "",
-    headline: headlineEl ? headlineEl.value.trim() : "",
-    bio: bioEl ? bioEl.value.trim() : "",
+  // 3. Update the display text immediately (Visual feedback)
+  const fDisplay = document.querySelector(".first-name");
+  const lDisplay = document.querySelector(".last-name");
+  const hDisplay = document.querySelector(".profile-section .headline");
+  const bDisplay = document.querySelector(".profile-section .Bio p");
+
+  if (fDisplay) fDisplay.textContent = fname;
+  if (lDisplay) lDisplay.textContent = lname;
+  if (hDisplay) hDisplay.textContent = title;
+  if (bDisplay) bDisplay.textContent = bio;
+
+  // 4. Prepare data for the database
+  // We send the basic info PLUS all the existing lists (experience, etc.)
+  const payload = {
+    fname: fname,
+    lname: lname,
+    title: title,
+    bio: bio,
+    experience: experienceList,
+    education: educationList,
+    courses: coursesList,
+    projects: projectsList,
+    skills: skillsList
   };
 
-  const nameContainer = document.querySelector(".name");
-  const headlineContainer = document.querySelector(".headline");
-  const bioContainer = document.querySelector(".Bio p");
-
-  if (nameContainer)
-    nameContainer.textContent = profileData.profile.name || "Profile name";
-  if (headlineContainer)
-    headlineContainer.textContent = profileData.profile.headline || "";
-  if (bioContainer) bioContainer.textContent = profileData.profile.bio || "";
-
-  profileData.skills = [];
-
-  document.querySelectorAll(".accordion-item").forEach((item) => {
-    const headerText =
-      item
-        .querySelector(".accordion-header")
-        ?.textContent.trim()
-        .toLowerCase() || "";
-    if (headerText.includes("skills")) {
-      const content = item.querySelector(".accordion-content");
-      if (content) {
-        const skillInput = content.querySelector(".form-input");
-        const bulletEditor = content.querySelector(".bullet-editor");
-
-        profileData.skills.push({
-          skill: skillInput ? skillInput.value.trim() : "",
-          info: bulletEditor ? bulletEditor.innerHTML.trim() : "",
-        });
-      }
+  // 5. Send to PHP
+  fetch('../php/profile_user.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.success) {
+      alert("Profile saved successfully!");
+      document.body.classList.remove("edit-open"); // Close the panel
+    } else {
+      console.error(data);
+      alert("Error saving profile.");
     }
+  })
+  .catch(err => {
+    console.error("Save error:", err);
+    alert("An error occurred while saving.");
   });
-
-  const skillsContainer = document.querySelector(".skills-list");
-  if (skillsContainer) {
-    skillsContainer.innerHTML = "";
-    profileData.skills.forEach((s) => {
-      if (!s.skill && !s.info) return;
-      const li = document.createElement("li");
-      li.innerHTML = `<strong>${escapeHtml(s.skill)}</strong>: ${
-        s.info || "-"
-      }`;
-      skillsContainer.appendChild(li);
-    });
-  }
-  alert("Profile & Skills Saved Successfully!");
 });
-
-function escapeHtml(text) {
-  if (!text) return "";
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-//--------------------------
