@@ -6,5 +6,5 @@ CREATE TABLE notifications (
     sender_id  INT NOT NULL,
     sender_type     VARCHAR(20) NOT NULL,
     receiver_type    VARCHAR(20) NOT NULL,
-    created_at      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
