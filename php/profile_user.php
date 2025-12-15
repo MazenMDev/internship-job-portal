@@ -32,40 +32,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'experience' => ['title', 'institution', 'start_date', 'end_date', 'description'],
             'education'  => ['title', 'institution', 'start_date', 'end_date', 'description'],
             'courses'    => ['title', 'institution', 'start_date', 'end_date', 'description'],
-            'projects'   => ['title', 'institution', 'start_date', 'end_date', 'description'],
+            'projects'   => ['title', 'link' => 'institution', 'description'],
             'skills'     => ['skill', 'info'] 
         ];
 
-        foreach ($tables as $tableName => $columns) {
-            // Only touch the table if the specific list is included in the JSON
-            if (isset($input[$tableName])) {
-                // Delete old entries
-                $conn->query("DELETE FROM $tableName WHERE user_id = $userId");
+foreach ($tables as $tableName => $columns) {
+    if (isset($input[$tableName])) {
+        $conn->query("DELETE FROM $tableName WHERE user_id = $userId");
 
-                // Insert new entries
-                if (!empty($input[$tableName])) {
-                    foreach ($input[$tableName] as $entry) {
-                        $cols = ['user_id']; 
-                        $vals = [$userId];
-                        $types = "i"; 
+        if (!empty($input[$tableName])) {
+            foreach ($input[$tableName] as $entry) {
+                $cols = ['user_id']; 
+                $vals = [$userId];
+                $types = "i"; 
 
-                        foreach ($columns as $col) {
-                            $cols[] = $col;
-                            // Ensure we handle empty strings safely
-                            $vals[] = isset($entry[$col]) ? $entry[$col] : '';
-                            $types .= "s";
-                        }
-
-                        $colSql = implode(", ", $cols);
-                        $valSql = implode(", ", array_fill(0, count($cols), "?"));
-                        
-                        $stmt = $conn->prepare("INSERT INTO $tableName ($colSql) VALUES ($valSql)");
-                        $stmt->bind_param($types, ...$vals);
-                        $stmt->execute();
+                foreach ($columns as $dbCol => $jsonKey) {
+                    // Handle case where key is numeric (no renaming needed)
+                    if (is_numeric($dbCol)) {
+                        $dbCol = $jsonKey;
                     }
+
+                    $cols[] = $dbCol;
+                    // Use $jsonKey to grab data from JS, but save to $dbCol in SQL
+                    $vals[] = isset($entry[$jsonKey]) ? $entry[$jsonKey] : '';
+                    $types .= "s";
                 }
+
+                $colSql = implode(", ", $cols);
+                $valSql = implode(", ", array_fill(0, count($cols), "?"));
+                
+                $stmt = $conn->prepare("INSERT INTO $tableName ($colSql) VALUES ($valSql)");
+                $stmt->bind_param($types, ...$vals);
+                $stmt->execute();
             }
         }
+    }
+}
         echo json_encode(["success" => true]);
         exit;
     }

@@ -522,7 +522,7 @@ document.addEventListener("click", (e) => {
       <div class="edit-row">
         <label>Edit Existing</label>
         <div class="edit-controls">
-            <select class="edit-entry-select">
+            <select class="edit-skill-select">
               <option value="">-- Select existing --</option>
             </select>
             <button type="button" class="delete-entry-btn" title="Delete">
@@ -581,6 +581,7 @@ document.addEventListener("click", (e) => {
     renderSkills();
     populateSkillDropdown(block);
     updateSectionVisibility();
+    saveAllDataToBackend(); // <--- ADD THIS LINE HERE
     alert("Skill saved!");
     $(block).slideUp(250, () => block.remove());
     return;
@@ -594,6 +595,8 @@ document.addEventListener("click", (e) => {
     if (index !== "" && index !== undefined) {
       skillsList.splice(Number(index), 1);
       renderSkills();
+      updateSectionVisibility();
+      saveAllDataToBackend(); // <--- ADD THIS LINE HERE
     }
     $(block).slideUp(200, () => block.remove());
     return;
@@ -624,6 +627,16 @@ function populateSkillDropdown(form) {
     form.querySelector(".bullet-editor").innerHTML =
       skillData.info || "<ul><li></li></ul>";
   });
+}
+
+function escapeHtml(text) {
+  if (!text) return text;
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 function renderSkills() {
