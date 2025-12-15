@@ -681,7 +681,30 @@ input[type="range"]::-webkit-slider-thumb {
 #post-job-button:active {
   transform: translateY(0);
 }
+#view-applied-jobs-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  align-self: center;
+  padding: 14px 28px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  
+}
 
+#view-applied-jobs-button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+#view-applied-jobs-button:active {
+  transform: translateY(0);
+}
 .posted-jobs-heading {
   font-size: 1.5em;
   color: var(--text-color);
@@ -917,6 +940,15 @@ input[type="range"]::-webkit-slider-thumb {
 .applied-job-card{
   border: 1px solid var(--text-muted) !important;
   background: rgba(0, 0, 0, 0.02);
+}
+
+#user-applied-jobs{
+  margin-top: 180px;
+  text-align: center;
+  font-size: 1.1em;
+  color: var(--text-color);
+  font-weight: 500;
+  display: none;
 }
 
 @media (max-width: 1160px) {
