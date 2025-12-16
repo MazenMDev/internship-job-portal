@@ -54,6 +54,20 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       if (data.type === "user") {
         userData(data);
+        
+        const userNameHeadings = document.querySelectorAll(".userName-heading");
+        if(userNameHeadings){
+          userNameHeadings.forEach((el)=>{
+            let name = "";
+            if (data.first_name) {
+              name = data.first_name;
+            }
+            if (data.last_name) {
+              name = name ? `${name} ${data.last_name}` : data.last_name;
+            }
+            el.textContent = name;
+          });
+        }
       }
       if (data.type === "company") {
         companyData(data);
