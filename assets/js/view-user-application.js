@@ -5,6 +5,7 @@ async function fetchuserapplications() {
             method: 'GET'
         });
         const data = await response.json();
+        console.log(data)
 
         if (data.success) {
             displayApplications(data.applications);
@@ -36,7 +37,7 @@ function displayApplications(applications) {
     let html = '';
     applications.forEach(app => {
         const statusClass = app.status ? `status-${app.status.toLowerCase()}` : 'status-pending';
-        const companyImage = app.company.image ? `/uploads/${app.company.image}` : '/imgs/default-company.png';
+        const companyImage = app.company.image ? `/ImageStorage/companies/${app.job.company_id}/${app.company.image}` : '/ImageStorage/company.png';
         const salaryRange = app.job.salary_min && app.job.salary_max 
             ? `$${app.job.salary_min.toLocaleString()} - $${app.job.salary_max.toLocaleString()}` 
             : 'Not specified';
@@ -83,7 +84,7 @@ function displayApplications(applications) {
                 </div>
                 
                 <div class="card-footer">
-                    <a href="${app.company.company_url}" target="_blank" class="btn-view-company">View Company</a>
+                    <a href="/pages/profile.html?id=${app.company.company_id}&type=company" target="_blank" class="btn-view-company">View Company</a>
                     <a href="/pages/job-details.html?id=${app.job.job_id}" class="btn-view-job">View Job</a>
                 </div>
             </div>
