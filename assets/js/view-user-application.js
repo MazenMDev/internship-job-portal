@@ -1,7 +1,7 @@
  async function fetchuserapplications()  {
     
     try{
-     const response = await fetch('../api/user-applications.php', {
+     const response = await fetch('../user-applications.php', {
          method: 'GET',
          credentials: 'include',
     });
