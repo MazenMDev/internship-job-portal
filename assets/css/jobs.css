@@ -521,7 +521,7 @@ input[type="range"]::-webkit-slider-thumb {
   background: var(--background-color);
   border: 6px solid var(--primary-color);
   box-shadow: 0 0 6px var(--box-shadow);
-  pointer-events: auto; /* to make the thumb the only clickable part */
+  pointer-events: auto;
   cursor: pointer; 
   transition: all 0.3s ease;
 }
@@ -701,9 +701,6 @@ input[type="range"]::-webkit-slider-thumb {
   color: var(--text-muted);
 }
 
-/* ================================
-   CONTAINER
-================================ */
 
 .user-applied-jobs-container {
   display: flex;
@@ -712,9 +709,6 @@ input[type="range"]::-webkit-slider-thumb {
   gap: 28px;
 }
 
-/* ================================
-   STATS GRID
-================================ */
 
 .user-stats-grid {
   display: grid;
@@ -722,9 +716,7 @@ input[type="range"]::-webkit-slider-thumb {
   gap: 24px;
 }
 
-/* ================================
-   STAT CARD
-================================ */
+
 
 .user-stats-grid .stat-item {
   background-color: var(--box-color);
