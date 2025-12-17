@@ -141,13 +141,13 @@ function userData(data) {
     document.querySelector(".profileEducation").textContent = "";
   }
 
-  if (data.image == "default.png") {
+  if (data.image == "profile.jpeg") {
     document.querySelector(
       ".profile-dropdown-img"
-    ).src = `../ImageStorage/default.png`;
+    ).src = `../ImageStorage/profile.jpeg`;
     document.querySelector(
       ".profile-nav-img"
-    ).src = `../ImageStorage/default.png`;
+    ).src = `../ImageStorage/profile.jpeg`;
   } else {
     document.querySelector(
       ".profile-dropdown-img"
