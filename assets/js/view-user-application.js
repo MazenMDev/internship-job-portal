@@ -51,6 +51,32 @@ function displayApplications(applications) {
                         <p class="company-name">${app.company.company_name}</p>
                     </div>
                 </div>
+
+                 <div class="card-body">
+                    <div class="section-title">Your Application Details</div>
+                    <div class="info-row">
+                        <span class="label">Full Name:</span>
+                        <span class="value">${app.full_name}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Email:</span>
+                        <span class="value">${app.email}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Experience Level:</span>
+                        <span class="value">${app.experience_level}</span>
+                    </div>
+                    ${app.cover_letter ? `` : ''}
+                    <div class="info-row-full">
+                        <span class="label">Cover Letter:</span>
+                        <p class="cover-letter">${app.cover_letter}</p>
+                    </div>
+                    
+                    ${app.additional_note ? `` : ''}
+                    <div class="info-row-full">
+                        <span class="label">Additional Note:</span>
+                        <p class="additional-note">${app.additional_note}</p>
+                    </div>
                 
                 <div class="card-body">
                     <div class="info-row">
@@ -85,7 +111,6 @@ function displayApplications(applications) {
                 
                 <div class="card-footer">
                     <a href="/pages/profile.html?id=${app.company.company_id}&type=company" target="_blank" class="btn-view-company">View Company</a>
-                    <a href="/pages/job-details.html?id=${app.job.job_id}" class="btn-view-job">View Job</a>
                 </div>
             </div>
         `;

@@ -114,45 +114,74 @@ h1 {
     color: white;
 }
 
+.section-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 25px 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--primary-color);
+    clear: both;
+}
+
+.section-title:first-child {
+    margin-top: 0;
+}
+
+.info-row-full {
+    margin-bottom: 15px;
+}
+
+.info-row-full .label {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.cover-letter,
+.additional-note {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding: 12px;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
 .card-footer {
     display: flex;
-    gap: 10px;
+    justify-content: center;
     padding: 15px 20px;
     background-color: var(--background-color);
     border-top: 1px solid var(--border-color);
 }
 
 .card-footer a {
-    flex: 1;
     text-align: center;
-    padding: 10px 20px;
+    padding: 12px 30px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     transition: all 0.2s;
 }
 
 .btn-view-company {
-    background-color: transparent;
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: white;
     border: 2px solid var(--primary-color);
 }
 
 .btn-view-company:hover {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.btn-view-job {
-    background-color: var(--primary-color);
-    color: white;
-    border: 2px solid var(--primary-color);
-}
-
-.btn-view-job:hover {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
+    transform: translateY(-2px);
 }
 
 .loading {
