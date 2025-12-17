@@ -64,6 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (content !== accordioncontent) {
           content.classList.remove("active");
           content.style.maxHeight = "0px";
+          const otherHeader =
+            content.parentElement.querySelector(".accordion-header");
+          if (otherHeader) otherHeader.classList.remove("active");
         }
       });
 
@@ -455,7 +458,15 @@ function renderProfileAccordionSection(
 
     const header = document.createElement("div");
     header.classList.add("profile-accordion-header");
-    header.textContent = item.title || `Entry ${idx + 1}`;
+    // We insert the SVG directly here
+    header.innerHTML = `
+      <span>${item.title || `Entry ${idx + 1}`}</span>
+      <span class="arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </span>
+    `;
 
     const body = document.createElement("div");
     body.classList.add("profile-accordion-body");
@@ -486,8 +497,14 @@ function renderProfileAccordionSection(
 
     header.addEventListener("click", () => {
       container.querySelectorAll(".profile-accordion-body").forEach((b) => {
-        if (b !== body) b.classList.remove("open");
+        if (b !== body) {
+          b.classList.remove("open");
+          if (b.previousElementSibling) {
+            b.previousElementSibling.classList.remove("active");
+          }
+        }
       });
+      header.classList.toggle("active");
       body.classList.toggle("open");
     });
 
@@ -1069,6 +1086,7 @@ function editCompanyInfo(companyData) {
       });
 
       accordioncontent.classList.toggle("active");
+      header.classList.toggle("active");
       accordioncontent.style.maxHeight = accordioncontent.classList.contains(
         "active"
       )
@@ -1244,9 +1262,12 @@ document.addEventListener("click", (e) => {
       country: document.getElementById("Company-country")?.value.trim(),
       city: document.getElementById("companyCity")?.value.trim(),
       state: document.getElementById("companyState")?.value.trim(),
-      street_address: document.getElementById("companyStreetAddress")?.value.trim(),
+      street_address: document
+        .getElementById("companyStreetAddress")
+        ?.value.trim(),
       zip_code: document.getElementById("companyZipCode")?.value.trim(),
-      company_email: document.querySelector(".profile-section .headline")?.textContent // Preserve email
+      company_email: document.querySelector(".profile-section .headline")
+        ?.textContent, // Preserve email
     };
 
     // 2. Update the display immediately for visual feedback
@@ -1268,9 +1289,7 @@ document.addEventListener("click", (e) => {
         }
       })
       .catch((err) => console.error("Save error:", err));
-
-  }
-  else if (Type === "user") {
+  } else if (Type === "user") {
     // 2. Get values from the input fields
     const fInput = document.getElementById("first-name");
     const lInput = document.getElementById("last-name");
@@ -1312,10 +1331,7 @@ document.addEventListener("click", (e) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
-  
     })
-  
-  
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -1330,6 +1346,5 @@ document.addEventListener("click", (e) => {
         console.error("Save error:", err);
         alert("An error occurred while saving.");
       });
-
   }
 });
