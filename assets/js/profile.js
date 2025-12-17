@@ -967,14 +967,6 @@ function editCompanyInfo(companyData) {
                 />
               </div>
               <div class="input-group">
-                <label for="profile-headline">Headline</label>
-                <input
-                  type="text"
-                  id="profile-headline"
-                  class="form-input"
-                />
-              </div>
-              <div class="input-group">
                 <label for="profile-bio">About Us</label>
                 <textarea
                   id="profile-About-us"
