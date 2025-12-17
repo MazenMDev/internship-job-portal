@@ -292,6 +292,34 @@
     background-color: var(--box-color);
 }
 
+.topRight{
+    
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.delete-message-btn{
+    cursor: pointer;
+    color: var(--text-color);
+    transition: color 0.3s;
+    background: red;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background 0.3s, color 0.3s;
+}
+.delete-message-btn:hover{
+    color: #f44336;
+    background: var(--box-color);
+}
+
+.delete-message-btn svg{
+    width: 18px;
+    height: 18px;
+    fill: white;
+    color: #f44336;
+}
+
 .message-header{
     display: flex;
     justify-content: space-between;
@@ -557,6 +585,143 @@
     border-color: var(--primary-color);
 }
 
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--box-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.users-table thead {
+    background-color: var(--primary-color);
+}
+
+.users-table thead th {
+    padding: 12px 15px;
+    text-align: left;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.users-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+}
+
+.users-table tbody tr:hover {
+    background-color: var(--table-hover-row);
+}
+
+.users-table tbody tr:nth-child(even) {
+    background-color: var(--table-even-row);
+}
+
+.users-table tbody td {
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+
+.users-table .user-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.users-table .user-image:hover {
+    transform: scale(1.1);
+    border-color: var(--primary-color);
+}
+
+.users-table .profile-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.users-table .profile-link:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+.users-table a[href^="mailto:"] {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.users-table a[href^="mailto:"]:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.users-table a[href*="CVStorage"] {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 4px 8px;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.users-table a[href*="CVStorage"]:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.users-table a[href="#"] {
+    color: var(--text-color);
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+#usersPanel .search-input {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+#usersPanel h2 {
+    margin-bottom: 15px;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+#usersPanel .delete-user-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: color 0.3s;
+    padding: 5px;
+    border-radius: 4px;
+}
+#usersPanel .delete-user-btn:hover {
+    color: #f44336;
+    background: var(--box-color);
+}
+#usersPanel .delete-user-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+    color: #f44336;
+}
+
 @media (max-width: 768px) {
     #adminPanel {
         margin-left: 10px;
@@ -590,5 +755,20 @@
     .page-btn {
         padding: 6px 10px;
         font-size: 0.9rem;
+    }
+    
+    .users-table .user-image {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .users-table thead th,
+    .users-table tbody td {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+    
+    #usersPanel .search-input {
+        max-width: 100%;
     }
 }
