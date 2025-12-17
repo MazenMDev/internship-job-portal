@@ -217,6 +217,10 @@ $(document).ready(function () {
         document.getElementById("applied-jobs-count").textContent = appliedJobs.length;
         document.getElementById("user-applied-jobs").style.display = appliedJobs.length >=0 ? "block" : "none";
       }
+      console.log(appliedJobs);
+      console.log(isCompany);
+      console.log(isUserLoggedIn);
+
 
       renderPage(currentPage);
     })

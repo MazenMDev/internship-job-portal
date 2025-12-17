@@ -681,9 +681,6 @@ input[type="range"]::-webkit-slider-thumb {
 #post-job-button:active {
   transform: translateY(0);
 }
-/* ================================
-   USER DASHBOARD HEADER
-================================ */
 
 .user-applied-jobs {
   text-align: center;
