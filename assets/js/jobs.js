@@ -218,7 +218,6 @@ $(document).ready(function () {
         document.getElementById("user-applied-jobs").style.display = appliedJobs.length >=0 ? "block" : "none";
       }
 
-
       renderPage(currentPage);
     })
     .catch((error) => console.error("Error fetching applied jobs:", error));

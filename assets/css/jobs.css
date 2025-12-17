@@ -681,30 +681,102 @@ input[type="range"]::-webkit-slider-thumb {
 #post-job-button:active {
   transform: translateY(0);
 }
+/* ================================
+   USER DASHBOARD HEADER
+================================ */
+
+.user-applied-jobs {
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--text-color);
+  font-family: var(--main-font-family);
+  display: none;
+}
+
+.user-dashboard-heading {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.user-dashboard-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+/* ================================
+   CONTAINER
+================================ */
+
+.user-applied-jobs-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* ================================
+   STATS GRID
+================================ */
+
+.user-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+/* ================================
+   STAT CARD
+================================ */
+
+.user-stats-grid .stat-item {
+  background-color: var(--box-color);
+  padding: 32px 40px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 12px 30px var(--box-shadow);
+  min-width: 220px;
+}
+
+.user-stats-grid .stat-number {
+  display: block;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.user-stats-grid .stat-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
 #view-applied-jobs-button {
+  width: 220px;             
   background-color: var(--primary-color);
-  color: white;
-  border: none;
-  align-self: center;
-  padding: 14px 28px;
-  border-radius: 10px;
-  cursor: pointer;
+  color: #ffffff;
+  padding: 14px 0;
+  border-radius: 14px;
   font-size: 1.05rem;
   font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 96%;
   text-decoration: none;
+  text-align: center;
+  display: block;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 22px var(--box-shadow);
 }
 
 #view-applied-jobs-button:hover {
   background-color: var(--secondary-color);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 14px 36px var(--box-shadow);
 }
+
 #view-applied-jobs-button:active {
   transform: translateY(0);
 }
+
 .posted-jobs-heading {
   font-size: 1.5em;
   color: var(--text-color);
