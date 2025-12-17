@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", (e) => {
       e.preventDefault(); // Stop the browser from submitting/refreshing
       // You can also call your save function here if you want "Enter" to save:
-      // document.querySelector(".save-btn").click(); 
+      // document.querySelector(".save-btn").click();
     });
   }
 });
@@ -30,23 +30,23 @@ function saveAllDataToBackend() {
     education: educationList,
     courses: coursesList,
     projects: projectsList,
-    skills: skillsList
+    skills: skillsList,
   };
 
-  fetch('../php/profile_user.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
+  fetch("../php/profile_user.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
   })
-  .then(res => res.json())
-  .then(data => {
-    if(data.success) {
-      console.log("Auto-saved to database");
-    } else {
-      console.error("Save failed", data);
-    }
-  })
-  .catch(err => console.error("Error saving:", err));
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        console.log("Auto-saved to database");
+      } else {
+        console.error("Save failed", data);
+      }
+    })
+    .catch((err) => console.error("Error saving:", err));
 }
 
 /* EDIT PANEL*/
@@ -138,77 +138,86 @@ document.addEventListener("click", (e) => {
   const form = document.createElement("div");
   form.classList.add(isCourse ? "course-form" : "entry-form");
   form.innerHTML = `
-      <div class="edit-row">
-        <label>Edit Existing</label>
-        <div class="edit-controls">
-            <select class="edit-entry-select">
-              <option value="">-- Select existing ${target} --</option>
-            </select>
-            <button type="button" class="delete-entry-btn" title="Delete">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-trash2-icon lucide-trash-2">
-                    <path d="M10 11v6"/>
-                    <path d="M14 11v6"/>
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
-                    <path d="M3 6h18"/>
-                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                </svg>
-            </button>
-        </div>
+    <div class="edit-row">
+      <label>Edit Existing</label>
+      <div class="edit-controls">
+          <select class="edit-entry-select">
+            <option value="">-- Select existing ${target} --</option>
+          </select>
+          <button type="button" class="delete-entry-btn" title="Delete">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-trash2-icon lucide-trash-2">
+                  <path d="M10 11v6"/>
+                  <path d="M14 11v6"/>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                  <path d="M3 6h18"/>
+                  <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              </svg>
+          </button>
       </div>
+    </div>
 
-      <label>Title</label>
-      <textarea class="title-input"></textarea>
+    ${!isprojects ? `
+        <label>Title</label>
+        <textarea class="title-input"></textarea>
 
-      <label>${isCourse ? "Institution" : " "}
-      ${iseducation ? "School/University" : " "}
-      ${isprojects ? "Project Name" : " "}
-      ${isexperience ? "Company" : " "}
-      
-      </label>
-      <textarea class="institution-input"></textarea>
+        <label>${isCourse ? "Institution" : ""}
+        ${iseducation ? "School/University" : ""}
+        ${isexperience ? "Company" : ""}
+        </label>
+        <textarea class="institution-input"></textarea>
 
-      <div class="date-picker">
-        <label>Start Date</label>
-        <input type="text" class="dateInput start-date" placeholder="MM/YYYY" readonly>
-        <div class="prof-date-dropdown">
-          <div class="months">
-            <div data-month="01">Jan</div><div data-month="02">Feb</div>
-            <div data-month="03">Mar</div><div data-month="04">Apr</div>
-            <div data-month="05">May</div><div data-month="06">Jun</div>
-            <div data-month="07">Jul</div><div data-month="08">Aug</div>
-            <div data-month="09">Sep</div><div data-month="10">Oct</div>
-            <div data-month="11">Nov</div><div data-month="12">Dec</div>
+        <div class="date-picker">
+          <label>Start Date</label>
+          <input type="text" class="dateInput start-date" placeholder="MM/YYYY" readonly>
+          <div class="prof-date-dropdown">
+            <div class="months">
+              <div data-month="01">Jan</div><div data-month="02">Feb</div>
+              <div data-month="03">Mar</div><div data-month="04">Apr</div>
+              <div data-month="05">May</div><div data-month="06">Jun</div>
+              <div data-month="07">Jul</div><div data-month="08">Aug</div>
+              <div data-month="09">Sep</div><div data-month="10">Oct</div>
+              <div data-month="11">Nov</div><div data-month="12">Dec</div>
+            </div>
+            <div class="divider"></div>
+            <div class="years"></div>
           </div>
-          <div class="divider"></div>
-          <div class="years"></div>
         </div>
-      </div>
 
-      <div class="date-picker">
-        <label>End Date</label>
-        <input type="text" class="dateInput end-date" placeholder="MM/YYYY" readonly>
-        <div class="prof-date-dropdown">
-          <div class="months">
-            <div data-month="01">Jan</div><div data-month="02">Feb</div>
-            <div data-month="03">Mar</div><div data-month="04">Apr</div>
-            <div data-month="05">May</div><div data-month="06">Jun</div>
-            <div data-month="07">Jul</div><div data-month="08">Aug</div>
-            <div data-month="09">Sep</div><div data-month="10">Oct</div>
-            <div data-month="11">Nov</div><div data-month="12">Dec</div>
+        <div class="date-picker">
+          <label>End Date</label>
+          <input type="text" class="dateInput end-date" placeholder="MM/YYYY" readonly>
+          <div class="prof-date-dropdown">
+            <div class="months">
+              <div data-month="01">Jan</div><div data-month="02">Feb</div>
+              <div data-month="03">Mar</div><div data-month="04">Apr</div>
+              <div data-month="05">May</div><div data-month="06">Jun</div>
+              <div data-month="07">Jul</div><div data-month="08">Aug</div>
+              <div data-month="09">Sep</div><div data-month="10">Oct</div>
+              <div data-month="11">Nov</div><div data-month="12">Dec</div>
+            </div>
+            <div class="divider"></div>
+            <div class="years"></div>
           </div>
-          <div class="divider"></div>
-          <div class="years"></div>
         </div>
-      </div>
+    ` : ""}
 
-      <label>Description</label>
-      <textarea class="description-input"></textarea>
+    ${isprojects ? `
+        <label>Project Name</label>
+        <textarea class="title-input"></textarea>
 
-      <button type="button" class="save-entry">Save</button>
-  `;
+        <label>Project URL</label>
+        <input type="url" class="url-input" placeholder="https://example.com">
+    ` : ""}
+
+    <label>Description</label>
+    <textarea class="description-input"></textarea>
+
+    <button type="button" class="save-entry">Save</button>
+`;
+
 
   $(form).hide();
   container.appendChild(form);
@@ -287,24 +296,20 @@ document.addEventListener("click", (e) => {
   if (!form) return;
   const container = form.parentElement;
 
-  const data = {
-    title: form.querySelector(".title-input").value.trim(),
-    institution: form.querySelector(".institution-input").value.trim(),
-    start_date: form.querySelector(".start-date").value,
-    end_date: form.querySelector(".end-date").value,
-    description: form.querySelector(".description-input").value.trim(),
-  };
-
+  // Declare data outside the if blocks
+  let data;
   let listRef;
-  if (container.classList.contains("courses-forms-container"))
+
+  // Determine which list based on container
+  if (container.classList.contains("courses-forms-container")) {
     listRef = coursesList;
-  else if (container.classList.contains("experience-forms-container"))
+  } else if (container.classList.contains("experience-forms-container")) {
     listRef = experienceList;
-  else if (container.classList.contains("education-forms-container"))
+  } else if (container.classList.contains("education-forms-container")) {
     listRef = educationList;
-  else if (container.classList.contains("projects-forms-container"))
+  } else if (container.classList.contains("projects-forms-container")) {
     listRef = projectsList;
-  else {
+  } else {
     const acc = container.closest(".accordion-item");
     const headerText = acc
       ? acc.querySelector(".accordion-header").textContent.trim().toLowerCase()
@@ -313,6 +318,25 @@ document.addEventListener("click", (e) => {
     else if (headerText.includes("experience")) listRef = experienceList;
     else if (headerText.includes("education")) listRef = educationList;
     else listRef = projectsList;
+  }
+
+  // Check if this is a project form
+  const isProjects = container.classList.contains("projects-forms-container");
+
+  if (isProjects) {
+    data = {
+      title: form.querySelector(".title-input").value.trim(),
+        url: form.querySelector(".url-input").value.trim(),
+      description: form.querySelector(".description-input").value.trim(),
+    };
+  } else {
+    data = {
+      title: form.querySelector(".title-input").value.trim(),
+      institution: form.querySelector(".institution-input").value.trim(),
+      start_date: form.querySelector(".start-date").value,
+      end_date: form.querySelector(".end-date").value,
+      description: form.querySelector(".description-input").value.trim(),
+    };
   }
 
   const editSelect = form.querySelector(".edit-entry-select");
@@ -332,15 +356,16 @@ document.addEventListener("click", (e) => {
   alert("Saved successfully!");
 });
 
+
 /*DELETE*/
 document.addEventListener("click", (e) => {
   const delBtn = e.target.closest(".delete-entry-btn");
   if (!delBtn) return;
 
-  const form = delBtn.closest(".entry-form, .course-form");
+  const form = delBtn.closest(".entry-form, .course-form, .skill-block");
   if (!form) return;
 
-  const select = form.querySelector(".edit-entry-select");
+  const select = form.querySelector(".edit-entry-select, .edit-skill-select");
   if (!select) {
     alert("No selectable entry found.");
     return;
@@ -360,6 +385,8 @@ document.addEventListener("click", (e) => {
 
   const container = form.parentElement;
   let listRef;
+  let isSkill = false;
+  
   if (container.classList.contains("courses-forms-container"))
     listRef = coursesList;
   else if (container.classList.contains("experience-forms-container"))
@@ -368,30 +395,51 @@ document.addEventListener("click", (e) => {
     listRef = educationList;
   else if (container.classList.contains("projects-forms-container"))
     listRef = projectsList;
+  else if (container.classList.contains("skills-container")) {
+    listRef = skillsList;
+    isSkill = true;
+  }
   else listRef = coursesList;
 
   if (index < 0 || index >= listRef.length) {
     alert("Selected entry no longer exists.");
     populateAllDropdowns();
+    if (isSkill) populateSkillDropdown(form);
     return;
   }
 
   listRef.splice(index, 1); // delete entry
-  populateAllDropdowns();
-  renderProfileAccordion();
+  
+  if (isSkill) {
+    renderSkills();
+    populateSkillDropdown(form);
+  } else {
+    populateAllDropdowns();
+    renderProfileAccordion();
+  }
+  
   updateSectionVisibility();
-
   saveAllDataToBackend();
 
   $(form).slideUp(200, () => form.remove());
   alert("Entry deleted.");
 });
 
+
 /*PROFILE DISPLAY*/
-function renderProfileAccordionSection(containerSelector, dataList) {
+function renderProfileAccordionSection(containerSelector, dataList, sectionType) 
+{
   const container = document.querySelector(containerSelector);
   if (!container) return;
   container.innerHTML = "";
+
+  // Auto-detect if sectionType is not provided
+  let isProjects = sectionType === "projects";
+  if (!sectionType) {
+    isProjects = containerSelector.includes("project") || 
+                 container.id.includes("project") || 
+                 container.classList.contains("projects-container");
+  }
 
   dataList.forEach((item, idx) => {
     const wrapper = document.createElement("div");
@@ -404,10 +452,20 @@ function renderProfileAccordionSection(containerSelector, dataList) {
     const body = document.createElement("div");
     body.classList.add("profile-accordion-body");
     body.innerHTML = `
-      <p><strong>Institution:</strong> ${item.institution || "-"}</p>
-      <p><strong>Description:</strong> ${item.description || "-"}</p>
-      <p><strong>Start:</strong> ${item.start_date || "-"}</p>
-      <p><strong>End:</strong> ${item.end_date || "-"}</p>
+      ${!isProjects ? `
+        <p><strong>Institution:</strong> ${item.institution || "-"}</p>
+        <p><strong>Description:</strong> ${item.description || "-"}</p>
+        <p><strong>Start:</strong> ${item.start_date || "-"}</p>
+        <p><strong>End:</strong> ${item.end_date || "-"}</p>
+      ` : ""}
+      ${isProjects ? `
+        <p><strong>URL:</strong> ${
+          item.url
+            ? `<a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.url}</a>`
+            : "-"
+        }</p>
+        <p><strong>Description:</strong> ${item.description || "-"}</p>
+      ` : ""}
     `;
 
     header.addEventListener("click", () => {
@@ -422,6 +480,7 @@ function renderProfileAccordionSection(containerSelector, dataList) {
     container.appendChild(wrapper);
   });
 }
+
 
 function renderProfileAccordion() {
   renderProfileAccordionSection(
@@ -550,7 +609,6 @@ document.addEventListener("click", (e) => {
 
       <div class="skill-controls">
         <button type="button" class="save-skill-btn">Save</button>
-        <button type="button" class="delete-skill-btn">Delete</button>
       </div>
     `;
     container.appendChild(form);
@@ -581,27 +639,13 @@ document.addEventListener("click", (e) => {
     renderSkills();
     populateSkillDropdown(block);
     updateSectionVisibility();
-    saveAllDataToBackend(); // <--- ADD THIS LINE HERE
+    saveAllDataToBackend();
     alert("Skill saved!");
     $(block).slideUp(250, () => block.remove());
     return;
   }
-
-  if (e.target.classList.contains("delete-skill-btn")) {
-    const block = e.target.closest(".skill-block");
-    const editSelect = block.querySelector(".edit-skill-select");
-    const index = editSelect?.value;
-
-    if (index !== "" && index !== undefined) {
-      skillsList.splice(Number(index), 1);
-      renderSkills();
-      updateSectionVisibility();
-      saveAllDataToBackend(); // <--- ADD THIS LINE HERE
-    }
-    $(block).slideUp(200, () => block.remove());
-    return;
-  }
 });
+
 
 function populateSkillDropdown(form) {
   const select = form.querySelector(".edit-skill-select");
@@ -675,18 +719,28 @@ function get_user_data() {
       } else {
         // 1. Update Profile Image
         if (data.Image == "profile.jpeg") {
-          document.querySelector(".profile-photo").src = `../ImageStorage/profile.jpeg`;
-          document.querySelector(".profile-photo2").src = `../ImageStorage/profile.jpeg`;
+          document.querySelector(
+            ".profile-photo"
+          ).src = `../ImageStorage/profile.jpeg`;
+          document.querySelector(
+            ".profile-photo2"
+          ).src = `../ImageStorage/profile.jpeg`;
         } else {
-          document.querySelector(".profile-photo").src = `../ImageStorage/users/${userId}/${data.Image}`;
-          document.querySelector(".profile-photo2").src = `../ImageStorage/users/${userId}/${data.Image}`;
+          document.querySelector(
+            ".profile-photo"
+          ).src = `../ImageStorage/users/${userId}/${data.Image}`;
+          document.querySelector(
+            ".profile-photo2"
+          ).src = `../ImageStorage/users/${userId}/${data.Image}`;
         }
 
         // 2. Update Text Display
         document.querySelector(".first-name").textContent = data.First_Name;
         document.querySelector(".last-name").textContent = data.Last_Name;
-        document.querySelector(".profile-section .headline").textContent = data.Title || "";
-        document.querySelector(".profile-section .Bio p").textContent = data.Bio || "";
+        document.querySelector(".profile-section .headline").textContent =
+          data.Title || "";
+        document.querySelector(".profile-section .Bio p").textContent =
+          data.Bio || "";
 
         /* --- 3. PRE-FILL INPUTS (Moved here from Company function) --- */
         const fInput = document.getElementById("first-name");
@@ -700,11 +754,16 @@ function get_user_data() {
         if (bInput) bInput.value = data.Bio || "";
 
         /* --- 4. LOAD LISTS FROM DB (Moved here from Company function) --- */
-        if (data.experience) experienceList.splice(0, experienceList.length, ...data.experience);
-        if (data.education) educationList.splice(0, educationList.length, ...data.education);
-        if (data.courses) coursesList.splice(0, coursesList.length, ...data.courses);
-        if (data.projects) projectsList.splice(0, projectsList.length, ...data.projects);
-        if (data.skills) skillsList.splice(0, skillsList.length, ...data.skills);
+        if (data.experience)
+          experienceList.splice(0, experienceList.length, ...data.experience);
+        if (data.education)
+          educationList.splice(0, educationList.length, ...data.education);
+        if (data.courses)
+          coursesList.splice(0, coursesList.length, ...data.courses);
+        if (data.projects)
+          projectsList.splice(0, projectsList.length, ...data.projects);
+        if (data.skills)
+          skillsList.splice(0, skillsList.length, ...data.skills);
 
         // 5. Render UI
         renderProfileAccordion();
@@ -719,8 +778,14 @@ function get_user_data() {
           document.getElementById("profile-edit").style.display = "none";
           const p1 = document.querySelector(".profile-photo");
           const p2 = document.querySelector(".profile-photo2");
-          if(p1) { p1.style.cursor = "default"; p1.style.pointerEvents = "none"; }
-          if(p2) { p2.style.cursor = "default"; p2.style.pointerEvents = "none"; }
+          if (p1) {
+            p1.style.cursor = "default";
+            p1.style.pointerEvents = "none";
+          }
+          if (p2) {
+            p2.style.cursor = "default";
+            p2.style.pointerEvents = "none";
+          }
         }
       }
     })
@@ -752,12 +817,11 @@ function get_company_data() {
         }
       */
 
-
       if (data.error) {
         document.body.innerHTML = `<h2>${data.error}</h2>`;
       } else {
         showCompanyInfo(data);
-          if (data.image == "company.png") {
+        if (data.image == "company.png") {
           document.querySelector(
             ".profile-photo"
           ).src = `../ImageStorage/company.png`;
@@ -773,7 +837,7 @@ function get_company_data() {
           ).src = `../ImageStorage/companies/${userId}/${data.image}`;
         }
 
-         if (data.is_owner === true) {
+        if (data.is_owner === true) {
           document.getElementById("profile-edit").style.display = "block";
         } else {
           document.getElementById("profile-edit").style.display = "none";
@@ -784,7 +848,7 @@ function get_company_data() {
             "none";
         }
 
-        console.log(data)
+        console.log(data);
       }
     })
     .catch((err) => {
@@ -792,7 +856,6 @@ function get_company_data() {
       console.error(err);
     });
 }
-
 
 function showCompanyInfo(companyData) {
   document.querySelector(".profile-section").innerHTML = `
@@ -1013,13 +1076,13 @@ function editCompanyInfo(companyData) {
   document.getElementById("companyZipCode").value = companyData.zip_code || "";
 }
 
-
-
 function updateSectionVisibility() {
-// Experience
+  // Experience
   const experienceSection = document.querySelector(".profile-experience");
   const editExperience = document.getElementById("experience-accordion");
-  const experienceContainer = document.querySelector(".profile-experience-container");
+  const experienceContainer = document.querySelector(
+    ".profile-experience-container"
+  );
 
   if (experienceContainer && experienceSection) {
     if (experienceContainer.children.length > 0) {
@@ -1034,7 +1097,9 @@ function updateSectionVisibility() {
   // Education
   const educationSection = document.querySelector(".profile-education");
   const editEducation = document.getElementById("education-accordion");
-  const educationContainer = document.querySelector(".profile-education-container");
+  const educationContainer = document.querySelector(
+    ".profile-education-container"
+  );
 
   if (educationContainer && educationSection) {
     if (educationContainer.children.length > 0) {
@@ -1163,7 +1228,7 @@ document.addEventListener("click", (e) => {
   const fname = fInput ? fInput.value.trim() : "";
   const lname = lInput ? lInput.value.trim() : "";
   const title = hInput ? hInput.value.trim() : "";
-  const bio   = bInput ? bInput.value.trim() : "";
+  const bio = bInput ? bInput.value.trim() : "";
 
   // 3. Update the display text immediately (Visual feedback)
   const fDisplay = document.querySelector(".first-name");
@@ -1187,27 +1252,27 @@ document.addEventListener("click", (e) => {
     education: educationList,
     courses: coursesList,
     projects: projectsList,
-    skills: skillsList
+    skills: skillsList,
   };
 
   // 5. Send to PHP
-  fetch('../php/profile_user.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
+  fetch("../php/profile_user.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
   })
-  .then(res => res.json())
-  .then(data => {
-    if(data.success) {
-      alert("Profile saved successfully!");
-      document.body.classList.remove("edit-open"); // Close the panel
-    } else {
-      console.error(data);
-      alert("Error saving profile.");
-    }
-  })
-  .catch(err => {
-    console.error("Save error:", err);
-    alert("An error occurred while saving.");
-  });
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        alert("Profile saved successfully!");
+        document.body.classList.remove("edit-open"); // Close the panel
+      } else {
+        console.error(data);
+        alert("Error saving profile.");
+      }
+    })
+    .catch((err) => {
+      console.error("Save error:", err);
+      alert("An error occurred while saving.");
+    });
 });
