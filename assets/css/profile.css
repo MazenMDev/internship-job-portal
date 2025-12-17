@@ -525,6 +525,7 @@ label {
   padding: 12px 24px;
   background-color: var(--primary-color);
   color: white;
+  font-size: 16px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -548,8 +549,11 @@ label {
   margin-bottom: 10px;
 }
 
-.save-entry,
 .skill-controls :hover{
+background-color: var(--secondary-color);
+
+}
+.save-entry:hover{
 background-color: var(--secondary-color);
 
 }
@@ -833,11 +837,17 @@ background-color: var(--secondary-color);
   font-size: 14px;
   color: var(--text-color);
   background: var(--background-color);
+  transition: all 0.2s ease-in-out;
 }
 
 .entry-form textarea {
   resize: vertical;
   min-height: 70px;
+}
+.entry-form input:focus,
+.entry-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color); 
 }
 
 .entry-textarea {
@@ -950,6 +960,7 @@ background-color: var(--secondary-color);
 }
 
 .bullet-editor {
+  width: 99%;
   min-height: 120px;
   padding: 12px;
   border: 1px solid #ddd;
@@ -957,6 +968,11 @@ background-color: var(--secondary-color);
   border-radius: 8px;
   font-size: 14px;
   overflow-y: auto;
+  transition: all 0.2s ease-in-out;
+}
+.bullet-editor:focus{
+    outline: none;
+  border-color: var(--primary-color); 
 }
 
 .bullet-editor ul {
@@ -1037,14 +1053,15 @@ background-color: var(--secondary-color);
   padding: 8px;
   margin: 5px 0 15px 0;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
   resize: vertical;
+  transition: all 0.2s ease-in-out;
 }
 
 .course-form textarea:focus,
 .course-form input[type="text"]:focus {
-  border-color: var(--main-color, #007bff);
   outline: none;
+  border-color: var(--primary-color); 
 }
 
 .course-form .dateInput {
