@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'experience' => ['title', 'institution', 'start_date', 'end_date', 'description'],
             'education'  => ['title', 'institution', 'start_date', 'end_date', 'description'],
             'courses'    => ['title', 'institution', 'start_date', 'end_date', 'description'],
-            'projects'   => ['title', 'link' => 'institution', 'description'],
+            'projects'   => ['title', 'link', 'description'],
             'skills'     => ['skill', 'info'] 
         ];
 

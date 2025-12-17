@@ -159,7 +159,9 @@ document.addEventListener("click", (e) => {
       </div>
     </div>
 
-    ${!isprojects ? `
+    ${
+      !isprojects
+        ? `
         <label>Title</label>
         <textarea class="title-input"></textarea>
 
@@ -202,22 +204,27 @@ document.addEventListener("click", (e) => {
             <div class="years"></div>
           </div>
         </div>
-    ` : ""}
+    `
+        : ""
+    }
 
-    ${isprojects ? `
+    ${
+      isprojects
+        ? `
         <label>Project Name</label>
         <textarea class="title-input"></textarea>
 
         <label>Project URL</label>
-        <input type="url" class="url-input" placeholder="https://example.com">
-    ` : ""}
+        <input type="url" class="link-input" placeholder="https://example.com">
+    `
+        : ""
+    }
 
     <label>Description</label>
     <textarea class="description-input"></textarea>
 
     <button type="button" class="save-entry">Save</button>
 `;
-
 
   $(form).hide();
   container.appendChild(form);
@@ -326,7 +333,7 @@ document.addEventListener("click", (e) => {
   if (isProjects) {
     data = {
       title: form.querySelector(".title-input").value.trim(),
-        url: form.querySelector(".url-input").value.trim(),
+      url: form.querySelector(".link-input").value.trim(),
       description: form.querySelector(".description-input").value.trim(),
     };
   } else {
@@ -355,7 +362,6 @@ document.addEventListener("click", (e) => {
   $(form).slideUp(250, () => form.remove());
   alert("Saved successfully!");
 });
-
 
 /*DELETE*/
 document.addEventListener("click", (e) => {
@@ -386,7 +392,7 @@ document.addEventListener("click", (e) => {
   const container = form.parentElement;
   let listRef;
   let isSkill = false;
-  
+
   if (container.classList.contains("courses-forms-container"))
     listRef = coursesList;
   else if (container.classList.contains("experience-forms-container"))
@@ -398,8 +404,7 @@ document.addEventListener("click", (e) => {
   else if (container.classList.contains("skills-container")) {
     listRef = skillsList;
     isSkill = true;
-  }
-  else listRef = coursesList;
+  } else listRef = coursesList;
 
   if (index < 0 || index >= listRef.length) {
     alert("Selected entry no longer exists.");
@@ -409,7 +414,7 @@ document.addEventListener("click", (e) => {
   }
 
   listRef.splice(index, 1); // delete entry
-  
+
   if (isSkill) {
     renderSkills();
     populateSkillDropdown(form);
@@ -417,7 +422,7 @@ document.addEventListener("click", (e) => {
     populateAllDropdowns();
     renderProfileAccordion();
   }
-  
+
   updateSectionVisibility();
   saveAllDataToBackend();
 
@@ -425,10 +430,12 @@ document.addEventListener("click", (e) => {
   alert("Entry deleted.");
 });
 
-
 /*PROFILE DISPLAY*/
-function renderProfileAccordionSection(containerSelector, dataList, sectionType) 
-{
+function renderProfileAccordionSection(
+  containerSelector,
+  dataList,
+  sectionType
+) {
   const container = document.querySelector(containerSelector);
   if (!container) return;
   container.innerHTML = "";
@@ -436,9 +443,10 @@ function renderProfileAccordionSection(containerSelector, dataList, sectionType)
   // Auto-detect if sectionType is not provided
   let isProjects = sectionType === "projects";
   if (!sectionType) {
-    isProjects = containerSelector.includes("project") || 
-                 container.id.includes("project") || 
-                 container.classList.contains("projects-container");
+    isProjects =
+      containerSelector.includes("project") ||
+      container.id.includes("project") ||
+      container.classList.contains("projects-container");
   }
 
   dataList.forEach((item, idx) => {
@@ -452,20 +460,28 @@ function renderProfileAccordionSection(containerSelector, dataList, sectionType)
     const body = document.createElement("div");
     body.classList.add("profile-accordion-body");
     body.innerHTML = `
-      ${!isProjects ? `
+      ${
+        !isProjects
+          ? `
         <p><strong>Institution:</strong> ${item.institution || "-"}</p>
         <p><strong>Description:</strong> ${item.description || "-"}</p>
         <p><strong>Start:</strong> ${item.start_date || "-"}</p>
         <p><strong>End:</strong> ${item.end_date || "-"}</p>
-      ` : ""}
-      ${isProjects ? `
+      `
+          : ""
+      }
+      ${
+        isProjects
+          ? `
         <p><strong>URL:</strong> ${
-          item.url
-            ? `<a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.url}</a>`
+          item.link
+            ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.link}</a>`
             : "-"
         }</p>
         <p><strong>Description:</strong> ${item.description || "-"}</p>
-      ` : ""}
+      `
+          : ""
+      }
     `;
 
     header.addEventListener("click", () => {
@@ -480,7 +496,6 @@ function renderProfileAccordionSection(containerSelector, dataList, sectionType)
     container.appendChild(wrapper);
   });
 }
-
 
 function renderProfileAccordion() {
   renderProfileAccordionSection(
@@ -645,7 +660,6 @@ document.addEventListener("click", (e) => {
     return;
   }
 });
-
 
 function populateSkillDropdown(form) {
   const select = form.querySelector(".edit-skill-select");
@@ -839,6 +853,7 @@ function get_company_data() {
 
         if (data.is_owner === true) {
           document.getElementById("profile-edit").style.display = "block";
+          editCompanyInfo(data);
         } else {
           document.getElementById("profile-edit").style.display = "none";
           document.querySelector(".profile-photo").style.cursor = "default";
@@ -984,20 +999,20 @@ function editCompanyInfo(companyData) {
                   class="form-input"
                 />
               </div>
-
-              <div class="input-group">
-                <label for="profile-headline">City</label>
-                <input
-                  type="text"
-                  id="companyCity"
-                  class="form-input"
-                />
-              </div>
+              
               <div class="input-group">
                 <label for="profile-headline">Country</label>
                 <input
                   type="text"
                   id="Company-country"
+                  class="form-input"
+                />
+              </div>    
+              <div class="input-group">
+                <label for="profile-headline">City</label>
+                <input
+                  type="text"
+                  id="companyCity"
                   class="form-input"
                 />
               </div>
@@ -1218,61 +1233,102 @@ document.addEventListener("click", (e) => {
 
   // 1. IMPORTANT: Stop the page from refreshing
   e.preventDefault();
+  if (Type === "company") {
+    // 1. Get values using IDs from your editCompanyInfo function
+    const companyPayload = {
+      company_name: document.getElementById("company-name")?.value.trim(),
+      description: document.getElementById("profile-About-us")?.value.trim(),
+      phone_number: document.getElementById("Company-number")?.value.trim(),
+      company_url: document.getElementById("CompanyURL")?.value.trim(),
+      country: document.getElementById("Company-country")?.value.trim(),
+      city: document.getElementById("companyCity")?.value.trim(),
+      state: document.getElementById("companyState")?.value.trim(),
+      street_address: document.getElementById("companyStreetAddress")?.value.trim(),
+      zip_code: document.getElementById("companyZipCode")?.value.trim(),
+      company_email: document.querySelector(".profile-section .headline")?.textContent // Preserve email
+    };
 
-  // 2. Get values from the input fields
-  const fInput = document.getElementById("first-name");
-  const lInput = document.getElementById("last-name");
-  const hInput = document.getElementById("profile-headline");
-  const bInput = document.getElementById("profile-bio");
+    // 2. Update the display immediately for visual feedback
+    showCompanyInfo(companyPayload);
 
-  const fname = fInput ? fInput.value.trim() : "";
-  const lname = lInput ? lInput.value.trim() : "";
-  const title = hInput ? hInput.value.trim() : "";
-  const bio = bInput ? bInput.value.trim() : "";
-
-  // 3. Update the display text immediately (Visual feedback)
-  const fDisplay = document.querySelector(".first-name");
-  const lDisplay = document.querySelector(".last-name");
-  const hDisplay = document.querySelector(".profile-section .headline");
-  const bDisplay = document.querySelector(".profile-section .Bio p");
-
-  if (fDisplay) fDisplay.textContent = fname;
-  if (lDisplay) lDisplay.textContent = lname;
-  if (hDisplay) hDisplay.textContent = title;
-  if (bDisplay) bDisplay.textContent = bio;
-
-  // 4. Prepare data for the database
-  // We send the basic info PLUS all the existing lists (experience, etc.)
-  const payload = {
-    fname: fname,
-    lname: lname,
-    title: title,
-    bio: bio,
-    experience: experienceList,
-    education: educationList,
-    courses: coursesList,
-    projects: projectsList,
-    skills: skillsList,
-  };
-
-  // 5. Send to PHP
-  fetch("../php/profile_user.php", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.success) {
-        alert("Profile saved successfully!");
-        document.body.classList.remove("edit-open"); // Close the panel
-      } else {
-        console.error(data);
-        alert("Error saving profile.");
-      }
+    // 3. Send to PHP (Ensure your PHP handles POST)
+    fetch("../php/profile_company.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(companyPayload),
     })
-    .catch((err) => {
-      console.error("Save error:", err);
-      alert("An error occurred while saving.");
-    });
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          alert("Company profile saved!");
+          closeModal();
+        } else {
+          alert("Error: " + (data.error || "Could not save"));
+        }
+      })
+      .catch((err) => console.error("Save error:", err));
+
+  }
+  else if (Type === "user") {
+    // 2. Get values from the input fields
+    const fInput = document.getElementById("first-name");
+    const lInput = document.getElementById("last-name");
+    const hInput = document.getElementById("profile-headline");
+    const bInput = document.getElementById("profile-bio");
+
+    const fname = fInput ? fInput.value.trim() : "";
+    const lname = lInput ? lInput.value.trim() : "";
+    const title = hInput ? hInput.value.trim() : "";
+    const bio = bInput ? bInput.value.trim() : "";
+
+    // 3. Update the display text immediately (Visual feedback)
+    const fDisplay = document.querySelector(".first-name");
+    const lDisplay = document.querySelector(".last-name");
+    const hDisplay = document.querySelector(".profile-section .headline");
+    const bDisplay = document.querySelector(".profile-section .Bio p");
+
+    if (fDisplay) fDisplay.textContent = fname;
+    if (lDisplay) lDisplay.textContent = lname;
+    if (hDisplay) hDisplay.textContent = title;
+    if (bDisplay) bDisplay.textContent = bio;
+
+    // 4. Prepare data for the database
+    // We send the basic info PLUS all the existing lists (experience, etc.)
+    const payload = {
+      fname: fname,
+      lname: lname,
+      title: title,
+      bio: bio,
+      experience: experienceList,
+      education: educationList,
+      courses: coursesList,
+      projects: projectsList,
+      skills: skillsList,
+    };
+
+    // 5. Send to PHP
+    fetch("../php/profile_user.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+  
+    })
+  
+  
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          alert("Profile saved successfully!");
+          document.body.classList.remove("edit-open"); // Close the panel
+        } else {
+          console.error(data);
+          alert("Error saving profile.");
+        }
+      })
+      .catch((err) => {
+        console.error("Save error:", err);
+        alert("An error occurred while saving.");
+      });
+
+  }
 });
