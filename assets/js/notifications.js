@@ -53,7 +53,7 @@ function loadNotifications() {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            const notifList = document.getElementById('notification-list');
+            const container = document.getElementById('notificationList');
             const notifCount = document.getElementById('notification-count');
           
 
@@ -63,39 +63,34 @@ function loadNotifications() {
                 notifCount.style.display = data.length > 0 ? 'inline-block' : 'none';
             }
 
-            notifList.innerHTML = '';
+            container.innerHTML = '';
 
             data.forEach(notif => {
-                const item = document.createElement('div');
-                item.className = 'notification-item';
-                
-             
-                if (notif.sender_type == 1) {
-                    profileLink = `view_profile.php?id=${notif.sender_id}`;
-                } 
-               
-                else if (notif.sender_type == 2) {
-                    profileLink = `company_details.php?id=${notif.sender_id}`;
-                }
-                
 
-                item.innerHTML = `
-                    <a href="${profileLink}" class="notif-link">
-                        <div style="display:flex; flex-direction:column;">
-                            <strong>${notif.title}</strong>
-                            <small>${notif.description}</small>
-                            <span style="font-size:10px; color:gray;">${notif.created_at}</span>
+
+                const cardHTML = `
+                    <div class="notification-card">
+                        <img 
+                            src="../assets/imgs/DefaultProfile/profile.jpeg" 
+                            alt="Profile" 
+                            class="notification-profile-img" 
+                        />
+                        <div class="notification-content">
+                            <p><strong>${notif.title}</strong>: ${notif.description}</p>
+                            <span class="notification-time">${notif.created_at}</span>
                         </div>
-                    </a>
-                    <hr style="margin: 5px 0;">
+                    </div>
                 `;
-                notifList.appendChild(item);
+
+
+                container.innerHTML += cardHTML;
             });
         })
         .catch(error => console.error('Error:', error));
+        
     }
-
     loadNotifications();
+
 
 
 });
