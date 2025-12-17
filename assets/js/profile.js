@@ -333,7 +333,7 @@ document.addEventListener("click", (e) => {
   if (isProjects) {
     data = {
       title: form.querySelector(".title-input").value.trim(),
-      url: form.querySelector(".link-input").value.trim(),
+      link: form.querySelector(".link-input").value.trim(),
       description: form.querySelector(".description-input").value.trim(),
     };
   } else {
@@ -661,29 +661,38 @@ document.addEventListener("click", (e) => {
   }
 });
 
-function populateSkillDropdown(form) {
-  const select = form.querySelector(".edit-skill-select");
+/* REPLACE THE populateEditDropdown FUNCTION WITH THIS */
+function populateEditDropdown(form, type) {
+  const select = form.querySelector(".edit-entry-select");
   if (!select) return;
 
-  select.innerHTML = `<option value="">-- Select existing skill --</option>`;
-  skillsList.forEach((s, idx) => {
+  // 1. Populate the dropdown options
+  select.innerHTML = `<option value="">-- Select existing ${type} --</option>`;
+  (profileData[type] || []).forEach((item, index) => {
     const opt = document.createElement("option");
-    opt.value = idx;
-    opt.textContent = s.skill || `Skill ${idx + 1}`;
+    opt.value = index;
+    opt.textContent = item.title || `Entry ${index + 1}`;
     select.appendChild(opt);
   });
 
+  // 2. Handle selection change
   select.addEventListener("change", () => {
-    const index = select.value;
-    if (index === "") {
-      form.querySelector(".form-input").value = "";
-      form.querySelector(".bullet-editor").innerHTML = "<ul><li></li></ul>";
-      return;
-    }
-    const skillData = skillsList[index];
-    form.querySelector(".form-input").value = skillData.skill || "";
-    form.querySelector(".bullet-editor").innerHTML =
-      skillData.info || "<ul><li></li></ul>";
+    // If an index is selected, get that entry. If not, use an empty object to clear fields.
+    const entry = profileData[type][select.value] || {};
+
+    // Helper: Find input by class. If it exists, set its value. If not, do nothing.
+    const setVal = (selector, key) => {
+      const input = form.querySelector(selector);
+      if (input) input.value = entry[key] || "";
+    };
+
+    // 3. Update all possible fields safely
+    setVal(".title-input", "title");
+    setVal(".description-input", "description");
+    setVal(".institution-input", "institution");
+    setVal(".start-date", "start_date");
+    setVal(".end-date", "end_date");
+    setVal(".link-input", "link"); // This loads your Project URL
   });
 }
 
