@@ -774,6 +774,15 @@ function get_user_data() {
           ).src = `../ImageStorage/users/${userId}/${data.Image}`;
         }
 
+        let cvCard = document.getElementById("cvCard");
+        if(data.cv == null){
+          cvCard.style.display = "none";
+        }
+        else{
+          cvCard.href = `/CVStorage/${userId}/${data.cv}`;
+          document.querySelector(".file-display-text").innerHTML = `<span style="color: var(--secondary-color)">Update CV:</span> ${data.cv}`;
+        }
+
         // 2. Update Text Display
         document.querySelector(".first-name").textContent = data.First_Name;
         document.querySelector(".last-name").textContent = data.Last_Name;
@@ -1244,6 +1253,35 @@ function uploadPhoto() {
   };
 }
 
+
+
+// Uploading CV
+function uploadCVToServer(file) {
+  const formData = new FormData();
+  formData.append("cv_file", file);
+  fetch("../../php/upload_cv.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        alert("CV uploaded successfully!");
+      } else {
+        alert(data.message || "Error uploading CV");
+      }
+    })
+    .catch((err) => console.error(err));
+}
+
+let cvFile = null;
+document.getElementById("cv-file-input").addEventListener("change", function () {
+    const file = this.files[0];
+    document.querySelector(".file-display-text").innerHTML = `${file.name}`;
+    cvFile = file;
+});
+
+
 /* MAIN PROFILE SAVE LOGIC */
 document.addEventListener("click", (e) => {
   // Check if the clicked element is the "Save" button
@@ -1346,5 +1384,12 @@ document.addEventListener("click", (e) => {
         console.error("Save error:", err);
         alert("An error occurred while saving.");
       });
+
+      if(cvFile){
+        uploadCVToServer(cvFile);
+      }
   }
 });
+
+
+

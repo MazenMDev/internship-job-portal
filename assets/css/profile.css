@@ -825,7 +825,7 @@ background-color: var(--secondary-color);
 .file-display-text {
   text-align: center;
   flex-grow: 1;
-  white-space: nowrap;
+  flex-wrap: wrap;
 }
 
 .entry-form input,

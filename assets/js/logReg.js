@@ -570,9 +570,12 @@ if (companyForm && errorMsgCompany) {
       } else {
         errorMsgCompany.style.color = "var(--success)";
         errorMsgCompany.textContent = data.message;
-        setTimeout(() => {
-          window.location.href = "./login-register.html?method=2";
-        }, 1000);
+        if(!data.pending === true){
+          
+          setTimeout(() => {
+            window.location.href = "./login-register.html?method=2";
+          }, 1000);
+        }
       }
     }).catch(() => {
       errorMsgCompany.textContent = "Something went wrong. Please try again.";

@@ -45,7 +45,7 @@ $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 $stmt = $conn->prepare("INSERT INTO verify_company (company_name, company_email, password, company_phone, company_address, company_city, company_state, company_zip, company_country, company_website) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 $stmt->bind_param("ssssssssss", $company_name, $company_email, $hashed_password, $company_phone, $company_address, $company_city, $company_state, $company_zip, $company_country, $company_link);
 if ($stmt->execute()) {
-    echo json_encode(["status" => "success", "message" => "Registration successful. Please allow up to 3 working days for verification."]);
+    echo json_encode(["status" => "success", "pending" => true,  "message" => "Registration successful. Please allow up to 3 working days for verification."]);
 } else {
     echo json_encode(["status" => "error", "message" => "Registration failed. Please try again."]);
 }
