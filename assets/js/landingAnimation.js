@@ -1,6 +1,7 @@
 const steps = document.querySelectorAll(".step");
 window.addEventListener("scroll", check);
 window.addEventListener("load", check); // ensure initial state on page load
+
 function check() {
   checkJobs();
   checkSteps();

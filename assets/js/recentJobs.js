@@ -1,5 +1,41 @@
-import { jobListings } from "./data/jobsData.js";
 import jobCategories from "./jobCategories.js";
+
+let jobListings = [];
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("/php/landing.php")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      jobListings = data.jobs;
+      renderRecentJobs();
+      displayCountUsers(data.total_users_companies);
+      displayImages(data.users);
+    });
+});
+
+function displayCountUsers(count) {
+  const learners = document.querySelector(".learners-span");
+  let numberOfUsers;
+  if (count < 10) {
+    learners.textContent = "many";
+  } else if (count < 100) {
+    learners.textContent = "tens";
+  } else if (count < 1000) {
+    learners.textContent = "hundreds";
+  } else {
+    numberOfUsers = count.toString();
+    learners.textContent = numberOfUsers.slice(0, -3) + "k+";
+  }
+}
+
+function displayImages(users) {
+  if (users.length < 4) return;
+  document.querySelector(".image1").src = users[0].Image;
+  document.querySelector(".image2").src = users[1].Image;
+  document.querySelector(".image3").src = users[2].Image;
+  document.querySelector(".image4").src = users[3].Image;
+    "/ImageStorage/users/" + users[3].Image;
+}
 
 // put icons for each main category
 const categoryIcons = {
@@ -38,19 +74,10 @@ function getSVG(category) {
   return categoryIcons["Other"];
 }
 
-function getRecentJobs() {
-  const sorted = [...jobListings].sort(
-    (a, b) =>
-      new Date(b.datePosted.replace(" ", "T")) -
-      new Date(a.datePosted.replace(" ", "T"))
-  );
-  return sorted.slice(0, 3); // take the recent 3 jobs
-}
-
 function renderRecentJobs() {
   const container = document.querySelector(".recent-jobs .job-list");
 
-  const recent = getRecentJobs();
+  const recent = jobListings;
   container.innerHTML = "";
 
   recent.forEach((job) => {
@@ -58,20 +85,18 @@ function renderRecentJobs() {
     item.className = "job-item";
     // title category salary location company + icons
     item.innerHTML = `
-    <h3>${job.title}</h3> 
+    <h3>${job.job_title}</h3> 
     <div class="job-detail-category">
         ${getSVG(job.category)}
         ${job.category}
     </div>
     <p class="job-location">${job.location}</p>
-    <p class="job-salary">${job.salary}</p>
+    <p class="job-salary">${job.salary_min} - ${job.salary_max}</p>
     <a href ="#" class="job-view-details">View Details</a>
     `;
     container.appendChild(item);
   });
 }
-
-renderRecentJobs();
 
 const jobList = document.querySelector(".recent-jobs .job-list");
 

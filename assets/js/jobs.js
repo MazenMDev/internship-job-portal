@@ -1,7 +1,27 @@
 //Import the job categories from jobcategories script
 import jobCategories from "./jobCategories.js";
 import { showJobDetails } from "./jobForm.js";
-import { isUserLoggedIn , isCompany } from "./Sessions/notLoggedSession.js";
+import { isUserLoggedIn, isCompany } from "./Sessions/notLoggedSession.js";
+
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("/php/getJobs.php")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Fetched Jobs:", data);
+      jobListings = data.data || [];
+      jobListings.forEach((job) => {
+        if (job.logo === "company.png") {
+          job.logo = "/ImageStorage/company.png";
+        } else {
+          job.logo = `/ImageStorage/companies/${job.company_id}/${job.logo}`;
+        }
+      });
+      noFilterArr = jobListings;
+      renderPage(currentPage);
+      addSalaryFilterJobs();
+    })
+    .catch((error) => console.error("Error fetching jobs:", error));
+});
 
 // put icons for each main category
 const categoryIcons = {
@@ -24,157 +44,9 @@ const categoryIcons = {
 };
 
 // dummy jobs until we make the backend
-let jobListings = [
-  {
-    job_id: 1,
-    job_title: "Software Engineer",
-    company_name: "Google",
-    company_id: 1,
-    category: "Software Development",
-    job_type: "Part time",
-    salary: "$24000-$3200",
-    location: "Cairo, EG",
-    experience: "2-4 years",
-    created_at: "2025-10-10 20:00:00",
-    logo: "../assets/imgs/dummyJobCompanyImages/google-company.jpg",
-    job_description:
-      "As a Software Engineer at Google, you will be part of a dynamic and innovative environment that values creativity, problem-solving, and technical excellence. You will collaborate with cross-functional teams to design, build, and optimize scalable web and cloud-based applications. The ideal candidate should have a strong grasp of modern JavaScript frameworks, experience in developing RESTful APIs, and the ability to translate product requirements into clean and efficient code. This position offers opportunities for mentorship, career growth, and exposure to global-scale projects.",
-    skill: ["JavaScript", "React", "Node.js", "API Design"],
-    tag: ["Frontend", "Backend", "Web Development"],
-    website: "https://careers.google.com",
-  },
-  {
-    job_id: 2,
-    job_title: "Marketing Specialist",
-    company_name: "Coca-Cola",
-    company_id: 2,
-    category: "Digital Marketing",
-    job_type: "Full time",
-    salary: "$28000-$35000",
-    experience: "3-5 years",
-    location: "Atlanta, GA",
-    created_at: "2025-10-08 09:20:00",
-    logo: "../assets/imgs/dummyJobCompanyImages/cocacola.jpg",
-    job_description:
-      "Join Coca-Cola’s digital marketing team and play a key role in shaping online campaigns that reach millions of customers worldwide. As a Marketing Specialist, you will develop creative strategies for social media engagement, manage advertising budgets, analyze performance data, and coordinate with design and product teams to ensure brand consistency. Candidates should possess strong analytical skills, an understanding of digital trends, and experience using tools such as Google Analytics and Meta Ads Manager. This role encourages innovative thinking and offers the opportunity to work on global brand campaigns.",
-    skill: ["SEO", "Google Ads", "Social Media Management", "Analytics"],
-    tag: ["Marketing", "Advertising", "Branding"],
-    website: "https://www.coca-colacompany.com/careers",
-  },
-  {
-    job_id: 3,
-    job_title: "Cloud Engineer",
-    company_name: "Amazon",
-    company_id: 3,
-    category: "Cloud Computing",
-    job_type: "Part Time",
-    salary: "$130000-$190000",
-    experience: "6+ years",
-    location: "Smart Village, Giza",
-    created_at: "2025-10-06 11:55:00",
-    logo: "../assets/imgs/dummyJobCompanyImages/amazon.jpeg",
-    job_description:
-      "As a Cloud Engineer at Amazon, you will architect, deploy, and maintain secure and scalable infrastructure across AWS services. You’ll collaborate closely with DevOps teams to implement CI/CD pipelines, monitor cloud performance, and automate processes using Terraform and AWS CloudFormation. The ideal candidate should have experience with container technologies like Docker and Kubernetes, strong networking knowledge, and a passion for improving system reliability and scalability. This is an excellent opportunity to work within a fast-paced environment where innovation drives every decision.",
-    skill: ["AWS", "Docker", "Kubernetes", "CI/CD"],
-    tag: ["Cloud", "DevOps", "Infrastructure"],
-    website: "https://aws.amazon.com/careers/",
-  },
-  {
-    job_id: 4,
-    job_title: "Registered Nurse",
-    company_name: "Mayo Clinic",
-    company_id: 4,
-    category: "Medical & Nursing",
-    job_type: "Part Time",
-    salary: "$55000-$75000",
-    experience: "2+ years",
-    location: "Rochester, MN",
-    created_at: "2025-10-07 08:45:00",
-    logo: "../assets/imgs/dummyJobCompanyImages/mayo-clinic.jpeg",
-    job_description:
-      "The Registered Nurse at Mayo Clinic will provide patient-centered care in one of the most respected healthcare institutions in the world. You will be responsible for assessing patient health, administering medications, assisting with procedures, and collaborating with physicians to develop effective treatment plans. Candidates should have strong communication skills, the ability to remain calm under pressure, and a compassionate approach to patient care. Working at Mayo Clinic offers continuous learning opportunities and access to cutting-edge medical research and technologies.",
-    skill: ["Patient Care", "CPR", "EMR Systems", "Teamwork"],
-    tag: ["Healthcare", "Nursing"],
-    website: "https://jobs.mayoclinic.org",
-  },
-  {
-    job_id: 5,
-    job_title: "Accountant",
-    company_name: "PwC",
-    company_id: 5,
-    category: "Accounting",
-    job_type: "Full time",
-    salary: "$40000-$60000",
-    experience: "2-3 years",
-    location: "London, UK",
-    created_at: "2025-10-04 12:00:00",
-    logo: "../assets/imgs/dummyJobCompanyImages/pwc.jpg",
-    job_description:
-      "As an Accountant at PwC, you’ll be responsible for managing client accounts, preparing financial reports, analyzing budgets, and ensuring regulatory compliance. You will work with a diverse set of clients and collaborate with audit and consulting teams to provide strategic financial insights. The position requires a strong understanding of accounting principles, attention to detail, and proficiency in financial software tools. This role offers a collaborative environment where you’ll have opportunities to grow within one of the world’s leading professional services firms.",
-    skill: ["Excel", "Financial Analysis", "QuickBooks", "Tax Preparation"],
-    tag: ["Finance", "Auditing", "Tax"],
-    website: "https://www.pwc.com/careers",
-  },
-  {
-    job_id: 6,
-    job_title: "Civil Engineer",
-    company_name: "Bechtel",
-    company_id: 6,
-    category: "Architecture",
-    job_type: "InternShip",
-    salary: "$1000-$1200",
-    experience: "Student",
-    location: "Houston, TX",
-    created_at: "2025-10-29 17:32:00",
-    logo: "../assets/imgs/dummyJobCompanyImages/bechtel.png",
-    job_description:
-      "Bechtel is offering an internship opportunity for aspiring Civil Engineers looking to gain real-world experience in infrastructure development. As an intern, you will assist project managers and senior engineers in drafting designs, inspecting construction sites, and preparing reports. You will learn how to use tools like AutoCAD, perform basic structural analysis, and understand project documentation processes. This internship provides an excellent foundation for students passionate about construction, design, and sustainable engineering practices.",
-    skill: ["AutoCAD", "Project Management", "Structural Design"],
-    tag: ["Engineering", "Construction", "Internship"],
-    website: "https://jobs.bechtel.com",
-  },
-  {
-    job_id: 7,
-    job_title: "Biology Teacher",
-    company_name: "Springfield High School",
-    company_id: 7,
-    category: "Teaching & Tutoring",
-    job_type: "Full time",
-    salary: "$35000-$48000",
-    experience: "3+ years",
-    location: "Springfield, IL",
-    created_at: "2025-10-02 08:15:00",
-    logo: "../assets/imgs/dummyJobCompanyImages/springfield.jpeg",
-    job_description:
-      "We are seeking a dedicated Biology Teacher to join Springfield High School’s science department. The candidate will be responsible for preparing lesson plans, conducting laboratory experiments, and fostering a love for science among students. You will also evaluate student performance, maintain a safe classroom environment, and collaborate with other teachers to develop interdisciplinary projects. A strong passion for education and the ability to engage students through interactive teaching methods are essential for success in this role.",
-    skill: ["Teaching", "Biology", "Classroom Management", "Lesson Planning"],
-    tag: ["Education", "Science"],
-    website: "https://springfieldhigh.edu/careers",
-  },
-  {
-    job_id: 8,
-    job_title: "iOS Developer",
-    company_name: "Apple",
-    company_id: 8,
-    category: "Mobile App Development",
-    job_type: "Remote",
-    salary: "$34000-$45000",
-    experience: "4-6 years",
-    location: "Cupertino, CA",
-    created_at: "2025-10-05 14:18:00",
-    logo: "../assets/imgs/dummyJobCompanyImages/apple.jpeg",
-    job_description:
-      "As an iOS Developer at Apple, you will design, develop, and maintain mobile applications that deliver exceptional user experiences. You’ll collaborate with designers, backend developers, and product managers to bring creative ideas to life. The ideal candidate should have strong experience with Swift and Xcode, a deep understanding of Apple’s Human Interface Guidelines, and a commitment to writing clean and maintainable code. This role provides the opportunity to work on apps that reach millions of users while staying at the forefront of mobile innovation.",
-    skill: ["Swift", "Xcode", "UI/UX Design", "REST APIs"],
-    tag: ["Mobile", "iOS", "App Development"],
-    website: "https://jobs.apple.com",
-  },
-];
+let jobListings = [];
 
-
-
-
-const noFilterArr = jobListings;
+let noFilterArr = jobListings;
 
 const userBookMarks = [];
 const selectedCategories = [];
@@ -188,9 +60,9 @@ $(document).ready(function () {
       if (data.bookmarked_jobs) {
         userBookMarks.push(...data.bookmarked_jobs);
       }
-      
+
       console.log(userBookMarks);
-      
+
       userBookMarks.forEach((jobId) => {
         const bookmarkIcon = document.querySelector(
           `.bookmark-icon[data-job-id="${jobId}"]`
@@ -208,19 +80,19 @@ $(document).ready(function () {
     .then((response) => response.json())
     .then((data) => {
       if (data.applications) {
-        const jobIds = data.applications.map(app => app.job_id);
+        const jobIds = data.applications.map((app) => app.job_id);
         appliedJobs.push(...jobIds);
-
       }
       console.log("Applied Jobs:", appliedJobs);
-      if(isCompany===false && isUserLoggedIn===true){
-        document.getElementById("applied-jobs-count").textContent = appliedJobs.length;
-        document.getElementById("user-applied-jobs").style.display = appliedJobs.length >=0 ? "block" : "none";
+      if (isCompany === false && isUserLoggedIn === true) {
+        document.getElementById("applied-jobs-count").textContent =
+          appliedJobs.length;
+        document.getElementById("user-applied-jobs").style.display =
+          appliedJobs.length >= 0 ? "block" : "none";
       }
       console.log(appliedJobs);
       console.log(isCompany);
       console.log(isUserLoggedIn);
-
 
       renderPage(currentPage);
     })
@@ -363,11 +235,13 @@ function renderPage(page) {
       applied = true;
     }
 
-
-    
     jobCard.innerHTML = `
         <div class="job-date">${timeSince(job.created_at)}</div>
-        <svg class="job-bookmark ${userBookMarks.includes(job.job_id) ? "bookmarked" : ""}" style="${!isUserLoggedIn || isCompany ? 'display: none !important;' : ''}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="job-bookmark ${
+          userBookMarks.includes(job.job_id) ? "bookmarked" : ""
+        }" style="${
+      !isUserLoggedIn || isCompany ? "display: none !important;" : ""
+    }" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
         </svg>
         <div class="job-main-content">
@@ -398,7 +272,7 @@ function renderPage(page) {
                                                 <line x1="12" y1="1" x2="12" y2="23"></line>
                                                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                                         </svg>
-                                        ${job.salary}
+                                        $${job.salary_min} - $${job.salary_max}
                                 </div>
                                 <div class="job-detail-item">
                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase-icon lucide-briefcase"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
@@ -413,8 +287,14 @@ function renderPage(page) {
                                 </div>
                         </div>
                 </div>
-                <div class="job-action-button" style="${!isUserLoggedIn || isCompany ? 'display: none !important;' : ''}">
-                        <button class="job-form-button${applied ? ' applied-job-submit' : ''}">Job Details</button>
+                <div class="job-action-button" style="${
+                  !isUserLoggedIn || isCompany
+                    ? "display: none !important;"
+                    : ""
+                }">
+                        <button class="job-form-button${
+                          applied ? " applied-job-submit" : ""
+                        }">Job Details</button>
                 </div>
         </div>
     `;
@@ -693,16 +573,12 @@ const manageSlider = () => {
   sliderTrack.style.left = `${left + 2}%`;
   sliderTrack.style.width = `${width - 2}%`;
 };
-document.addEventListener("DOMContentLoaded", () => {
+function addSalaryFilterJobs() {
   let max = -1;
   let min = 999999999999;
   jobListings.forEach((job) => {
-    // Example: "$24000-$32000"
-    const parts = job.salary.split("-");
-    // parts = ["$24000" , "$32000"] now
-    //remove the dollar sign and parse the string to int
-    const low = parseInt(parts[0].replace("$", ""));
-    const high = parseInt(parts[1].replace("$", ""));
+    const low = job.salary_min;
+    const high = job.salary_max;
     if (!isNaN(low) && low < min) min = low;
     if (!isNaN(high) && high > max) max = high;
   });
@@ -738,7 +614,7 @@ document.addEventListener("DOMContentLoaded", () => {
     maxSalarySpan.textContent = `$ ${maxSlider.value}`;
     manageSlider();
   });
-});
+}
 
 // THESE FUNCTIONS WILL BE REPLACED LATER WITH SQL QUERIES
 
@@ -753,8 +629,8 @@ function searchJobs(keyword) {
       job.category.toLowerCase().includes(lowerKeyword) ||
       job.experience.toLowerCase().includes(lowerKeyword) ||
       job.job_type.toLowerCase().includes(lowerKeyword) ||
-      job.tag.some((t) => t.toLowerCase().includes(lowerKeyword)) ||
-      job.skill.some((s) => s.toLowerCase().includes(lowerKeyword))
+      job.tags.some((t) => t.toLowerCase().includes(lowerKeyword)) ||
+      job.skills.some((s) => s.toLowerCase().includes(lowerKeyword))
     );
   });
   return filteredJobs;

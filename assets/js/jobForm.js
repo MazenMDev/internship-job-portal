@@ -189,14 +189,14 @@ function leftDivContent(job, formLeftDiv) {
     <p class="job-description-content">${job.job_description}</p>
     <h2 class="job-skills-title">Required Skills</h2>
     <ul class="job-skills-list">
-      ${job.skill
+      ${job.skills
         .map((skill) => `<li class="job-skill">${skill}</li>`)
         .join("")}
     </ul>
 
     <h2 class="job-tags-title">Tags:</h2>
     <div class="job-tags-container">
-      ${job.tag.map((tag) => `<span class="job-tag">${tag}</span>`).join("")}
+      ${job.tags.map((tag) => `<span class="job-tag">${tag}</span>`).join("")}
     </div> 
 
     <a href="${job.website}" target="_blank" class="companyWebsite">
