@@ -110,7 +110,7 @@ function displayApplications(applications) {
                 </div>
                 
                 <div class="card-footer">
-                    <a href="/pages/profile.html?id=${app.company.company_id}&type=company" target="_blank" class="btn-view-company">View Company</a>
+                    <a href="/pages/profile.html?id=${app.job.company_id}&type=company" target="_blank" class="btn-view-company">View Company</a>
                 </div>
             </div>
         `;
