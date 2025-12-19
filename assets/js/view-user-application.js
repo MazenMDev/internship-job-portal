@@ -66,19 +66,22 @@ function displayApplications(applications) {
                         <span class="label">Experience Level:</span>
                         <span class="value">${app.experience_level}</span>
                     </div>
-                    ${app.cover_letter ? `` : ''}
+                    ${app.cover_letter ? `
                     <div class="info-row-full">
                         <span class="label">Cover Letter:</span>
                         <p class="cover-letter">${app.cover_letter}</p>
                     </div>
-                    
-                    ${app.additional_note ? `` : ''}
+                    ` : ''}
+                    ${app.additional_note ? `
                     <div class="info-row-full">
                         <span class="label">Additional Note:</span>
                         <p class="additional-note">${app.additional_note}</p>
                     </div>
+                    ` : ''}
+                </div>
                 
                 <div class="card-body">
+                    <div class="section-title">Job Details</div>
                     <div class="info-row">
                         <span class="label">Location:</span>
                         <span class="value">${app.job.location}</span>
@@ -113,7 +116,7 @@ function displayApplications(applications) {
                     <a href="/pages/profile.html?id=${app.job.company_id}&type=company" target="_blank" class="btn-view-company">View Company</a>
                 </div>
             </div>
-        `;
+        `; 
     });
 
     applicationsContainer.innerHTML = html;
