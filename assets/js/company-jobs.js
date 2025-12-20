@@ -506,7 +506,7 @@ function addCompanyData(data) {
                   <div class="status-indicator ${activeClass}"></div>
                   <span class="job-status">${statusText}</span>
                 </div>
-                <span class="applicant-count">0 Applicants</span>
+                <span class="applicant-count"> ${job.numApplications} Applicants</span>
                 <svg
                   class="manage-company-form"
                   xmlns="http://www.w3.org/2000/svg"
