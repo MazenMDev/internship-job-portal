@@ -643,6 +643,7 @@ if (applyButton) {
   applyButton.addEventListener("click", function () {
     inputSearch();
     filterLables();
+    filterBySalary(minSlider.value, maxSlider.value);
   });
 }
 
@@ -651,6 +652,7 @@ document.addEventListener("keydown", function (e) {
     e.preventDefault();
     inputSearch();
     filterLables();
+    filterBySalary(minSlider.value, maxSlider.value);
   }
 });
 
@@ -799,6 +801,22 @@ function filterLables() {
   });
 
   currentPage = 1;
+}
+
+function filterBySalary(minSalary, maxSalary) {
+  const filteredJobs = noFilterArr.filter((job) => {
+    return job.salary_min >= minSalary && job.salary_max <= maxSalary;
+  });
+
+  if (filteredJobs.length === 0) {
+    jobListings = [];
+    renderPage(currentPage);
+    showError("No jobs found.");
+  } else {
+    jobListings = filteredJobs;
+    currentPage = 1;
+    renderPage(currentPage);
+  }
 }
 
 function resetButton() {
