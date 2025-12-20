@@ -5,6 +5,7 @@ CREATE TABLE notifications (
     description     TEXT,
     sender_id  INT NOT NULL,
     sender_type     INT NOT NULL,
+    seen INT DEFAULT 0,
     receiver_type    INT NOT NULL,
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

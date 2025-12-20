@@ -30,7 +30,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         "is_admin": false,
         "is_company": true,
         "image": "company.png",
-        "type": "company"
+        "type": "company",
+        "unread_notifications": 0
       }
       
     */
@@ -44,6 +45,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       if (data.type === "company") {
         companyData(data);
+      }
+      const notifications_unseen = document.querySelector(".notifications_unseen")
+      if (notifications_unseen) {
+        notifications_unseen.textContent = data.unread_notifications;
+        if (data.unread_notifications > 0) {
+          notifications_unseen.style.display = "flex";
+        } else {
+          notifications_unseen.style.display = "none";
+        }
       }
 
       document.querySelectorAll(".sign").forEach((el) => {
