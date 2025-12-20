@@ -520,6 +520,7 @@ function handleUsersTable() {
       //$stmt = $conn->prepare("SELECT Id, First_Name , Last_Name , Email , Title,  Image , cv , created_at , updated_at FROM users ");
       
       htmlContent += `
+      <div class="users-table-wrapper">
       <table class="users-table">
       <thead>
         <tr>
@@ -566,7 +567,7 @@ function handleUsersTable() {
         `
       });
 
-      htmlContent += '</tbody> </table>';
+      htmlContent += '</tbody> </table></div>';
       htmlContent += '<div id="usersPaginationContainer"></div>';
 
       $("#usersTableContainer").html(htmlContent);
@@ -623,9 +624,190 @@ function handleUsersTable() {
 
 }
 
+//-----------------------COMPANY TABLE----------------------
+function handleCompaniesTable() {
+  let allCompanies = [];
+  let defaultCompanies = [];
+  let currentPage = 1;
+  const itemsPerPage = 10;
+
+  loadCompanies();
+
+  function loadCompanies() {
+    $("#companiesPanel").html('<div class="loading">Loading companies...</div>');
+    fetch("/php/adminPanel/getAllCompanies.php")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          $("#companiesPanel").html(`<h3>${data.error}</h3>`);
+          return;
+        }
+        allCompanies = data.companies;
+        defaultCompanies = data.companies;
+        
+        $("#companiesPanel").html(`
+          <h2 id="companiesTitle">Companies (${allCompanies.length})</h2>
+          <input
+            type="text"
+            class="search-input"
+            id="companySearchInput"
+            placeholder="Search companies..."
+          />
+          <div id="companiesTableContainer"></div>
+        `);
+        
+        $("#companiesPanel").find("#companySearchInput").on("input", function () {
+          const query = $(this).val();
+          if(!query || query.trim() === ""){
+            allCompanies = defaultCompanies;
+            currentPage = 1;
+            displayCompanies();
+            return;
+          }
+          const filteredCompanies = searchArray(query, defaultCompanies);
+          allCompanies = filteredCompanies;
+          currentPage = 1;
+          displayCompanies();
+        });
+        
+        displayCompanies();
+      })
+      .catch((error) => {
+        console.error("Error fetching companies:", error);
+        $("#companiesPanel").html("<h3>Error loading companies. Please try again.</h3>");
+      });
+  }
+
+  function displayCompanies() {
+    const total = allCompanies.length;
+    const totalPages = Math.max(1, Math.ceil(total / itemsPerPage));
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedCompanies = allCompanies.slice(startIndex, startIndex + itemsPerPage);
+
+    $("#companiesTitle").text(`Companies (${total})`);
+
+    let htmlContent = "";
+
+    if (total === 0) {
+      htmlContent += '<div class="no-results">No companies found.</div>';
+      $("#companiesTableContainer").html(htmlContent);
+      return;
+    }
+
+    htmlContent += `
+      <div class="companies-table-container">
+      <table class="companies-table">
+        <thead>
+          <tr>
+            <th>Company ID</th>
+            <th>Image</th>
+            <th>Company Name</th>
+            <th>Phone Number</th>
+            <th>Profile</th>
+            <th>Address</th>
+            <th>Website</th>
+            <th>Created At</th>
+            <th>Total Jobs</th>
+            <th>Total Applications</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+    
+    paginatedCompanies.forEach((company) => {
+      let image_url = '/ImageStorage/company.png';
+      if(company.Image != 'company.png'){
+        image_url = `/ImageStorage/companies/${company.company_id}/${company.Image}`;
+      }
+      htmlContent += `
+        <tr id="companyRow_${company.company_id}">
+          <td>${company.company_id}</td>
+          <td><img src="${image_url}" alt="Company Image" loading="lazy" class="company-image"></td>
+          <td>${company.company_name}</td>
+          <td>${company.phone_number}</td>
+          <td><a href="/pages/profile.html?id=${company.company_id}&type=company" target="_blank">View Profile</a></td>
+          <td>${company.street_address}, ${company.city}, ${company.state}, ${company.zip_code}, ${company.country}</td>
+          <td><a href="${company.company_url}" target="_blank">${company.company_url}</a></td>
+          <td>${company.created_at}</td>
+          <td>${company.total_jobs}</td>
+          <td>${company.total_applications}</td>
+          <td>
+            <button class="delete-company-btn" data-company-id="${company.company_id}" title="Delete Company">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            </button>
+          </td>
+        </tr>
+      `;
+    });
+    
+    htmlContent += `
+        </tbody>
+      </table>
+      </div>
+    `;
+    htmlContent += '<div id="companiesPaginationContainer"></div>';
+
+    $("#companiesTableContainer").html(htmlContent);
+
+    $("#companiesTableContainer").on("click", ".delete-company-btn", function (event) {
+      event.preventDefault();
+      const companyId = $(this).data("company-id");
+      if (confirm("Are you sure you want to delete this company?")) {
+        deleteCompany(companyId);
+      }
+    });
+
+    function deleteCompany(companyId) {
+      let formData = new FormData();
+      formData.append("company_id", companyId);
+      fetch("/php/adminPanel/deleteCompany.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert(data.message || "Company deleted successfully");
+            allCompanies = allCompanies.filter(
+              (company) => company.company_id !== companyId
+            );
+            defaultCompanies = defaultCompanies.filter(
+              (company) => company.company_id !== companyId
+            );
+            $("#totalCompanies").text(defaultCompanies.length);
+            displayCompanies();
+          }
+          else {
+            alert(data.error || "Failed to delete company");
+          }
+        })
+        .catch((error) => {
+          console.error("Error deleting company:", error);
+          alert("Error deleting company. Please try again.");
+        });
+    }
+
+    addPagination(
+      "#companiesPaginationContainer",
+      total,
+      itemsPerPage,
+      currentPage,
+      function (nextPage) {
+        currentPage = nextPage;
+        displayCompanies();
+      }
+    );
+  }
+}
+
 $(document).ready(function () {
   handleTotals();
   handleCompanyVerification();
   handleMessages();
   handleUsersTable();
+  handleCompaniesTable();
 });
+

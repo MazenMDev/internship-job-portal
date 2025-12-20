@@ -98,12 +98,14 @@
 .tableContainer {
     max-height: 300px;
     overflow-y: auto;
+    overflow-x: auto;
     border-radius: 8px;
     align-self: center;
     width: 95%;
 }
 .panel table {
     width: 100%;
+    min-width: 800px;
     margin-bottom: 20px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -585,8 +587,15 @@
     border-color: var(--primary-color);
 }
 
+.users-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 20px;
+}
+
 .users-table {
     width: 100%;
+    min-width: 1000px;
     border-collapse: collapse;
     background-color: var(--box-color);
     border-radius: 8px;
@@ -722,6 +731,104 @@
     color: #f44336;
 }
 
+#companiesPanel h2 {
+    margin-bottom: 15px;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.companies-table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.companies-table {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+    background-color: var(--box-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.companies-table thead {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.companies-table thead th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.companies-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.companies-table tbody tr:hover {
+    background-color: var(--hover-color, rgba(0, 123, 255, 0.05));
+}
+
+.companies-table tbody td {
+    padding: 12px 15px;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.companies-table .company-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+}
+
+.companies-table a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.companies-table a:hover {
+    color: var(--primary-hover-color, #0056b3);
+    text-decoration: underline;
+}
+
+.delete-company-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: all 0.3s;
+    padding: 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-company-btn:hover {
+    color: #f44336;
+    background: var(--box-color);
+    transform: scale(1.1);
+}
+
+.delete-company-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+    color: #f44336;
+}
+
 @media (max-width: 768px) {
     #adminPanel {
         margin-left: 10px;
@@ -770,5 +877,21 @@
     
     #usersPanel .search-input {
         max-width: 100%;
+    }
+    
+    .companies-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .companies-table thead th,
+    .companies-table tbody td {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .companies-table .company-image {
+        width: 40px;
+        height: 40px;
     }
 }

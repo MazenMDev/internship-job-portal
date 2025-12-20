@@ -3,6 +3,11 @@
     session_start();
     header('Content-Type: application/json');
 
+    if(!isset($_SESSION['type'])) {
+        echo json_encode(["error" => "User isnt logged in"]);
+        exit();
+    }
+
     if($_SESSION['type'] !== 'user') {
         echo json_encode(["error" => "Only users can access bookmarked jobs"]);
         exit();
