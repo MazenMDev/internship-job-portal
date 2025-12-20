@@ -35,6 +35,13 @@ if ($isCompanyEmail) {
         $_SESSION['is_admin'] = false;
         $_SESSION['type'] = 'company';
         $_SESSION['image'] = $company['Image'];
+
+        $stmt = $conn->prepare("SELECT COUNT(*) AS unread_count FROM notifications WHERE receiver_type = 2 AND sender_id = ? AND seen = 0");
+        $stmt->bind_param("i", $company['company_id']);
+        $stmt->execute();
+        $notifResult = $stmt->get_result();
+        $notifData = $notifResult->fetch_assoc();
+        $_SESSION['unread_notifications'] = $notifData['unread_count'];
         
         echo json_encode([
             "status" => "success",
@@ -87,6 +94,12 @@ $_SESSION['is_admin'] = $user['is_admin'];
 $_SESSION['is_company'] = false;
 $_SESSION['type'] = 'user';
 $_SESSION['cv'] = $user['cv'];
+$stmt = $conn->prepare("SELECT COUNT(*) AS unread_count FROM notifications WHERE receiver_type = 1 AND sender_id = ? AND seen = 0");
+$stmt->bind_param("i", $user['Id']);
+$stmt->execute();
+$notifResult = $stmt->get_result();
+$notifData = $notifResult->fetch_assoc();
+$_SESSION['unread_notifications'] = $notifData['unread_count'];
 
 echo json_encode([
     "status" => "success",

@@ -344,7 +344,7 @@
 .userAccount{
     margin-top: 10px;
     font-size: 1rem;
-    color: var(--text-color);77
+    color: var(--text-color);
 }
 .userAccount strong{
     color: var(--text-color)
@@ -604,12 +604,13 @@
     border-color: var(--primary-color);
 }
 
+.jobs-table-wrapper,
 .users-table-wrapper {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     margin-top: 20px;
 }
-
+.jobs-table,
 .users-table {
     width: 100%;
     min-width: 1000px;
@@ -619,11 +620,11 @@
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
+.jobs-table thead,
 .users-table thead {
     background-color: var(--primary-color);
 }
-
+.jobs-table thead th,
 .users-table thead th {
     padding: 12px 15px;
     text-align: left;
@@ -634,20 +635,23 @@
     top: 0;
     z-index: 10;
 }
-
+.jobs-table tbody tr,
 .users-table tbody tr {
     border-bottom: 1px solid var(--border-color);
     transition: background-color 0.2s;
 }
 
+.jobs-table tbody tr:hover,
 .users-table tbody tr:hover {
     background-color: var(--table-hover-row);
 }
 
+.jobs-table tbody tr:nth-child(even),
 .users-table tbody tr:nth-child(even) {
     background-color: var(--table-even-row);
 }
 
+.jobs-table tbody td,
 .users-table tbody td {
     padding: 12px 15px;
     font-size: 0.95rem;

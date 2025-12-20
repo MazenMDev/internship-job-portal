@@ -78,7 +78,8 @@ div<!DOCTYPE html>
           >
         </div>
 
-        <div class="nav-icon">
+
+        <div class="nav-icon userLogged notifications-Nav">
           <a href="./notifications.html">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -98,9 +99,11 @@ div<!DOCTYPE html>
                 d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
               />
             </svg>
+            <div class="notifications_unseen"></div>
             Notifications</a
           >
         </div>
+
 
         <div class="nav-icon">
           <a href="./jobs.html">
@@ -325,50 +328,8 @@ div<!DOCTYPE html>
       </div>
 
 
-      <div id="jobsPanel" class="panel">
-        <h2>Manage Job Postings</h2>
-        <div class="tableContainer">
-          <input
-            type="text"
-            class="search-input"
-            id="jobSearch"
-            placeholder="Search job postings..."
-          />
-          <table>
-            <thead>
-              <tr>
-                <th>Job ID</th>
-                <th>Title</th>
-                <th>Company</th>
-                <th>Company Id</th>
-                <th>Location</th>
-                <th>Salary Range</th>
-                <th>Category</th>
-                <th>Created At</th>
-                <th>Updated At</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Software Engineer Intern</td>
-                <td>TechCorp</td>
-                <td>55</td>
-                <td>New York, NY</td>
-                <td>$20,000 - $30,000</td>
-                <td>Software Development</td>
-                <td>2024-02-01 09:00:00</td>
-                <td>2024-02-01 09:00:00</td>
-                <td>
-                  <button class="edit-btn">Edit</button>
-                  <button class="view-btn">View</button>
-                  <button class="delete-btn">Delete</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div id="jobsPanel" class="panel secondary">
+  
       </div>
 
       <div id="jobApplication" class="panel secondary">

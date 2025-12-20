@@ -942,6 +942,26 @@ body.open-company-popup #blurred-background {
   display: block;
 }
 
+.notifications-Nav{
+  position: relative;
+}
+.notifications_unseen {
+  position: absolute;
+  top: 10px;
+  right: 35px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+  background-color: #dc2626;
+  border-radius: 50%;
+  z-index: 3000;
+  border: 2px solid var(--box-color);
+}
+
+
+
 @keyframes loadingAnimation {
   0% {
     transform: translateX(-100%);

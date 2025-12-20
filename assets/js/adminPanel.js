@@ -374,19 +374,37 @@ function handleMessages() {
             <span class="message-id">Message ID: ${msg.message_id}</span>
             <div class="topRight">
               <span class="message-timestamp">${msg.created_at}</span>
-              <div class="delete-message-btn" data-message-id="${msg.message_id}" title="Delete Message">
+              <div class="delete-message-btn" data-message-id="${
+                msg.message_id
+              }" title="Delete Message">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
               </div>
             </div>
             </div>
             <h4 class="message-name">
-            <span class="fname">${msg.first_name}</span> <span class="lname">${msg.last_name}</span>
+            <span class="fname">${msg.first_name}</span> <span class="lname">${
+            msg.last_name
+          }</span>
           </h4>
           <a href="mailto:${msg.email}" class="message-email">${msg.email}</a>
           <div class="userAccount">
-            <strong>Account Type:</strong> ${msg.user_Id ? 'User' : msg.company_id ? 'Company' : 'Guest'}<br/>
-            <strong>Account ID:</strong> ${msg.user_Id ? msg.user_Id : msg.company_id ? msg.company_id : 'N/A'}
-            <h3 style="display:${msg.user_Id || msg.company_id ? 'block' : 'none'}" class="msg_logged_profile">View <a href="/pages/profile.html?id=${msg.user_Id ? msg.user_Id : msg.company_id ? msg.company_id : ''}&type=${msg.user_Id ? 'user' : msg.company_id ? 'company' : ''}">Profile</a></h3>
+            <strong>Account Type:</strong> ${
+              msg.user_Id ? "User" : msg.company_id ? "Company" : "Guest"
+            }<br/>
+            <strong>Account ID:</strong> ${
+              msg.user_Id
+                ? msg.user_Id
+                : msg.company_id
+                ? msg.company_id
+                : "N/A"
+            }
+            <h3 style="display:${
+              msg.user_Id || msg.company_id ? "block" : "none"
+            }" class="msg_logged_profile">View <a href="/pages/profile.html?id=${
+            msg.user_Id ? msg.user_Id : msg.company_id ? msg.company_id : ""
+          }&type=${
+            msg.user_Id ? "user" : msg.company_id ? "company" : ""
+          }">Profile</a></h3>
 
           </div>
           <h5>Message:</h5>
@@ -472,7 +490,7 @@ function handleUsersTable() {
         }
         allUsers = data.users;
         defaultUsers = data.users;
-        
+
         usersPanel.html(`
           <h2 id="usersTitle">Users (${allUsers.length})</h2>
           <input
@@ -483,10 +501,10 @@ function handleUsersTable() {
           />
           <div id="usersTableContainer"></div>
         `);
-        
+
         usersPanel.find(".search-input").on("input", function () {
           const query = $(this).val();
-          if(!query || query.trim() === ""){
+          if (!query || query.trim() === "") {
             allUsers = defaultUsers;
             currentPage = 1;
             displayUsers();
@@ -497,7 +515,7 @@ function handleUsersTable() {
           currentPage = 1;
           displayUsers();
         });
-        
+
         displayUsers();
       })
       .catch((error) => {
@@ -508,24 +526,27 @@ function handleUsersTable() {
   function displayUsers() {
     const total = allUsers.length;
     const totalPages = Math.max(1, Math.ceil(total / itemsPerPage));
-      if (currentPage > totalPages) currentPage = totalPages;
+    if (currentPage > totalPages) currentPage = totalPages;
 
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const paginatedUsers = allUsers.slice(startIndex, startIndex + itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedUsers = allUsers.slice(
+      startIndex,
+      startIndex + itemsPerPage
+    );
 
-      $("#usersTitle").text(`Users (${total})`);
+    $("#usersTitle").text(`Users (${total})`);
 
-      let htmlContent = "";
+    let htmlContent = "";
 
-      if (total === 0) {
-        htmlContent += '<div class="no-results">No users found.</div>';
-        $("#usersTableContainer").html(htmlContent);
-        return;
-      }
+    if (total === 0) {
+      htmlContent += '<div class="no-results">No users found.</div>';
+      $("#usersTableContainer").html(htmlContent);
+      return;
+    }
 
-      //$stmt = $conn->prepare("SELECT Id, First_Name , Last_Name , Email , Title,  Image , cv , created_at , updated_at FROM users ");
-      
-      htmlContent += `
+    //$stmt = $conn->prepare("SELECT Id, First_Name , Last_Name , Email , Title,  Image , cv , created_at , updated_at FROM users ");
+
+    htmlContent += `
       <div class="users-table-wrapper">
       <table class="users-table">
       <thead>
@@ -546,88 +567,87 @@ function handleUsersTable() {
       
       <tbody>
       `;
-      
-      paginatedUsers.forEach((user) => {
-        let image_url = '/ImageStorage/profile.jpeg';
-        if(user.Image != 'profile.jpeg'){
-          image_url = `/ImageStorage/users/${user.Id}/${user.Image}`;
-        }
-        htmlContent += `
+
+    paginatedUsers.forEach((user) => {
+      let image_url = "/ImageStorage/profile.jpeg";
+      if (user.Image != "profile.jpeg") {
+        image_url = `/ImageStorage/users/${user.Id}/${user.Image}`;
+      }
+      htmlContent += `
         <tr>
           <td>${user.Id}</td>
           <td><img src="${image_url}" alt="User Image" loading="lazy" class="user-image"></td>
-          <td><a href="/pages/profile.html?id=${user.Id}&type=user" class="profile-link" target="_blank">View Profile</a></td>
+          <td><a href="/pages/profile.html?id=${
+            user.Id
+          }&type=user" class="profile-link" target="_blank">View Profile</a></td>
           <td>${user.First_Name}</td>
           <td>${user.Last_Name}</td>
           <td><a href="mailto:${user.Email}">${user.Email}</a></td>
           <td>${user.Title}</td>
-          <td><a href="${user.cv ? `/CVStorage/${user.Id}/${user.cv}` : '#'}" target="_blank">${user.cv ? 'View CV' : 'No CV'}</a></td>
+          <td><a href="${
+            user.cv ? `/CVStorage/${user.Id}/${user.cv}` : "#"
+          }" target="_blank">${user.cv ? "View CV" : "No CV"}</a></td>
           <td>${user.created_at}</td>
           <td>${user.updated_at}</td>
           <td>
-            <button class="delete-user-btn" data-user-id="${user.Id}" title="Delete User">
+            <button class="delete-user-btn" data-user-id="${
+              user.Id
+            }" title="Delete User">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
             </button>
           </td>
         </tr>
-        `
-      });
+        `;
+    });
 
-      htmlContent += '</tbody> </table></div>';
-      htmlContent += '<div id="usersPaginationContainer"></div>';
+    htmlContent += "</tbody> </table></div>";
+    htmlContent += '<div id="usersPaginationContainer"></div>';
 
-      $("#usersTableContainer").html(htmlContent);
-      
-      $("#usersTableContainer .delete-user-btn").on("click", function () {
-        const userId = $(this).data("user-id");
-        if (confirm("Are you sure you want to delete this user?")) {
-          deleteUser(userId);
-        }
-      });
+    $("#usersTableContainer").html(htmlContent);
 
-      function deleteUser(userId) {
-        let formData = new FormData();
-        formData.append("user_id", userId);
-        fetch("/php/adminPanel/deleteUser.php", {
-          method: "POST",
-          body: formData,
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.success) {
-              alert(data.message || "User deleted successfully");
-              allUsers = allUsers.filter(
-                (user) => user.Id !== userId
-              );
-              defaultUsers = defaultUsers.filter(
-                (user) => user.Id !== userId
-              );
-              $("#totalUsers").text(defaultUsers.length);
-              displayUsers();
-            }
-            else {
-              alert(data.error || "Failed to delete user");
-            }
-          })
-          .catch((error) => {
-            console.error("Error deleting user:", error);
-            alert("Error deleting user. Please try again.");
-          });
+    $("#usersTableContainer .delete-user-btn").on("click", function () {
+      const userId = $(this).data("user-id");
+      if (confirm("Are you sure you want to delete this user?")) {
+        deleteUser(userId);
       }
+    });
 
-      
-      addPagination(
-        "#usersPaginationContainer",
-        total,
-        itemsPerPage,
-        currentPage,
-        function (nextPage) {
-        currentPage = nextPage;
-        displayUsers();
-        }
-      );
+    function deleteUser(userId) {
+      let formData = new FormData();
+      formData.append("user_id", userId);
+      fetch("/php/adminPanel/deleteUser.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert(data.message || "User deleted successfully");
+            allUsers = allUsers.filter((user) => user.Id !== userId);
+            defaultUsers = defaultUsers.filter((user) => user.Id !== userId);
+            $("#totalUsers").text(defaultUsers.length);
+            displayUsers();
+          } else {
+            alert(data.error || "Failed to delete user");
+          }
+        })
+        .catch((error) => {
+          console.error("Error deleting user:", error);
+          alert("Error deleting user. Please try again.");
+        });
     }
 
+    addPagination(
+      "#usersPaginationContainer",
+      total,
+      itemsPerPage,
+      currentPage,
+      function (nextPage) {
+        currentPage = nextPage;
+        displayUsers();
+      }
+    );
+  }
 }
 
 //-----------------------COMPANY TABLE----------------------
@@ -640,7 +660,9 @@ function handleCompaniesTable() {
   loadCompanies();
 
   function loadCompanies() {
-    $("#companiesPanel").html('<div class="loading">Loading companies...</div>');
+    $("#companiesPanel").html(
+      '<div class="loading">Loading companies...</div>'
+    );
     fetch("/php/adminPanel/getAllCompanies.php")
       .then((response) => response.json())
       .then((data) => {
@@ -650,7 +672,7 @@ function handleCompaniesTable() {
         }
         allCompanies = data.companies;
         defaultCompanies = data.companies;
-        
+
         $("#companiesPanel").html(`
           <h2 id="companiesTitle">Companies (${allCompanies.length})</h2>
           <input
@@ -661,26 +683,30 @@ function handleCompaniesTable() {
           />
           <div id="companiesTableContainer"></div>
         `);
-        
-        $("#companiesPanel").find("#companySearchInput").on("input", function () {
-          const query = $(this).val();
-          if(!query || query.trim() === ""){
-            allCompanies = defaultCompanies;
+
+        $("#companiesPanel")
+          .find("#companySearchInput")
+          .on("input", function () {
+            const query = $(this).val();
+            if (!query || query.trim() === "") {
+              allCompanies = defaultCompanies;
+              currentPage = 1;
+              displayCompanies();
+              return;
+            }
+            const filteredCompanies = searchArray(query, defaultCompanies);
+            allCompanies = filteredCompanies;
             currentPage = 1;
             displayCompanies();
-            return;
-          }
-          const filteredCompanies = searchArray(query, defaultCompanies);
-          allCompanies = filteredCompanies;
-          currentPage = 1;
-          displayCompanies();
-        });
-        
+          });
+
         displayCompanies();
       })
       .catch((error) => {
         console.error("Error fetching companies:", error);
-        $("#companiesPanel").html("<h3>Error loading companies. Please try again.</h3>");
+        $("#companiesPanel").html(
+          "<h3>Error loading companies. Please try again.</h3>"
+        );
       });
   }
 
@@ -690,7 +716,10 @@ function handleCompaniesTable() {
     if (currentPage > totalPages) currentPage = totalPages;
 
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const paginatedCompanies = allCompanies.slice(startIndex, startIndex + itemsPerPage);
+    const paginatedCompanies = allCompanies.slice(
+      startIndex,
+      startIndex + itemsPerPage
+    );
 
     $("#companiesTitle").text(`Companies (${total})`);
 
@@ -722,10 +751,10 @@ function handleCompaniesTable() {
         </thead>
         <tbody>
     `;
-    
+
     paginatedCompanies.forEach((company) => {
-      let image_url = '/ImageStorage/company.png';
-      if(company.Image != 'company.png'){
+      let image_url = "/ImageStorage/company.png";
+      if (company.Image != "company.png") {
         image_url = `/ImageStorage/companies/${company.company_id}/${company.Image}`;
       }
       htmlContent += `
@@ -748,7 +777,7 @@ function handleCompaniesTable() {
         </tr>
       `;
     });
-    
+
     htmlContent += `
         </tbody>
       </table>
@@ -758,13 +787,17 @@ function handleCompaniesTable() {
 
     $("#companiesTableContainer").html(htmlContent);
 
-    $("#companiesTableContainer").on("click", ".delete-company-btn", function (event) {
-      event.preventDefault();
-      const companyId = $(this).data("company-id");
-      if (confirm("Are you sure you want to delete this company?")) {
-        deleteCompany(companyId);
+    $("#companiesTableContainer").on(
+      "click",
+      ".delete-company-btn",
+      function (event) {
+        event.preventDefault();
+        const companyId = $(this).data("company-id");
+        if (confirm("Are you sure you want to delete this company?")) {
+          deleteCompany(companyId);
+        }
       }
-    });
+    );
 
     function deleteCompany(companyId) {
       let formData = new FormData();
@@ -785,8 +818,7 @@ function handleCompaniesTable() {
             );
             $("#totalCompanies").text(defaultCompanies.length);
             displayCompanies();
-          }
-          else {
+          } else {
             alert(data.error || "Failed to delete company");
           }
         })
@@ -809,11 +841,231 @@ function handleCompaniesTable() {
   }
 }
 
+function handleJobsTable() {
+  let allJobs = [];
+  let defaultJobs = [];
+  let currentPage = 1;
+  const itemsPerPage = 10;
+
+  loadJobs();
+
+  function loadJobs() {
+    $("#jobsPanel").html('<div class="loading">Loading jobs...</div>');
+
+    fetch("/php/adminPanel/getAllJobs.php")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          $("#jobsPanel").html(`<h3>${data.error}</h3>`);
+          return;
+        }
+
+        allJobs = data.jobs;
+        defaultJobs = data.jobs;
+
+        $("#jobsPanel").html(`
+          <h2 id="jobsTitle">Jobs (${allJobs.length})</h2>
+          <input
+            type="text"
+            class="search-input"
+            id="jobSearchInput"
+            placeholder="Search jobs..."
+          />
+          <div id="jobsTableContainer"></div>
+        `);
+
+        $("#jobsPanel")
+          .find("#jobSearchInput")
+          .on("input", function () {
+            const query = $(this).val();
+            if (!query || query.trim() === "") {
+              allJobs = defaultJobs;
+              currentPage = 1;
+              displayJobs();
+              return;
+            }
+            const filteredJobs = searchArray(query, defaultJobs);
+            allJobs = filteredJobs;
+            currentPage = 1;
+            displayJobs();
+          });
+
+        displayJobs();
+      })
+      .catch((error) => {
+        console.error("Error fetching jobs:", error);
+        $("#jobsPanel").html("<h3>Error loading jobs. Please try again.</h3>");
+      });
+  }
+
+  function displayJobs() {
+    const total = allJobs.length;
+    const totalPages = Math.max(1, Math.ceil(total / itemsPerPage));
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedJobs = allJobs.slice(startIndex, startIndex + itemsPerPage);
+
+    $("#jobsTitle").text(`Jobs (${total})`);
+
+    let htmlContent = "";
+
+    if (total === 0) {
+      htmlContent += '<div class="no-results">No jobs found.</div>';
+      $("#jobsTableContainer").html(htmlContent);
+      return;
+    }
+
+    htmlContent += `
+      <div class="jobs-table-container">
+      <table class="jobs-table">
+        <thead>
+          <tr>
+            <th>Job ID</th>
+            <th>Title</th>
+            <th>Company</th>
+            <th>Location</th>
+            <th>Category</th>
+            <th>Job Type</th>
+            <th>Experience</th>
+            <th>Salary Range</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+
+    paginatedJobs.forEach((job) => {
+      const statusText = job.is_deleted == 1 ? "Hidden" : "Visible";
+      const toggleText = job.is_deleted == 1 ? "Unhide" : "Hide";
+
+      htmlContent += `
+        <tr id="jobRow_${job.job_id}">
+          <td>${job.job_id}</td>
+          <td>${job.title}</td>
+          <td>${job.company_name}</td>
+          <td>${job.location}</td>
+          <td>${job.category}</td>
+          <td>${job.job_type}</td>
+          <td>${job.experience}</td>
+          <td>${job.min_salary} - ${job.max_salary}</td>
+          <td>${statusText}</td>
+          <td>${job.created_at}</td>
+          <td>
+            <button class="toggle-job-btn"
+            data-job-id="${job.job_id}"
+            data-is-deleted="${job.is_deleted}">
+    ${toggleText}
+  </button>
+  <button class="delete-job-btn" data-job-id="${job.job_id}">
+    Delete
+  </button>
+</td>
+        </tr>
+      `;
+    });
+
+    htmlContent += `
+        </tbody>
+      </table>
+      </div>
+    `;
+    htmlContent += '<div id="jobsPaginationContainer"></div>';
+
+    $("#jobsTableContainer").html(htmlContent);
+    $("#jobsTableContainer").off("click", ".toggle-job-btn");
+    $("#jobsTableContainer").on("click", ".toggle-job-btn", function (e) {
+      e.preventDefault();
+      const btn = $(this);
+      const jobId = btn.data("job-id");
+      const current = btn.data("is-deleted") == 1 ? 1 : 0;
+      const next = current ? 0 : 1;
+
+      const formData = new FormData();
+      formData.append("action", "toggle");
+      formData.append("job_id", jobId);
+      formData.append("is_deleted", next);
+
+      fetch("/php/adminPanel/deleteAllJobs.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.success) {
+            alert(data.message || "Job visibility updated");
+
+            allJobs = allJobs.map((j) =>
+              j.job_id === jobId ? { ...j, is_deleted: next } : j
+            );
+            defaultJobs = defaultJobs.map((j) =>
+              j.job_id === jobId ? { ...j, is_deleted: next } : j
+            );
+
+            displayJobs();
+          } else {
+            alert(data.error || "Failed to update job visibility");
+          }
+        })
+        .catch((error) => {
+          console.error("Error updating job visibility:", error);
+          alert("Error updating job visibility. Please try again.");
+        });
+    });
+
+    $("#jobsTableContainer").off("click", ".delete-job-btn");
+    $("#jobsTableContainer").on("click", ".delete-job-btn", function (e) {
+      e.preventDefault();
+      const jobId = $(this).data("job-id");
+      if (!confirm("Are you sure you want to permanently delete this job?")) {
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("action", "delete");
+      formData.append("job_id", jobId);
+
+      fetch("/php/adminPanel/deleteAllJobs.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.success) {
+            alert(data.message || "Job deleted successfully");
+            allJobs = allJobs.filter((job) => job.job_id !== jobId);
+            defaultJobs = defaultJobs.filter((job) => job.job_id !== jobId);
+            displayJobs();
+          } else {
+            alert(data.error || "Failed to delete job");
+          }
+        })
+        .catch((error) => {
+          console.error("Error deleting job:", error);
+          alert("Error deleting job. Please try again.");
+        });
+    });
+
+    addPagination(
+      "#jobsPaginationContainer",
+      total,
+      itemsPerPage,
+      currentPage,
+      function (nextPage) {
+        currentPage = nextPage;
+        displayJobs();
+      }
+    );
+  }
+}
+
 $(document).ready(function () {
   handleTotals();
   handleCompanyVerification();
   handleMessages();
   handleUsersTable();
   handleCompaniesTable();
+  handleJobsTable();
 });
-
