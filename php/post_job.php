@@ -71,7 +71,7 @@
             }
 
             $title_notif='A New job has been Posted';
-            $desc_notif ='You have posted a new job for '.$title. ' postion ';
+            $desc_notif ='You have posted a new job for '.$title. ',  <a style="color: var(--primary-color)" href="/pages/job-application-view.html?jobId='.$job_id.'">View Job</a>';
             $stmt = $conn->prepare("INSERT INTO notifications (receiver_type , receiver_id, sender_id,sender_type,title, description) VALUES (2, ?, ?, 3, ?, ?)");
             $stmt->bind_param("iiss",$company_id,$job_id, $title_notif,$desc_notif) ;
             if(!$stmt->execute()){
@@ -80,6 +80,12 @@
                 'message' => 'error while sending notification: ' . $stmt->error
                  ]);
             }
+
+            if(!isset($_SESSION["unread_notifications"])){
+                $_SESSION["unread_notifications"] = 0;
+            }
+            $_SESSION["unread_notifications"] = ($_SESSION["unread_notifications"] + 1);
+
         } else {
             echo json_encode(['success' => false, 'message' => 'Error posting job: ' . $stmt->error]); 
         }

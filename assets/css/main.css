@@ -955,6 +955,7 @@ body.open-company-popup #blurred-background {
   width: 18px;
   height: 18px;
   background-color: #dc2626;
+  color: #ffffff;
   border-radius: 50%;
   z-index: 3000;
   border: 2px solid var(--box-color);

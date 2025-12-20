@@ -116,8 +116,7 @@ if (empty($errors)) {
         'email' => $email,
         'experience_level' => $experience_level,
         'cover_letter' => $cover_letter,
-        'additional_note' => $note,
-        //'resume' => $resume
+        'additional_note' => $note
     ];
 
     $check_application = $conn->prepare("SELECT application_id FROM job_applications WHERE user_id = ? AND job_id = ?");
@@ -163,7 +162,7 @@ if (empty($errors)) {
             $job_title = $result['job_title'];
             $company_id = intval($result['company_id']);
         }
-        $stmt = $conn->prepare("SELECT company_name from company where company_id = ?");
+        $stmt = $conn->prepare("SELECT company_name  from company where company_id = ?");
         $stmt->bind_param("i",$company_id);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -172,11 +171,16 @@ if (empty($errors)) {
             $company_name = $result["company_name"];
         }
         $title_notif='Application Submitted';
-        $desc_notif ='You have been Submitted a job application for '.$company_name .' and for postion' .$job_title;
+        $desc_notif ='You have been Submitted a job application for  <a  style="color: var(--primary-color)" href="/pages/profile.html?id='. $company_id .'&type=company">'. $company_name .'</a>. , and for postion' .$job_title;
 
         $stmt = $conn->prepare("INSERT INTO notifications (receiver_type , receiver_id, sender_id,sender_type,title, description) VALUES (1, ?, ?, 3, ?, ?)");
         $stmt->bind_param("iiss",$application_data['user_id'],$application_data['job_id'], $title_notif,$desc_notif) ;
         $stmt->execute();
+
+        if(!isset($_SESSION["unread_notifications"])){
+            $_SESSION["unread_notifications"] = 0;
+        }
+        $_SESSION["unread_notifications"] = ($_SESSION["unread_notifications"] + 1);
 
         $stmt = $conn->prepare("SELECT job_title,company_id FROM jobs where job_id = ?");
         $stmt->bind_param( "i",$application_data['job_id']);
@@ -189,7 +193,7 @@ if (empty($errors)) {
         }
 
         $title_notif='New Job Application';
-        $desc_notif ='user'.$application_data['full_name']. 'has applied for '.$job_title .' position http://localhost:3000/pages/job-application-view.html?jobId='.$application_data['job_id'];
+        $desc_notif ='user'.$application_data['full_name']. 'has applied for '.$job_title .' position <a style="color: var(--primary-color)" href="/pages/job-application-view.html?jobId='.$application_data['job_id'].'">View Application</a>';
 
 
         $stmt = $conn->prepare("INSERT INTO notifications (receiver_type , receiver_id, sender_id,sender_type,title, description) VALUES (2, ?, ?, 3, ?, ?)");
@@ -200,7 +204,6 @@ if (empty($errors)) {
             'message' => 'error while sending notification: ' . $stmt->error
         ]);
         }
-        
         
 
     } else {

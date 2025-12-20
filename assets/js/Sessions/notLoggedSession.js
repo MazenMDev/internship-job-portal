@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         "image": "profile_1763214550.png",
         "is_admin": 1,
         "is_company": false,
-        "type": "user"
+        "type": "user",
+        "unread_notifications": 2,
       }
       company:
       {
@@ -31,7 +32,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         "is_admin": false,
         "is_company": true,
         "image": "company.png",
-        "type": "company"
+        "type": "company",
+        "unread_notifications": 0
       }
       
     */
