@@ -47,8 +47,22 @@ $statjob->execute();
 $result = $statjob->get_result();
 $jobs = array();
 while($job = $result->fetch_assoc()){
+    $stmt = $conn->prepare('
+        SELECT COUNT(*) AS num_applications FROM job_applications
+        WHERE job_id = ?
+    ');
+    $stmt->bind_param('i', $job['job_id']);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    if($res->num_rows > 0){
+        $data = $res->fetch_assoc();
+        $job['numApplications'] = $data['num_applications'];
+    } else {
+        $job['numApplications'] = 0;
+    }
     $jobs[] = $job;
 }
+
 $stattags = $conn->prepare('
     SELECT tag FROM job_tags 
     WHERE job_id = ?

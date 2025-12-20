@@ -642,6 +642,8 @@ const applyButton = document.querySelector(".apply-button");
 if (applyButton) {
   applyButton.addEventListener("click", function () {
     inputSearch();
+    filterLables();
+    filterBySalary(minSlider.value, maxSlider.value);
   });
 }
 
@@ -649,6 +651,8 @@ document.addEventListener("keydown", function (e) {
   if (e.key == "Enter") {
     e.preventDefault();
     inputSearch();
+    filterLables();
+    filterBySalary(minSlider.value, maxSlider.value);
   }
 });
 
@@ -733,6 +737,86 @@ function removeCatSelections() {
     catInp.checked = false;
   });
   selectedCategories.length = 0;
+}
+
+function filterLables() {
+  const labels = document.querySelectorAll(".filter-option-label");
+  let filteredJobs = noFilterArr;
+
+  labels.forEach((label) => {
+    const checkbox = label.querySelector(".filter-checkbox");
+    if (checkbox && checkbox.checked) {
+      // search by job type
+      if (
+        label.parentElement === document.querySelector(".type-filter-group")
+      ) {
+        filteredJobs = filteredJobs.filter((job) => {
+          return (
+            job.job_type.toLowerCase() === label.innerText.trim().toLowerCase()
+          );
+        });
+        if (filteredJobs.length === 0) {
+          jobListings = [];
+          renderPage(currentPage);
+          showError("No jobs found.");
+        } else {
+          jobListings = filteredJobs;
+          renderPage(currentPage);
+        }
+      }
+
+      // search by date posted
+      else if (
+        label.parentElement === document.querySelector(".date-filter-group")
+      ) {
+        const currentDate = new Date();
+        let timeLimit = 0;
+
+        if (checkbox.value === "last-hour") {
+          timeLimit = 1 * 60 * 60 * 1000;
+        } else if (checkbox.value === "last-24-hours") {
+          timeLimit = 24 * 60 * 60 * 1000;
+        } else if (checkbox.value === "last-7-days") {
+          timeLimit = 7 * 24 * 60 * 60 * 1000;
+        } else if (checkbox.value === "last-30-days") {
+          timeLimit = 30 * 24 * 60 * 60 * 1000;
+        }
+
+        filteredJobs = filteredJobs.filter((job) => {
+          const jobDate = new Date(job.created_at.replace(" ", "T"));
+          return currentDate - jobDate <= timeLimit;
+        });
+
+        console.log(filteredJobs);
+        if (filteredJobs.length === 0) {
+          jobListings = [];
+          renderPage(currentPage);
+          showError("No jobs found.");
+        } else {
+          jobListings = filteredJobs;
+          renderPage(currentPage);
+        }
+      }
+    }
+  });
+
+  currentPage = 1;
+}
+
+function filterBySalary(minSalary, maxSalary) {
+  const filteredJobs = noFilterArr.filter((job) => {
+    return job.salary_min >= minSalary && job.salary_max <= maxSalary;
+  });
+
+  if (filteredJobs.length === 0) {
+    jobListings = [];
+    renderPage(currentPage);
+    showError("No jobs found.");
+  } else {
+    jobListings = filteredJobs;
+    currentPage = 1;
+    renderPage(currentPage);
+  }
 }
 
 function resetButton() {
