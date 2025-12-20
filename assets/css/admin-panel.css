@@ -341,6 +341,23 @@
     font-size: 1.2rem;
 }
 
+.userAccount{
+    margin-top: 10px;
+    font-size: 1rem;
+    color: var(--text-color);77
+}
+.userAccount strong{
+    color: var(--text-color)
+}
+.userAccount a{
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.userAccount a:hover{
+    text-decoration: underline;
+}
+
 .message-item h5{
     margin-top: 20px;
     margin-bottom: 5px;

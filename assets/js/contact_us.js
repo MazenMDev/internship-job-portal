@@ -41,6 +41,7 @@ document.getElementById("contact-form").addEventListener("submit", (event) => {
         document.querySelector(".contact-form #firstname").value = "";
         document.querySelector(".contact-form #lastname").value = "";
         document.querySelector(".contact-form #message").value = "";
+        window.location.reload();
       } else {
         document.getElementById("form-error").textContent = data.message;
       }

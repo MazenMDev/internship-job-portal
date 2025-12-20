@@ -383,6 +383,12 @@ function handleMessages() {
             <span class="fname">${msg.first_name}</span> <span class="lname">${msg.last_name}</span>
           </h4>
           <a href="mailto:${msg.email}" class="message-email">${msg.email}</a>
+          <div class="userAccount">
+            <strong>Account Type:</strong> ${msg.user_Id ? 'User' : msg.company_id ? 'Company' : 'Guest'}<br/>
+            <strong>Account ID:</strong> ${msg.user_Id ? msg.user_Id : msg.company_id ? msg.company_id : 'N/A'}
+            <h3 style="display:${msg.user_Id || msg.company_id ? 'block' : 'none'}" class="msg_logged_profile">View <a href="/pages/profile.html?id=${msg.user_Id ? msg.user_Id : msg.company_id ? msg.company_id : ''}&type=${msg.user_Id ? 'user' : msg.company_id ? 'company' : ''}">Profile</a></h3>
+
+          </div>
           <h5>Message:</h5>
           <div class="message-content">
             <p>${msg.message}</p>
