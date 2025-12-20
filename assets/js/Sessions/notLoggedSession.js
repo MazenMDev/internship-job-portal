@@ -49,6 +49,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
       isUserLoggedIn = true;
       userDataExport = data;
+
+      
+      const notifications_unseen = document.querySelector(".notifications_unseen")
+      if (notifications_unseen) {
+        notifications_unseen.textContent = data.unread_notifications;
+        if (data.unread_notifications > 0) {
+          notifications_unseen.style.display = "flex";
+        } else {
+          notifications_unseen.style.display = "none";
+        }
+      }
+
       if(data.type == "company"){
         isCompany = true;
       }

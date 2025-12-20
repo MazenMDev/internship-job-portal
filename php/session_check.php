@@ -15,7 +15,8 @@ if (isset($_SESSION['user_id'])) {
         "is_admin" => $_SESSION['is_admin'],
         "is_company" => false, // Users only
         "type" => "user",
-        "cv" => $_SESSION['cv']
+        "cv" => $_SESSION['cv'],
+        "unread_notifications" => $_SESSION['unread_notifications']
     ]);
 } else if (isset($_SESSION['company_id'])) {
     echo json_encode([
@@ -27,7 +28,8 @@ if (isset($_SESSION['user_id'])) {
         "is_admin" => false,
         "is_company" => true,
         "image" => $_SESSION['image'],
-        "type" => "company"
+        "type" => "company",
+        "unread_notifications" => $_SESSION['unread_notifications']
     ]);
 } else {
     echo json_encode(["logged_in" => false]);
