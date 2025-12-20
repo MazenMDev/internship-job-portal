@@ -60,10 +60,30 @@
         $stmt->bind_param("isiisssss", $company_id, $title, $salary_min, $salary_max, $experience, $location, $description, $job_type, $category);
         if ($stmt->execute()) {
             echo json_encode(['success' => true, 'message' => 'Job posted successfully.']);
+
+            $stmt = $conn->prepare("SELECT job_id FROM jobs where company_id = ?");
+            $stmt->bind_param( "i",$company_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if($result->num_rows > 0){
+                $result = $result->fetch_assoc();
+                $job_id = $result['job_id'];
+            }
+
+            $title_notif='A New job has been Posted';
+            $desc_notif ='You have posted a new job for '.$title. ' postion ';
+            $stmt = $conn->prepare("INSERT INTO notifications (receiver_type , receiver_id, sender_id,sender_type,title, description) VALUES (2, ?, ?, 3, ?, ?)");
+            $stmt->bind_param("iiss",$company_id,$job_id, $title_notif,$desc_notif) ;
+            if(!$stmt->execute()){
+                echo json_encode([
+                'success' => false, 
+                'message' => 'error while sending notification: ' . $stmt->error
+                 ]);
+            }
         } else {
             echo json_encode(['success' => false, 'message' => 'Error posting job: ' . $stmt->error]); 
         }
-        $job_id = $conn->insert_id;
+        
         foreach ($skills as $skill) {
             $skill_stmt = $conn->prepare("INSERT INTO job_skills (job_id, skill) VALUES (?, ?)");
             $skill_stmt->bind_param("is", $job_id, $skill);
