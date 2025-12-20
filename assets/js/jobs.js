@@ -685,6 +685,7 @@ const inputSearch = () => {
 
   let filterJobs;
   if (searchInput != "") {
+    resetFilter();
     filterJobs = searchJobs(searchInput);
     const filteredCat = FilterCategories();
     if (filteredCat.length > 0) {
@@ -704,7 +705,6 @@ const inputSearch = () => {
         showError("No jobs found.");
         return;
       }
-
       jobListings = filterJobs;
     }
   } else {
@@ -734,9 +734,17 @@ function removeCatSelections() {
   });
   selectedCategories.length = 0;
 }
+
 function resetButton() {
   jobListings = noFilterArr;
   document.querySelector(".search-bar").value = "";
+  removeCatSelections();
+  currentPage = 1;
+  renderPage(currentPage);
+}
+
+function resetFilter() {
+  jobListings = noFilterArr;
   removeCatSelections();
   currentPage = 1;
   renderPage(currentPage);
