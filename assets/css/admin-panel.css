@@ -850,6 +850,53 @@
     color: #f44336;
 }
 
+.toggle-job-btn,
+.delete-job-btn {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-job-btn svg,
+.delete-job-btn svg {
+  pointer-events: none;
+}
+
+.delete-job-btn svg {
+  color: #e02424;
+  stroke: #e02424;
+}
+
+.toggle-job-btn:hover svg {
+  opacity: 0.8;
+}
+
+.delete-job-btn:hover svg {
+  filter: brightness(0.9);
+}
+
+.delete-application-btn {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-application-btn svg {
+  color: #e02424;
+  stroke: #e02424;
+  pointer-events: none;
+}
+
 @media (max-width: 768px) {
     #adminPanel {
         margin-left: 10px;

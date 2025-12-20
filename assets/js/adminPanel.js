@@ -954,15 +954,45 @@ function handleJobsTable() {
           <td>${statusText}</td>
           <td>${job.created_at}</td>
           <td>
-            <button class="toggle-job-btn"
-            data-job-id="${job.job_id}"
-            data-is-deleted="${job.is_deleted}">
-    ${toggleText}
+  <button class="toggle-job-btn"
+          data-job-id="${job.job_id}"
+          data-is-deleted="${job.is_deleted}"
+          title="${toggleText}">
+    ${
+      job.is_deleted == 1
+        ? `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+             <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+             <circle cx="12" cy="12" r="3"/>
+           </svg>`
+        : `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+             <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20
+                      c-7 0-11-8-11-8a21.77 21.77 0 0 1 5.06-5.94"/>
+             <path d="M9.9 4.24A10.94 10.94 0 0 1 12 4
+                      c7 0 11 8 11 8a21.77 21.77 0 0 1-4.88 5.82"/>
+             <line x1="1" y1="1" x2="23" y2="23"/>
+           </svg>`
+    }
   </button>
-  <button class="delete-job-btn" data-job-id="${job.job_id}">
-    Delete
+
+  <button class="delete-job-btn"
+          data-job-id="${job.job_id}"
+          title="Delete job">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="3 6 5 6 21 6" />
+      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+      <path d="M10 11v6" />
+      <path d="M14 11v6" />
+      <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+    </svg>
   </button>
 </td>
+
         </tr>
       `;
     });
@@ -1061,6 +1091,197 @@ function handleJobsTable() {
   }
 }
 
+function handleApplicationsTable() {
+  let allApps = [];
+  let defaultApps = [];
+  let currentPage = 1;
+  const itemsPerPage = 10;
+
+  loadApplications();
+
+  function loadApplications() {
+    $("#jobApplication").html(
+      '<div class="loading">Loading applications...</div>'
+    );
+
+    fetch("/php/adminPanel/getAllApplications.php")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          $("#jobApplication").html(`<h3>${data.error}</h3>`);
+          return;
+        }
+
+        allApps = data.applications;
+        defaultApps = data.applications;
+
+        $("#jobApplication").html(`
+          <h2 id="applicationsTitle">Applications (${allApps.length})</h2>
+          <input
+            type="text"
+            class="search-input"
+            id="applicationSearchInput"
+            placeholder="Search job applications..."
+          />
+          <div id="applicationsTableContainer"></div>
+        `);
+
+        $("#jobApplication")
+          .find("#applicationSearchInput")
+          .on("input", function () {
+            const query = $(this).val();
+            if (!query || query.trim() === "") {
+              allApps = defaultApps;
+              currentPage = 1;
+              displayApplications();
+              return;
+            }
+            const filtered = searchArray(query, defaultApps);
+            allApps = filtered;
+            currentPage = 1;
+            displayApplications();
+          });
+
+        displayApplications();
+      })
+      .catch((error) => {
+        console.error("Error fetching applications:", error);
+        $("#jobApplication").html(
+          "<h3>Error loading applications. Please try again.</h3>"
+        );
+      });
+  }
+
+  function displayApplications() {
+    const total = allApps.length;
+    const totalPages = Math.max(1, Math.ceil(total / itemsPerPage));
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginated = allApps.slice(startIndex, startIndex + itemsPerPage);
+
+    $("#applicationsTitle").text(`Applications (${total})`);
+
+    let htmlContent = "";
+
+    if (total === 0) {
+      htmlContent += '<div class="no-results">No applications found.</div>';
+      $("#applicationsTableContainer").html(htmlContent);
+      return;
+    }
+
+    htmlContent += `
+      <div class="users-table-wrapper">
+      <table class="users-table">
+        <thead>
+          <tr>
+            <th>Application ID</th>
+            <th>User</th>
+            <th>User ID</th>
+            <th>Job Title</th>
+            <th>Company</th>
+            <th>Company ID</th>
+            <th>Email</th>
+            <th>Experience Level</th>
+            <th>Applied At</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+
+    paginated.forEach((app) => {
+      htmlContent += `
+        <tr id="appRow_${app.application_id}">
+          <td>${app.application_id}</td>
+          <td>${app.user_name || app.applicant_name}</td>
+          <td>${app.user_id}</td>
+          <td>${app.job_title}</td>
+          <td>${app.company_name}</td>
+          <td>${app.company_id}</td>
+          <td>${app.email}</td>
+          <td>${app.experience_level}</td>
+          <td>${app.application_date}</td>
+          <td>
+          <button class="delete-application-btn"
+          data-application-id="${app.application_id}"
+          title="Delete application">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="3 6 5 6 21 6" />
+        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+        <path d="M10 11v6" />
+        <path d="M14 11v6" />
+        <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+        </svg>
+        </button>
+        </td>
+        </tr>
+      `;
+    });
+
+    htmlContent += `
+        </tbody>
+      </table>
+      </div>
+    `;
+    htmlContent += '<div id="applicationsPaginationContainer"></div>';
+
+    $("#applicationsTableContainer").html(htmlContent);
+
+    $("#applicationsTableContainer").off("click", ".delete-application-btn");
+    $("#applicationsTableContainer").on(
+      "click",
+      ".delete-application-btn",
+      function (e) {
+        e.preventDefault();
+        const appId = $(this).data("application-id");
+        if (!confirm("Are you sure you want to delete this application?")) {
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("action", "delete");
+        formData.append("application_id", appId);
+
+        fetch("/php/adminPanel/deleteJobApplications.php", {
+          method: "POST",
+          body: formData,
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            if (data.success) {
+              alert(data.message || "Application deleted successfully");
+              allApps = allApps.filter((a) => a.application_id !== appId);
+              defaultApps = defaultApps.filter(
+                (a) => a.application_id !== appId
+              );
+              displayApplications();
+            } else {
+              alert(data.error || "Failed to delete application");
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting application:", error);
+            alert("Error deleting application. Please try again.");
+          });
+      }
+    );
+
+    addPagination(
+      "#applicationsPaginationContainer",
+      total,
+      itemsPerPage,
+      currentPage,
+      function (nextPage) {
+        currentPage = nextPage;
+        displayApplications();
+      }
+    );
+  }
+}
+
 $(document).ready(function () {
   handleTotals();
   handleCompanyVerification();
@@ -1068,4 +1289,5 @@ $(document).ready(function () {
   handleUsersTable();
   handleCompaniesTable();
   handleJobsTable();
+  handleApplicationsTable();
 });
