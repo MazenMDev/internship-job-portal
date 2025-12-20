@@ -171,7 +171,7 @@ if (empty($errors)) {
             $company_name = $result["company_name"];
         }
         $title_notif='Application Submitted';
-        $desc_notif ='You have been Submitted a job application for  <a  style="color: var(--primary-color)" href="/pages/profile.html?id='. $company_id .'&type=company">'. $company_name .'</a>. , and for postion' .$job_title;
+        $desc_notif ='You have been Submitted a job application for  <a  target="_blank" style="color: var(--primary-color)" href="/pages/profile.html?id='. $company_id .'&type=company">'. $company_name .'</a>. , and for postion ' .$job_title;
 
         $stmt = $conn->prepare("INSERT INTO notifications (receiver_type , receiver_id, sender_id,sender_type,title, description) VALUES (1, ?, ?, 3, ?, ?)");
         $stmt->bind_param("iiss",$application_data['user_id'],$application_data['job_id'], $title_notif,$desc_notif) ;
@@ -193,7 +193,7 @@ if (empty($errors)) {
         }
 
         $title_notif='New Job Application';
-        $desc_notif ='user'.$application_data['full_name']. 'has applied for '.$job_title .' position <a style="color: var(--primary-color)" href="/pages/job-application-view.html?jobId='.$application_data['job_id'].'">View Application</a>';
+        $desc_notif ='user '.$application_data['full_name']. ' has applied for '.$job_title .' position <a target="_blank" style="color: var(--primary-color)" href="/pages/job-application-view.html?jobId='.$application_data['job_id'].'">View Application</a>';
 
 
         $stmt = $conn->prepare("INSERT INTO notifications (receiver_type , receiver_id, sender_id,sender_type,title, description) VALUES (2, ?, ?, 3, ?, ?)");
