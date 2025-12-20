@@ -4,7 +4,6 @@ CREATE TABLE job_applications (
     job_id INT NOT NULL,
     full_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    resume VARCHAR(255) NOT NULL,
     experience_level VARCHAR(50) NOT NULL,
     additional_note TEXT,
     cover_letter TEXT,
