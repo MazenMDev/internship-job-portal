@@ -5,6 +5,7 @@
     header('Content-Type: application/json');
     
     # Check if a file was uploaded
+    # UPLOAD_ERR_OK means there is no error with the upload
     if (!isset($_FILES['cv_file']) || $_FILES['cv_file']['error'] !== UPLOAD_ERR_OK) {
         echo json_encode(['success' => false, 'message' => 'No file uploaded or upload error.']);
         exit;
@@ -28,7 +29,7 @@
     }
 
 
-    # Create user-specific directory if it doesn't exist
+    # Create directory for user if it doesn't exist
     $upload_dir = __DIR__ . "/../CVStorage/$user_id/";
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0755, true);

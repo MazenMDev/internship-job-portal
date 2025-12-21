@@ -361,6 +361,7 @@ if (userData && userData.company_name) {
         return;
       }
       // salary format: 12000-16000 (allow optional spaces)
+      //\d any digit 1-7 number of digits, \s* zero or more spaces, - hyphen between the numbers and then \d for 1-7 digits
       const salaryPattern = /^\d{1,7}\s*-\s*\d{1,7}/;
       if (!salaryPattern.test(salary)) {
         errorMessageEl.textContent = "Salary must be in format: ex:12000-16000";

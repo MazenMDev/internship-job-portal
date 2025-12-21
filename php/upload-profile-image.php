@@ -43,6 +43,7 @@ if (!is_dir($uploadDir)) {
 }
 
 $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+//pathinfo( , PATHINFO_EXTENSION) gets the file extension then convert to lower case 
 $fileExt = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 if (!in_array($fileExt, $allowedTypes)) {
     echo json_encode(["success" => false, "message" => "Invalid file type"]);
@@ -50,9 +51,13 @@ if (!in_array($fileExt, $allowedTypes)) {
 }
 
 // delete existing profile images for this user
+//loop through allowed types and delete any existing files
 foreach ($allowedTypes as $ext) {
+    // use glob to find files matching the pattern (profile_(extentsion))
     foreach (glob($uploadDir . "profile_*.{$ext}") as $oldFile) {
+        // check if file exists and delete it
         if (is_file($oldFile)) {
+            // @unlink deletes the file
             @unlink($oldFile);
         }
     }
