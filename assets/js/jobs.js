@@ -19,6 +19,18 @@ document.addEventListener("DOMContentLoaded", function () {
       noFilterArr = jobListings;
       renderPage(currentPage);
       addSalaryFilterJobs();
+
+      // --- Auto-open job details if job_id is in URL ---
+      const params = new URLSearchParams(window.location.search);
+      const jobIdParam = params.get("job_id");
+      if (jobIdParam) {
+        const jobToShow = jobListings.find(
+          (j) => String(j.job_id) === String(jobIdParam)
+        );
+        if (jobToShow) {
+          showJobDetails(jobToShow);
+        }
+      }
     })
     .catch((error) => console.error("Error fetching jobs:", error));
 });
@@ -616,43 +628,17 @@ function addSalaryFilterJobs() {
   });
 }
 
-// THESE FUNCTIONS WILL BE REPLACED LATER WITH SQL QUERIES
-
-// FILTERING FUNCTION
-function searchJobs(keyword) {
-  const lowerKeyword = keyword.toLowerCase();
-  const filteredJobs = noFilterArr.filter((job) => {
-    return (
-      job.job_title.toLowerCase().includes(lowerKeyword) ||
-      job.location.toLowerCase().includes(lowerKeyword) ||
-      job.company_name.toLowerCase().includes(lowerKeyword) ||
-      job.category.toLowerCase().includes(lowerKeyword) ||
-      job.experience.toLowerCase().includes(lowerKeyword) ||
-      job.job_type.toLowerCase().includes(lowerKeyword) ||
-      job.tags.some((t) => t.toLowerCase().includes(lowerKeyword)) ||
-      job.skills.some((s) => s.toLowerCase().includes(lowerKeyword))
-    );
-  });
-  return filteredJobs;
-}
-
-// class="search-bar"
-
 const applyButton = document.querySelector(".apply-button");
 if (applyButton) {
   applyButton.addEventListener("click", function () {
-    inputSearch();
-    filterLables();
-    filterBySalary(minSlider.value, maxSlider.value);
+    applyAllFilters();
   });
 }
 
 document.addEventListener("keydown", function (e) {
   if (e.key == "Enter") {
     e.preventDefault();
-    inputSearch();
-    filterLables();
-    filterBySalary(minSlider.value, maxSlider.value);
+    applyAllFilters();
   }
 });
 
@@ -670,66 +656,12 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-function FilterCategories() {
-  const filteredCategories = [];
-
-  noFilterArr.forEach((job) => {
-    for (let cat of selectedCategories) {
-      if (cat === job.category) {
-        filteredCategories.push(job);
-      }
-    }
-  });
-  return filteredCategories;
-}
-
-const inputSearch = () => {
-  let searchInput = document.querySelector(".search-bar").value;
-  searchInput = searchInput.trim();
-
-  let filterJobs;
-  if (searchInput != "") {
-    resetFilter();
-    filterJobs = searchJobs(searchInput);
-    const filteredCat = FilterCategories();
-    if (filteredCat.length > 0) {
-      //Removes duplicate jobs from the filtered categories to not add a job twice if its returned from both filters
-      jobListings = filterJobs.filter((job) => {
-        return filteredCat.some((categ) => {
-          if (categ.job_id == job.job_id) {
-            return true;
-          }
-          return false;
-        });
-      });
-    } else {
-      if (filterJobs.length === 0) {
-        jobListings = [];
-        renderPage(currentPage);
-        showError("No jobs found.");
-        return;
-      }
-      jobListings = filterJobs;
-    }
-  } else {
-    if (FilterCategories().length === 0) {
-      if (selectedCategories.length === 0) {
-        jobListings = noFilterArr;
-        renderPage(currentPage);
-        return;
-      }
-      jobListings = [];
-      renderPage(currentPage);
-      showError("No jobs found.");
-      return;
-    } else {
-      jobListings = FilterCategories();
-    }
+function FilterCategories(jobs) {
+  if (selectedCategories.length === 0) {
+    return jobs;
   }
-
-  currentPage = 1;
-  renderPage(currentPage);
-};
+  return jobs.filter((job) => selectedCategories.includes(job.category));
+}
 
 function removeCatSelections() {
   const categoryFilters = document.querySelectorAll(".filter-checkbox");
@@ -739,39 +671,24 @@ function removeCatSelections() {
   selectedCategories.length = 0;
 }
 
-function filterLables() {
+function filterLables(jobs) {
   const labels = document.querySelectorAll(".filter-option-label");
-  let filteredJobs = noFilterArr;
+  let filteredJobs = jobs;
+
+  const selectedJobTypes = [];
+  const selectedDateFilters = [];
 
   labels.forEach((label) => {
     const checkbox = label.querySelector(".filter-checkbox");
     if (checkbox && checkbox.checked) {
-      // search by job type
       if (
         label.parentElement === document.querySelector(".type-filter-group")
       ) {
-        filteredJobs = filteredJobs.filter((job) => {
-          return (
-            job.job_type.toLowerCase() === label.innerText.trim().toLowerCase()
-          );
-        });
-        if (filteredJobs.length === 0) {
-          jobListings = [];
-          renderPage(currentPage);
-          showError("No jobs found.");
-        } else {
-          jobListings = filteredJobs;
-          renderPage(currentPage);
-        }
-      }
-
-      // search by date posted
-      else if (
+        selectedJobTypes.push(label.innerText.trim().toLowerCase());
+      } else if (
         label.parentElement === document.querySelector(".date-filter-group")
       ) {
-        const currentDate = new Date();
         let timeLimit = 0;
-
         if (checkbox.value === "last-hour") {
           timeLimit = 1 * 60 * 60 * 1000;
         } else if (checkbox.value === "last-24-hours") {
@@ -781,35 +698,53 @@ function filterLables() {
         } else if (checkbox.value === "last-30-days") {
           timeLimit = 30 * 24 * 60 * 60 * 1000;
         }
-
-        filteredJobs = filteredJobs.filter((job) => {
-          const jobDate = new Date(job.created_at.replace(" ", "T"));
-          return currentDate - jobDate <= timeLimit;
-        });
-
-        console.log(filteredJobs);
-        if (filteredJobs.length === 0) {
-          jobListings = [];
-          renderPage(currentPage);
-          showError("No jobs found.");
-        } else {
-          jobListings = filteredJobs;
-          renderPage(currentPage);
-        }
+        selectedDateFilters.push(timeLimit);
       }
     }
   });
 
-  currentPage = 1;
+  if (selectedJobTypes.length > 0) {
+    filteredJobs = filteredJobs.filter((job) => {
+      return selectedJobTypes.includes(job.job_type.toLowerCase());
+    });
+  }
+
+  if (selectedDateFilters.length > 0) {
+    const maxTimeLimit = Math.max(...selectedDateFilters);
+    const currentDate = new Date();
+    filteredJobs = filteredJobs.filter((job) => {
+      const jobDate = new Date(job.created_at.replace(" ", "T"));
+      return currentDate - jobDate <= maxTimeLimit;
+    });
+  }
+
+  return filteredJobs;
 }
 
-function filterBySalary(minSalary, maxSalary) {
-  const filteredJobs = noFilterArr.filter((job) => {
-    return job.salary_min >= minSalary && job.salary_max <= maxSalary;
+function filterBySalary(jobs, minSalary, maxSalary) {
+  return jobs.filter((job) => {
+    return job.salary_min <= maxSalary && job.salary_max >= minSalary;
   });
+}
+
+function applyAllFilters() {
+  let filteredJobs = [...noFilterArr];
+
+  filteredJobs = inputSearch(filteredJobs);
+
+  filteredJobs = FilterCategories(filteredJobs);
+
+  filteredJobs = filterLables(filteredJobs);
+
+  filteredJobs = filterBySalary(
+    filteredJobs,
+    parseInt(minSlider.value),
+    parseInt(maxSlider.value)
+  );
 
   if (filteredJobs.length === 0) {
     jobListings = [];
+    currentPage = 1;
     renderPage(currentPage);
     showError("No jobs found.");
   } else {
@@ -830,8 +765,36 @@ function resetButton() {
 function resetFilter() {
   jobListings = noFilterArr;
   removeCatSelections();
+  const typeAndDateCheckboxes = document.querySelectorAll(
+    ".type-filter-group .filter-checkbox, .date-filter-group .filter-checkbox"
+  );
+  typeAndDateCheckboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
   currentPage = 1;
   renderPage(currentPage);
+}
+
+function inputSearch(jobs) {
+  const searchInput = document.querySelector(".search-bar").value.trim();
+  if (searchInput === "") {
+    return jobs;
+  }
+  resetFilter();
+
+  const lowerKeyword = searchInput.toLowerCase();
+  return noFilterArr.filter((job) => {
+    return (
+      job.job_title.toLowerCase().includes(lowerKeyword) ||
+      job.location.toLowerCase().includes(lowerKeyword) ||
+      job.company_name.toLowerCase().includes(lowerKeyword) ||
+      job.category.toLowerCase().includes(lowerKeyword) ||
+      job.experience.toLowerCase().includes(lowerKeyword) ||
+      job.job_type.toLowerCase().includes(lowerKeyword) ||
+      job.tags.some((t) => t.toLowerCase().includes(lowerKeyword)) ||
+      job.skills.some((s) => s.toLowerCase().includes(lowerKeyword))
+    );
+  });
 }
 
 export { jobListings, getSVG, timeSince, toggleBookmark, userBookMarks };
