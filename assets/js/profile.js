@@ -17,9 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector(".edit-form");
   if (form) {
     form.addEventListener("submit", (e) => {
-      e.preventDefault(); // Stop the browser from submitting/refreshing
-      // You can also call your save function here if you want "Enter" to save:
-      // document.querySelector(".save-btn").click();
+      e.preventDefault();
     });
   }
 });
@@ -306,10 +304,10 @@ document.addEventListener("click", (e) => {
   if (!form) return;
 
   const titleInput = form.querySelector(".title-input");
-  
+
   if (titleInput && !titleInput.value.trim()) {
-    titleInput.reportValidity(); 
-    return; 
+    titleInput.reportValidity();
+    return;
   }
 
   const container = form.parentElement;
@@ -336,7 +334,6 @@ document.addEventListener("click", (e) => {
     else listRef = projectsList;
   }
 
-  // Check if this is a project form
   const isProjects = container.classList.contains("projects-forms-container");
 
   if (isProjects) {
@@ -422,7 +419,7 @@ document.addEventListener("click", (e) => {
     return;
   }
 
-  listRef.splice(index, 1); // delete entry
+  listRef.splice(index, 1);
 
   if (isSkill) {
     renderSkills();
@@ -449,7 +446,6 @@ function renderProfileAccordionSection(
   if (!container) return;
   container.innerHTML = "";
 
-  // Auto-detect if sectionType is not provided
   let isProjects = sectionType === "projects";
   if (!sectionType) {
     isProjects =
@@ -464,7 +460,7 @@ function renderProfileAccordionSection(
 
     const header = document.createElement("div");
     header.classList.add("profile-accordion-header");
-    // We insert the SVG directly here
+
     header.innerHTML = `
       <span>${item.title || `Entry ${idx + 1}`}</span>
       <span class="arrow">
@@ -586,7 +582,6 @@ function initDatePicker(wrapper) {
     if (selectedMonth && selectedYear) dropdown.style.display = "none";
   }
 
-  // close dropdown when clicking outside
   document.addEventListener("click", (e) => {
     if (!input.contains(e.target) && !dropdown.contains(e.target)) {
       dropdown.style.display = "none";
@@ -684,12 +679,10 @@ document.addEventListener("click", (e) => {
   }
 });
 
-/* REPLACE THE populateEditDropdown FUNCTION WITH THIS */
 function populateEditDropdown(form, type) {
   const select = form.querySelector(".edit-entry-select");
   if (!select) return;
 
-  // 1. Populate the dropdown options
   select.innerHTML = `<option value="">-- Select existing ${type} --</option>`;
   (profileData[type] || []).forEach((item, index) => {
     const opt = document.createElement("option");
@@ -698,24 +691,20 @@ function populateEditDropdown(form, type) {
     select.appendChild(opt);
   });
 
-  // 2. Handle selection change
   select.addEventListener("change", () => {
-    // If an index is selected, get that entry. If not, use an empty object to clear fields.
     const entry = profileData[type][select.value] || {};
 
-    // Helper: Find input by class. If it exists, set its value. If not, do nothing.
     const setVal = (selector, key) => {
       const input = form.querySelector(selector);
       if (input) input.value = entry[key] || "";
     };
 
-    // 3. Update all possible fields safely
     setVal(".title-input", "title");
     setVal(".description-input", "description");
     setVal(".institution-input", "institution");
     setVal(".start-date", "start_date");
     setVal(".end-date", "end_date");
-    setVal(".link-input", "link"); // This loads your Project URL
+    setVal(".link-input", "link");
   });
 }
 
@@ -733,32 +722,26 @@ function populateSkillDropdown(form) {
   const select = form.querySelector(".edit-skill-select");
   if (!select) return;
 
-  // 1. Reset the dropdown
   select.innerHTML = `<option value="">-- Select existing --</option>`;
 
-  // 2. Loop through the global skillsList and create options
   skillsList.forEach((item, index) => {
     const opt = document.createElement("option");
     opt.value = index;
-    // content is the skill name
     opt.textContent = item.skill || `Skill ${index + 1}`;
     select.appendChild(opt);
   });
 
-  // 3. Add event listener to fill the inputs when a skill is selected
   select.addEventListener("change", () => {
     const index = select.value;
     const nameInput = form.querySelector("input.form-input");
     const infoInput = form.querySelector(".bullet-editor");
 
-    // If user selects the default "-- Select existing --", clear inputs
     if (index === "") {
       if (nameInput) nameInput.value = "";
       if (infoInput) infoInput.innerHTML = "<ul><li></li></ul>";
       return;
     }
 
-    // Otherwise, fill inputs with the selected skill data
     const entry = skillsList[index];
     if (entry) {
       if (nameInput) nameInput.value = entry.skill || "";
@@ -781,7 +764,7 @@ function renderSkills() {
 const params = new URLSearchParams(window.location.search);
 const userId = params.get("id");
 const Type = params.get("type");
-//url example: profile.html?id=1&type=user
+
 console.log(`Profile ID: ${userId}, Type: ${Type}`);
 fetchProfileData();
 function fetchProfileData() {
@@ -801,7 +784,6 @@ function get_user_data() {
       if (data.error) {
         document.body.innerHTML = `<h2>${data.error}</h2>`;
       } else {
-        // 1. Update Profile Image
         if (data.Image == "profile.jpeg") {
           document.querySelector(
             ".profile-photo"
@@ -819,15 +801,15 @@ function get_user_data() {
         }
 
         let cvCard = document.getElementById("cvCard");
-        if(data.cv == null){
+        if (data.cv == null) {
           cvCard.style.display = "none";
-        }
-        else{
+        } else {
           cvCard.href = `/CVStorage/${userId}/${data.cv}`;
-          document.querySelector(".file-display-text").innerHTML = `<span style="color: var(--secondary-color)">Update CV:</span> ${data.cv}`;
+          document.querySelector(
+            ".file-display-text"
+          ).innerHTML = `<span style="color: var(--secondary-color)">Update CV:</span> ${data.cv}`;
         }
 
-        // 2. Update Text Display
         document.querySelector(".first-name").textContent = data.First_Name;
         document.querySelector(".last-name").textContent = data.Last_Name;
         document.querySelector(".profile-section .headline").textContent =
@@ -835,7 +817,6 @@ function get_user_data() {
         document.querySelector(".profile-section .Bio p").textContent =
           data.Bio || "";
 
-        /* --- 3. PRE-FILL INPUTS (Moved here from Company function) --- */
         const fInput = document.getElementById("first-name");
         const lInput = document.getElementById("last-name");
         const hInput = document.getElementById("profile-headline");
@@ -846,7 +827,6 @@ function get_user_data() {
         if (hInput) hInput.value = data.Title || "";
         if (bInput) bInput.value = data.Bio || "";
 
-        /* --- 4. LOAD LISTS FROM DB (Moved here from Company function) --- */
         if (data.experience)
           experienceList.splice(0, experienceList.length, ...data.experience);
         if (data.education)
@@ -858,13 +838,11 @@ function get_user_data() {
         if (data.skills)
           skillsList.splice(0, skillsList.length, ...data.skills);
 
-        // 5. Render UI
         renderProfileAccordion();
         renderSkills();
         populateAllDropdowns();
         updateSectionVisibility();
 
-        // 6. Handle Edit Button Visibility
         if (data.is_owner === true) {
           document.getElementById("profile-edit").style.display = "block";
         } else {
@@ -892,24 +870,6 @@ function get_company_data() {
   fetch(`../php/profile_company.php?id=${userId}`)
     .then((res) => res.json())
     .then((data) => {
-      /*
-        data:
-        {
-        "company_id": 1,
-        "company_name": "Job Connect Test Account",
-        "company_email": "JobConnect@gmail.com",
-        "description": null,
-        "company_url": "http://localhost:3000/pages/profile.html?id=1#",
-        "street_address": "assdasdasda",
-        "city": "Fisal",
-        "state": "AL Mariotia Fisal",
-        "zip_code": "asdasd",
-        "country": "Egypt",
-        "image": "company.png",
-        "is_owner": true
-        }
-      */
-
       if (data.error) {
         document.body.innerHTML = `<h2>${data.error}</h2>`;
       } else {
@@ -1278,7 +1238,6 @@ function closeModal() {
 
 document.getElementById("view-photo").addEventListener("click", uploadPhoto);
 function uploadPhoto() {
-  // create a hidden file input to choose an image
   const fileInput = document.createElement("input");
   fileInput.type = "file";
   fileInput.accept = "image/*";
@@ -1297,9 +1256,6 @@ function uploadPhoto() {
   };
 }
 
-
-
-// Uploading CV
 function uploadCVToServer(file) {
   const formData = new FormData();
   formData.append("cv_file", file);
@@ -1319,23 +1275,21 @@ function uploadCVToServer(file) {
 }
 
 let cvFile = null;
-document.getElementById("cv-file-input").addEventListener("change", function () {
+document
+  .getElementById("cv-file-input")
+  .addEventListener("change", function () {
     const file = this.files[0];
     document.querySelector(".file-display-text").innerHTML = `${file.name}`;
     cvFile = file;
-});
+  });
 
-
-/* MAIN PROFILE SAVE LOGIC */
+/* Profile Save */
 document.addEventListener("click", (e) => {
-  // Check if the clicked element is the "Save" button
   const btn = e.target.closest(".save-btn");
   if (!btn) return;
 
-  // 1. IMPORTANT: Stop the page from refreshing
   e.preventDefault();
   if (Type === "company") {
-    // 1. Get values using IDs from your editCompanyInfo function
     const companyPayload = {
       company_name: document.getElementById("company-name")?.value.trim(),
       description: document.getElementById("profile-About-us")?.value.trim(),
@@ -1349,13 +1303,11 @@ document.addEventListener("click", (e) => {
         ?.value.trim(),
       zip_code: document.getElementById("companyZipCode")?.value.trim(),
       company_email: document.querySelector(".profile-section .headline")
-        ?.textContent, // Preserve email
+        ?.textContent,
     };
 
-    // 2. Update the display immediately for visual feedback
     showCompanyInfo(companyPayload);
 
-    // 3. Send to PHP (Ensure your PHP handles POST)
     fetch("../php/profile_company.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -1372,7 +1324,6 @@ document.addEventListener("click", (e) => {
       })
       .catch((err) => console.error("Save error:", err));
   } else if (Type === "user") {
-    // 2. Get values from the input fields
     const fInput = document.getElementById("first-name");
     const lInput = document.getElementById("last-name");
     const hInput = document.getElementById("profile-headline");
@@ -1383,7 +1334,6 @@ document.addEventListener("click", (e) => {
     const title = hInput ? hInput.value.trim() : "";
     const bio = bInput ? bInput.value.trim() : "";
 
-    // 3. Update the display text immediately (Visual feedback)
     const fDisplay = document.querySelector(".first-name");
     const lDisplay = document.querySelector(".last-name");
     const hDisplay = document.querySelector(".profile-section .headline");
@@ -1394,8 +1344,6 @@ document.addEventListener("click", (e) => {
     if (hDisplay) hDisplay.textContent = title;
     if (bDisplay) bDisplay.textContent = bio;
 
-    // 4. Prepare data for the database
-    // We send the basic info PLUS all the existing lists (experience, etc.)
     const payload = {
       fname: fname,
       lname: lname,
@@ -1408,7 +1356,6 @@ document.addEventListener("click", (e) => {
       skills: skillsList,
     };
 
-    // 5. Send to PHP
     fetch("../php/profile_user.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -1418,7 +1365,7 @@ document.addEventListener("click", (e) => {
       .then((data) => {
         if (data.success) {
           alert("Profile saved successfully!");
-          document.body.classList.remove("edit-open"); // Close the panel
+          document.body.classList.remove("edit-open");
         } else {
           console.error(data);
           alert("Error saving profile.");
@@ -1429,11 +1376,8 @@ document.addEventListener("click", (e) => {
         alert("An error occurred while saving.");
       });
 
-      if(cvFile){
-        uploadCVToServer(cvFile);
-      }
+    if (cvFile) {
+      uploadCVToServer(cvFile);
+    }
   }
 });
-
-
-

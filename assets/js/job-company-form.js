@@ -73,12 +73,6 @@ document.getElementById("addSkill").addEventListener("click", function (e) {
   });
 });
 
-
-
-
-
-
-
 document.getElementById("addtag").addEventListener("click", function (e) {
   e.preventDefault();
 

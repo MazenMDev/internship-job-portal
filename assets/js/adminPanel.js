@@ -7,12 +7,11 @@ function searchArray(searchQuery, dataArray) {
   //change the input to lower case to be able to search the whole array (lower case and uppercase)
   const query = searchQuery.toLowerCase().trim();
 
-
   //loop through each item in the array and get its value , then see if it includes the search
   const filteredArray = dataArray.filter((item) => {
     for (let val in item) {
       const value = item[val];
-      if (value !== null && value !== undefined){
+      if (value !== null && value !== undefined) {
         const valueString = String(value).toLowerCase();
         if (valueString.includes(query)) {
           return true;
@@ -23,7 +22,6 @@ function searchArray(searchQuery, dataArray) {
   });
 
   return filteredArray;
-  
 }
 
 function addPagination(

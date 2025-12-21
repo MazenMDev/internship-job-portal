@@ -5,15 +5,13 @@ include 'db_connection.php';
 
 header('Content-Type: application/json');
 
-if(!isset($_SESSION['type']))
-{
-  echo json_encode(['success' => 'false', 'message' => 'User not logged in']);
+if (!isset($_SESSION['type'])) {
+    echo json_encode(['success' => 'false', 'message' => 'User not logged in']);
     exit;
 }
 
-if($_SESSION['type'] !== 'user')
-{
-  echo json_encode(['success' => 'false', 'message' => 'only users can view applications']);
+if ($_SESSION['type'] !== 'user') {
+    echo json_encode(['success' => 'false', 'message' => 'only users can view applications']);
     exit;
 }
 
@@ -22,18 +20,15 @@ $user_id = $_SESSION['user_id'];
 $statement = $conn->prepare("SELECT * FROM job_applications where user_id = ?");
 $statement->bind_param("i", $user_id);
 
-if($statement->execute())
-{
+if ($statement->execute()) {
     $result = $statement->get_result();
     $applications = [];
-    while($row = $result->fetch_assoc())
-    {
+    while ($row = $result->fetch_assoc()) {
         $statement_job = $conn->prepare("SELECT * FROM jobs WHERE job_id = ?");
         $statement_job->bind_param("i", $row['job_id']);
         $statement_job->execute();
         $result_job = $statement_job->get_result();
-        if($job = $result_job->fetch_assoc())
-        {
+        if ($job = $result_job->fetch_assoc()) {
             $row['job'] = $job;
         }
 
@@ -42,8 +37,7 @@ if($statement->execute())
         $statement_company->bind_param("i", $job['company_id']);
         $statement_company->execute();
         $result_company = $statement_company->get_result();
-        if($company = $result_company->fetch_assoc())
-        {
+        if ($company = $result_company->fetch_assoc()) {
             $row['company'] = $company;
         }
 
@@ -53,14 +47,12 @@ if($statement->execute())
 
     }
     echo json_encode([
-        'success' => 'true', 
+        'success' => 'true',
         'applications' => $applications
     ]);
-}
-else
-{
+} else {
     echo json_encode([
-        'success' => 'false', 
+        'success' => 'false',
         'message' => 'failed to fetch applications'
     ]);
 }

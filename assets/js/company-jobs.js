@@ -485,7 +485,8 @@ function addCompanyData(data) {
     }
   });
   document.getElementById("active-listings").textContent = countActiveJobs;
-  document.getElementById("applications-received").textContent = data.num_applications;
+  document.getElementById("applications-received").textContent =
+    data.num_applications;
 
   const companyJobsContainer = document.querySelector(".company-posted-grid");
   data.jobs.forEach((job) => {

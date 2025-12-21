@@ -119,7 +119,7 @@ function rightDivContent(job, formRightDiv) {
         })
         .catch((err) => {
           console.error(err);
-          return { success: false, message: 'Upload failed' };
+          return { success: false, message: "Upload failed" };
         });
     }
 
