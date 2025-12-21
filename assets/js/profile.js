@@ -166,7 +166,7 @@ document.addEventListener("click", (e) => {
       !isprojects
         ? `
         <label>Title</label>
-        <textarea class="title-input"></textarea>
+        <textarea class="title-input" required></textarea>
 
         <label>${isCourse ? "Institution" : ""}
         ${iseducation ? "School/University" : ""}
@@ -215,7 +215,7 @@ document.addEventListener("click", (e) => {
       isprojects
         ? `
         <label>Project Name</label>
-        <textarea class="title-input"></textarea>
+        <textarea class="title-input" required></textarea>
 
         <label>Project URL</label>
         <input type="url" class="link-input" placeholder="https://example.com">
@@ -304,13 +304,19 @@ document.addEventListener("click", (e) => {
 
   const form = e.target.closest(".entry-form, .course-form");
   if (!form) return;
+
+  const titleInput = form.querySelector(".title-input");
+  
+  if (titleInput && !titleInput.value.trim()) {
+    titleInput.reportValidity(); 
+    return; 
+  }
+
   const container = form.parentElement;
 
-  // Declare data outside the if blocks
   let data;
   let listRef;
 
-  // Determine which list based on container
   if (container.classList.contains("courses-forms-container")) {
     listRef = coursesList;
   } else if (container.classList.contains("experience-forms-container")) {
@@ -721,6 +727,44 @@ function escapeHtml(text) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+function populateSkillDropdown(form) {
+  const select = form.querySelector(".edit-skill-select");
+  if (!select) return;
+
+  // 1. Reset the dropdown
+  select.innerHTML = `<option value="">-- Select existing --</option>`;
+
+  // 2. Loop through the global skillsList and create options
+  skillsList.forEach((item, index) => {
+    const opt = document.createElement("option");
+    opt.value = index;
+    // content is the skill name
+    opt.textContent = item.skill || `Skill ${index + 1}`;
+    select.appendChild(opt);
+  });
+
+  // 3. Add event listener to fill the inputs when a skill is selected
+  select.addEventListener("change", () => {
+    const index = select.value;
+    const nameInput = form.querySelector("input.form-input");
+    const infoInput = form.querySelector(".bullet-editor");
+
+    // If user selects the default "-- Select existing --", clear inputs
+    if (index === "") {
+      if (nameInput) nameInput.value = "";
+      if (infoInput) infoInput.innerHTML = "<ul><li></li></ul>";
+      return;
+    }
+
+    // Otherwise, fill inputs with the selected skill data
+    const entry = skillsList[index];
+    if (entry) {
+      if (nameInput) nameInput.value = entry.skill || "";
+      if (infoInput) infoInput.innerHTML = entry.info || "<ul><li></li></ul>";
+    }
+  });
 }
 
 function renderSkills() {
