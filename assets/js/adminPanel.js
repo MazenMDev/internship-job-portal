@@ -4,14 +4,26 @@ function searchArray(searchQuery, dataArray) {
     return dataArray;
   }
 
+  //change the input to lower case to be able to search the whole array (lower case and uppercase)
   const query = searchQuery.toLowerCase().trim();
 
-  return dataArray.filter((item) => {
-    return Object.values(item).some((value) => {
-      if (value === null || value === undefined) return false;
-      return String(value).toLowerCase().includes(query);
-    });
+
+  //loop through each item in the array and get its value , then see if it includes the search
+  const filteredArray = dataArray.filter((item) => {
+    for (let val in item) {
+      const value = item[val];
+      if (value !== null && value !== undefined){
+        const valueString = String(value).toLowerCase();
+        if (valueString.includes(query)) {
+          return true;
+        }
+      }
+    }
+    return false;
   });
+
+  return filteredArray;
+  
 }
 
 function addPagination(
@@ -19,7 +31,7 @@ function addPagination(
   totalItems,
   itemsPerPage,
   currentPage,
-  onPageChange
+  onPageChange // a callback function
 ) {
   const $container = $(containerSelector);
   if (!$container.length) return;
@@ -120,7 +132,16 @@ function handleTotals() {
         document.body.innerHTML = `<h1>${data.error}</h1>`;
         return;
       }
-      console.log(data);
+      /*
+        console.log(data);
+        {
+          "total_users": 4,
+          "total_companies": 6,
+          "total_jobs": 5,
+          "total_applications": 4,
+          "first_name": "Kareem"
+        }
+      */
       $totalUsers.text(data.total_users);
       $totalCompanies.text(data.total_companies);
       $totalJobs.text(data.total_jobs);
@@ -152,24 +173,24 @@ function handleCompanyVerification() {
         }
 
         allCompanies = data;
-        /*console.log(data)
-                {
-    "verification_id": 1,
-    "is_verified": 0,
-    "company_name": "testing_COMPANY_verif",
-    "company_email": "Test@gmail.com",
-    "password": "$2y$10$SRsvBbals0uiknMBWemc6uleM4yggEIYZXWhR6P5rNXa2yM9rCLQ.",
-    "company_phone": "01211125898",
-    "company_city": "Fisal",
-    "company_state": "fa",
-    "company_zip": "aaa",
-    "company_country": "Egyptaaa",
-    "company_website": "https://github.com/khaledcodeo-man",
-    "verification_code": "",
-    "created_at": "2025-12-15 20:44:24",
-    "company_address": "asdasda"
-}
-                */
+        /*
+        console.log(data)
+        {
+          "verification_id": 1,
+          "is_verified": 0,
+          "company_name": "testing_COMPANY_verif",
+          "company_email": "Test@gmail.com",
+          "company_phone": "01211125898",
+          "company_city": "Fisal",
+          "company_state": "fa",
+          "company_zip": "aaa",
+          "company_country": "Egyptaaa",
+          "company_website": "https://github.com/khaledcodeo-man",
+          "verification_code": "",
+          "created_at": "2025-12-15 20:44:24",
+          "company_address": "asdasda"
+        }
+        */
         displayCompanies();
       })
       .catch((error) => {
@@ -341,8 +362,31 @@ function handleMessages() {
         return;
       }
       messages = data;
-
-      console.log(messages);
+      /*
+        console.log(messages);
+        [
+          {
+              "message_id": 8,
+              "email": "kareem99710@gmail.com",
+              "message": "aaa",
+              "created_at": "2025-12-20 17:58:15",
+              "user_Id": 1,
+              "first_name": "Kareem",
+              "last_name": "Ahmed",
+              "company_id": null
+          },
+          {
+              "message_id": 7,
+              "email": "kareem99710@gmail.com",
+              "message": "aaa",
+              "created_at": "2025-12-20 17:54:53",
+              "user_Id": null,
+              "first_name": "Kareem",
+              "last_name": "Ahmed",
+              "company_id": 1
+          }
+        ]
+      */
       showMessages(data);
     })
     .catch((error) => console.error("Error fetching messages:", error));
@@ -488,6 +532,36 @@ function handleUsersTable() {
           usersPanel.html(`<h3>${data.error}</h3>`);
           return;
         }
+        /*
+          console.log(data);
+          {
+              "success": true,
+              "users": [
+                  {
+                      "Id": 1,
+                      "First_Name": "Kareem",
+                      "Last_Name": "Ahmed",
+                      "Email": "admin@gmail.com",
+                      "Title": "Student at MSA University",
+                      "Image": "profile_1766308011.jpg",
+                      "cv": "Course Registeration System.pdf",
+                      "created_at": "2025-11-13 13:54:02",
+                      "updated_at": "2025-12-21 11:06:51"
+                  },
+                  {
+                      "Id": 2,
+                      "First_Name": "Test",
+                      "Last_Name": "Account",
+                      "Email": "t@gmail.com",
+                      "Title": null,
+                      "Image": "profile_1766308114.jpg",
+                      "cv": null,
+                      "created_at": "2025-11-15 13:41:33",
+                      "updated_at": "2025-12-21 11:08:35"
+                  }
+              ]
+          }
+        */
         allUsers = data.users;
         defaultUsers = data.users;
 
@@ -670,6 +744,59 @@ function handleCompaniesTable() {
           $("#companiesPanel").html(`<h3>${data.error}</h3>`);
           return;
         }
+        /*
+          console.log(data);
+          {
+              "companies": [
+            {
+                  {
+                      "company_id": 4,
+                      "company_name": "Google",
+                      "phone_number": "+1 650-253-0000",
+                      "street_address": "1600 Amphitheatre Parkway",
+                      "city": "Mountain View",
+                      "state": "California",
+                      "zip_code": "94043",
+                      "country": "USA",
+                      "company_url": "https://careers.google.com",
+                      "created_at": "2025-12-21 11:16:29",
+                      "Image": "profile_1766308783.jpg",
+                      "total_jobs": 1,
+                      "total_applications": 0
+                  },
+                  {
+                      "company_id": 5,
+                      "company_name": "Microsoft",
+                      "phone_number": "+1 425-882-8080",
+                      "street_address": "One Microsoft Way",
+                      "city": "Redmond",
+                      "state": "Washington",
+                      "zip_code": "98052",
+                      "country": "USA",
+                      "company_url": "https://careers.microsoft.com",
+                      "created_at": "2025-12-21 11:16:29",
+                      "Image": "profile_1766329568.png",
+                      "total_jobs": 1,
+                      "total_applications": 0
+                  },
+                  {
+                      "company_id": 6,
+                      "company_name": "J-a",
+                      "phone_number": "01211125898",
+                      "street_address": "smart Village 1st gate",
+                      "city": "Smart Village",
+                      "state": "Giaza",
+                      "zip_code": "11231",
+                      "country": "Egypt",
+                      "company_url": "https://github.com/MazenMDev/internship-job-portal",
+                      "created_at": "2025-12-21 17:27:14",
+                      "Image": "profile_1766330936.png",
+                      "total_jobs": 0,
+                      "total_applications": 0
+                  }
+              ]
+          }
+        */
         allCompanies = data.companies;
         defaultCompanies = data.companies;
 
@@ -859,7 +986,58 @@ function handleJobsTable() {
           $("#jobsPanel").html(`<h3>${data.error}</h3>`);
           return;
         }
-
+        /*
+          console.log(data);
+          {
+              "jobs": [
+                  {
+                      "job_id": 1,
+                      "company_id": 1,
+                      "company_name": "Job Connect Test Account",
+                      "title": "Test Job Posting",
+                      "job_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel aliquam tellus, sit amet porttitor quam. Cras eu erat sed ipsum laoreet tincidunt. Mauris commodo tincidunt turpis, ut ullamcorper ex sollicitudin sed. Nulla varius mattis orci, quis blandit nisl dapibus eu. Cras quam elit, auctor eget enim et, euismod elementum risus. Nam odio sem, pharetra nec tincidunt vitae, rhoncus nec sapien. Integer sem ex, pellentesque id libero ut, volutpat pharetra lacus. Vestibulum et lacinia massa. Morbi ornare nisi at placerat egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas sagittis vehicula nisi eu tempor. In non ligula metus. Praesent faucibus, nibh eu bibendum sodales, lorem odio consectetur tellus, vel vulputate quam leo eu quam.\r\n\r\nAliquam erat volutpat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam eget pulvinar magna. Cras vitae nisi eu sem vestibulum commodo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut sit amet nisi vulputate nisl fringilla ultricies. Nulla viverra ornare massa a rhoncus. Praesent consequat, quam nec porta mollis, ligula neque consequat nibh, sed ultricies nibh augue in ex. Curabitur feugiat risus vel mi vulputate, tincidunt volutpat purus maximus. Ut vitae nisl eu quam fermentum imperdiet eu in metus. Aliquam sed lectus leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin id semper erat.",
+                      "location": "Fisal, Egypt",
+                      "category": "Software Development",
+                      "experience": "No Experience",
+                      "job_type": "part-time",
+                      "is_deleted": 0,
+                      "min_salary": 10000,
+                      "max_salary": 20000,
+                      "created_at": "2025-12-13 16:12:14"
+                  },
+                  {
+                      "job_id": 2,
+                      "company_id": 2,
+                      "company_name": "testing_COMPANY_verif",
+                      "title": "Job 2",
+                      "job_description": "This a description for this job test posting, aasdadasdfsad",
+                      "location": "Fisal, Egyptaaa",
+                      "category": "Network & System Administration",
+                      "experience": "3 years+",
+                      "job_type": "remote",
+                      "is_deleted": 0,
+                      "min_salary": 20000,
+                      "max_salary": 40000,
+                      "created_at": "2025-12-19 23:54:33"
+                  },
+                  {
+                      "job_id": 3,
+                      "company_id": 1,
+                      "company_name": "Job Connect Test Account",
+                      "title": "SE",
+                      "job_description": "telll me do you bleetelll me do you bleetelll me do you bleetelll me do you bleetelll me do you bleetelll me do you bleetelll me do you bleetelll me do you blee",
+                      "location": "Fisal, Egypt",
+                      "category": "Software Development",
+                      "experience": "sdfsd",
+                      "job_type": "part-time",
+                      "is_deleted": 0,
+                      "min_salary": 12005,
+                      "max_salary": 66767,
+                      "created_at": "2025-12-21 10:02:57"
+                  }
+              ]
+          }
+        */
         allJobs = data.jobs;
         defaultJobs = data.jobs;
 
@@ -1111,7 +1289,45 @@ function handleApplicationsTable() {
           $("#jobApplication").html(`<h3>${data.error}</h3>`);
           return;
         }
-
+        /*
+        console.log(data)
+          {
+              "applications": [
+                  {
+                      "application_id": 7,
+                      "user_id": 1,
+                      "user_name": "Kareem",
+                      "job_id": 1,
+                      "job_title": "Test Job Posting",
+                      "company_id": 1,
+                      "company_name": "Job Connect Test Account",
+                      "applicant_name": "Kareem Ahmed",
+                      "email": "kareem99710@gmail.com",
+                      "resume": "",
+                      "experience_level": "mid-level",
+                      "additional_note": "hi",
+                      "cover_letter": "hi",
+                      "application_date": "2025-12-20 21:59:14"
+                  },
+                  {
+                      "application_id": 5,
+                      "user_id": 1,
+                      "user_name": "Kareem",
+                      "job_id": 2,
+                      "job_title": "Job 2",
+                      "company_id": 2,
+                      "company_name": "testing_COMPANY_verif",
+                      "applicant_name": "Kareem Ahmed",
+                      "email": "kareem99710@gmail.com",
+                      "resume": "",
+                      "experience_level": "mid-level",
+                      "additional_note": "test",
+                      "cover_letter": "test",
+                      "application_date": "2025-12-20 19:41:14"
+                  }
+              ]
+          }
+        */
         allApps = data.applications;
         defaultApps = data.applications;
 
