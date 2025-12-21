@@ -34,7 +34,7 @@ function displayImages(users) {
   document.querySelector(".image2").src = users[1].Image;
   document.querySelector(".image3").src = users[2].Image;
   document.querySelector(".image4").src = users[3].Image;
-    "/ImageStorage/users/" + users[3].Image;
+  "/ImageStorage/users/" + users[3].Image;
 }
 
 // put icons for each main category
@@ -92,7 +92,9 @@ function renderRecentJobs() {
     </div>
     <p class="job-location">${job.location}</p>
     <p class="job-salary">${job.salary_min} - ${job.salary_max}</p>
-    <a href ="#" class="job-view-details">View Details</a>
+    <a href="./jobs.html?job_id=${
+      job.job_id
+    }" class="job-view-details">View Details</a>
     `;
     container.appendChild(item);
   });

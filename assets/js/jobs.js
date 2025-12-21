@@ -19,6 +19,18 @@ document.addEventListener("DOMContentLoaded", function () {
       noFilterArr = jobListings;
       renderPage(currentPage);
       addSalaryFilterJobs();
+
+      // --- Auto-open job details if job_id is in URL ---
+      const params = new URLSearchParams(window.location.search);
+      const jobIdParam = params.get("job_id");
+      if (jobIdParam) {
+        const jobToShow = jobListings.find(
+          (j) => String(j.job_id) === String(jobIdParam)
+        );
+        if (jobToShow) {
+          showJobDetails(jobToShow);
+        }
+      }
     })
     .catch((error) => console.error("Error fetching jobs:", error));
 });
@@ -616,7 +628,6 @@ function addSalaryFilterJobs() {
   });
 }
 
-
 const applyButton = document.querySelector(".apply-button");
 if (applyButton) {
   applyButton.addEventListener("click", function () {
@@ -674,9 +685,7 @@ function filterLables(jobs) {
         label.parentElement === document.querySelector(".type-filter-group")
       ) {
         selectedJobTypes.push(label.innerText.trim().toLowerCase());
-      }
-
-      else if (
+      } else if (
         label.parentElement === document.querySelector(".date-filter-group")
       ) {
         let timeLimit = 0;
