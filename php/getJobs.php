@@ -5,6 +5,7 @@ header('Content-Type: application/json');
 $statement = $conn->prepare('
   SELECT * FROM jobs
   WHERE is_deleted = 0
+  ORDER BY created_at DESC
 ');
 if($statement->execute()){
   $jobs = $statement->get_result();
