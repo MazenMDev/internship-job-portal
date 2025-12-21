@@ -3,8 +3,8 @@ include './db_connection.php';
 session_start();
 header('Content-Type: application/json');
 
-if(!isset($_SESSION['type'])){
-    echo json_encode(array('error'=> 'not signed in'));
+if (!isset($_SESSION['type'])) {
+    echo json_encode(array('error' => 'not signed in'));
     exit;
 }
 
@@ -13,13 +13,13 @@ $stat->bind_param('i', $_SESSION['company_id']);
 $stat->execute();
 $result = $stat->get_result();
 
-if($result->num_rows == 0){
-    echo json_encode(array('error'=> 'User is not a company'));
+if ($result->num_rows == 0) {
+    echo json_encode(array('error' => 'User is not a company'));
     exit;
 }
 
 $company = $result->fetch_assoc();
-$company_id = $company['company_id']; 
+$company_id = $company['company_id'];
 
 
 $numApplications = $conn->prepare('
@@ -30,7 +30,7 @@ $numApplications = $conn->prepare('
 $numApplications->bind_param('i', $company_id);
 $numApplications->execute();
 $result = $numApplications->get_result();
-if($result->num_rows > 0){
+if ($result->num_rows > 0) {
     $data = $result->fetch_assoc();
     $num_applications = $data['numApplications'];
 } else {
@@ -46,7 +46,7 @@ $statjob->bind_param('i', $company_id);
 $statjob->execute();
 $result = $statjob->get_result();
 $jobs = array();
-while($job = $result->fetch_assoc()){
+while ($job = $result->fetch_assoc()) {
     $stmt = $conn->prepare('
         SELECT COUNT(*) AS num_applications FROM job_applications
         WHERE job_id = ?
@@ -54,7 +54,7 @@ while($job = $result->fetch_assoc()){
     $stmt->bind_param('i', $job['job_id']);
     $stmt->execute();
     $res = $stmt->get_result();
-    if($res->num_rows > 0){
+    if ($res->num_rows > 0) {
         $data = $res->fetch_assoc();
         $job['numApplications'] = $data['num_applications'];
     } else {
@@ -68,12 +68,12 @@ $stattags = $conn->prepare('
     WHERE job_id = ?
 ');
 
-foreach($jobs as & $job){
+foreach ($jobs as &$job) {
     $stattags->bind_param('i', $job['job_id']);
     $stattags->execute();
-    $tags =array();
+    $tags = array();
     $result = $stattags->get_result();
-    while($tag = $result->fetch_assoc()){
+    while ($tag = $result->fetch_assoc()) {
         $tags[] = $tag['tag'];
     }
     $job['tag'] = $tags;
@@ -82,12 +82,12 @@ $statskill = $conn->prepare('
     SELECT skill FROM job_skills
     WHERE job_id = ?
 ');
-foreach($jobs as & $job){
+foreach ($jobs as &$job) {
     $statskill->bind_param('i', $job['job_id']);
     $statskill->execute();
     $skills = [];
     $result = $statskill->get_result();
-    while($skill = $result->fetch_assoc()){
+    while ($skill = $result->fetch_assoc()) {
         $skills[] = $skill['skill'];
     }
     $job['skill'] = $skills;

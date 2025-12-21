@@ -518,28 +518,33 @@ const companyConfirmPass = document.getElementById("companyConfirmPassword");
 if (companyForm && errorMsgCompany) {
   companyForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    
+
     let passwordVal = (companyPass.value = companyPass.value.trim());
-    let confirmPasswordVal = (companyConfirmPass.value = companyConfirmPass.value.trim());
+    let confirmPasswordVal = (companyConfirmPass.value =
+      companyConfirmPass.value.trim());
 
     // PASSWORD VALIDATIONS (same as user form)
     let numbers = /[0-9]/g;
     if (passwordVal.length < 8) {
-      errorMsgCompany.textContent = "Password must be at least 8 characters long.";
+      errorMsgCompany.textContent =
+        "Password must be at least 8 characters long.";
       return;
     }
     let lowerCaseLetters = /[a-z]/g;
     if (!passwordVal.match(lowerCaseLetters)) {
-      errorMsgCompany.textContent = "Password must contain at least one lowercase letter.";
+      errorMsgCompany.textContent =
+        "Password must contain at least one lowercase letter.";
       return;
     }
     let upperCaseLetters = /[A-Z]/g;
     if (!passwordVal.match(upperCaseLetters)) {
-      errorMsgCompany.textContent = "Password must contain at least one uppercase letter.";
+      errorMsgCompany.textContent =
+        "Password must contain at least one uppercase letter.";
       return;
     }
     if (!passwordVal.match(numbers)) {
-      errorMsgCompany.textContent = "Password must contain at least one number.";
+      errorMsgCompany.textContent =
+        "Password must contain at least one number.";
       return;
     }
     let notAllowedChars = /[<>\/\\'"]/g;
@@ -559,30 +564,31 @@ if (companyForm && errorMsgCompany) {
     }
 
     const formData = new FormData(companyForm);
-    
+
     fetch("../php/register_company.php", {
       method: "POST",
       body: formData,
-    }).then((res) => res.json()).then((data) => {
-      if (data.status === "error") {
-        errorMsgCompany.style.color = "var(--error)";
-        errorMsgCompany.textContent = data.message;
-      } else {
-        errorMsgCompany.style.color = "var(--success)";
-        errorMsgCompany.textContent = data.message;
-        if(!data.pending === true){
-          
-          setTimeout(() => {
-            window.location.href = "./login-register.html?method=2";
-          }, 1000);
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "error") {
+          errorMsgCompany.style.color = "var(--error)";
+          errorMsgCompany.textContent = data.message;
+        } else {
+          errorMsgCompany.style.color = "var(--success)";
+          errorMsgCompany.textContent = data.message;
+          if (!data.pending === true) {
+            setTimeout(() => {
+              window.location.href = "./login-register.html?method=2";
+            }, 1000);
+          }
         }
-      }
-    }).catch(() => {
-      errorMsgCompany.textContent = "Something went wrong. Please try again.";
-    });
+      })
+      .catch(() => {
+        errorMsgCompany.textContent = "Something went wrong. Please try again.";
+      });
   });
 }
-
 
 const regCompanyLink = document.getElementById("regcomp");
 const userRegisterForm = document.getElementById("registerForm");

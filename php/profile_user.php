@@ -6,20 +6,20 @@ header('Content-Type: application/json');
 $userId = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!$userId) { echo json_encode(["error" => "Not logged in"]); exit; }
+    if (!$userId) {
+        echo json_encode(["error" => "Not logged in"]);
+        exit;
+    }
 
     $input = json_decode(file_get_contents('php://input'), true);
 
     if ($input) {
-        // --- 1. SAFER CHECK: Only update Basic Info if 'fname' is actually sent ---
-        // We use array_key_exists to be 100% sure the key is in the JSON payload
         if (array_key_exists('fname', $input)) {
             $fname = $input['fname'] ?? '';
             $lname = $input['lname'] ?? '';
             $title = $input['title'] ?? '';
-            $bio   = $input['bio']   ?? '';
+            $bio = $input['bio'] ?? '';
 
-            // Only update if we have at least a first name (safety net)
             if (!empty($fname)) {
                 $stmt = $conn->prepare("UPDATE users SET First_Name=?, Last_Name=?, Title=?, Bio=? WHERE Id=?");
                 $stmt->bind_param("ssssi", $fname, $lname, $title, $bio, $userId);
@@ -27,53 +27,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // --- 2. Update Lists (Experience, Education, etc.) ---
         $tables = [
             'experience' => ['title', 'institution', 'start_date', 'end_date', 'description'],
-            'education'  => ['title', 'institution', 'start_date', 'end_date', 'description'],
-            'courses'    => ['title', 'institution', 'start_date', 'end_date', 'description'],
-            'projects'   => ['title', 'link', 'description'],
-            'skills'     => ['skill', 'info'] 
+            'education' => ['title', 'institution', 'start_date', 'end_date', 'description'],
+            'courses' => ['title', 'institution', 'start_date', 'end_date', 'description'],
+            'projects' => ['title', 'link', 'description'],
+            'skills' => ['skill', 'info']
         ];
 
-foreach ($tables as $tableName => $columns) {
-    if (isset($input[$tableName])) {
-        $conn->query("DELETE FROM $tableName WHERE user_id = $userId");
+        foreach ($tables as $tableName => $columns) {
+            if (isset($input[$tableName])) {
+                $conn->query("DELETE FROM $tableName WHERE user_id = $userId");
 
-        if (!empty($input[$tableName])) {
-            foreach ($input[$tableName] as $entry) {
-                $cols = ['user_id']; 
-                $vals = [$userId];
-                $types = "i"; 
+                if (!empty($input[$tableName])) {
+                    foreach ($input[$tableName] as $entry) {
+                        $cols = ['user_id'];
+                        $vals = [$userId];
+                        $types = "i";
 
-                foreach ($columns as $dbCol => $jsonKey) {
-                    // Handle case where key is numeric (no renaming needed)
-                    if (is_numeric($dbCol)) {
-                        $dbCol = $jsonKey;
+                        foreach ($columns as $dbCol => $jsonKey) {
+                            if (is_numeric($dbCol)) {
+                                $dbCol = $jsonKey;
+                            }
+
+                            $cols[] = $dbCol;
+                            $vals[] = isset($entry[$jsonKey]) ? $entry[$jsonKey] : '';
+                            $types .= "s";
+                        }
+
+                        $colSql = implode(", ", $cols);
+                        $valSql = implode(", ", array_fill(0, count($cols), "?"));
+
+                        $stmt = $conn->prepare("INSERT INTO $tableName ($colSql) VALUES ($valSql)");
+                        $stmt->bind_param($types, ...$vals);
+                        $stmt->execute();
                     }
-
-                    $cols[] = $dbCol;
-                    // Use $jsonKey to grab data from JS, but save to $dbCol in SQL
-                    $vals[] = isset($entry[$jsonKey]) ? $entry[$jsonKey] : '';
-                    $types .= "s";
                 }
-
-                $colSql = implode(", ", $cols);
-                $valSql = implode(", ", array_fill(0, count($cols), "?"));
-                
-                $stmt = $conn->prepare("INSERT INTO $tableName ($colSql) VALUES ($valSql)");
-                $stmt->bind_param($types, ...$vals);
-                $stmt->execute();
             }
         }
-    }
-}
         echo json_encode(["success" => true]);
         exit;
     }
 }
 
-// ... (The GET section remains the same) ...
 if (isset($_GET['id'])) {
     $targetId = intval($_GET['id']);
     $stmt = $conn->prepare("SELECT Id, First_Name, Last_Name, Email, Bio, Title, Image, cv FROM users WHERE Id = ?");

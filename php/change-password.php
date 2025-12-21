@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $table = '';
     $idColumn = '';
     $passwordColumn = '';
-    if($_SESSION['type'] === 'user'){
+    if ($_SESSION['type'] === 'user') {
         $table = 'users';
         $idColumn = 'Id';
         $passwordColumn = 'Password';

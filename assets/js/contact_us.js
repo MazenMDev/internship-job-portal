@@ -8,7 +8,8 @@ document.getElementById("contact-form").addEventListener("submit", (event) => {
     const timeDiff = currentTime - lastMessageTime;
     const threeHour = 60 * 60 * 1000 * 3;
     if (timeDiff < threeHour) {
-      document.getElementById("form-error").textContent = "You can only send one message every 3 hours.";
+      document.getElementById("form-error").textContent =
+        "You can only send one message every 3 hours.";
       throw new Error("Message limit reached");
       return;
     }
@@ -47,6 +48,7 @@ document.getElementById("contact-form").addEventListener("submit", (event) => {
       }
     })
     .catch(() => {
-      document.getElementById("form-error").textContent = "Something went wrong. Please try again later.";
+      document.getElementById("form-error").textContent =
+        "Something went wrong. Please try again later.";
     });
 });

@@ -15,7 +15,7 @@ const jobCategories = {
     "Network & System Administration",
     "IT Support",
     "Game Development",
-    "Cloud Computing"
+    "Cloud Computing",
   ],
 
   "Design & Creative": [
@@ -25,7 +25,7 @@ const jobCategories = {
     "Video Editing / Animation",
     "Interior Design",
     "Product Design",
-    "Illustration / Digital Art"
+    "Illustration / Digital Art",
   ],
 
   "Business & Management": [
@@ -34,7 +34,7 @@ const jobCategories = {
     "Product Management",
     "Operations",
     "Supply Chain Management",
-    "Strategy & Consulting"
+    "Strategy & Consulting",
   ],
 
   "Marketing & Sales": [
@@ -44,7 +44,7 @@ const jobCategories = {
     "Content Writing / Copywriting",
     "Sales & Account Management",
     "E-commerce / Online Store Management",
-    "Public Relations / Communications"
+    "Public Relations / Communications",
   ],
 
   "Finance & Accounting": [
@@ -54,7 +54,7 @@ const jobCategories = {
     "Auditing",
     "Taxation",
     "Insurance",
-    "Payroll Management"
+    "Payroll Management",
   ],
 
   "Human Resources": [
@@ -62,17 +62,17 @@ const jobCategories = {
     "Recruitment / Talent Acquisition",
     "Training & Development",
     "Compensation & Benefits",
-    "Employee Relations"
+    "Employee Relations",
   ],
 
-  "Engineering": [
+  Engineering: [
     "Mechanical Engineering",
     "Electrical Engineering",
     "Civil Engineering",
     "Chemical Engineering",
     "Industrial Engineering",
     "Robotics",
-    "Environmental Engineering"
+    "Environmental Engineering",
   ],
 
   "Science & Healthcare": [
@@ -81,7 +81,7 @@ const jobCategories = {
     "Pharmacy",
     "Psychology",
     "Nutrition",
-    "Research & Laboratory Work"
+    "Research & Laboratory Work",
   ],
 
   "Architecture & Construction": [
@@ -89,14 +89,14 @@ const jobCategories = {
     "Structural Design",
     "Urban Planning",
     "Construction Management",
-    "Real Estate Development"
+    "Real Estate Development",
   ],
 
   "Education & Training": [
     "Teaching & Tutoring",
     "Academic Research",
     "Educational Administration",
-    "E-Learning / Instructional Design"
+    "E-Learning / Instructional Design",
   ],
 
   "Media & Communication": [
@@ -104,21 +104,21 @@ const jobCategories = {
     "Broadcasting / Radio / TV",
     "Photography",
     "Film / Production",
-    "Translation / Linguistics"
+    "Translation / Linguistics",
   ],
 
   "Law & Legal": [
     "Legal Assistant / Paralegal",
     "Corporate Law",
     "Legal Research",
-    "Compliance"
+    "Compliance",
   ],
 
   "Hospitality & Tourism": [
     "Hotel & Restaurant Management",
     "Travel & Tourism",
     "Event Management",
-    "Food & Beverage Service"
+    "Food & Beverage Service",
   ],
 
   "Agriculture & Environment": [
@@ -126,7 +126,7 @@ const jobCategories = {
     "Environmental Science",
     "Sustainability / Conservation",
     "Forestry",
-    "Fisheries"
+    "Fisheries",
   ],
 
   "Manufacturing & Logistics": [
@@ -134,8 +134,8 @@ const jobCategories = {
     "Quality Control",
     "Logistics & Transportation",
     "Warehousing",
-    "Procurement / Purchasing"
-  ]
+    "Procurement / Purchasing",
+  ],
 };
 
 export default jobCategories;

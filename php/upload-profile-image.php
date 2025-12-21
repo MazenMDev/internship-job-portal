@@ -30,10 +30,9 @@ if (!isset($_FILES['profile_image'])) {
 }
 
 $file = $_FILES['profile_image'];
-if($type === 'company') {
+if ($type === 'company') {
     $uploadDir = __DIR__ . "/../ImageStorage/companies/$id/";
-}
-else {
+} else {
     $uploadDir = __DIR__ . "/../ImageStorage/users/$id/";
 }
 
@@ -74,10 +73,9 @@ if (move_uploaded_file($file['tmp_name'], $targetPath)) {
     $stmt->execute();
 
     $fullUrl = '';
-    if($type === 'company') {
+    if ($type === 'company') {
         $fullUrl = "../ImageStorage/companies/$id/$filename";
-    }
-    else {
+    } else {
         $fullUrl = "../ImageStorage/users/$id/$filename";
     }
     echo json_encode([

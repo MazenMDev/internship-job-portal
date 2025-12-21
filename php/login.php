@@ -42,7 +42,7 @@ if ($isCompanyEmail) {
         $notifResult = $stmt->get_result();
         $notifData = $notifResult->fetch_assoc();
         $_SESSION['unread_notifications'] = $notifData['unread_count'];
-        
+
         echo json_encode([
             "status" => "success",
             "message" => "Company login successful!",

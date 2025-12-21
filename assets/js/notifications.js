@@ -1,30 +1,22 @@
+document.addEventListener("DOMContentLoaded", function () {
+  function loadNotifications() {
+    fetch("../php/notification.php", {})
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        document.querySelector(".notifications_unseen").style = "none";
+        const container = document.getElementById("notificationList");
+        const notifCount = document.getElementById("notification-count");
 
-document.addEventListener("DOMContentLoaded", function() {
-    
-function loadNotifications() {
-        fetch("../php/notification.php",{
-        })
+        if (notifCount) {
+          notifCount.innerText = data.length;
+          notifCount.style.display = data.length > 0 ? "inline-block" : "none";
+        }
 
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            document.querySelector('.notifications_unseen').style = 'none';
-            const container = document.getElementById('notificationList');
-            const notifCount = document.getElementById('notification-count');
-          
+        container.innerHTML = "";
 
-
-            if (notifCount) {
-                notifCount.innerText = data.length;
-                notifCount.style.display = data.length > 0 ? 'inline-block' : 'none';
-            }
-
-            container.innerHTML = '';
-
-            data.forEach(notif => {
-
-
-                const cardHTML = `
+        data.forEach((notif) => {
+          const cardHTML = `
                     <div class="notification-card">
                         <img 
                             src="${notif.image}" 
@@ -38,15 +30,10 @@ function loadNotifications() {
                     </div>
                 `;
 
-
-                container.innerHTML += cardHTML;
-            });
-        })
-        .catch(error => console.error('Error:', error));
-        
-    }
-    loadNotifications();
-
-
-
+          container.innerHTML += cardHTML;
+        });
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+  loadNotifications();
 });

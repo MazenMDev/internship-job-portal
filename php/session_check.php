@@ -4,7 +4,7 @@ include 'db_connection.php';
 header('Content-Type: application/json');
 
 if (isset($_SESSION['user_id'])) {
-    
+
     $stmt = $conn->prepare("SELECT COUNT(*) AS unread_count FROM notifications WHERE receiver_type = 1 AND receiver_id = ? AND seen = 0");
     $stmt->bind_param("i", $_SESSION['user_id']);
     $stmt->execute();
@@ -12,7 +12,7 @@ if (isset($_SESSION['user_id'])) {
     $notifData = $notifResult->fetch_assoc();
     $unread_count = $notifData['unread_count'];
     $stmt->close();
-    
+
     echo json_encode([
         "logged_in" => true,
         "user_id" => $_SESSION['user_id'],
@@ -37,7 +37,7 @@ if (isset($_SESSION['user_id'])) {
     $notifData = $notifResult->fetch_assoc();
     $unread_count = $notifData['unread_count'];
     $stmt->close();
-    
+
     echo json_encode([
         "logged_in" => true,
         "company_id" => $_SESSION['company_id'],
