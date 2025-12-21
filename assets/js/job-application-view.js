@@ -30,6 +30,12 @@ fetch("/php/job-application-view.php", {
       });
       const applications = data.data;
 
+      if(applications.length === 0) {
+        $("#applicants").append(`<p class="no-applications-message">No applications found for this job.</p>`);
+        $(".application-filters").hide();
+        $("#total-applications").text("0");
+        return;
+      }
       $("#total-applications").text(applications.length);
       const applicants = $("#applicants");
       applicants.empty();
