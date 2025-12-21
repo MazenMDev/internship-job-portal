@@ -166,7 +166,7 @@ document.addEventListener("click", (e) => {
       !isprojects
         ? `
         <label>Title</label>
-        <textarea class="title-input"></textarea>
+        <textarea class="title-input" required></textarea>
 
         <label>${isCourse ? "Institution" : ""}
         ${iseducation ? "School/University" : ""}
@@ -215,7 +215,7 @@ document.addEventListener("click", (e) => {
       isprojects
         ? `
         <label>Project Name</label>
-        <textarea class="title-input"></textarea>
+        <textarea class="title-input" required></textarea>
 
         <label>Project URL</label>
         <input type="url" class="link-input" placeholder="https://example.com">
@@ -304,13 +304,19 @@ document.addEventListener("click", (e) => {
 
   const form = e.target.closest(".entry-form, .course-form");
   if (!form) return;
+
+  const titleInput = form.querySelector(".title-input");
+  
+  if (titleInput && !titleInput.value.trim()) {
+    titleInput.reportValidity(); 
+    return; 
+  }
+
   const container = form.parentElement;
 
-  // Declare data outside the if blocks
   let data;
   let listRef;
 
-  // Determine which list based on container
   if (container.classList.contains("courses-forms-container")) {
     listRef = coursesList;
   } else if (container.classList.contains("experience-forms-container")) {
