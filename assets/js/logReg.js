@@ -485,6 +485,14 @@ Regform.addEventListener("submit", async (e) => {
     document.querySelector('input[name="gender"]:checked').value
   );
 
+  const submitBtn = registerForm.querySelector('input[type="submit"]');
+  const originalBtnText = submitBtn.value;
+  submitBtn.disabled = true;
+  submitBtn.value = "Sending email...";
+
+  const formInputs = registerForm.querySelectorAll('input, button');
+  formInputs.forEach(input => input.disabled = true);
+
   fetch("../php/register.php", {
     method: "POST",
     body: formData,
@@ -494,6 +502,9 @@ Regform.addEventListener("submit", async (e) => {
       if (data.status === "error") {
         errorMsgReg.style.color = "var(--error)";
         errorMsgReg.textContent = data.message;
+
+        formInputs.forEach(input => input.disabled = false);
+        submitBtn.textContent = originalBtnText;
       } else {
         errorMsgReg.style.color = "var(--success)";
         errorMsgReg.textContent = data.message;
@@ -504,6 +515,9 @@ Regform.addEventListener("submit", async (e) => {
     })
     .catch(() => {
       errorMsgReg.textContent = "Something went wrong. Please try again.";
+
+      formInputs.forEach(input => input.disabled = false);
+      submitBtn.textContent = originalBtnText;
     });
 });
 
@@ -565,6 +579,15 @@ if (companyForm && errorMsgCompany) {
 
     const formData = new FormData(companyForm);
 
+    const submitBtn = companyForm.querySelector('input[type="submit"]');
+    const originalBtnText = submitBtn.value;
+    submitBtn.disabled = true;
+    submitBtn.value = "Sending email...";
+    errorMsgCompany.textContent = "";
+
+    const formInputs = companyForm.querySelectorAll('input, button, select, textarea');
+    formInputs.forEach(input => input.disabled = true);
+
     fetch("../php/register_company.php", {
       method: "POST",
       body: formData,
@@ -574,6 +597,9 @@ if (companyForm && errorMsgCompany) {
         if (data.status === "error") {
           errorMsgCompany.style.color = "var(--error)";
           errorMsgCompany.textContent = data.message;
+
+          formInputs.forEach(input => input.disabled = false);
+          submitBtn.textContent = originalBtnText;
         } else {
           errorMsgCompany.style.color = "var(--success)";
           errorMsgCompany.textContent = data.message;
@@ -586,6 +612,8 @@ if (companyForm && errorMsgCompany) {
       })
       .catch(() => {
         errorMsgCompany.textContent = "Something went wrong. Please try again.";
+        formInputs.forEach(input => input.disabled = false);
+        submitBtn.textContent = originalBtnText;
       });
   });
 }

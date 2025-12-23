@@ -1,0 +1,12 @@
+CREATE TABLE email_verifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(255) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    expires_at DATETIME NOT NULL,
+    is_used BOOLEAN DEFAULT FALSE,
+    First_Name VARCHAR(100) NOT NULL,
+    Last_Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(150) NOT NULL UNIQUE,
+    Password VARCHAR(255) NOT NULL,
+    Gender VARCHAR(6) NOT NULL
+);

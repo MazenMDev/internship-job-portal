@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification - Job Portal</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/verification-result.css">
+</head>
+<body>
+    <div class="verification-container">
+        <div class="icon-container" id="iconContainer">
+        </div>
+        <h1 id="title">Processing...</h1>
+        <p class="message" id="message">Please wait...</p>
+        <div class="button-group" id="buttonGroup">
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        const message = urlParams.get('message');
+
+        const iconContainer = document.getElementById('iconContainer');
+        const title = document.getElementById('title');
+        const messageElement = document.getElementById('message');
+        const buttonGroup = document.getElementById('buttonGroup');
+
+        if (status === 'success') {
+            iconContainer.innerHTML = `
+                <div class="success-icon">
+                    <svg viewBox="0 0 52 52">
+                        <polyline points="14 27 22 35 38 19"/>
+                    </svg>
+                </div>
+            `;
+            title.textContent = 'Email Verified!';
+            messageElement.textContent = message || 'Your email has been successfully verified. You can now login to your account.';
+            buttonGroup.innerHTML = `
+                <a href="login-register.html" class="btn btn-primary">Login Now</a>
+                <a href="landing.html" class="btn btn-secondary">Go to Home</a>
+            `;
+        } else {
+            iconContainer.innerHTML = `
+                <div class="error-icon">
+                    <svg viewBox="0 0 52 52">
+                        <line x1="16" y1="16" x2="36" y2="36"/>
+                        <line x1="36" y1="16" x2="16" y2="36"/>
+                    </svg>
+                </div>
+            `;
+            title.textContent = 'Verification Failed';
+            messageElement.textContent = message || 'There was an error verifying your email. Please try again or contact support.';
+            buttonGroup.innerHTML = `
+                <a href="login-register.html" class="btn btn-primary">Try Again</a>
+                <a href="landing.html" class="btn btn-secondary">Go to Home</a>
+            `;
+        }
+    </script>
+</body>
+</html>
