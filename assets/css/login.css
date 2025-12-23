@@ -497,6 +497,22 @@ label {
   color: var(--text-muted);
 }
 
+
+#forgetPassword{
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+#forgetPassword a {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
 @media (max-width: 768px) {
   #companyRegisterForm {
     width: 100%;

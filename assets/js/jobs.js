@@ -3,6 +3,7 @@ import jobCategories from "./jobCategories.js";
 import { showJobDetails } from "./jobForm.js";
 import { isUserLoggedIn, isCompany } from "./Sessions/notLoggedSession.js";
 
+let currentPage = 1;
 document.addEventListener("DOMContentLoaded", function () {
   fetch("/php/getJobs.php")
     .then((response) => response.json())
@@ -171,7 +172,6 @@ function getSVG(category) {
 
 // pages buttons
 const jobsPerPage = 6;
-let currentPage = 1;
 const pagesContainer = document.querySelector(".pages");
 const prevButton = document.querySelector(".prevP");
 const nextButton = document.querySelector(".nextP");
