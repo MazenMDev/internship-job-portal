@@ -1,13 +1,6 @@
 <?php
 require 'db_connection.php';
-require 'includes/PHPMailer/PHPMailer.php';
-require 'includes/PHPMailer/SMTP.php';
-require 'includes/PHPMailer/Exception.php';
-require 'includes/PHPMailer/mail_config.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+require 'includes/PHPMailer/sendMail.php';
 
 session_start();
 header('Content-Type: application/json');
@@ -66,46 +59,30 @@ header('Content-Type: application/json');
             exit();
         }
         
-        // Send email using PHPMailer
-        $mail = new PHPMailer(true);
+        $reset_link = "http://" . $_SERVER['HTTP_HOST'] . "/Job Portal/pages/reset-password.html?token=" . $token;
         
-        try {
-            // Server settings
-            $mail->isSMTP();
-            $mail->Host       = MAIL_HOST;
-            $mail->SMTPAuth   = true;
-            $mail->Username   = MAIL_USER;
-            $mail->Password   = MAIL_PASS;
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = MAIL_PORT;
-            
-            $mail->setFrom(MAIL_USER, 'JobConnect');
-            $mail->addAddress($email);
-            
-            $mail->isHTML(true);
-            $mail->Subject = 'Password Reset Request';
-            
-            $reset_link = "http://" . $_SERVER['HTTP_HOST'] . "/pages/reset-password.html?token=" . $token;
-            
-            $mail->Body = "
-                <html>
-                <body style='font-family: Arial, sans-serif;'>
-                    <h2>Password Reset Request</h2>
-                    <p>You have requested to reset your password. Click the link below to proceed:</p>
-                    <p><a href='$reset_link' style='background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Reset Password</a></p>
-                    <p>Or copy this link: $reset_link</p>
-                    <p>This link will expire in 1 hour.</p>
-                    <p>If you didn't request this, please ignore this email.</p>
-                </body>
-                </html>
-            ";
-            
-            $mail->AltBody = "You have requested to reset your password. Click the link to proceed: $reset_link. This link will expire in 1 hour.";
-            
-            $mail->send();
+        $body = "
+            <html>
+            <body style='font-family: Arial, sans-serif;'>
+                <h2>Password Reset Request</h2>
+                <p>You have requested to reset your password. Click the link below to proceed:</p>
+                <p><a href='$reset_link' style='background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Reset Password</a></p>
+                <p>Or copy this link: $reset_link</p>
+                <p>This link will expire in 1 hour.</p>
+                <p>If you didn't request this, please ignore this email.</p>
+            </body>
+            </html>
+        ";
+        
+        $altBody = "You have requested to reset your password. Click the link to proceed: $reset_link. This link will expire in 1 hour.";
+        
+        // Send email
+        $result = sendMail($email, 'Password Reset Request', $body, $altBody);
+        
+        if ($result['success']) {
             echo json_encode(['status' => 'success', 'message' => 'Password reset email sent successfully']);
-        } catch (Exception $e) {
-            echo json_encode(['status' => 'error', 'message' => 'Failed to send email: ' . $mail->ErrorInfo]);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => $result['message']]);
         }
 
 
@@ -138,44 +115,31 @@ header('Content-Type: application/json');
             exit();
         }
         
-        $mail = new PHPMailer(true);
+        // Prepare email content
+        $reset_link = "http://" . $_SERVER['HTTP_HOST'] . "/Job Portal/pages/reset-password.html?token=" . $token;
         
-        try {
-            $mail->isSMTP();
-            $mail->Host       = MAIL_HOST;
-            $mail->SMTPAuth   = true;
-            $mail->Username   = MAIL_USER;
-            $mail->Password   = MAIL_PASS;
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = MAIL_PORT;
-            
-            $mail->setFrom(MAIL_USER, 'JobConnect');
-            $mail->addAddress($email);
-            
-            $mail->isHTML(true);
-            $mail->Subject = 'Password Reset Request';
-            
-            $reset_link = "http://" . $_SERVER['HTTP_HOST'] . "/pages/reset-password.html?token=" . $token;
-            
-            $mail->Body = "
-                <html>
-                <body style='font-family: Arial, sans-serif;'>
-                    <h2>Password Reset Request</h2>
-                    <p>You have requested to reset your password. Click the link below to proceed:</p>
-                    <p><a href='$reset_link' style='background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Reset Password</a></p>
-                    <p>Or copy this link: $reset_link</p>
-                    <p>This link will expire in 1 hour.</p>
-                    <p>If you didn't request this, please ignore this email.</p>
-                </body>
-                </html>
-            ";
-            
-            $mail->AltBody = "You have requested to reset your password. Click the link to proceed: $reset_link. This link will expire in 1 hour.";
-            
-            $mail->send();
+        $body = "
+            <html>
+            <body style='font-family: Arial, sans-serif;'>
+                <h2>Password Reset Request</h2>
+                <p>You have requested to reset your password. Click the link below to proceed:</p>
+                <p><a href='$reset_link' style='background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Reset Password</a></p>
+                <p>Or copy this link: $reset_link</p>
+                <p>This link will expire in 1 hour.</p>
+                <p>If you didn't request this, please ignore this email.</p>
+            </body>
+            </html>
+        ";
+        
+        $altBody = "You have requested to reset your password. Click the link to proceed: $reset_link. This link will expire in 1 hour.";
+        
+        // Send email
+        $result = sendMail($email, 'Password Reset Request', $body, $altBody);
+        
+        if ($result['success']) {
             echo json_encode(['status' => 'success', 'message' => 'Password reset email sent successfully']);
-        } catch (Exception $e) {
-            echo json_encode(['status' => 'error', 'message' => 'Failed to send email: ' . $mail->ErrorInfo]);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => $result['message']]);
         }
     }
 
