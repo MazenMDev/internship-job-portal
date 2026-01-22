@@ -934,6 +934,27 @@ footer {
   margin-top: -10px;
 }
 
+.popup-content .popup-info {
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: center;
+  margin: -5px 0;
+  line-height: 1.4;
+  padding: 0 10px;
+}
+
+.popup-content button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.popup-content button:disabled:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  transform: none;
+}
+
 body.popup-open #blurred-background {
   display: block;
 }

@@ -513,6 +513,40 @@ label {
   border-radius: 6px;
   transition: color 0.15s ease, background-color 0.15s ease;
 }
+
+.submit-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.submit.loading {
+  pointer-events: none;
+  cursor: not-allowed;
+  color: transparent !important;
+}
+
+.btn-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -11px;
+  margin-left: -11px;
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: button-spinner 0.8s linear infinite;
+  z-index: 10;
+}
+
+@keyframes button-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
 @media (max-width: 768px) {
   #companyRegisterForm {
     width: 100%;
@@ -666,7 +700,6 @@ label {
   body {
     flex-direction: column;
     font-size: 15px;
-    /* scrolling is handled by html; keep body visible to avoid double bars */
     overflow: visible;
   }
 
@@ -878,7 +911,6 @@ label {
   .rightCont {
     margin: 0;
   }
-  /* remove scaling to avoid content being pushed under the viewport top */
   .container {
     transform: none;
   }
@@ -898,3 +930,4 @@ label {
     font-size: 0.9rem !important;
   }
 }
+

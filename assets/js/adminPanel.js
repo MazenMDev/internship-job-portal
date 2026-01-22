@@ -263,28 +263,51 @@ function handleCompanyVerification() {
     clicksVerif();
   }
 
+  function showLoadingOverlay(message) {
+    const overlay = document.createElement('div');
+    overlay.className = 'admin-loading-overlay';
+    overlay.id = 'adminLoadingOverlay';
+    overlay.innerHTML = `
+      <div class="spinner"></div>
+      <div class="loading-text">${message}</div>
+    `;
+    document.body.appendChild(overlay);
+  }
+
+  function hideLoadingOverlay() {
+    const overlay = document.getElementById('adminLoadingOverlay');
+    if (overlay) {
+      overlay.remove();
+    }
+  }
+
   function clicksVerif() {
     $(".verify-company-btn").on("click", function () {
       const companyId = $(this).data("company-id");
+      const $btn = $(this);
+      const originalText = $btn.text();
 
-      alert(
-        sendAcceptanceEmail(
-          allCompanies.find((c) => c.verification_id === companyId)
-        )
-      );
       if (confirm("Verify this company?")) {
+        $(".verify-company-btn, .reject-company-btn").prop("disabled", true);
+        $btn.addClass("loading");
+        $btn.data("original-text", originalText);
+        $btn.html('<span class="btn-spinner"></span>');
+        showLoadingOverlay("Verifying company...");
         updateCompanyStatus(companyId, 1);
       }
     });
 
     $(".reject-company-btn").on("click", function () {
       const companyId = $(this).data("company-id");
-      alert(
-        sendRejectionEmail(
-          allCompanies.find((c) => c.verification_id === companyId)
-        )
-      );
+      const $btn = $(this);
+      const originalText = $btn.text();
+
       if (confirm("Reject this company?")) {
+        $(".verify-company-btn, .reject-company-btn").prop("disabled", true);
+        $btn.addClass("loading");
+        $btn.data("original-text", originalText);
+        $btn.html('<span class="btn-spinner"></span>');
+        showLoadingOverlay("Rejecting company...");
         updateCompanyStatus(companyId, 2);
       }
     });
@@ -300,51 +323,38 @@ function handleCompanyVerification() {
     })
       .then((response) => response.json())
       .then((data) => {
+        hideLoadingOverlay();
         if (data.success) {
           alert(data.message || "Status updated successfully");
           loadCompanies();
         } else {
           alert(data.error || "Failed to update status");
+          // Re-enable buttons on error and restore text
+          $(".verify-company-btn, .reject-company-btn").each(function() {
+            const $b = $(this);
+            $b.prop("disabled", false).removeClass("loading");
+            if ($b.data("original-text")) {
+              $b.text($b.data("original-text"));
+            }
+          });
         }
       })
       .catch((error) => {
+        hideLoadingOverlay();
         console.error("Error updating status:", error);
         alert("Error updating status. Please try again.");
+        $(".verify-company-btn, .reject-company-btn").each(function() {
+          const $b = $(this);
+          $b.prop("disabled", false).removeClass("loading");
+          if ($b.data("original-text")) {
+            $b.text($b.data("original-text"));
+          }
+        });
       });
   }
 
   loadCompanies();
 
-  function sendRejectionEmail(company_data) {
-    const emailTemplate = `
-    Subject: Company Verification Rejected
-
-    Dear ${company_data.company_name},
-
-    We regret to inform you that your company verification request has been rejected on our Job Portal.
-
-    If you believe this is an error, please contact our support team for further assistance.
-
-    Best regards,
-    Job Portal Admin Team
-      `.trim();
-
-    return `Copy the email template below and send it to ${company_data.company_email}:\n\n'  ${emailTemplate} '\n\nClick OK after sending the email.`;
-  }
-
-  function sendAcceptanceEmail(company_data) {
-    const emailTemplate = `
-    Subject: Company Verification Approved
-    Dear ${company_data.company_name},
-
-    Congratulations! Your company verification request has been approved on our Job Portal. You can now log in and start posting job listings.
-
-    If you have any questions or need assistance, feel free to reach out to our support team.
-    Best regards,
-    Job Portal Admin Team
-      `.trim();
-    return `Copy the email template below and send it to ${company_data.company_email}:\n\n' ${emailTemplate} '\n\nClick OK after sending the email.`;
-  }
 }
 
 //-----------------------MESSAGES----------------------

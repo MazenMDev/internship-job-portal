@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Change Verification - JobConnect</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/verification-result.css">
+    <link rel="stylesheet" href="../assets/css/account-change-verify.css">
+</head>
+<body>
+    <div class="verification-container">
+        <div class="icon-container" id="iconContainer">
+            <div class="spinner"></div>
+        </div>
+        <h1 id="title">Processing...</h1>
+        <p class="message" id="message">Please wait while we verify your request...</p>
+        <div id="passwordFormContainer" style="display: none;">
+            <form class="password-form" id="passwordForm">
+                <div class="password-requirements" id="passwordRequirements">
+                    <h4>Password Requirements:</h4>
+                    <ul>
+                        <li id="req-length">At least 8 characters</li>
+                        <li id="req-upper">At least one uppercase letter</li>
+                        <li id="req-lower">At least one lowercase letter</li>
+                        <li id="req-number">At least one number</li>
+                        <li id="req-special">No special characters: &lt; &gt; / \ ' "</li>
+                        <li id="req-space">No spaces</li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" required placeholder="Enter new password">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" required placeholder="Confirm new password">
+                </div>
+                <p class="error-message" id="formError"></p>
+                <button type="submit" id="submitBtn">Change Password</button>
+            </form>
+        </div>
+        <div class="button-group" id="buttonGroup">
+        </div>
+    </div>
+
+    <script src="../assets/js/account-change-verify.js"></script>
+</body>
+</html>

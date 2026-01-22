@@ -19,9 +19,9 @@ function displayCountUsers(count) {
   if (count < 10) {
     learners.textContent = "many";
   } else if (count < 100) {
-    learners.textContent = "tens";
+    learners.textContent = "tens of";
   } else if (count < 1000) {
-    learners.textContent = "hundreds";
+    learners.textContent = "hundreds of";
   } else {
     numberOfUsers = count.toString();
     learners.textContent = numberOfUsers.slice(0, -3) + "k+";

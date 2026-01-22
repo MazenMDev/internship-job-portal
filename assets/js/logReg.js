@@ -487,8 +487,22 @@ Regform.addEventListener("submit", async (e) => {
 
   const submitBtn = registerForm.querySelector('input[type="submit"]');
   const originalBtnText = submitBtn.value;
+  
+  let wrapper = submitBtn.parentNode;
+  if (!wrapper.classList.contains('submit-wrapper')) {
+    wrapper = document.createElement('div');
+    wrapper.classList.add('submit-wrapper');
+    submitBtn.parentNode.insertBefore(wrapper, submitBtn);
+    wrapper.appendChild(submitBtn);
+  }
+  
   submitBtn.disabled = true;
-  submitBtn.value = "Sending email...";
+  submitBtn.classList.add('loading');
+  submitBtn.value = '';
+  
+  const spinner = document.createElement('span');
+  spinner.classList.add('btn-spinner');
+  wrapper.appendChild(spinner);
 
   const formInputs = registerForm.querySelectorAll('input, button');
   formInputs.forEach(input => input.disabled = true);
@@ -504,10 +518,17 @@ Regform.addEventListener("submit", async (e) => {
         errorMsgReg.textContent = data.message;
 
         formInputs.forEach(input => input.disabled = false);
-        submitBtn.textContent = originalBtnText;
+        submitBtn.classList.remove('loading');
+        submitBtn.value = originalBtnText;
+        spinner.remove();
       } else {
         errorMsgReg.style.color = "var(--success)";
         errorMsgReg.textContent = data.message;
+        
+        submitBtn.classList.remove('loading');
+        submitBtn.value = originalBtnText;
+        spinner.remove();
+        
         setTimeout(() => {
           window.location.href = "./login-register.html?method=2";
         }, 1000);
@@ -517,7 +538,9 @@ Regform.addEventListener("submit", async (e) => {
       errorMsgReg.textContent = "Something went wrong. Please try again.";
 
       formInputs.forEach(input => input.disabled = false);
-      submitBtn.textContent = originalBtnText;
+      submitBtn.classList.remove('loading');
+      submitBtn.value = originalBtnText;
+      spinner.remove();
     });
 });
 
@@ -581,9 +604,23 @@ if (companyForm && errorMsgCompany) {
 
     const submitBtn = companyForm.querySelector('input[type="submit"]');
     const originalBtnText = submitBtn.value;
+    
+    let wrapper = submitBtn.parentNode;
+    if (!wrapper.classList.contains('submit-wrapper')) {
+      wrapper = document.createElement('div');
+      wrapper.classList.add('submit-wrapper');
+      submitBtn.parentNode.insertBefore(wrapper, submitBtn);
+      wrapper.appendChild(submitBtn);
+    }
+    
     submitBtn.disabled = true;
-    submitBtn.value = "Sending email...";
+    submitBtn.classList.add('loading');
+    submitBtn.value = '';
     errorMsgCompany.textContent = "";
+    
+    const spinner = document.createElement('span');
+    spinner.classList.add('btn-spinner');
+    wrapper.appendChild(spinner);
 
     const formInputs = companyForm.querySelectorAll('input, button, select, textarea');
     formInputs.forEach(input => input.disabled = true);
@@ -599,10 +636,17 @@ if (companyForm && errorMsgCompany) {
           errorMsgCompany.textContent = data.message;
 
           formInputs.forEach(input => input.disabled = false);
-          submitBtn.textContent = originalBtnText;
+          submitBtn.classList.remove('loading');
+          submitBtn.value = originalBtnText;
+          spinner.remove();
         } else {
           errorMsgCompany.style.color = "var(--success)";
           errorMsgCompany.textContent = data.message;
+          
+          submitBtn.classList.remove('loading');
+          submitBtn.value = originalBtnText;
+          spinner.remove();
+          
           if (!data.pending === true) {
             setTimeout(() => {
               window.location.href = "./login-register.html?method=2";
@@ -613,7 +657,9 @@ if (companyForm && errorMsgCompany) {
       .catch(() => {
         errorMsgCompany.textContent = "Something went wrong. Please try again.";
         formInputs.forEach(input => input.disabled = false);
-        submitBtn.textContent = originalBtnText;
+        submitBtn.classList.remove('loading');
+        submitBtn.value = originalBtnText;
+        spinner.remove();
       });
   });
 }
@@ -631,7 +677,6 @@ function showUserRegisterForm() {
   companyRegisterForm.classList.add("hidden");
   isCompanyRegister = false;
 
-  // reset link text to default
   if (changeToRegComp) {
     changeToRegComp.innerHTML = `
       Want to register a company?
@@ -646,7 +691,6 @@ function showCompanyRegisterForm() {
   companyRegisterForm.classList.remove("hidden");
   isCompanyRegister = true;
 
-  // change text to "Register an account"
   if (changeToRegComp) {
     changeToRegComp.innerHTML = `
       Register an account

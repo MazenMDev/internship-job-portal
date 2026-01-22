@@ -68,10 +68,11 @@ function createPopUp(mail = false, password = true) {
       <form class="popup-content">
         <span class="close-mail-btn">&times;</span>
         <h2>Change Email</h2>
-        <input type="email"  id="newEmail" required placeholder="Enter new email" />
+        <p class="popup-info">A verification email will be sent to your current email address. After confirming, another verification will be sent to your new email.</p>
+        <input type="email" id="newEmail" required placeholder="Enter new email" />
         <input type="password" id="currentPassword" required placeholder="Enter current password" />
         <p class="errorPopup"></p>
-        <button id="submitEmailBtn">Submit</button>
+        <button id="submitEmailBtn">Send Verification</button>
       </form>
     `;
     document.body.appendChild(popupMail);
@@ -86,31 +87,50 @@ function createPopUp(mail = false, password = true) {
       .querySelector(".popup-content")
       .addEventListener("submit", (Event) => {
         Event.preventDefault();
-        const mail = document.getElementById("newEmail").value;
-        const password = document.getElementById("currentPassword").value;
+        const newEmail = document.getElementById("newEmail").value;
+        const currentPassword = document.getElementById("currentPassword").value;
+        const submitBtn = document.getElementById("submitEmailBtn");
+        const errorEl = document.querySelector(".errorPopup");
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+        errorEl.textContent = "";
+        errorEl.style.color = "var(--error)";
+        
         const formData = new FormData();
-        formData.append("current_password", password);
-        formData.append("email", mail);
-        fetch("../php/change-email.php", {
+        formData.append("current_password", currentPassword);
+        formData.append("new_email", newEmail);
+        formData.append("change_type", "email");
+        
+        fetch("../php/request-account-change.php", {
           method: "POST",
           body: formData,
         })
           .then((res) => res.json())
           .then((data) => {
             if (data.status === "success") {
-              const error = document.querySelector(".errorPopup");
-              error.textContent = "Email changed successfully.";
-              error.style.color = "var(--success)";
+              errorEl.textContent = data.message;
+              errorEl.style.color = "var(--success)";
+              submitBtn.textContent = "Email Sent!";
               setTimeout(() => {
                 document.body.classList.remove("popup-open");
                 document.body.removeChild(popupMail);
-                error.style.color = "var(--error)";
-
-                error.textContent = "";
-              }, 1000);
+              }, 3000);
             } else {
-              document.querySelector(".errorPopup").innerHTML = data.message;
+              errorEl.innerHTML = data.message;
+              if (data.time_left) {
+                const minutes = Math.floor(data.time_left / 60);
+                const seconds = data.time_left % 60;
+                errorEl.innerHTML += ` (${minutes}m ${seconds}s remaining)`;
+              }
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Send Verification";
             }
+          })
+          .catch(() => {
+            errorEl.textContent = "An error occurred. Please try again.";
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Send Verification";
           });
       });
   } else if (password) {
@@ -120,12 +140,11 @@ function createPopUp(mail = false, password = true) {
     popupPass.innerHTML = `
       <form class="popup-content">
         <span class="close-pass-btn">&times;</span>
-        <h2>Forgot Password</h2>
+        <h2>Change Password</h2>
+        <p class="popup-info">A verification email will be sent to confirm your identity before changing the password.</p>
         <input type="password" id="currentPassword" required placeholder="Enter current password" />
-        <input type="password" id="newPassword" required placeholder="Enter new password" />
-        <input type="password" id="confirmNewPassword" required placeholder="Confirm new password" />
         <p class="errorPopup"></p>
-        <button id="submitPassBtn">Submit</button>
+        <button id="submitPassBtn">Send Verification</button>
       </form>
     `;
 
@@ -141,76 +160,48 @@ function createPopUp(mail = false, password = true) {
       .querySelector(".popup-content")
       .addEventListener("submit", function (e) {
         e.preventDefault();
-        document.querySelector(".errorPopup").textContent = "";
-        const currentPassword =
-          document.getElementById("currentPassword").value;
-        const newPassword = document.getElementById("newPassword").value;
-        const confirmNewPassword =
-          document.getElementById("confirmNewPassword").value;
+        const currentPassword = document.getElementById("currentPassword").value;
+        const submitBtn = document.getElementById("submitPassBtn");
+        const errorEl = document.querySelector(".errorPopup");
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+        errorEl.textContent = "";
+        errorEl.style.color = "var(--error)";
 
-        if (newPassword !== confirmNewPassword) {
-          document.querySelector(".errorPopup").textContent =
-            "New passwords do not match.";
-          return;
-        }
-        if (newPassword.length < 8) {
-          document.querySelector(".errorPopup").textContent =
-            "New password must be at least 8 characters long.";
-          return;
-        }
-        if (!/[A-Z]/.test(newPassword)) {
-          document.querySelector(".errorPopup").textContent =
-            "New password must contain at least one uppercase letter.";
-          return;
-        }
-        if (!/[a-z]/.test(newPassword)) {
-          document.querySelector(".errorPopup").textContent =
-            "New password must contain at least one lowercase letter.";
-          return;
-        }
-        if (!/[0-9]/.test(newPassword)) {
-          document.querySelector(".errorPopup").textContent =
-            "New password must contain at least one digit.";
-          return;
-        }
-        let notAllowedChars = /[<>\/\\'"]/g;
-        if (newPassword.match(notAllowedChars)) {
-          document.querySelector(".errorPopup").textContent =
-            "New password contains invalid characters.";
-          return;
-        }
-
-        for (let char of newPassword) {
-          if (char === " ") {
-            document.querySelector(".errorPopup").textContent =
-              "New password cannot contain spaces.";
-            return;
-          }
-        }
-        // If the password has nothong wrong, then post data to backend
         const formData = new FormData();
         formData.append("current_password", currentPassword);
-        formData.append("new_password", newPassword);
-        fetch("../php/change-password.php", {
+        formData.append("change_type", "password");
+        
+        fetch("../php/request-account-change.php", {
           method: "POST",
           body: formData,
         })
           .then((res) => res.json())
           .then((data) => {
             if (data.status === "success") {
-              const error = document.querySelector(".errorPopup");
-              error.textContent = "Password changed successfully.";
-              error.style.color = "var(--success)";
+              errorEl.textContent = data.message;
+              errorEl.style.color = "var(--success)";
+              submitBtn.textContent = "Email Sent!";
               setTimeout(() => {
                 document.body.classList.remove("popup-open");
                 document.body.removeChild(popupPass);
-                error.style.color = "var(--error)";
-
-                error.textContent = "";
-              }, 1000);
+              }, 3000);
             } else {
-              document.querySelector(".errorPopup").textContent = data.message;
+              errorEl.innerHTML = data.message;
+              if (data.time_left) {
+                const minutes = Math.floor(data.time_left / 60);
+                const seconds = data.time_left % 60;
+                errorEl.innerHTML += ` (${minutes}m ${seconds}s remaining)`;
+              }
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Send Verification";
             }
+          })
+          .catch(() => {
+            errorEl.textContent = "An error occurred. Please try again.";
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Send Verification";
           });
       });
   }

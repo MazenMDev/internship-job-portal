@@ -1,0 +1,133 @@
+.password-form {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.password-form .form-group {
+    margin-bottom: 15px;
+}
+
+.password-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 500;
+}
+
+.password-form input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.password-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.password-form .error-message {
+    color: #f44336;
+    font-size: 13px;
+    margin-top: 5px;
+    display: none;
+}
+
+.password-form .error-message.show {
+    display: block;
+}
+
+.password-form button {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.password-form button:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.password-form button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.password-requirements {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.password-requirements h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.password-requirements ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.password-requirements li {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 3px;
+}
+
+.password-requirements li.valid {
+    color: #4caf50;
+}
+
+.password-requirements li.invalid {
+    color: #f44336;
+}
+
+.info-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #2196f3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    animation: scaleIn 0.5s ease-out 0.2s both;
+}
+
+.pending-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #ff9800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    animation: scaleIn 0.5s ease-out 0.2s both;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
