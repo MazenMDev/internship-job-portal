@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $title_notif = 'Your application has been rejected !';
             $desc_notif = 'Your application for the  ' . $job_title . ' postion at ' . $company_name . ' has been rejected <a target="_blank" style="color: var(--primary-color)" href="/pages/job-application-view.html?jobId=' . $jobId . '">View Application</a>';
         }
-        $stmt = $conn->prepare("INSERT INTO notifications (receiver_type , receiver_id, sender_id,sender_type,title, description) VALUES (1, ?, ?, 2, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO notifications (receiver_type , receiver_user_id, sender_company_id,sender_type,title, description) VALUES (1, ?, ?, 2, ?, ?)");
         $stmt->bind_param("iiss", $user_id, $companyId, $title_notif, $desc_notif);
         if (!$stmt->execute()) {
             echo json_encode([

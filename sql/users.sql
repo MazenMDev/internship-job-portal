@@ -1,5 +1,6 @@
 CREATE TABLE users (
     Id INT(11) NOT NULL AUTO_INCREMENT,
+    email_verified INT DEFAULT 0,
     First_Name VARCHAR(100) NOT NULL,
     Last_Name VARCHAR(100) NOT NULL,
     Email VARCHAR(150) NOT NULL UNIQUE,
