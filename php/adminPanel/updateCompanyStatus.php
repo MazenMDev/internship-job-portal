@@ -52,6 +52,7 @@
             $stmt->close();
             $to = $company['company_email'];
             $subject = "Company Verification Successful";
+            $adminName = $_SESSION['first_name'];
             $body = "
                 <!DOCTYPE html>
                 <html lang='en'>
@@ -157,7 +158,7 @@
                             <h1>Verification Successful!</h1>
                         </div>
                         <div class='content'>
-                            <h2>Welcome, " . htmlspecialchars($company['company_name']) . "!</h2>
+                            <h2>Welcome, " . htmlspecialchars($company['company_name']) . "! This is " . htmlspecialchars($adminName) . " from JobConnect</h2>
                             <p>Your company has been successfully verified and registered on JobConnect.</p>
                             
                             <div class='success-box'>

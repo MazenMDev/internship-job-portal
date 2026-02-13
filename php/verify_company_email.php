@@ -202,6 +202,7 @@ $body = "
             <h2>Hello,</h2>
             <p>Thank you for registering with JobConnect!</p>
             <p>Your company account is currently being reviewed by our team to ensure compliance with our policies and standards.</p>
+            <p>This to ensure that all the data provided is accurate and meets our guidelines.</p>
             
             <div class='info-box'>
                 <p><strong>Review Status:</strong> In Progress</p>

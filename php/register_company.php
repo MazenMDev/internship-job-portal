@@ -274,7 +274,7 @@ $body = "
             <h1>Welcome to JobConnect!</h1>
         </div>
         <div class='content'>
-            <h2>Hello $company_name,</h2>
+            <h2>Hello $company_name, this is Mazen from JobConnect</h2>
             <p>Thank you for registering your company with JobConnect!</p>
             <p>To complete your registration, please verify your email address by clicking the button below:</p>
             
