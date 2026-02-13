@@ -72,7 +72,7 @@
 
             $title_notif='A New job has been Posted';
             $desc_notif ='You have posted a new job for '.$title. ' ,  <a target="_blank" style="color: var(--primary-color)" href="/pages/job-application-view.html?jobId='.$job_id.'">View Job</a>';
-            $stmt = $conn->prepare("INSERT INTO notifications (receiver_type , receiver_id, sender_id,sender_type,title, description) VALUES (2, ?, ?, 3, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO notifications (receiver_type , receiver_company_id, sender_job_id,sender_type,title, description) VALUES (2, ?, ?, 3, ?, ?)");
             $stmt->bind_param("iiss",$company_id,$job_id, $title_notif,$desc_notif) ;
             if(!$stmt->execute()){
                 echo json_encode([

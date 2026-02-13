@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 
 if (isset($_SESSION['user_id'])) {
 
-    $stmt = $conn->prepare("SELECT COUNT(*) AS unread_count FROM notifications WHERE receiver_type = 1 AND receiver_id = ? AND seen = 0");
+    $stmt = $conn->prepare("SELECT COUNT(*) AS unread_count FROM notifications WHERE receiver_type = 1 AND receiver_user_id = ? AND seen = 0");
     $stmt->bind_param("i", $_SESSION['user_id']);
     $stmt->execute();
     $notifResult = $stmt->get_result();
@@ -30,7 +30,7 @@ if (isset($_SESSION['user_id'])) {
     ]);
 } else if (isset($_SESSION['company_id'])) {
 
-    $stmt = $conn->prepare("SELECT COUNT(*) AS unread_count FROM notifications WHERE receiver_type = 2 AND receiver_id = ? AND seen = 0");
+    $stmt = $conn->prepare("SELECT COUNT(*) AS unread_count FROM notifications WHERE receiver_type = 2 AND receiver_company_id = ? AND seen = 0");
     $stmt->bind_param("i", $_SESSION['company_id']);
     $stmt->execute();
     $notifResult = $stmt->get_result();

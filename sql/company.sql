@@ -1,5 +1,6 @@
 CREATE TABLE company(
     company_id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    company_verified INT DEFAULT 0,
     company_name VARCHAR(250) NOT NULL,
     company_email VARCHAR(150) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,

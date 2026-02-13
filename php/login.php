@@ -36,7 +36,7 @@ if ($isCompanyEmail) {
         $_SESSION['type'] = 'company';
         $_SESSION['image'] = $company['Image'];
 
-        $stmt = $conn->prepare("SELECT COUNT(*) AS unread_count FROM notifications WHERE receiver_type = 2 AND receiver_id = ? AND seen = 0");
+        $stmt = $conn->prepare("SELECT COUNT(*) AS unread_count FROM notifications WHERE receiver_type = 2 AND receiver_company_id = ? AND seen = 0");
         $stmt->bind_param("i", $company['company_id']);
         $stmt->execute();
         $notifResult = $stmt->get_result();
@@ -94,7 +94,7 @@ $_SESSION['is_admin'] = $user['is_admin'];
 $_SESSION['is_company'] = false;
 $_SESSION['type'] = 'user';
 $_SESSION['cv'] = $user['cv'];
-$stmt = $conn->prepare("SELECT COUNT(*) AS unread_count FROM notifications WHERE receiver_type = 1 AND receiver_id = ? AND seen = 0");
+$stmt = $conn->prepare("SELECT COUNT(*) AS unread_count FROM notifications WHERE receiver_type = 1 AND receiver_user_id = ? AND seen = 0");
 $stmt->bind_param("i", $user['Id']);
 $stmt->execute();
 $notifResult = $stmt->get_result();
