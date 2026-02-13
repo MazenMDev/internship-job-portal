@@ -5,7 +5,7 @@ require 'includes/PHPMailer/sendMail.php';
 session_start();
 header('Content-Type: application/json');
     $email = $_POST['email'];
-    $stmt = $conn->prepare('SELECT Id FROM users WHERE Email = ?');
+    $stmt = $conn->prepare('SELECT Id, email_verified FROM users WHERE Email = ?');
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -13,7 +13,7 @@ header('Content-Type: application/json');
     $type = '';
     $id = $result->fetch_assoc();
     if ($result->num_rows === 0) {
-        $stmt = $conn->prepare('SELECT company_id FROM company WHERE company_email = ?');
+        $stmt = $conn->prepare('SELECT company_id, company_verified FROM company WHERE company_email = ?');
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -31,6 +31,10 @@ header('Content-Type: application/json');
     }
 
     if($type === 'user'){
+        if($id['email_verified'] == 0){
+            echo json_encode(['status' => 'error', 'message' => 'Email not verified']);
+            exit();
+        }
         $user_id = $id['Id'];
         $stmt = $conn->prepare('SELECT * FROM forget_password_requests WHERE user_id = ? AND used = FALSE AND expires_at > NOW()');
         $stmt->bind_param('i', $user_id);
@@ -62,6 +66,7 @@ header('Content-Type: application/json');
         $reset_link = "http://" . $_SERVER['HTTP_HOST'] . "/pages/reset-password.html?token=" . $token;
         $currentYear = date('Y');
 
+        
               $body = "
 <!DOCTYPE html>
 <html lang='en'>
@@ -215,7 +220,15 @@ header('Content-Type: application/json');
         } else {
             echo json_encode(['status' => 'error', 'message' => $result['message']]);
         }
+
+
+        
+
     }else{
+        if($id['company_verified'] == 0 || $id['company_verified'] == 1){
+            echo json_encode(['status' => 'error', 'message' => 'Please verify your email first before resetting password.']);
+            exit();
+        }
         $company_id = $id['company_id'];
         $stmt = $conn->prepare('SELECT * FROM forget_password_requests WHERE company_id = ? AND used = FALSE AND expires_at > NOW()');
         $stmt->bind_param('i', $company_id);
@@ -246,8 +259,7 @@ header('Content-Type: application/json');
         $reset_link = "http://" . $_SERVER['HTTP_HOST'] . "/pages/reset-password.html?token=" . $token;
         $currentYear = date('Y');
         
-        $body = "
-<!DOCTYPE html>
+        $body = "<!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>

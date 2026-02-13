@@ -21,29 +21,63 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-// Check if email already exists in users table
-$checkMail = $conn->prepare("SELECT 1 FROM users WHERE Email = ?");
+$checkMail = $conn->prepare("SELECT Id, email_verified FROM users WHERE Email = ?");
 $checkMail->bind_param("s", $email);
 $checkMail->execute();
-$checkMail->store_result();
+$result = $checkMail->get_result();
 
-if ($checkMail->num_rows > 0) {
-    echo json_encode(["status" => "error", "message" => "Email already registered!"]);
-    exit;
-}
-$checkMail->close();
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $existing_user_id = $row['Id'];
+   
+    if($row['email_verified'] == 1){
+        $checkMail->close();
+        echo json_encode(["status" => "error", "message" => "Email already registered! Please login instead."]);
+        exit;
+    }
+    
+    if($row['email_verified'] == 0){
+        $checkMail->close();
+        
+        $checkPending = $conn->prepare("SELECT id, expires_at FROM email_verifications WHERE user_id = ? AND is_used = FALSE ORDER BY created_at DESC LIMIT 1");
+        $checkPending->bind_param("i", $existing_user_id);
+        $checkPending->execute();
+        $pendingResult = $checkPending->get_result();
+        
+        if ($pendingResult->num_rows > 0) {
+            $pendingRow = $pendingResult->fetch_assoc();
+            $current_datetime = date('Y-m-d H:i:s');
+            
+            if(strtotime($current_datetime) >= strtotime($pendingRow['expires_at'])) {
+                // Expired - delete old records and allow re-registration
+                $checkPending->close();
+                
+                $deleteVerif = $conn->prepare("DELETE FROM email_verifications WHERE user_id = ?");
+                $deleteVerif->bind_param("i", $existing_user_id);
+                $deleteVerif->execute();
+                $deleteVerif->close();
 
-// Check if email already has a pending verification
-$checkPending = $conn->prepare("SELECT * FROM email_verifications WHERE Email = ? AND is_used = FALSE");
-$checkPending->bind_param("s", $email);
-$checkPending->execute();
-$checkPending->store_result();
-
-if ($checkPending->num_rows > 0) {
-    echo json_encode(["status" => "error", "message" => "A verification email has already been sent to this address. Please check your inbox."]);
-    exit;
-}
-$checkPending->close();
+                $deleteUser = $conn->prepare("DELETE FROM users WHERE Id = ?");
+                $deleteUser->bind_param("i", $existing_user_id);
+                $deleteUser->execute();
+                $deleteUser->close();
+            } else {
+                $checkPending->close();
+                echo json_encode(["status" => "error", "message" => "A verification email has already been sent to this address. Please check your inbox."]);
+                exit;
+            }
+        } else {
+            $checkPending->close();
+            
+            $deleteUser = $conn->prepare("DELETE FROM users WHERE Id = ?");
+            $deleteUser->bind_param("i", $existing_user_id);
+            $deleteUser->execute();
+            $deleteUser->close();
+        }
+    }
+} else {
+    $checkMail->close();
+};
 
 // Hash password
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -51,13 +85,12 @@ $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 // Generate verification token
 $token = bin2hex(random_bytes(32));
 $expiresAt = date('Y-m-d H:i:s', strtotime('+24 hours'));
-
-// Insert into email_verifications table
+// Insert new user with email_verified = 0
 $query = $conn->prepare("
-    INSERT INTO email_verifications (token, expires_at, First_Name, Last_Name, Email, Password, Gender)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO users(First_Name, Last_Name, Email, Password, Gender, email_verified) VALUES (?, ?, ?, ?, ?, 0)
 ");
-$query->bind_param("sssssss", $token, $expiresAt, $fname, $lname, $email, $hashedPassword, $gender);
+
+$query->bind_param("sssss", $fname, $lname, $email, $hashedPassword, $gender);
 
 if (!$query->execute()) {
     echo json_encode(["status" => "error", "message" => "Error: " . $query->error]);
@@ -65,6 +98,14 @@ if (!$query->execute()) {
 }
 $query->close();
 
+$userId = $conn->insert_id;
+$verificationQuery = $conn->prepare("INSERT INTO email_verifications (token, user_id, expires_at) VALUES (?, ?, ?)");
+$verificationQuery->bind_param("sis", $token, $userId, $expiresAt);
+if (!$verificationQuery->execute()) {
+    echo json_encode(["status" => "error", "message" => "Error: " . $verificationQuery->error]);
+    exit;
+}
+$verificationQuery->close();
 // Send verification email
 $verificationLink = "http://" . $_SERVER['HTTP_HOST'] . "/php/verify_email.php?token=" . urlencode($token);
 $subject = 'Verify Your Email Address';

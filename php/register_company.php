@@ -34,63 +34,125 @@ if ($password !== $confirm_password) {
     exit;
 }
 
-$stmt = $conn->prepare("SELECT company_id FROM company WHERE company_email = ?");
+// Check if company with this email already exists
+$stmt = $conn->prepare("SELECT company_id, company_verified FROM company WHERE company_email = ?");
 $stmt->bind_param("s", $company_email);
 $stmt->execute();
 $result = $stmt->get_result();
+
 if ($result->num_rows > 0) {
-    echo json_encode(["status" => "error", "message" => "Email already registered."]);
-    exit;
-}
-$stmt->close();
+    $row = $result->fetch_assoc();
+    $existing_company_id = $row['company_id'];
 
-// Check if email already in verify_company table
-$stmt = $conn->prepare("SELECT verification_id FROM verify_company WHERE company_email = ?");
-$stmt->bind_param("s", $company_email);
-$stmt->execute();
-$result = $stmt->get_result();
-if ($result->num_rows > 0) {
-    echo json_encode(["status" => "error", "message" => "Your company registration is already pending admin verification."]);
-    exit;
-}
-$stmt->close();
+    // 2 =  verified and registered
+    if($row['company_verified'] == 2){
+        echo json_encode(["status" => "error", "message" => "This email is already registered. Please login instead."]);
+        $stmt->close();
+        exit;
+    }
+    // 1 = under admin verification
+    else if($row['company_verified'] == 1){
+        echo json_encode(["status" => "error", "message" => "Your company registration is still under admin verification. Please wait for approval."]);
+        $stmt->close();
+        exit;
+    }
+    // -1 = rejected
+    else if($row['company_verified'] == -1){
+        echo json_encode(["status" => "error", "message" => "Your company registration has been rejected. Please contact support for more information."]);
+        $stmt->close();
+        exit;
+    }
+    // 0 = hasn't verified email yet - check if verification expired
+    else if($row['company_verified'] == 0){
+        $stmt->close();
+        
+        // Check if there's a pending verification
+        $checkPending = $conn->prepare("SELECT id, expires_at FROM company_email_verifications WHERE company_id = ? AND is_used = FALSE ORDER BY created_at DESC LIMIT 1");
+        $checkPending->bind_param("i", $existing_company_id);
+        $checkPending->execute();
+        $pendingResult = $checkPending->get_result();
+        
+        if ($pendingResult->num_rows > 0) {
+            $pendingRow = $pendingResult->fetch_assoc();
+            $current_datetime = date('Y-m-d H:i:s');
+            
+            // Check if verification has expired
+            if(strtotime($current_datetime) >= strtotime($pendingRow['expires_at'])) {
+                // Expired
+                $checkPending->close();
+                
+                $deleteVerif = $conn->prepare("DELETE FROM company_email_verifications WHERE company_id = ?");
+                $deleteVerif->bind_param("i", $existing_company_id);
+                $deleteVerif->execute();
+                $deleteVerif->close();
 
-// Check if email already has a pending email verification
-$checkPending = $conn->prepare("SELECT * FROM company_email_verifications WHERE company_email = ? AND is_used = FALSE");
-$checkPending->bind_param("s", $company_email);
-$checkPending->execute();
-$checkPending->store_result();
-
-if ($checkPending->num_rows > 0) {
-    echo json_encode(["status" => "error", "message" => "A verification email has already been sent to this address. Please check your inbox."]);
-    exit;
+                $deleteCompany = $conn->prepare("DELETE FROM company WHERE company_id = ?");
+                $deleteCompany->bind_param("i", $existing_company_id);
+                $deleteCompany->execute();
+                $deleteCompany->close();
+            } else {
+                // Not expired
+                $checkPending->close();
+                echo json_encode(["status" => "error", "message" => "A verification email has already been sent to this address. Please check your inbox."]);
+                exit;
+            }
+        } else {
+            // No pending verification but company_verified = 0, delete and allow re-registration
+            $checkPending->close();
+            
+            $deleteCompany = $conn->prepare("DELETE FROM company WHERE company_id = ?");
+            $deleteCompany->bind_param("i", $existing_company_id);
+            $deleteCompany->execute();
+            $deleteCompany->close();
+        }
+    }
+} else {
+    $stmt->close();
 }
-$checkPending->close();
 
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+$stmt = $conn->prepare("
+    INSERT INTO company (company_name, company_email, password, phone_number, street_address, city, state, zip_code, country, company_url) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+");
+$stmt->bind_param(
+    "ssssssssss", 
+    $company_name, $company_email, $hashed_password, $company_phone, $company_address, 
+    $company_city, $company_state, $company_zip, $company_country, $company_link
+);
+if (!$stmt->execute()) {
+    echo json_encode(["status" => "error", "message" => "Error creating company: " . $stmt->error]);
+    exit;
+}
+$company_id = $conn->insert_id;
+$stmt->close();
 
 // Generate verification token
 $token = bin2hex(random_bytes(32));
 $expiresAt = date('Y-m-d H:i:s', strtotime('+24 hours'));
 
-// Insert into company_email_verifications table
 $stmt = $conn->prepare("
-    INSERT INTO company_email_verifications 
-    (token, expires_at, company_name, company_email, password, company_phone, 
-     company_address, company_city, company_state, company_zip, company_country, company_website)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO company_email_verifications (token, company_id, expires_at)
+    VALUES (?, ?, ?)
 ");
 $stmt->bind_param(
-    "ssssssssssss", 
-    $token, $expiresAt, $company_name, $company_email, $hashed_password, $company_phone,
-    $company_address, $company_city, $company_state, $company_zip, $company_country, $company_link
+    "sis", 
+    $token, $company_id, $expiresAt
 );
 
 if (!$stmt->execute()) {
+    // Rollback company creation if verification insert fails
+    $deleteCompany = $conn->prepare("DELETE FROM company WHERE company_id = ?");
+    $deleteCompany->bind_param("i", $company_id);
+    $deleteCompany->execute();
+    $deleteCompany->close();
+    
     echo json_encode(["status" => "error", "message" => "Error: " . $stmt->error]);
     exit;
 }
 $stmt->close();
+
 
 // Send verification email
 $verificationLink = "http://" . $_SERVER['HTTP_HOST'] . "/php/verify_company_email.php?token=" . urlencode($token);

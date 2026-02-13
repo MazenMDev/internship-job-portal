@@ -16,7 +16,7 @@ if (empty($email) || empty($password)) {
     exit;
 }
 
-$stmt = $conn->prepare("SELECT company_id, company_name, password , theme, Image FROM company WHERE company_email = ?");
+$stmt = $conn->prepare("SELECT company_id, company_name, password , theme, Image, company_verified FROM company WHERE company_email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $companyResult = $stmt->get_result();
@@ -25,6 +25,26 @@ $stmt->close();
 
 if ($isCompanyEmail) {
     $company = $companyResult->fetch_assoc();
+    // 0 = hasn't verified email
+    if($company['company_verified'] == 0) {
+        echo json_encode(["status" => "error", "message" => "Please check your email to verify your company account."]);
+        exit;
+    }
+    // 1 = under admin verification
+    else if($company['company_verified'] == 1) {
+        echo json_encode(["status" => "error", "message" => "Your company registration is still under admin verification. Please wait for approval."]);
+        exit;
+    }
+    // -1 = rejected
+    else if($company['company_verified'] == -1) {
+        echo json_encode(["status" => "error", "message" => "Your company registration has been rejected. Please contact support for more information."]);
+        exit;
+    }
+    // 2 = verified 
+    else if($company['company_verified'] != 2) {
+        echo json_encode(["status" => "error", "message" => "Invalid company verification status. Please contact support."]);
+        exit;
+    }
     if (password_verify($password, $company['password'])) {
         $_SESSION['logged_in'] = true;
         $_SESSION['company_id'] = $company['company_id'];
@@ -55,18 +75,8 @@ if ($isCompanyEmail) {
     exit;
 }
 
-$stmt = $conn->prepare("SELECT verification_id, password, company_name, company_email, company_phone, company_address, company_city, company_state, company_zip, company_country, company_website, created_at FROM verify_company WHERE company_email = ?");
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$verifyResult = $stmt->get_result();
-$isVerifyCompanyEmail = $verifyResult->num_rows > 0;
-$stmt->close();
-if ($isVerifyCompanyEmail) {
-    echo json_encode(["status" => "error", "message" => "Your company registration is still under verification. Please wait for approval."]);
-    exit;
-}
 
-$stmt = $conn->prepare("SELECT Id, Password, First_Name, Last_Name, Title, Image, is_admin, theme , cv FROM users WHERE Email = ?");
+$stmt = $conn->prepare("SELECT Id, Password, email_verified , First_Name, Last_Name, Title, Image, is_admin, theme , cv FROM users WHERE Email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -77,6 +87,12 @@ if ($result->num_rows === 0) {
 }
 
 $user = $result->fetch_assoc();
+
+if($user['email_verified'] == 0) {
+    echo json_encode(["status" => "error", "message" => "Please check your email to verify your account."]);
+    exit;
+}
+
 if (!password_verify($password, $user['Password'])) {
     echo json_encode(["status" => "error", "message" => "Incorrect password."]);
     exit;

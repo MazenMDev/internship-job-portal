@@ -13,8 +13,22 @@
     $status = $_POST['status'];
 
     if($status == 1){
-        $stmt = $conn->prepare("SELECT * FROM verify_company WHERE verification_id = ?");
+        // Get the verification record to get company_id
+        $stmt = $conn->prepare("SELECT company_id FROM verify_company WHERE verification_id = ?");
         $stmt->bind_param("i", $verif_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $verification = $result->fetch_assoc();
+        $stmt->close();
+
+        if (!$verification) {
+            echo json_encode(['error' => 'Company verification record not found']);
+            exit;
+        }
+
+        // Get company details from company table
+        $stmt = $conn->prepare("SELECT company_id, company_name, company_email FROM company WHERE company_id = ?");
+        $stmt->bind_param("i", $verification['company_id']);
         $stmt->execute();
         $result = $stmt->get_result();
         $company = $result->fetch_assoc();
@@ -25,8 +39,10 @@
             exit;
         }
 
-        $stmt = $conn->prepare("INSERT INTO company (company_name, company_email, password, phone_number, street_address, city, state, zip_code, country, company_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssssssss", $company['company_name'], $company['company_email'], $company['password'], $company['company_phone'], $company['company_address'], $company['company_city'], $company['company_state'], $company['company_zip'], $company['company_country'], $company['company_website']);
+        // Set company_verified = 2 (fully verified)
+        $stmt = $conn->prepare("UPDATE company SET company_verified = 2 WHERE company_id = ?");
+        $stmt->bind_param("i", $company['company_id']);
+
 
         if ($stmt->execute()) {
             $stmt->close();
@@ -178,8 +194,22 @@
         }
 
     } elseif ($status == 2) {
-        $stmt = $conn->prepare("SELECT company_name, company_email FROM verify_company WHERE verification_id = ?");
+        // Get the verification record to get company_id
+        $stmt = $conn->prepare("SELECT company_id FROM verify_company WHERE verification_id = ?");
         $stmt->bind_param("i", $verif_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $verification = $result->fetch_assoc();
+        $stmt->close();
+
+        if (!$verification) {
+            echo json_encode(['error' => 'Company verification record not found']);
+            exit;
+        }
+
+        // Get company details from company table
+        $stmt = $conn->prepare("SELECT company_id, company_name, company_email FROM company WHERE company_id = ?");
+        $stmt->bind_param("i", $verification['company_id']);
         $stmt->execute();
         $result = $stmt->get_result();
         $company = $result->fetch_assoc();
@@ -194,6 +224,13 @@
         $stmt->bind_param("i", $verif_id);
         if ($stmt->execute()) {
             $stmt->close();
+
+            $stmt = $conn->prepare("UPDATE company SET company_verified = -1 WHERE company_id = ?");
+            $stmt->bind_param("i", $company['company_id']);
+            $stmt->execute();
+            $stmt->close();
+
+
             
             $to = $company['company_email'];
             $subject = "Company Verification Status";

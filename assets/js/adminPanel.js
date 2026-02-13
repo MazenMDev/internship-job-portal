@@ -171,8 +171,8 @@ function handleCompanyVerification() {
         }
 
         allCompanies = data;
-        /*
         console.log(data)
+        /*    
         {
           "verification_id": 1,
           "is_verified": 0,
@@ -233,11 +233,11 @@ function handleCompanyVerification() {
                   </div>
 
                   <p><strong>Email:</strong> ${company.company_email}</p>
-                  <p><strong>Phone:</strong> ${company.company_phone}</p>
-                  <p><strong>City:</strong> ${company.company_city}</p>
-                  <p><strong>State:</strong> ${company.company_state}</p>
-                  <p><strong>Country:</strong> ${company.company_country}</p>
-                  <p><strong>Website:</strong> <a href="${company.company_website}" target="_blank">${company.company_website}</a></p>
+                  <p><strong>Phone:</strong> ${company.phone_number}</p>
+                  <p><strong>City:</strong> ${company.city}</p>
+                  <p><strong>State:</strong> ${company.state}</p>
+                  <p><strong>Country:</strong> ${company.country}</p>
+                  <p><strong>Website:</strong> <a href="${company.company_url}" target="_blank">${company.company_url}</a></p>
                   <div class="company-verif-actions">
                     <button class="verify-company-btn" data-company-id="${company.verification_id}">Verify</button>
                     <button class="reject-company-btn" data-company-id="${company.verification_id}">Reject</button>

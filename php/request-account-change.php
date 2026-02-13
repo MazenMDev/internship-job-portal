@@ -1,9 +1,5 @@
 <?php
-/**
- * Request Account Change (Email or Password)
- * This endpoint initiates the verification process for email/password changes
- * by sending a verification email to the user's current email address.
- */
+
 require 'db_connection.php';
 require 'includes/PHPMailer/sendMail.php';
 

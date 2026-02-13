@@ -4,67 +4,69 @@ include 'db_connection.php';
 $token = $_GET['token'] ?? '';
 
 if (empty($token)) {
-    die("Invalid verification link.");
+    header("Location: ../pages/verification-result.html?status=error&message=" . urlencode("Invalid verification link."));
+    exit;
 }
 
 $stmt = $conn->prepare("
-    SELECT * FROM email_verifications 
-    WHERE token = ? AND is_used = FALSE
+    SELECT id , user_id , is_used, expires_at
+    FROM email_verifications 
+    WHERE token = ?
 ");
 $stmt->bind_param("s", $token);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows === 0) {
-    die("Invalid or already used link.");
+    $stmt->close();
+    $conn->close();
+    header("Location: ../pages/verification-result.html?status=error&message=" . urlencode("Invalid or expired verification link."));
+    exit;
 }
 
 $verification = $result->fetch_assoc();
+$stmt->close();
 
-if (date('Y-m-d H:i:s') > $verification['expires_at']) {
-    die("Verification link expired.");
+if ($verification['is_used']) {
+    $conn->close();
+    header("Location: ../pages/verification-result.html?status=error&message=" . urlencode("This verification link has already been used."));
+    exit;
 }
 
-$conn->begin_transaction();
+$currentTime = date('Y-m-d H:i:s');
+if ($currentTime > $verification['expires_at']) {
+    $conn->close();
+    header("Location: ../pages/verification-result.html?status=error&message=" . urlencode("This verification link has expired. Please register again."));
+    exit;
+}
 
-try {
+$checkEmail = $conn->prepare("SELECT * FROM users WHERE Id = ?");
+$checkEmail->bind_param("i", $verification['user_id']);
+$checkEmail->execute();
+$checkEmail->store_result();
 
-    $insertUser = $conn->prepare("
-        INSERT INTO users 
-        (First_Name, Last_Name, Email, Password, Gender)
-        VALUES (?, ?, ?, ?, ?)
-    ");
-
-    $insertUser->bind_param(
-        "sssss",
-        $verification['First_Name'],
-        $verification['Last_Name'],
-        $verification['Email'],
-        $verification['Password'],
-        $verification['Gender']
-    );
-
-    $insertUser->execute();
-    $insertUser->close();
-
-    $markUsed = $conn->prepare("
-        UPDATE email_verifications 
-        SET is_used = TRUE 
-        WHERE id = ?
-    ");
-
+if ($checkEmail->num_rows > 0) {
+    $checkEmail->close();
+    
+    // Mark as used
+    $markUsed = $conn->prepare("UPDATE email_verifications SET is_used = TRUE WHERE id = ?");
     $markUsed->bind_param("i", $verification['id']);
     $markUsed->execute();
     $markUsed->close();
-
-    $conn->commit();
-    echo "Email verified successfully!";
-
-} catch (Exception $e) {
-    $conn->rollback();
-    echo "Verification failed.";
+    
+    // Update user's email_verified status
+    $updateUser = $conn->prepare("UPDATE users SET email_verified = 1 WHERE Id = ?");
+    $updateUser->bind_param("i", $verification['user_id']);
+    $updateUser->execute();
+    $updateUser->close();
+    
+    $conn->close();
+    header("Location: ../pages/verification-result.html?status=success&message=" . urlencode("Your email has been successfully verified. You can now log in."));
+    exit;
+} else {
+    $checkEmail->close();
+    $conn->close();
+    header("Location: ../pages/verification-result.html?status=error&message=" . urlencode("User not found. Please register again."));
+    exit;
 }
-
-$conn->close();
 ?>
-
