@@ -45,98 +45,93 @@
                     <style>
                         * { margin: 0; padding: 0; box-sizing: border-box; }
                         body { 
-                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+                            font-family: 'Rubik', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
                             line-height: 1.6; 
-                            color: #333;
-                            background-color: #f4f4f4;
+                            color: #1f2937;
+                            background-color: #f9fafb;
                             padding: 20px;
                         }
                         .email-wrapper {
                             max-width: 600px;
                             margin: 0 auto;
-                            background: white;
-                            border-radius: 12px;
+                            background: #ffffff;
+                            border-radius: 8px;
                             overflow: hidden;
-                            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                            border: 1px solid #e5e7eb;
                         }
                         .header {
-                            background: linear-gradient(135deg, #009aab 0%, #007a87 100%);
+                            background-color: #10b981;
                             color: white;
-                            padding: 40px 30px;
+                            padding: 32px 24px;
                             text-align: center;
                         }
                         .header h1 {
-                            font-size: 28px;
+                            font-size: 24px;
                             font-weight: 600;
                             margin: 0;
                         }
                         .content {
-                            padding: 40px 30px;
+                            padding: 32px 24px;
                             background-color: #ffffff;
                         }
                         .content h2 {
                             color: #009aab;
-                            font-size: 24px;
-                            margin-bottom: 20px;
+                            font-size: 20px;
+                            margin-bottom: 16px;
                         }
                         .content p {
-                            color: #555;
-                            margin-bottom: 15px;
-                            font-size: 16px;
+                            color: #4b5563;
+                            margin-bottom: 12px;
+                            font-size: 15px;
                         }
                         .button-container {
                             text-align: center;
-                            margin: 30px 0;
+                            margin: 24px 0;
                         }
                         .button {
                             display: inline-block;
-                            padding: 15px 40px;
-                            background: linear-gradient(135deg, #009aab 0%, #007a87 100%);
+                            padding: 12px 32px;
+                            background-color: #009aab;
                             color: white !important;
                             text-decoration: none;
-                            border-radius: 8px;
-                            font-weight: 600;
-                            font-size: 16px;
-                            box-shadow: 0 4px 15px rgba(0, 154, 171, 0.3);
-                            transition: transform 0.2s;
+                            border-radius: 6px;
+                            font-weight: 500;
+                            font-size: 15px;
                         }
                         .success-box {
-                            background-color: #d4edda;
-                            border-left: 4px solid #28a745;
-                            padding: 15px;
-                            border-radius: 6px;
-                            margin: 20px 0;
+                            background-color: #f0fdf4;
+                            border-left: 3px solid #10b981;
+                            padding: 12px;
+                            border-radius: 4px;
+                            margin: 16px 0;
                         }
                         .success-box p {
-                            color: #155724;
+                            color: #166534;
                             margin: 0;
-                            font-size: 14px;
+                            font-size: 13px;
                         }
                         .info-box {
-                            background-color: #d1ecf1;
-                            border-left: 4px solid #0c5460;
-                            padding: 15px;
-                            border-radius: 6px;
-                            margin: 20px 0;
+                            background-color: #f9fafb;
+                            border-left: 3px solid #009aab;
+                            padding: 12px;
+                            border-radius: 4px;
+                            margin: 16px 0;
                         }
                         .info-box p {
-                            color: #0c5460;
+                            color: #4b5563;
                             margin: 0;
-                            font-size: 14px;
+                            font-size: 13px;
                         }
                         .footer {
-                            background-color: #f8f9fa;
+                            background-color: #f9fafb;
                             text-align: center;
-                            padding: 30px 20px;
-                            border-top: 1px solid #e0e0e0;
+                            padding: 24px 16px;
+                            border-top: 1px solid #e5e7eb;
                         }
                         .footer p {
-                            color: #888;
-                            font-size: 13px;
-                            margin: 5px 0;
-                        }
-                        .footer .year {
-                            font-weight: 600;
+                            color: #4b5563;
+                            font-size: 12px;
+                            margin: 4px 0;
                         }
                     </style>
                 </head>
@@ -147,18 +142,17 @@
                         </div>
                         <div class='content'>
                             <h2>Welcome, " . htmlspecialchars($company['company_name']) . "!</h2>
-                            <p>Congratulations! Your company has been successfully verified and registered on the JobConnect platform.</p>
+                            <p>Your company has been successfully verified and registered on JobConnect.</p>
                             
                             <div class='success-box'>
-                                <p><strong>✓ Verification Complete:</strong> Your company account is now active and ready to use.</p>
+                                <p><strong>Verification Complete:</strong> Your company account is now active.</p>
                             </div>
                             
-                            <p>You can now access all features of our platform including:</p>
-                            <ul style='color: #555; margin-left: 20px; margin-bottom: 20px;'>
+                            <p>You can now access all features including:</p>
+                            <ul style='color: #4b5563; margin-left: 20px; margin-bottom: 16px;'>
                                 <li>Post job opportunities</li>
                                 <li>Review applicant profiles</li>
                                 <li>Manage your company profile</li>
-                                <li>Connect with talented professionals</li>
                             </ul>
                             
                             <div class='button-container'>
@@ -166,11 +160,11 @@
                             </div>
                             
                             <div class='info-box'>
-                                <p><strong>Getting Started:</strong> Use your registered email (" . htmlspecialchars($company['company_email']) . ") and password to log in to your account.</p>
+                                <p>Use your registered email (" . htmlspecialchars($company['company_email']) . ") and password to log in.</p>
                             </div>
                         </div>
                         <div class='footer'>
-                            <p>&copy; <span class='year'>" . date('Y') . "</span> JobConnect. All rights reserved.</p>
+                            <p>&copy; " . date('Y') . " JobConnect. All rights reserved.</p>
                             <p>Connecting talent with opportunities</p>
                         </div>
                     </div>
@@ -212,82 +206,79 @@
                     <style>
                         * { margin: 0; padding: 0; box-sizing: border-box; }
                         body { 
-                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+                            font-family: 'Rubik', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
                             line-height: 1.6; 
-                            color: #333;
-                            background-color: #f4f4f4;
+                            color: #1f2937;
+                            background-color: #f9fafb;
                             padding: 20px;
                         }
                         .email-wrapper {
                             max-width: 600px;
                             margin: 0 auto;
-                            background: white;
-                            border-radius: 12px;
+                            background: #ffffff;
+                            border-radius: 8px;
                             overflow: hidden;
-                            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                            border: 1px solid #e5e7eb;
                         }
                         .header {
-                            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+                            background-color: var(--error);
                             color: white;
-                            padding: 40px 30px;
+                            padding: 32px 24px;
                             text-align: center;
                         }
                         .header h1 {
-                            font-size: 28px;
+                            font-size: 24px;
                             font-weight: 600;
                             margin: 0;
                         }
                         .content {
-                            padding: 40px 30px;
+                            padding: 32px 24px;
                             background-color: #ffffff;
                         }
                         .content h2 {
-                            color: #dc3545;
-                            font-size: 24px;
-                            margin-bottom: 20px;
+                            color: #1f2937;
+                            font-size: 20px;
+                            margin-bottom: 16px;
                         }
                         .content p {
-                            color: #555;
-                            margin-bottom: 15px;
-                            font-size: 16px;
+                            color: #4b5563;
+                            margin-bottom: 12px;
+                            font-size: 15px;
                         }
                         .warning-box {
-                            background-color: #f8d7da;
-                            border-left: 4px solid #dc3545;
-                            padding: 15px;
-                            border-radius: 6px;
-                            margin: 20px 0;
+                            background-color: #fef2f2;
+                            border-left: 3px solid var(--error);
+                            padding: 12px;
+                            border-radius: 4px;
+                            margin: 16px 0;
                         }
                         .warning-box p {
-                            color: #721c24;
+                            color: #991b1b;
                             margin: 0;
-                            font-size: 14px;
+                            font-size: 13px;
                         }
                         .info-box {
-                            background-color: #d1ecf1;
-                            border-left: 4px solid #0c5460;
-                            padding: 15px;
-                            border-radius: 6px;
-                            margin: 20px 0;
+                            background-color: #f9fafb;
+                            border-left: 3px solid #009aab;
+                            padding: 12px;
+                            border-radius: 4px;
+                            margin: 16px 0;
                         }
                         .info-box p {
-                            color: #0c5460;
+                            color: #4b5563;
                             margin: 0;
-                            font-size: 14px;
+                            font-size: 13px;
                         }
                         .footer {
-                            background-color: #f8f9fa;
+                            background-color: #f9fafb;
                             text-align: center;
-                            padding: 30px 20px;
-                            border-top: 1px solid #e0e0e0;
+                            padding: 24px 16px;
+                            border-top: 1px solid #e5e7eb;
                         }
                         .footer p {
-                            color: #888;
-                            font-size: 13px;
-                            margin: 5px 0;
-                        }
-                        .footer .year {
-                            font-weight: 600;
+                            color: #4b5563;
+                            font-size: 12px;
+                            margin: 4px 0;
                         }
                     </style>
                 </head>
@@ -298,25 +289,25 @@
                         </div>
                         <div class='content'>
                             <h2>Dear " . htmlspecialchars($company['company_name']) . ",</h2>
-                            <p>Thank you for your interest in joining the JobConnect platform.</p>
+                            <p>Thank you for your interest in joining JobConnect.</p>
                             
                             <div class='warning-box'>
-                                <p><strong>Application Status:</strong> Unfortunately, we were unable to verify your company registration at this time.</p>
+                                <p><strong>Status:</strong> We were unable to verify your company registration at this time.</p>
                             </div>
                             
-                            <p>This could be due to one of the following reasons:</p>
-                            <ul style='color: #555; margin-left: 20px; margin-bottom: 20px;'>
+                            <p>This could be due to:</p>
+                            <ul style='color: #4b5563; margin-left: 20px; margin-bottom: 16px;'>
                                 <li>Incomplete or inaccurate company information</li>
                                 <li>Unable to verify company credentials</li>
                                 <li>Documentation requirements not met</li>
                             </ul>
                             
                             <div class='info-box'>
-                                <p><strong>Next Steps:</strong> You are welcome to submit a new registration with updated and accurate information. If you believe this decision was made in error, please contact our support team.</p>
+                                <p>You are welcome to submit a new registration with updated information.</p>
                             </div>
                         </div>
                         <div class='footer'>
-                            <p>&copy; <span class='year'>" . date('Y') . "</span> JobConnect. All rights reserved.</p>
+                            <p>&copy; " . date('Y') . " JobConnect. All rights reserved.</p>
                             <p>Connecting talent with opportunities</p>
                         </div>
                     </div>

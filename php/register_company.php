@@ -106,130 +106,121 @@ $body = "
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            font-family: 'Rubik', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             line-height: 1.6; 
-            color: #333;
-            background-color: #f4f4f4;
+            color: #1f2937;
+            background-color: #f9fafb;
             padding: 20px;
         }
         .email-wrapper {
             max-width: 600px;
             margin: 0 auto;
-            background: white;
-            border-radius: 12px;
+            background: #ffffff;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
         }
         .header {
-            background: linear-gradient(135deg, #009aab 0%, #007a87 100%);
+            background-color: #009aab;
             color: white;
-            padding: 40px 30px;
+            padding: 32px 24px;
             text-align: center;
         }
         .header h1 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 600;
             margin: 0;
         }
         .content {
-            padding: 40px 30px;
+            padding: 32px 24px;
             background-color: #ffffff;
         }
         .content h2 {
             color: #009aab;
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 20px;
+            margin-bottom: 16px;
         }
         .content p {
-            color: #555;
-            margin-bottom: 15px;
-            font-size: 16px;
+            color: #4b5563;
+            margin-bottom: 12px;
+            font-size: 15px;
         }
         .button-container {
             text-align: center;
-            margin: 30px 0;
+            margin: 24px 0;
         }
         .button {
             display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(135deg, #009aab 0%, #007a87 100%);
+            padding: 12px 32px;
+            background-color: #009aab;
             color: white !important;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            box-shadow: 0 4px 15px rgba(0, 154, 171, 0.3);
-            transition: transform 0.2s;
-        }
-        .button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 154, 171, 0.4);
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 15px;
         }
         .link-box {
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 6px;
-            border-left: 4px solid #009aab;
-            margin: 20px 0;
+            background-color: #f9fafb;
+            padding: 12px;
+            border-radius: 4px;
+            border-left: 3px solid #009aab;
+            margin: 16px 0;
             word-break: break-all;
-            font-size: 14px;
-            color: #666;
+            font-size: 13px;
+            color: #4b5563;
         }
         .warning-box {
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            border-radius: 6px;
-            margin: 20px 0;
+            background-color: #fef3c7;
+            border-left: 3px solid #f59e0b;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 16px 0;
         }
         .warning-box p {
-            color: #856404;
+            color: #92400e;
             margin: 0;
-            font-size: 14px;
+            font-size: 13px;
         }
         .info-box {
-            background-color: #e7f3ff;
-            border-left: 4px solid #0066cc;
-            padding: 15px;
-            border-radius: 6px;
-            margin: 20px 0;
+            background-color: #f0fdf4;
+            border-left: 3px solid #10b981;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 16px 0;
         }
         .info-box p {
-            color: #004080;
+            color: #166534;
             margin: 0;
-            font-size: 14px;
+            font-size: 13px;
         }
         .footer {
-            background-color: #f8f9fa;
+            background-color: #f9fafb;
             text-align: center;
-            padding: 30px 20px;
-            border-top: 1px solid #e0e0e0;
+            padding: 24px 16px;
+            border-top: 1px solid #e5e7eb;
         }
         .footer p {
-            color: #888;
-            font-size: 13px;
-            margin: 5px 0;
-        }
-        .footer .year {
-            font-weight: 600;
+            color: #4b5563;
+            font-size: 12px;
+            margin: 4px 0;
         }
     </style>
 </head>
 <body>
     <div class='email-wrapper'>
         <div class='header'>
-            <h1>Welcome to JobConnect! </h1>
+            <h1>Welcome to JobConnect!</h1>
         </div>
         <div class='content'>
             <h2>Hello $company_name,</h2>
-            <p>Thank you for registering your company with JobConnect! We're excited to have you join our platform.</p>
+            <p>Thank you for registering your company with JobConnect!</p>
             <p>To complete your registration, please verify your email address by clicking the button below:</p>
             
             <div class='button-container'>
                 <a href='$verificationLink' class='button'>Verify Email Address</a>
             </div>
             
-            <p style='text-align: center; color: #888; font-size: 14px;'>Or copy and paste this link into your browser:</p>
+            <p style='text-align: center; color: #4b5563; font-size: 13px;'>Or copy and paste this link into your browser:</p>
             <div class='link-box'>$verificationLink</div>
             
             <div class='warning-box'>
@@ -237,19 +228,16 @@ $body = "
             </div>
             
             <div class='info-box'>
-                <p><strong>Next Steps:</strong> After email verification, your company registration will be reviewed by our admin team. Please allow up to 3 working days for verification.</p>
+                <p><strong>Next Steps:</strong> After email verification, your company registration will be reviewed by our admin team. Please allow up to 3 working days.</p>
             </div>
             
-            <p style='font-size: 14px; color: #888; margin-top: 30px;'>If you did not register this company, please ignore this email or contact our support team.</p>
+            <p style='font-size: 13px; color: #4b5563; margin-top: 24px;'>If you did not register this company, please ignore this email.</p>
         </div>
         <div class='footer'>
-            <p>&copy; <span class='year' id='year'>$currentYear</span> JobConnect. All rights reserved.</p>
+            <p>&copy; $currentYear JobConnect. All rights reserved.</p>
             <p>Connecting talent with opportunities</p>
         </div>
     </div>
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear() || 2025;
-    </script>
 </body>
 </html>
 ";

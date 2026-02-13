@@ -29,7 +29,7 @@
 }
 
 .password-form .error-message {
-    color: #f44336;
+    color: var(--error);
     font-size: 13px;
     margin-top: 5px;
     display: none;
@@ -89,11 +89,11 @@
 }
 
 .password-requirements li.valid {
-    color: #4caf50;
+    color: var(--success);
 }
 
 .password-requirements li.invalid {
-    color: #f44336;
+    color: var(--error);
 }
 
 .info-icon {
@@ -111,7 +111,7 @@
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background: #ff9800;
+    background: var(--warning);
     display: inline-flex;
     align-items: center;
     justify-content: center;
