@@ -59,52 +59,41 @@
        
         $stmt->bind_param("isiisssss", $company_id, $title, $salary_min, $salary_max, $experience, $location, $description, $job_type, $category);
         if ($stmt->execute()) {
-            echo json_encode(['success' => true, 'message' => 'Job posted successfully.']);
+            $job_id = $conn->insert_id;
+            $stmt->close();
 
-            $stmt = $conn->prepare("SELECT job_id FROM jobs where company_id = ?");
-            $stmt->bind_param( "i",$company_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if($result->num_rows > 0){
-                $result = $result->fetch_assoc();
-                $job_id = $result['job_id'];
+            foreach ($skills as $skill) {
+                $skill_stmt = $conn->prepare("INSERT INTO job_skills (job_id, skill) VALUES (?, ?)");
+                $skill_stmt->bind_param("is", $job_id, $skill);
+                $skill_stmt->execute();
+                $skill_stmt->close();
             }
 
-            $title_notif='A New job has been Posted';
-            $desc_notif ='You have posted a new job for '.$title. ' ,  <a target="_blank" style="color: var(--primary-color)" href="/pages/job-application-view.html?jobId='.$job_id.'">View Job</a>';
-            $stmt = $conn->prepare("INSERT INTO notifications (receiver_type , receiver_company_id, sender_job_id,sender_type,title, description) VALUES (2, ?, ?, 3, ?, ?)");
-            $stmt->bind_param("iiss",$company_id,$job_id, $title_notif,$desc_notif) ;
-            if(!$stmt->execute()){
-                echo json_encode([
-                'success' => false, 
-                'message' => 'error while sending notification: ' . $stmt->error
-                 ]);
+            foreach ($tags as $tag) {
+                $tag_stmt = $conn->prepare("INSERT INTO job_tags (job_id, tag) VALUES (?, ?)");
+                $tag_stmt->bind_param("is", $job_id, $tag);
+                $tag_stmt->execute();
+                $tag_stmt->close();
             }
 
-            if(!isset($_SESSION["unread_notifications"])){
+            $title_notif = 'A New job has been Posted';
+            $desc_notif = 'You have posted a new job for ' . $title . ' ,  <a target="_blank" style="color: var(--primary-color)" href="/pages/job-application-view.html?jobId=' . $job_id . '">View Job</a>';
+            $notif_stmt = $conn->prepare("INSERT INTO notifications (receiver_type, receiver_company_id, sender_job_id, sender_type, title, description) VALUES (2, ?, ?, 3, ?, ?)");
+            $notif_stmt->bind_param("iiss", $company_id, $job_id, $title_notif, $desc_notif);
+            $notif_stmt->execute();
+            $notif_stmt->close();
+
+            if (!isset($_SESSION["unread_notifications"])) {
                 $_SESSION["unread_notifications"] = 0;
             }
             $_SESSION["unread_notifications"] = ($_SESSION["unread_notifications"] + 1);
 
+            echo json_encode(['success' => true, 'message' => 'Job posted successfully.']);
         } else {
-            echo json_encode(['success' => false, 'message' => 'Error posting job: ' . $stmt->error]); 
-        }
-        
-        foreach ($skills as $skill) {
-            $skill_stmt = $conn->prepare("INSERT INTO job_skills (job_id, skill) VALUES (?, ?)");
-            $skill_stmt->bind_param("is", $job_id, $skill);
-            $skill_stmt->execute();
-            $skill_stmt->close();
+            echo json_encode(['success' => false, 'message' => 'Error posting job: ' . $stmt->error]);
+            $stmt->close();
         }
 
-        foreach ($tags as $tag) {
-            $tag_stmt = $conn->prepare("INSERT INTO job_tags (job_id, tag) VALUES (?, ?)");
-            $tag_stmt->bind_param("is", $job_id, $tag);
-            $tag_stmt->execute();
-            $tag_stmt->close();
-        }
-
-    $stmt->close();
     $conn->close();
 } else {
     echo json_encode(['success' => false, 'message' => 'Invalid request method.']);

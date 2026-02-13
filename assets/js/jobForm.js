@@ -183,20 +183,35 @@ function rightDivContent(job, formRightDiv) {
 }
 
 function leftDivContent(job, formLeftDiv) {
+  let skills = null;
+  let tags = null;
+  if(job.skills){
+    skills = job.skills
+  } else {
+    skills = job.skill
+  }
+
+  if(job.tags){
+    tags = job.tags
+  }
+  else {
+    tags = job.tag
+  }
+
   formLeftDiv.innerHTML = `
   <div class="details-container">
     <h2 class="job-description-title">Job Description</h2>
     <p class="job-description-content">${job.job_description}</p>
     <h2 class="job-skills-title">Required Skills</h2>
     <ul class="job-skills-list">
-      ${job.skills
+      ${skills
         .map((skill) => `<li class="job-skill">${skill}</li>`)
         .join("")}
     </ul>
 
     <h2 class="job-tags-title">Tags:</h2>
     <div class="job-tags-container">
-      ${job.tags.map((tag) => `<span class="job-tag">${tag}</span>`).join("")}
+      ${tags.map((tag) => `<span class="job-tag">${tag}</span>`).join("")}
     </div> 
 
     <a href="${job.website}" target="_blank" class="companyWebsite">
