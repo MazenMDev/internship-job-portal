@@ -1,9 +1,4 @@
 <?php
-/**
- * Verify Account Change
- * This endpoint handles the verification of email/password change requests
- * When user clicks the link in their current email.
- */
 require 'db_connection.php';
 require 'includes/PHPMailer/sendMail.php';
 
