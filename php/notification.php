@@ -68,38 +68,57 @@ while ($row = $result->fetch_assoc()) {
         $stmt_sender->bind_param("i", $sender_id);
         $res = $stmt_sender->execute();
         $result_sender = $stmt_sender->get_result();
+        $path = '/ImageStorage/profile.jpeg'; 
         if($result_sender->num_rows > 0){
             $result_sender = $result_sender->fetch_assoc();
             $image = $result_sender['Image'];
-            $path = null;
-            if($image == 'profile.jpeg'){
-                $path = '/ImageStorage/profile.jpeg';
-            }
-            else{
+            if($image && $image != 'profile.jpeg'){
                 $path = '/ImageStorage/users/'.$sender_id.'/'.$image;
             }
-            $notifications[count($notifications)-1]['image'] = $path;
         }
+        $notifications[count($notifications)-1]['image'] = $path;
         
-    } else{
+    } else if ($sender_type === 2) {
         $sender_id = $row['sender_company_id'];
         $stmt_sender = $conn->prepare("SELECT Image FROM company WHERE company_id = ?");
         $stmt_sender->bind_param("i", $sender_id);
         $res = $stmt_sender->execute();
         $result_sender = $stmt_sender->get_result();
+        $path = '/ImageStorage/company.png';
         if($result_sender->num_rows > 0){
             $result_sender = $result_sender->fetch_assoc();
             $img = $result_sender['Image'];
-            $path = null;
-            if($img == 'company.png'){
-                $path = '/ImageStorage/company.png';
-            }
-            else{
+            if($img && $img != 'company.png'){
                 $path = '/ImageStorage/companies/'.$sender_id.'/'.$img;
             }
-            $notifications[count($notifications)-1]['image'] = $path;
         }
-    }
+        $notifications[count($notifications)-1]['image'] = $path;
+        }
+        else{
+            $sender_id = $row['sender_job_id'];
+            $get_id = $conn->prepare("SELECT company_id FROM jobs WHERE job_id = ?");
+            $get_id->bind_param("i", $sender_id);
+            $get_id->execute();
+            $result_id = $get_id->get_result();
+            if($result_id->num_rows > 0){
+                $result_id = $result_id->fetch_assoc();
+                $sender_id = $result_id['company_id'];
+            }
+            $stmt_sender = $conn->prepare("SELECT Image FROM company WHERE company_id = ?");
+            $stmt_sender->bind_param("i", $sender_id);
+            $res = $stmt_sender->execute();
+            $result_sender = $stmt_sender->get_result();
+            $path = '/ImageStorage/company.png';
+            if($result_sender->num_rows > 0){
+                $result_sender = $result_sender->fetch_assoc();
+                $img = $result_sender['Image'];
+                if($img && $img != 'company.png'){
+                    $path = '/ImageStorage/companies/'.$sender_id.'/'.$img;
+                }
+            }
+            $notifications[count($notifications)-1]['image'] = $path;
+
+        }
 }
 
 header('Content-Type: application/json');
