@@ -530,6 +530,10 @@ function renderProfileAccordion() {
   renderProfileAccordionSection(".profile-projects-container", projectsList);
 }
 
+
+const type = wrapper.dataset.type; 
+const startInput = document.querySelector(".start-date");
+
 /* DATE DROPDOWN*/
 function initDatePicker(wrapper) {
   const input = wrapper.querySelector(".dateInput");
@@ -1377,7 +1381,8 @@ function uploadPhoto() {
 function uploadCVToServer(file) {
   const formData = new FormData();
   formData.append("cv_file", file);
-  fetch("../../php/upload_cv.php", {
+  
+  return fetch("../../php/upload_cv.php", { 
     method: "POST",
     body: formData,
   })
@@ -1407,95 +1412,98 @@ document.addEventListener("click", (e) => {
   if (!btn) return;
 
   e.preventDefault();
-  if (Type === "company") {
-    const companyPayload = {
-      company_name: document.getElementById("company-name")?.value.trim(),
-      description: document.getElementById("profile-About-us")?.value.trim(),
-      phone_number: document.getElementById("Company-number")?.value.trim(),
-      company_url: document.getElementById("CompanyURL")?.value.trim(),
-      country: document.getElementById("Company-country")?.value.trim(),
-      city: document.getElementById("companyCity")?.value.trim(),
-      state: document.getElementById("companyState")?.value.trim(),
-      street_address: document
-        .getElementById("companyStreetAddress")
-        ?.value.trim(),
-      zip_code: document.getElementById("companyZipCode")?.value.trim(),
-      company_email: document.querySelector(".profile-section .headline")
-        ?.textContent,
-    };
+  let submissionChain = Promise.resolve();
 
-    showCompanyInfo(companyPayload);
-
-    fetch("../php/profile_company.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(companyPayload),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          alert("Company profile saved!");
-          closeModal();
-        } else {
-          alert("Error: " + (data.error || "Could not save"));
-        }
-      })
-      .catch((err) => console.error("Save error:", err));
-  } else if (Type === "user") {
-    const fInput = document.getElementById("first-name");
-    const lInput = document.getElementById("last-name");
-    const hInput = document.getElementById("profile-headline");
-    const bInput = document.getElementById("profile-bio");
-
-    const fname = fInput ? fInput.value.trim() : "";
-    const lname = lInput ? lInput.value.trim() : "";
-    const title = hInput ? hInput.value.trim() : "";
-    const bio = bInput ? bInput.value.trim() : "";
-
-    const fDisplay = document.querySelector(".first-name");
-    const lDisplay = document.querySelector(".last-name");
-    const hDisplay = document.querySelector(".profile-section .headline");
-    const bDisplay = document.querySelector(".profile-section .Bio p");
-
-    if (fDisplay) fDisplay.textContent = fname;
-    if (lDisplay) lDisplay.textContent = lname;
-    if (hDisplay) hDisplay.textContent = title;
-    if (bDisplay) bDisplay.textContent = bio;
-
-    const payload = {
-      fname: fname,
-      lname: lname,
-      title: title,
-      bio: bio,
-      experience: experienceList,
-      education: educationList,
-      courses: coursesList,
-      projects: projectsList,
-      skills: skillsList,
-    };
-
-    fetch("../php/profile_user.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          alert("Profile saved successfully!");
-          document.body.classList.remove("edit-open");
-        } else {
-          console.error(data);
-          alert("Error saving profile.");
-        }
-      })
-      .catch((err) => {
-        console.error("Save error:", err);
-        alert("An error occurred while saving.");
-      });
-
-    if (cvFile) {
-      uploadCVToServer(cvFile);
-    }
+  if (cvFile) {
+    submissionChain = uploadCVToServer(cvFile);
   }
+
+  submissionChain.then(() => {
+    
+    if (Type === "company") {
+      const companyPayload = {
+        company_name: document.getElementById("company-name")?.value.trim(),
+        description: document.getElementById("profile-About-us")?.value.trim(),
+        phone_number: document.getElementById("Company-number")?.value.trim(),
+        company_url: document.getElementById("CompanyURL")?.value.trim(),
+        country: document.getElementById("Company-country")?.value.trim(),
+        city: document.getElementById("companyCity")?.value.trim(),
+        state: document.getElementById("companyState")?.value.trim(),
+        street_address: document.getElementById("companyStreetAddress")?.value.trim(),
+        zip_code: document.getElementById("companyZipCode")?.value.trim(),
+        company_email: document.querySelector(".profile-section .headline")?.textContent,
+      };
+
+      showCompanyInfo(companyPayload);
+
+      fetch("../php/profile_company.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(companyPayload),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            alert("Company profile saved!");
+            closeModal();
+          } else {
+            alert("Error: " + (data.error || "Could not save"));
+          }
+        })
+        .catch((err) => console.error("Save error:", err));
+
+    } else if (Type === "user") {
+      const fInput = document.getElementById("first-name");
+      const lInput = document.getElementById("last-name");
+      const hInput = document.getElementById("profile-headline");
+      const bInput = document.getElementById("profile-bio");
+
+      const fname = fInput ? fInput.value.trim() : "";
+      const lname = lInput ? lInput.value.trim() : "";
+      const title = hInput ? hInput.value.trim() : "";
+      const bio = bInput ? bInput.value.trim() : "";
+
+      const fDisplay = document.querySelector(".first-name");
+      const lDisplay = document.querySelector(".last-name");
+      const hDisplay = document.querySelector(".profile-section .headline");
+      const bDisplay = document.querySelector(".profile-section .Bio p");
+
+      if (fDisplay) fDisplay.textContent = fname;
+      if (lDisplay) lDisplay.textContent = lname;
+      if (hDisplay) hDisplay.textContent = title;
+      if (bDisplay) bDisplay.textContent = bio;
+
+      const payload = {
+        fname: fname,
+        lname: lname,
+        title: title,
+        bio: bio,
+        experience: experienceList,
+        education: educationList,
+        courses: coursesList,
+        projects: projectsList,
+        skills: skillsList,
+      };
+
+      fetch("../php/profile_user.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            alert("Profile saved successfully!");
+            document.body.classList.remove("edit-open");
+          } else {
+            console.error(data);
+            alert("Error saving profile.");
+          }
+        })
+        .catch((err) => {
+          console.error("Save error:", err);
+          alert("An error occurred while saving.");
+        });
+    }
+  });
 });
