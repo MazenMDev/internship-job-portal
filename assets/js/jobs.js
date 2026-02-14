@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   fetch("/php/getJobs.php")
     .then((response) => response.json())
     .then((data) => {
-      console.log("Fetched Jobs:", data);
+      //console.log("Fetched Jobs:", data);
       jobListings = data.data || [];
       jobListings.forEach((job) => {
         if (job.logo === "company.png") {
@@ -74,7 +74,7 @@ $(document).ready(function () {
         userBookMarks.push(...data.bookmarked_jobs);
       }
 
-      console.log(userBookMarks);
+      //console.log(userBookMarks);
 
       userBookMarks.forEach((jobId) => {
         const bookmarkIcon = document.querySelector(
@@ -96,16 +96,16 @@ $(document).ready(function () {
         const jobIds = data.applications.map((app) => app.job_id);
         appliedJobs.push(...jobIds);
       }
-      console.log("Applied Jobs:", appliedJobs);
+      //console.log("Applied Jobs:", appliedJobs);
       if (isCompany === false && isUserLoggedIn === true) {
         document.getElementById("applied-jobs-count").textContent =
           appliedJobs.length;
         document.getElementById("user-applied-jobs").style.display =
           appliedJobs.length >= 0 ? "block" : "none";
       }
-      console.log(appliedJobs);
-      console.log(isCompany);
-      console.log(isUserLoggedIn);
+      //console.log(appliedJobs);
+      //console.log(isCompany);
+      //console.log(isUserLoggedIn);
 
       renderPage(currentPage);
     })
@@ -433,7 +433,7 @@ function toggleBookmark(jobId) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
     })
     .catch((error) => {
       console.error("Error:", error);

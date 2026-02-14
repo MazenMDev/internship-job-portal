@@ -58,6 +58,7 @@
 
 .job-description {
   margin-top: 20px;
+  overflow: auto;
 }
 
 .job-required-skills ul , .job-tags ul{

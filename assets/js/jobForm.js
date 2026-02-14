@@ -56,7 +56,7 @@ function showJobDetails(job) {
   lowerDiv.appendChild(formLeftDiv);
   lowerDiv.appendChild(formRightDiv);
 
-  console.log(userDataExport);
+  //console.log(userDataExport);
   document.body.appendChild(blurDiv);
 }
 

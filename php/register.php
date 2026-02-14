@@ -79,6 +79,17 @@ if ($result->num_rows > 0) {
     $checkMail->close();
 };
 
+//check if a company with the same email exists
+$checkCompanyMail = $conn->prepare("SELECT company_id FROM company WHERE company_email = ?");
+$checkCompanyMail->bind_param("s", $email);
+$checkCompanyMail->execute();
+$companyResult = $checkCompanyMail->get_result();
+if ($companyResult->num_rows > 0) {
+    $checkCompanyMail->close();
+    echo json_encode(["status" => "error", "message" => "Email already registered! Please login instead."]);
+    exit;
+}
+
 // Hash password
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 

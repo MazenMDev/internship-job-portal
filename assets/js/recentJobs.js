@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("/php/landing.php")
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       jobListings = data.jobs;
       renderRecentJobs();
       displayCountUsers(data.total_users_companies);

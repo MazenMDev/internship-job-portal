@@ -110,6 +110,19 @@ if ($result->num_rows > 0) {
     $stmt->close();
 }
 
+//check if a user with the same email exists
+$checkUserMail = $conn->prepare("SELECT Id FROM users WHERE Email = ?");
+$checkUserMail->bind_param("s", $company_email);
+$checkUserMail->execute();
+$userResult = $checkUserMail->get_result();
+if ($userResult->num_rows > 0) {
+    $checkUserMail->close();
+    echo json_encode(["status" => "error", "message" => "Email already registered! Please login instead."]);
+    exit;
+}
+
+$checkUserMail->close();
+
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 $stmt = $conn->prepare("

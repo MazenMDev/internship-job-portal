@@ -1104,6 +1104,10 @@ body.open-company-popup #blurred-background {
 }
 
 @media (max-width: 1160px) and (min-width: 481px) {
+  .admin-panel-link{
+    bottom: 80px;
+    z-index: 2001;
+  }
   .nav-bar {
     position: fixed;
     bottom: 0;
@@ -1169,7 +1173,7 @@ body.open-company-popup #blurred-background {
     padding: 12px 20px;
     justify-content: space-between;
     align-items: center;
-    z-index: 1000;
+    z-index: 2000;
     height: 50px;
     box-sizing: border-box;
   }
@@ -1221,6 +1225,7 @@ body.open-company-popup #blurred-background {
     position: fixed;
     bottom: 70px;
     right: 10px;
+    z-index: 3000;
     left: auto;
     top: auto;
     min-width: 260px;
@@ -1251,9 +1256,18 @@ body.open-company-popup #blurred-background {
     max-width: 450px;
     margin-top: 35px;
   }
+
+  .notifications_unseen{
+    top: 2px;
+    right: 20px;
+  }
 }
 
 @media (max-width: 480px) {
+  .notifications_unseen{
+    top: 2px;
+    right: 10px;
+  }
   .nav-bar {
     position: fixed;
     bottom: 0;

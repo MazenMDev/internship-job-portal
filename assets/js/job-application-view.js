@@ -10,7 +10,7 @@ fetch("/php/job-application-view.php", {
 })
   .then((Response) => Response.json())
   .then((data) => {
-    console.log(data);
+    //console.log(data);
     jobsData = data;
     const job = data.job;
 
@@ -47,14 +47,19 @@ fetch("/php/job-application-view.php", {
           hasCV = true;
         }
 
+        let img = "";
+        if(app.image == "profile.jpeg"){
+          img = "/ImageStorage/profile.jpeg";
+        }
+        else{
+          img = `/ImageStorage/users/${app.user_id}/${app.image}`;
+        }
         const applicantCard = `
         <div class="application-card" data-applicant-id="${app.user_id}">
         <a href="/pages/profile.html?id=${
           app.user_id
         }&type=user" class="applicant-profile-link">
-            <img src="/ImageStorage/users/${app.user_id}/${app.image}" alt="${
-          app.name
-        }" class="applicant-profile-img" loading="lazy" />
+            <img src="${img}" alt="${app.name}" class="applicant-profile-img" loading="lazy" />
             <h2 class="applicant-name">${app.name}</h2>
         </a>
         <div class="application-status">
@@ -129,12 +134,18 @@ function openPopUp(applicationId) {
   if (application.resume && application.resume.trim() !== "") {
     hasCV = true;
   }
+
+   let img = "";
+        if(application.image == "profile.jpeg"){
+          img = "/ImageStorage/profile.jpeg";
+        }
+        else{
+          img = `/ImageStorage/users/${application.user_id}/${application.image}`;
+        }
   popup.innerHTML = `
     <div class="popup-content-job-application">
       <span class="close-popup-job-application">&times;</span>
-      <img src="/ImageStorage/users/${application.user_id}/${
-    application.image
-  }" alt="${application.name}" class="popup-applicant-image" />
+      <img src="${img}" alt="${application.name}" class="popup-applicant-image" />
       <h2 class="popup-applicant-name">${application.name}</h2>
         <p class="popup-applicant-email">Email: ${application.email}</p>
         <p class="popup-application-date">Applied on: ${
@@ -210,7 +221,7 @@ function openPopUp(applicationId) {
         .then((Response) => Response.json())
         .then((data) => {
           if (data.success) {
-            console.log("Application accepted successfully.");
+            //console.log("Application accepted successfully.");
             application.status = "Accepted";
 
             $popupScoped
@@ -237,7 +248,7 @@ function openPopUp(applicationId) {
             console.error("Failed to accept application:", data.message);
             alert("Failed to accept application: " + data.message);
           }
-          console.log(data);
+         // console.log(data);
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -259,7 +270,7 @@ function openPopUp(applicationId) {
         .then((Response) => Response.json())
         .then((data) => {
           if (data.success) {
-            console.log("Application rejected successfully.");
+           // console.log("Application rejected successfully.");
             application.status = "Rejected";
 
             $popupScoped

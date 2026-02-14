@@ -1,20 +1,29 @@
-# JobConnect - Job Portal Platform
+<a id="readme-top"></a>
+ 
+<h1 align="center" style="color:#3498DB;">JobConnect - Job Portal Platform</h1>
+
 
 <div align="center">
   <img src="./assets/imgs/JobConnect.png" alt="JobConnect Logo" width="150"/>
   
   <p><i>A comprehensive job portal connecting job seekers with employers</i></p>
-  
-  [![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat&logo=php&logoColor=white)](https://www.php.net/)
-  [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-  [![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)](https://www.mysql.com/)
-  [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-  [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-  
+
+  [![Contributors][contributors-shield]][contributors-url]
+  [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+  [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+  [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+  [![jQuery](https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white)](https://jquery.com)
+  [![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/)
+  [![PHPMailer](https://img.shields.io/badge/PHPMailer-008000?style=for-the-badge&logo=maildotru&logoColor=white)](https://github.com/PHPMailer/PHPMailer)
+  [![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+
+  <br/><br/>
+
   ### Live Demo
   
-  **[Full Backend Demo →](http://www.jobconnect.42web.io/pages/landing.html)** | **[Frontend Preview →](https://mazenmdev.github.io/internship-job-portal/pages/landing.html)**
-  
+  **[Full Backend Demo →](http://www.jobconnect.42web.io/pages/landing.html)**  
+  **[Frontend Preview →](https://mazenmdev.github.io/internship-job-portal/pages/landing.html)**
+
 </div>
 
 ---
@@ -64,7 +73,7 @@ JobConnect is a full-stack job portal platform that bridges job seekers with emp
     </td>
     <td align="center" width="150">
       <a href="https://github.com/pharoah4ee">
-        <img src="https://github.com/pharoah4ee.png" width="80" style="border-radius:50%;" alt="Mostafa Abdullah"/><br />
+        <img src="https://github.com/MostafaAbdallah-eng.png" width="80" style="border-radius:50%;" alt="Mostafa Abdullah"/><br />
         <sub><b>Mostafa Abdullah</b></sub>
       </a><br />
     </td>
@@ -100,11 +109,19 @@ JobConnect is a full-stack job portal platform that bridges job seekers with emp
 
 ## Tech Stack
 
-**Frontend:** HTML5, CSS3, JavaScript (ES6+), jQuery  
-**Backend:** PHP 7.4+, MySQL  
-**Tools:** XAMPP, Git
+**Frontend:** HTML, CSS, JavaScript, jQuery  
+**Backend:** PHP, MySQL , PHPMailer  
+**Tools:** XAMPP, Git         
+**Icons & Fonts:** Google Fonts, FontAwesome, Lucide 
 
 ---
 
 
 Developed as part of CS283 course project.
+
+
+[contributors-shield]: https://img.shields.io/github/contributors/MazenMDev/internship-job-portal.svg?style=for-the-badge
+[contributors-url]: https://github.com/MazenMDev/internship-job-portal/graphs/contributors
+
+
+

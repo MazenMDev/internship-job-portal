@@ -4,7 +4,7 @@ async function fetchuserapplications() {
       method: "GET",
     });
     const data = await response.json();
-    console.log(data);
+    //console.log(data);
 
     if (data.success) {
       displayApplications(data.applications);
@@ -41,9 +41,12 @@ function displayApplications(applications) {
     const statusClass = app.status
       ? `status-${app.status.toLowerCase()}`
       : "status-pending";
-    const companyImage = app.company.image
+    let companyImage = app.company.image
       ? `/ImageStorage/companies/${app.job.company_id}/${app.company.image}`
       : "/ImageStorage/company.png";
+      if(app.company.image == 'company.png'){
+        companyImage = "/ImageStorage/company.png";
+      }
     const salaryRange =
       app.job.salary_min && app.job.salary_max
         ? `$${app.job.salary_min.toLocaleString()} - $${app.job.salary_max.toLocaleString()}`

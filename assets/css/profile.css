@@ -1092,6 +1092,14 @@ box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.1);
     top: 0px;
     left: 0px;
   }
+
+  #cvCard {
+    top: 200px;
+    right: 30px;
+  }
+  #cvCard .cvMain {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
