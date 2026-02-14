@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       accordioncontent.classList.toggle("active");
       accordioncontent.style.maxHeight = accordioncontent.classList.contains(
-        "active"
+        "active",
       )
         ? accordioncontent.scrollHeight + "10px"
         : "0px";
@@ -103,7 +103,7 @@ function deduceTargetFromButton(btn) {
   if (!txt) return null;
   return txt.toLowerCase().split(" ")[0];
 }
-
+// code for adding new entry forms
 document.addEventListener("click", (e) => {
   if (!e.target.classList.contains("add-entry-btn")) return;
 
@@ -172,7 +172,7 @@ document.addEventListener("click", (e) => {
         </label>
         <textarea class="institution-input"></textarea>
 
-        <div class="date-picker">
+        <div class="date-picker" date-type="start">
           <label>Start Date</label>
           <input type="text" class="dateInput start-date" placeholder="MM/YYYY" readonly>
           <div class="prof-date-dropdown">
@@ -189,7 +189,7 @@ document.addEventListener("click", (e) => {
           </div>
         </div>
 
-        <div class="date-picker">
+        <div class="date-picker" date-type="end">
           <label>End Date</label>
           <input type="text" class="dateInput end-date" placeholder="MM/YYYY" readonly>
           <div class="prof-date-dropdown">
@@ -440,7 +440,7 @@ document.addEventListener("click", (e) => {
 function renderProfileAccordionSection(
   containerSelector,
   dataList,
-  sectionType
+  sectionType,
 ) {
   const container = document.querySelector(containerSelector);
   if (!container) return;
@@ -479,7 +479,11 @@ function renderProfileAccordionSection(
         <p><strong>Institution:</strong> ${item.institution || "-"}</p>
         <p><strong>Description:</strong> ${item.description || "-"}</p>
         <p><strong>Start:</strong> ${item.start_date || "-"}</p>
-        <p><strong>End:</strong> ${item.end_date || "-"}</p>
+        <p><strong>End:</strong> ${
+              item.end_date === "Present"
+                ? `<span class="present-label">Present</span>`
+                : item.end_date || "-"
+            }</p>
       `
           : ""
       }
@@ -519,75 +523,233 @@ function renderProfileAccordionSection(
 function renderProfileAccordion() {
   renderProfileAccordionSection(
     ".profile-experience-container",
-    experienceList
+    experienceList,
   );
   renderProfileAccordionSection(".profile-education-container", educationList);
   renderProfileAccordionSection(".profile-courses-container", coursesList);
   renderProfileAccordionSection(".profile-projects-container", projectsList);
 }
 
+
+const type = wrapper.dataset.type; 
+const startInput = document.querySelector(".start-date");
+
 /* DATE DROPDOWN*/
 function initDatePicker(wrapper) {
   const input = wrapper.querySelector(".dateInput");
   const dropdown = wrapper.querySelector(".prof-date-dropdown");
+  const dateType = wrapper.getAttribute('date-type'); 
+  
   if (!input || !dropdown) return;
   dropdown.style.display = "none";
 
   const monthsBox = wrapper.querySelector(".months");
   const yearsBox = wrapper.querySelector(".years");
 
+  const today = new Date('2026-02-14');
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth() + 1; 
+
   if (!yearsBox.dataset.loaded) {
-    const currentYear = new Date().getFullYear();
-    for (let y = currentYear; y >= 1980; y--) {
+    if (dateType === 'end') {
+      const presentDiv = document.createElement("div");
+      presentDiv.textContent = "Pre";
+      presentDiv.dataset.present = "true";
+      presentDiv.className = "present-option";
+      presentDiv.style.cssText = "padding: 12px 8px; font-weight: bold; cursor: pointer; border-bottom: 1px solid #eee;";
+      yearsBox.appendChild(presentDiv);
+    }
+    
+    for (let y = currentYear + 10; y >= 1980; y--) {
       const div = document.createElement("div");
       div.textContent = y;
       div.dataset.year = y;
+      div.className = "date-option";
       yearsBox.appendChild(div);
     }
+    
     yearsBox.dataset.loaded = "true";
   }
 
   let selectedMonth = null;
   let selectedYear = null;
+  let isPresentSelected = false;
+
+  // hide all months
+  if (dateType === 'start') {
+    const allMonthOptions = monthsBox.querySelectorAll('div[data-month]');
+    allMonthOptions.forEach(monthOpt => {
+      monthOpt.style.display = 'none';
+    });
+  }
+
+  function updateAvailableDates(selectedYearParam = null) {
+    const allMonthOptions = monthsBox.querySelectorAll('div[data-month]');
+    const allYearOptions = yearsBox.querySelectorAll('.date-option');
+    const yearToCheck = selectedYearParam || selectedYear;
+
+    if (dateType === 'start') {
+      allYearOptions.forEach(option => {
+        const year = parseInt(option.dataset.year);
+        option.style.display = (year > currentYear) ? 'none' : 'block';
+      });
+      
+      if (selectedYear) {
+        allMonthOptions.forEach(monthOpt => {
+          monthOpt.style.display = 'block';
+        });
+        
+        if (yearToCheck === currentYear) {
+          allMonthOptions.forEach(monthOpt => {
+            const month = parseInt(monthOpt.dataset.month);
+            monthOpt.style.display = (month <= currentMonth) ? 'block' : 'none';
+          });
+        }
+      }
+    }
+    
+    if (dateType === 'end') {
+      const startInput = document.querySelector('.date-picker[date-type="start"] .dateInput');
+      if (!startInput?.value || startInput.value.includes('YYYY')) return;
+      
+      const [startMonthStr, startYearStr] = startInput.value.split('/');
+      const startMonthNum = parseInt(startMonthStr);
+      const startYearNum = parseInt(startYearStr);
+      
+      // Hide years before start year
+      allYearOptions.forEach(option => {
+        const year = parseInt(option.dataset.year);
+        option.style.display = (year >= startYearNum) ? 'block' : 'none';
+      });
+      
+      // Hide months before start month for SAME YEAR
+      allMonthOptions.forEach(monthOpt => {
+        const month = parseInt(monthOpt.dataset.month);
+        
+        if (yearToCheck === startYearNum) {
+          monthOpt.style.display = (month >= startMonthNum) ? 'block' : 'none';
+        } else {
+          monthOpt.style.display = 'block';
+        }
+      });
+    }
+  }
 
   input.addEventListener("click", (e) => {
-    dropdown.style.display =
-      dropdown.style.display === "grid" ? "none" : "grid";
+    updateAvailableDates();
+    dropdown.style.display = dropdown.style.display === "grid" ? "none" : "grid";
     e.stopPropagation();
   });
 
+
+  if (dateType === 'start') {
+    input.addEventListener('change', () => {
+      const endPicker = document.querySelector('.date-picker[date-type="end"]');
+      if (endPicker) {
+        const endYearsBox = endPicker.querySelector('.years');
+        endYearsBox.dataset.loaded = 'false';
+        initDatePicker(endPicker);
+      }
+    });
+  }
+
   monthsBox.addEventListener("click", (e) => {
-    if (!e.target.dataset.month) return;
-    monthsBox
-      .querySelectorAll("div")
-      .forEach((m) => m.classList.remove("active"));
+    if (!e.target.dataset.month || e.target.style.display === 'none') return;
+    
+    if (dateType === 'start' && !selectedYear) return;
+    
+    const month = parseInt(e.target.dataset.month);
+    monthsBox.querySelectorAll("div").forEach((m) => m.classList.remove("active"));
     e.target.classList.add("active");
-    selectedMonth = e.target.dataset.month;
+    selectedMonth = month;
+    isPresentSelected = false;
     updateInput();
   });
 
   yearsBox.addEventListener("click", (e) => {
-    if (!e.target.dataset.year) return;
-    yearsBox
-      .querySelectorAll("div")
-      .forEach((y) => y.classList.remove("active"));
+    if (e.target.dataset.present) {
+      if (dateType !== 'end') return;
+      yearsBox.querySelectorAll("div").forEach((y) => y.classList.remove("active"));
+      e.target.classList.add("active");
+      selectedMonth = null;
+      selectedYear = null;
+      isPresentSelected = true;
+      input.value = "Present";
+      dropdown.style.display = "none";
+      return;
+    }
+    
+    if (!e.target.dataset.year || e.target.style.display === 'none') return;
+    
+    const year = parseInt(e.target.dataset.year);
+    yearsBox.querySelectorAll("div").forEach((y) => y.classList.remove("active"));
     e.target.classList.add("active");
-    selectedYear = e.target.dataset.year;
+    selectedYear = year;
+    isPresentSelected = false;
+    
+    updateAvailableDates(year); 
     updateInput();
   });
 
   function updateInput() {
-    if (selectedMonth)
-      input.value = `${selectedMonth}/${selectedYear || "YYYY"}`;
-    if (selectedMonth && selectedYear) dropdown.style.display = "none";
+    if (isPresentSelected) {
+      input.value = "Present";
+    } else if (selectedMonth) {
+      input.value = `${String(selectedMonth).padStart(2, '0')}/${selectedYear || "YYYY"}`;
+    }
+    if ((selectedMonth && selectedYear) || isPresentSelected) {
+      dropdown.style.display = "none";
+    }
   }
 
   document.addEventListener("click", (e) => {
-    if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+    if (!wrapper.contains(e.target)) {
       dropdown.style.display = "none";
     }
   });
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".date-picker").forEach((dp) => initDatePicker(dp));
+  populateAllDropdowns?.();
+  renderProfileAccordion?.();
+});
+
+// **NEW: Add "Present" functionality for End Date**
+function addPresentOption() {
+  const endInput = document.querySelector('.date-picker[date-type="end"] .dateInput');
+  const endDropdown = document.querySelector('.date-picker[date-type="end"] .prof-date-dropdown');
+  
+  if (endInput && !endInput.dataset.presentAdded) {
+    // Add Present button after the input
+    const presentBtn = document.createElement('button');
+    presentBtn.textContent = 'Present';
+    presentBtn.className = 'present-btn';
+    presentBtn.style.cssText = `
+      margin-top: 5px; padding: 8px 16px; background: #007bff; 
+      color: white; border: none; border-radius: 4px; cursor: pointer;
+    `;
+    
+    presentBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      endInput.value = 'Present';
+      endDropdown.style.display = 'none';
+    });
+    
+    endInput.parentNode.insertBefore(presentBtn, endInput.nextSibling);
+    endInput.dataset.presentAdded = 'true';
+  }
+}
+
+// Initialize everything
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".date-picker").forEach((dp) => initDatePicker(dp));
+  addPresentOption(); // Add Present button
+  populateAllDropdowns?.(); // Your existing function
+  renderProfileAccordion?.(); // Your existing function
+});
+
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".date-picker").forEach((dp) => initDatePicker(dp));
@@ -785,19 +947,15 @@ function get_user_data() {
         document.body.innerHTML = `<h2>${data.error}</h2>`;
       } else {
         if (data.Image == "profile.jpeg") {
-          document.querySelector(
-            ".profile-photo"
-          ).src = `../ImageStorage/profile.jpeg`;
-          document.querySelector(
-            ".profile-photo2"
-          ).src = `../ImageStorage/profile.jpeg`;
+          document.querySelector(".profile-photo").src =
+            `../ImageStorage/profile.jpeg`;
+          document.querySelector(".profile-photo2").src =
+            `../ImageStorage/profile.jpeg`;
         } else {
-          document.querySelector(
-            ".profile-photo"
-          ).src = `../ImageStorage/users/${userId}/${data.Image}`;
-          document.querySelector(
-            ".profile-photo2"
-          ).src = `../ImageStorage/users/${userId}/${data.Image}`;
+          document.querySelector(".profile-photo").src =
+            `../ImageStorage/users/${userId}/${data.Image}`;
+          document.querySelector(".profile-photo2").src =
+            `../ImageStorage/users/${userId}/${data.Image}`;
         }
 
         let cvCard = document.getElementById("cvCard");
@@ -805,9 +963,8 @@ function get_user_data() {
           cvCard.style.display = "none";
         } else {
           cvCard.href = `/CVStorage/${userId}/${data.cv}`;
-          document.querySelector(
-            ".file-display-text"
-          ).innerHTML = `<span style="color: var(--secondary-color)">Update CV:</span> ${data.cv}`;
+          document.querySelector(".file-display-text").innerHTML =
+            `<span style="color: var(--secondary-color)">Update CV:</span> ${data.cv}`;
         }
 
         document.querySelector(".first-name").textContent = data.First_Name;
@@ -875,19 +1032,15 @@ function get_company_data() {
       } else {
         showCompanyInfo(data);
         if (data.image == "company.png") {
-          document.querySelector(
-            ".profile-photo"
-          ).src = `../ImageStorage/company.png`;
-          document.querySelector(
-            ".profile-photo2"
-          ).src = `../ImageStorage/company.png`;
+          document.querySelector(".profile-photo").src =
+            `../ImageStorage/company.png`;
+          document.querySelector(".profile-photo2").src =
+            `../ImageStorage/company.png`;
         } else {
-          document.querySelector(
-            ".profile-photo"
-          ).src = `../ImageStorage/companies/${userId}/${data.image}`;
-          document.querySelector(
-            ".profile-photo2"
-          ).src = `../ImageStorage/companies/${userId}/${data.image}`;
+          document.querySelector(".profile-photo").src =
+            `../ImageStorage/companies/${userId}/${data.image}`;
+          document.querySelector(".profile-photo2").src =
+            `../ImageStorage/companies/${userId}/${data.image}`;
         }
 
         if (data.is_owner === true) {
@@ -925,8 +1078,8 @@ function showCompanyInfo(companyData) {
       <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
         <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
         <a href="tel:${companyData.phone_number || ""}">${
-    companyData.phone_number || ""
-  }</a>
+          companyData.phone_number || ""
+        }</a>
       </div>
     </div>
     
@@ -935,8 +1088,8 @@ function showCompanyInfo(companyData) {
       <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
       <svg style="width:24px; height:24px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-icon lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>  
       <a href="${companyData.company_url || "#"}" target="_blank">${
-    companyData.company_name || ""
-  }</a>
+        companyData.company_name || ""
+      }</a>
       </div>
     </div>
     
@@ -1101,7 +1254,7 @@ function editCompanyInfo(companyData) {
       accordioncontent.classList.toggle("active");
       header.classList.toggle("active");
       accordioncontent.style.maxHeight = accordioncontent.classList.contains(
-        "active"
+        "active",
       )
         ? accordioncontent.scrollHeight + "10px"
         : "0px";
@@ -1128,7 +1281,7 @@ function updateSectionVisibility() {
   const experienceSection = document.querySelector(".profile-experience");
   const editExperience = document.getElementById("experience-accordion");
   const experienceContainer = document.querySelector(
-    ".profile-experience-container"
+    ".profile-experience-container",
   );
 
   if (experienceContainer && experienceSection) {
@@ -1145,7 +1298,7 @@ function updateSectionVisibility() {
   const educationSection = document.querySelector(".profile-education");
   const editEducation = document.getElementById("education-accordion");
   const educationContainer = document.querySelector(
-    ".profile-education-container"
+    ".profile-education-container",
   );
 
   if (educationContainer && educationSection) {
@@ -1172,7 +1325,7 @@ function updateSectionVisibility() {
   const projectsSection = document.querySelector(".profile-projects");
   const editProjects = document.getElementById("projects-accordion");
   const projectsContainer = document.querySelector(
-    ".profile-projects-container"
+    ".profile-projects-container",
   );
   if (projectsContainer.children.length > 0) {
     projectsSection.style.display = "block";
