@@ -1256,9 +1256,18 @@ body.open-company-popup #blurred-background {
     max-width: 450px;
     margin-top: 35px;
   }
+
+  .notifications_unseen{
+    top: 2px;
+    right: 20px;
+  }
 }
 
 @media (max-width: 480px) {
+  .notifications_unseen{
+    top: 2px;
+    right: 10px;
+  }
   .nav-bar {
     position: fixed;
     bottom: 0;
