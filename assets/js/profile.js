@@ -531,8 +531,6 @@ function renderProfileAccordion() {
 }
 
 
-const type = wrapper.dataset.type; 
-const startInput = document.querySelector(".start-date");
 
 /* DATE DROPDOWN*/
 function initDatePicker(wrapper) {
