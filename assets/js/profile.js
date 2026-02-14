@@ -530,10 +530,6 @@ function renderProfileAccordion() {
   renderProfileAccordionSection(".profile-projects-container", projectsList);
 }
 
-
-const type = wrapper.dataset.type; 
-const startInput = document.querySelector(".start-date");
-
 /* DATE DROPDOWN*/
 function initDatePicker(wrapper) {
   const input = wrapper.querySelector(".dateInput");
@@ -667,40 +663,51 @@ function initDatePicker(wrapper) {
   });
 
   yearsBox.addEventListener("click", (e) => {
-    if (e.target.dataset.present) {
-      if (dateType !== 'end') return;
-      yearsBox.querySelectorAll("div").forEach((y) => y.classList.remove("active"));
-      e.target.classList.add("active");
-      selectedMonth = null;
-      selectedYear = null;
-      isPresentSelected = true;
-      input.value = "Present";
-      dropdown.style.display = "none";
-      return;
-    }
-    
-    if (!e.target.dataset.year || e.target.style.display === 'none') return;
-    
-    const year = parseInt(e.target.dataset.year);
+  if (e.target.dataset.present) {
+    if (dateType !== 'end') return;
     yearsBox.querySelectorAll("div").forEach((y) => y.classList.remove("active"));
     e.target.classList.add("active");
-    selectedYear = year;
-    isPresentSelected = false;
-    
-    updateAvailableDates(year); 
-    updateInput();
-  });
+    selectedMonth = null;  
+    selectedYear = null;
+    isPresentSelected = true;
+    input.value = "Present";
+    dropdown.style.display = "none";
+    return;
+  }
+  
+  if (!e.target.dataset.year || e.target.style.display === 'none') return;
+  
+  const year = parseInt(e.target.dataset.year);
+  yearsBox.querySelectorAll("div").forEach((y) => y.classList.remove("active"));
+  e.target.classList.add("active");
+  
+ 
+  selectedMonth = null;
+  monthsBox.querySelectorAll("div").forEach((m) => m.classList.remove("active"));
+  
+  selectedYear = year;
+  isPresentSelected = false;
+  
+  updateAvailableDates(year); 
+  updateInput();  
+});
 
   function updateInput() {
-    if (isPresentSelected) {
-      input.value = "Present";
-    } else if (selectedMonth) {
-      input.value = `${String(selectedMonth).padStart(2, '0')}/${selectedYear || "YYYY"}`;
-    }
-    if ((selectedMonth && selectedYear) || isPresentSelected) {
-      dropdown.style.display = "none";
-    }
+  if (isPresentSelected) {
+    input.value = "Present";
+  } else if (selectedMonth && selectedYear) {
+    input.value = `${String(selectedMonth).padStart(2, '0')}/${selectedYear}`;
+  } else if (selectedYear) {
+    input.value = `MM/${selectedYear}`; 
+  } else {
+    input.value = "";  
   }
+  
+  if ((selectedMonth && selectedYear) || isPresentSelected) {
+    dropdown.style.display = "none";
+  }
+}
+
 
   document.addEventListener("click", (e) => {
     if (!wrapper.contains(e.target)) {
@@ -709,52 +716,10 @@ function initDatePicker(wrapper) {
   });
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".date-picker").forEach((dp) => initDatePicker(dp));
   populateAllDropdowns?.();
   renderProfileAccordion?.();
-});
-
-// **NEW: Add "Present" functionality for End Date**
-function addPresentOption() {
-  const endInput = document.querySelector('.date-picker[date-type="end"] .dateInput');
-  const endDropdown = document.querySelector('.date-picker[date-type="end"] .prof-date-dropdown');
-  
-  if (endInput && !endInput.dataset.presentAdded) {
-    // Add Present button after the input
-    const presentBtn = document.createElement('button');
-    presentBtn.textContent = 'Present';
-    presentBtn.className = 'present-btn';
-    presentBtn.style.cssText = `
-      margin-top: 5px; padding: 8px 16px; background: #007bff; 
-      color: white; border: none; border-radius: 4px; cursor: pointer;
-    `;
-    
-    presentBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      endInput.value = 'Present';
-      endDropdown.style.display = 'none';
-    });
-    
-    endInput.parentNode.insertBefore(presentBtn, endInput.nextSibling);
-    endInput.dataset.presentAdded = 'true';
-  }
-}
-
-// Initialize everything
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".date-picker").forEach((dp) => initDatePicker(dp));
-  addPresentOption(); // Add Present button
-  populateAllDropdowns?.(); // Your existing function
-  renderProfileAccordion?.(); // Your existing function
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".date-picker").forEach((dp) => initDatePicker(dp));
-  populateAllDropdowns();
-  renderProfileAccordion();
 });
 
 /* SKILLS */
