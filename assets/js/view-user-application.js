@@ -4,7 +4,7 @@ async function fetchuserapplications() {
       method: "GET",
     });
     const data = await response.json();
-    console.log(data);
+    //console.log(data);
 
     if (data.success) {
       displayApplications(data.applications);

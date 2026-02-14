@@ -171,8 +171,8 @@ function handleCompanyVerification() {
         }
 
         allCompanies = data;
-        console.log(data)
         /*    
+        console.log(data)
         {
           "verification_id": 1,
           "is_verified": 0,

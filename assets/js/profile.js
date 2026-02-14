@@ -39,7 +39,7 @@ function saveAllDataToBackend() {
     .then((res) => res.json())
     .then((data) => {
       if (data.success) {
-        console.log("Auto-saved to database");
+        //console.log("Auto-saved to database");
       } else {
         console.error("Save failed", data);
       }
@@ -765,7 +765,7 @@ const params = new URLSearchParams(window.location.search);
 const userId = params.get("id");
 const Type = params.get("type");
 
-console.log(`Profile ID: ${userId}, Type: ${Type}`);
+//console.log(`Profile ID: ${userId}, Type: ${Type}`);
 fetchProfileData();
 function fetchProfileData() {
   if (userId && Type == "user") {
@@ -902,7 +902,7 @@ function get_company_data() {
             "none";
         }
 
-        console.log(data);
+        //console.log(data);
       }
     })
     .catch((err) => {

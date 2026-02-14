@@ -10,7 +10,7 @@ fetch("/php/job-application-view.php", {
 })
   .then((Response) => Response.json())
   .then((data) => {
-    console.log(data);
+    //console.log(data);
     jobsData = data;
     const job = data.job;
 
@@ -221,7 +221,7 @@ function openPopUp(applicationId) {
         .then((Response) => Response.json())
         .then((data) => {
           if (data.success) {
-            console.log("Application accepted successfully.");
+            //console.log("Application accepted successfully.");
             application.status = "Accepted";
 
             $popupScoped
@@ -248,7 +248,7 @@ function openPopUp(applicationId) {
             console.error("Failed to accept application:", data.message);
             alert("Failed to accept application: " + data.message);
           }
-          console.log(data);
+         // console.log(data);
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -270,7 +270,7 @@ function openPopUp(applicationId) {
         .then((Response) => Response.json())
         .then((data) => {
           if (data.success) {
-            console.log("Application rejected successfully.");
+           // console.log("Application rejected successfully.");
             application.status = "Rejected";
 
             $popupScoped

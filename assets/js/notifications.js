@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("../php/notification.php", {})
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         document.querySelector(".notifications_unseen").style = "none";
         const container = document.getElementById("notificationList");
         const notifCount = document.getElementById("notification-count");

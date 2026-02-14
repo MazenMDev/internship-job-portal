@@ -7,7 +7,7 @@
     background-color: var(--box-color);
     border-right: 2px solid var(--border-color);
     padding: 15px;
-    display: flex;
+    display: none;
     z-index: 999;
     flex-direction: column;
 }
@@ -78,7 +78,7 @@
 }
 
 #adminPanel {
-    margin-left: 240px;
+    margin-left: 0px;
     margin-top: 50px;
     padding: 25px;
     font-size: 1.2rem;
