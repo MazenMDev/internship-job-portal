@@ -531,9 +531,6 @@ function renderProfileAccordion() {
 }
 
 
-const type = wrapper.dataset.type; 
-const startInput = document.querySelector(".start-date");
-
 /* DATE DROPDOWN*/
 function initDatePicker(wrapper) {
   const input = wrapper.querySelector(".dateInput");
@@ -575,7 +572,35 @@ function initDatePicker(wrapper) {
   let selectedYear = null;
   let isPresentSelected = false;
 
-  // hide all months
+  function resetEndDatePicker(endPicker) {
+    const endInput = endPicker.querySelector('.dateInput');
+    endInput.value = '';
+    
+    const endMonthsBox = endPicker.querySelector('.months');
+    const endYearsBox = endPicker.querySelector('.years');
+    
+    endMonthsBox?.querySelectorAll('div').forEach(m => {
+      m.classList.remove('active');
+    });
+    
+    endYearsBox.querySelectorAll('div').forEach(y => {
+      y.classList.remove('active');
+    });
+    
+    if (endPicker._selectedMonth !== undefined) endPicker._selectedMonth = null;
+    if (endPicker._selectedYear !== undefined) endPicker._selectedYear = null;
+    if (endPicker._isPresentSelected !== undefined) endPicker._isPresentSelected = false;
+    
+    endPicker.querySelector('.prof-date-dropdown').style.display = 'none';
+  }
+
+  function clearEndDate() {
+    const endPicker = document.querySelector('.date-picker[date-type="end"]');
+    if (endPicker) {
+      resetEndDatePicker(endPicker);
+    }
+  }
+
   if (dateType === 'start') {
     const allMonthOptions = monthsBox.querySelectorAll('div[data-month]');
     allMonthOptions.forEach(monthOpt => {
@@ -610,22 +635,19 @@ function initDatePicker(wrapper) {
     
     if (dateType === 'end') {
       const startInput = document.querySelector('.date-picker[date-type="start"] .dateInput');
-      if (!startInput?.value || startInput.value.includes('YYYY')) return;
+      if (!startInput?.value || startInput.value.includes('YYYY') || startInput.value === 'MM') return;
       
       const [startMonthStr, startYearStr] = startInput.value.split('/');
       const startMonthNum = parseInt(startMonthStr);
       const startYearNum = parseInt(startYearStr);
       
-      // Hide years before start year
       allYearOptions.forEach(option => {
         const year = parseInt(option.dataset.year);
         option.style.display = (year >= startYearNum) ? 'block' : 'none';
       });
       
-      // Hide months before start month for SAME YEAR
       allMonthOptions.forEach(monthOpt => {
         const month = parseInt(monthOpt.dataset.month);
-        
         if (yearToCheck === startYearNum) {
           monthOpt.style.display = (month >= startMonthNum) ? 'block' : 'none';
         } else {
@@ -641,18 +663,6 @@ function initDatePicker(wrapper) {
     e.stopPropagation();
   });
 
-
-  if (dateType === 'start') {
-    input.addEventListener('change', () => {
-      const endPicker = document.querySelector('.date-picker[date-type="end"]');
-      if (endPicker) {
-        const endYearsBox = endPicker.querySelector('.years');
-        endYearsBox.dataset.loaded = 'false';
-        initDatePicker(endPicker);
-      }
-    });
-  }
-
   monthsBox.addEventListener("click", (e) => {
     if (!e.target.dataset.month || e.target.style.display === 'none') return;
     
@@ -663,55 +673,61 @@ function initDatePicker(wrapper) {
     e.target.classList.add("active");
     selectedMonth = month;
     isPresentSelected = false;
+    
+    if (dateType === 'start') {
+      clearEndDate();
+    }
+    
     updateInput();
   });
 
   yearsBox.addEventListener("click", (e) => {
-  if (e.target.dataset.present) {
-    if (dateType !== 'end') return;
+    if (e.target.dataset.present) {
+      if (dateType !== 'end') return;
+      yearsBox.querySelectorAll("div").forEach((y) => y.classList.remove("active"));
+      e.target.classList.add("active");
+      selectedMonth = null;
+      selectedYear = null;
+      isPresentSelected = true;
+      input.value = "Present";
+      dropdown.style.display = "none";
+      return;
+    }
+    
+    if (!e.target.dataset.year || e.target.style.display === 'none') return;
+    
+    const year = parseInt(e.target.dataset.year);
     yearsBox.querySelectorAll("div").forEach((y) => y.classList.remove("active"));
     e.target.classList.add("active");
-    selectedMonth = null;  
-    selectedYear = null;
-    isPresentSelected = true;
-    input.value = "Present";
-    dropdown.style.display = "none";
-    return;
-  }
-  
-  if (!e.target.dataset.year || e.target.style.display === 'none') return;
-  
-  const year = parseInt(e.target.dataset.year);
-  yearsBox.querySelectorAll("div").forEach((y) => y.classList.remove("active"));
-  e.target.classList.add("active");
-  
- 
-  selectedMonth = null;
-  monthsBox.querySelectorAll("div").forEach((m) => m.classList.remove("active"));
-  
-  selectedYear = year;
-  isPresentSelected = false;
-  
-  updateAvailableDates(year); 
-  updateInput();  
-});
+    
+    selectedMonth = null;
+    monthsBox.querySelectorAll("div").forEach((m) => m.classList.remove("active"));
+    selectedYear = year;
+    isPresentSelected = false;
+    
+    if (dateType === 'start') {
+      clearEndDate();
+    }
+    
+    updateAvailableDates(year); 
+    updateInput();
+  });
 
   function updateInput() {
-  if (isPresentSelected) {
-    input.value = "Present";
-  } else if (selectedMonth && selectedYear) {
-    input.value = `${String(selectedMonth).padStart(2, '0')}/${selectedYear}`;
-  } else if (selectedYear) {
-    input.value = `MM/${selectedYear}`; 
-  } else {
-    input.value = "";  
+    if (isPresentSelected) {
+      input.value = "Present";
+    } else if (selectedMonth && selectedYear) {
+      input.value = `${String(selectedMonth).padStart(2, '0')}/${selectedYear}`;
+    } else if (selectedYear) {
+      input.value = `MM/${selectedYear}`;
+    } else {
+      input.value = "";
+    }
+    
+    if ((selectedMonth && selectedYear) || isPresentSelected) {
+      dropdown.style.display = "none";
+    }
   }
-  
-  if ((selectedMonth && selectedYear) || isPresentSelected) {
-    dropdown.style.display = "none";
-  }
-}
-
 
   document.addEventListener("click", (e) => {
     if (!wrapper.contains(e.target)) {
